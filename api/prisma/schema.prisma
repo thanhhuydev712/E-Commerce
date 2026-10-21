@@ -8,6 +8,7 @@ generator client {
   // output   = "../generated/prisma"
 }
 
+// Datasource: Khai báo loại database mà Prisma sử dụng.
 datasource db {
   provider = "postgresql"
 }

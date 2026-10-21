@@ -59,3 +59,7 @@ pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 /generated/prisma
+
+# AI tool skills
+/api/.windsurf/skills/
+/api/AI-AGENTS/.claude/skills/
