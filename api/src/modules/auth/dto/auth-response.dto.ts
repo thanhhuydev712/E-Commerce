@@ -2,7 +2,7 @@
 
 import { Role } from '@prisma/client';
 
-export class AuthenResponseDto {
+export class AuthResponseDto {
   accessToken: string;
   refreshToken: string;
 
