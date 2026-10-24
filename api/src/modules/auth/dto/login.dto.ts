@@ -6,11 +6,15 @@ export class LoginDto {
     description: 'User email address',
     example: 'john.doe@example.com',
   })
-  @IsEmail({}, { message: 'Please provide a valid email address' })
-  @IsNotEmpty({ message: 'Email is required' })
+  @IsEmail({}, { message: 'Vui lòng cung cấp địa chỉ email hợp lệ.' })
+  @IsNotEmpty({ message: 'Email là trường bắt buộc.' })
   email: string;
 
+  @ApiProperty({
+    description: 'User password',
+    example: 'StrongP@ssw0rd',
+  })
   @IsString()
-  @IsNotEmpty({ message: 'Password is required' })
+  @IsNotEmpty({ message: 'Mật khẩu là trường bắt buộc.' })
   password: string;
 }

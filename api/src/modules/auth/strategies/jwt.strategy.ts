@@ -39,7 +39,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
       return user;
     } catch (error) {
-      throw new UnauthorizedException('User not found');
+      throw new UnauthorizedException('Không tìm thấy người dùng');
     }
   }
 }

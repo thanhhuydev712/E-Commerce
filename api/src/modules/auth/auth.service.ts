@@ -29,7 +29,9 @@ export class AuthService {
     });
 
     if (existingUser) {
-      throw new ConflictException('User with email already exists');
+      throw new ConflictException(
+        'Người dùng với địa chỉ email này đã tồn tại.',
+      );
     }
 
     try {
@@ -60,9 +62,12 @@ export class AuthService {
         user,
       };
     } catch (error) {
-      console.error('Error during user registration:', error);
+      console.error(
+        'Đã xảy ra lỗi trong quá trình đăng ký tài khoản người dùng.:',
+        error,
+      );
       throw new InternalServerErrorException(
-        'An error occurred during registrantion',
+        'Đã xảy ra lỗi trong quá trình đăng ký.',
       );
     }
   }
@@ -125,7 +130,7 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new UnauthorizedException('User not found');
+      throw new UnauthorizedException('Không tìm tháy người dùng');
     }
 
     const tokens = await this.generateTokens(user.id, user.email);
@@ -155,7 +160,7 @@ export class AuthService {
     });
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      throw new UnauthorizedException('Invalid email or passwprd');
+      throw new UnauthorizedException('Email hoặc mật khẩu không chính xác.');
     }
 
     const tokens = await this.generateTokens(user.id, user.email);

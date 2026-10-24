@@ -27,24 +27,26 @@ export class RefreshTokenStrategy extends PassportStrategy(
 
   // Validate refresh token
   async validate(req: Request, payload: { sub: string; email: string }) {
-    console.log('RefreshTokenStrategy.validate called');
-    console.log('Payload: ', {
-      sub: payload.sub,
-      email: payload.email,
-    });
+    // console.log('RefreshTokenStrategy.validate called');
+    // console.log('Payload: ', {
+    //   sub: payload.sub,
+    //   email: payload.email,
+    // });
 
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
-      console.log('No authorization header found');
-      throw new UnauthorizedException('Refrsh token not provided');
+      console.log(
+        'Không tìm thấy Authorization Header (header xác thực) trong yêu cầu.',
+      );
+      throw new UnauthorizedException('Chưa cung cấp Refresh Token.');
     }
 
     const refreshToken = authHeader.replace('Bearer', '').trim();
 
     if (!refreshToken) {
       throw new UnauthorizedException(
-        'Refresh token is empty after axtraction',
+        'Refresh Token bị rỗng sau khi được trích xuất.',
       );
     }
 
@@ -60,7 +62,7 @@ export class RefreshTokenStrategy extends PassportStrategy(
     });
 
     if (!user || !user.refreshToken) {
-      throw new UnauthorizedException('Invalid refresh token');
+      throw new UnauthorizedException('Refresh Token không hợp lệ');
     }
 
     const refreshTokenMatches = await bcrypt.compare(
@@ -69,7 +71,9 @@ export class RefreshTokenStrategy extends PassportStrategy(
     );
 
     if (!refreshTokenMatches) {
-      throw new UnauthorizedException('Invalid refresh does not match');
+      throw new UnauthorizedException(
+        'Refresh Token không hợp lệ hoặc không khớp.',
+      );
     }
 
     return { id: user.id, email: user.email, role: user.role };

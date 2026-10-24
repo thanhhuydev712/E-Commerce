@@ -58,7 +58,7 @@ async function bootstrap() {
       },
       'JWT-refresh',
     )
-    .addServer('http://locahost:3001', 'Development server')
+    .addServer('http://localhost:3000', 'Development server')
     .build();
 
   // .addTag('users', 'USer management endpoints')

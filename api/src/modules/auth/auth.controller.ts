@@ -10,7 +10,7 @@ import { AuthService } from './auth.service.js';
 import { RegisterDto } from './dto/register.dto.js';
 import { AuthResponseDto } from './dto/auth-response.dto.js';
 import { RefreshTokenGuard } from './guards/refresh-token.guards.js';
-import { GetUser } from '../../common/decorators/get-user.decoratos.js';
+import { GetUser } from '../../common/decorators/get-user.decorator.js';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { LoginDto } from './dto/login.dto.js';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -23,20 +23,22 @@ export class AuthController {
   @HttpCode(201)
   @ApiOperation({
     summary: 'Register a new user',
-    description: 'Creates a new user account',
+    description: 'Tạo tài khoản người dùng',
   })
   @ApiResponse({
     status: 201,
-    description: 'User successfully registered',
+    description: 'Đăng ký thành công',
     type: AuthResponseDto,
   })
   @ApiResponse({
     status: 400,
-    description: 'Bad Request. Validation failed or user already exists',
+    description:
+      'Yêu cầu không hợp lệ. Dữ liệu không vượt qua bước kiểm tra tính hợp lệ hoặc người dùng đã tồn tại.',
   })
   @ApiResponse({
     status: 429,
-    description: 'Too Many Requests. Rate limit exceeded',
+    description:
+      'Quá nhiều yêu cầu. Đã vượt quá giới hạn số lượng yêu cầu cho phép.',
   })
   @ApiResponse({
     status: 500,
@@ -54,20 +56,21 @@ export class AuthController {
   @ApiBearerAuth('JWT-refresh')
   @ApiOperation({
     summary: 'Refresh access token',
-    description: 'Generates a new access token using a valid refresh token',
+    description: 'Tạo Access Token mới bằng cách sử dụng Refresh Token hợp lệ.',
   })
   @ApiResponse({
     status: 200,
-    description: 'New access token generated successfully',
+    description: 'Đã tạo Access Token mới thành công.',
     type: AuthResponseDto,
   })
   @ApiResponse({
     status: 401,
-    description: 'Unauthorized. Invalid or expired refresh token',
+    description: 'Chưa được xác thực. Thông tin đăng nhập không hợp lệ.',
   })
   @ApiResponse({
     status: 429,
-    description: 'Too Many Requests. Rate limit exceeded',
+    description:
+      'Quá nhiều yêu cầu. Đã vượt quá giới hạn số lượng yêu cầu cho phép.',
   })
   async refresh(@GetUser('id') userId: string): Promise<AuthResponseDto> {
     return await this.authService.refreshTokens(userId);
@@ -80,19 +83,20 @@ export class AuthController {
   @ApiBearerAuth('JWT-auth')
   @ApiOperation({
     summary: 'Logout user',
-    description: 'Logs out the user and invalidates the refresh token',
+    description: 'Đăng xuất người dùng và vô hiệu hóa Refresh Token.',
   })
   @ApiResponse({
     status: 200,
-    description: 'Successfully logged out',
+    description: 'Đăng xuất thành công',
   })
   @ApiResponse({
     status: 401,
-    description: 'Unauthorized. Invalid or expired access token',
+    description: 'Chưa được xác thực. Thông tin đăng nhập không hợp lệ.',
   })
   @ApiResponse({
     status: 429,
-    description: 'Too Many Requests. Rate limit exceeded',
+    description:
+      'Quá nhiều yêu cầu. Đã vượt quá giới hạn số lượng yêu cầu cho phép.',
   })
   async logout(@GetUser('id') userId: string): Promise<{ message: string }> {
     await this.authService.logout(userId);
@@ -103,19 +107,21 @@ export class AuthController {
   @Post('login')
   @ApiOperation({
     summary: 'User login',
-    description: 'Authenticates a user and returns access and refresh tokens',
+    description:
+      'Xác thực người dùng và trả về Access Token cùng Refresh Token.',
   })
   @ApiResponse({
     status: 200,
-    description: 'User successfully logged in',
+    description: 'Đăng nhập thành công',
   })
   @ApiResponse({
     status: 401,
-    description: 'Unauthorized. Invalid credentials',
+    description: 'Chưa được xác thực. Thông tin đăng nhập không hợp lệ.',
   })
   @ApiResponse({
     status: 429,
-    description: 'Too Many Requests. Rate limit exceeded',
+    description:
+      'Quá nhiều yêu cầu. Đã vượt quá giới hạn số lượng yêu cầu cho phép.',
   })
   @HttpCode(HttpStatus.OK)
   async login(@Body() loginDto: LoginDto): Promise<AuthResponseDto> {
