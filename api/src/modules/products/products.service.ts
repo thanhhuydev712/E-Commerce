@@ -6,12 +6,10 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { ProductResponseDto } from './dto/product-response.dto.js';
-import { Prisma } from '../../../generated/prisma/client.js';
 import { CreateProductDto } from './dto/create-product.dto.js';
-import { Category, Product } from '@prisma/client';
+import { Category, Prisma, Product } from '@prisma/client';
 import { QueryProDuctDto } from './dto/query-product.dto.js';
 import { UpdateProductDto } from './dto/update-product.dto.js';
-import { Decimal } from '@prisma/client/runtime/index-browser';
 
 @Injectable()
 export class ProductsService {
@@ -21,24 +19,46 @@ export class ProductsService {
   async create(
     createProductDto: CreateProductDto,
   ): Promise<ProductResponseDto> {
+    // 1. Kiểm tra SKU đã tồn tại chưa
     const existingSku = await this.prisma.product.findUnique({
-      where: { sku: createProductDto.sku },
+      where: {
+        sku: createProductDto.sku,
+      },
     });
 
     if (existingSku) {
-      throw new NotFoundException('SKU đã tồn tại: ' + existingSku.sku);
+      throw new ConflictException(`SKU đã tồn tại: ${existingSku.sku}`);
     }
 
+    // 2. Kiểm tra Category có tồn tại không
+    const existingCategory = await this.prisma.category.findUnique({
+      where: {
+        id: createProductDto.categoryId,
+      },
+    });
+
+    if (!existingCategory) {
+      throw new BadRequestException(
+        `Category không tồn tại: ${createProductDto.categoryId}`,
+      );
+    }
+
+    // 3. Tạo sản phẩm mới
     const product = await this.prisma.product.create({
       data: {
         ...createProductDto,
+
+        // Chuyển giá thành Prisma Decimal
         price: new Prisma.Decimal(createProductDto.price),
       },
+
+      // Lấy thêm dữ liệu Category
       include: {
         category: true,
       },
     });
 
+    // 4. Format dữ liệu trả về
     return this.formatPrice(product);
   }
 
@@ -169,7 +189,7 @@ export class ProductsService {
 
     const newStock = product.stock + quantity;
 
-    if (newStock) {
+    if (newStock < 0) {
       throw new BadRequestException('Tồn kho không được < 0 ');
     }
 

@@ -5,7 +5,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  // output   = "../generated/prisma"
+  // output   = "../src/generated/prisma"
 }
 
 // Datasource: Khai báo loại database mà Prisma sử dụng.
@@ -177,7 +177,7 @@ model Cart {
 
 model Payment {
   id            String        @id @default(uuid())
-  amout         Decimal       @db.Decimal(10, 2)
+  amount        Decimal       @db.Decimal(10, 2)
   status        PaymentStatus @default(PENDING)
   currency      String        @default("usd")
   paymentMethod String?

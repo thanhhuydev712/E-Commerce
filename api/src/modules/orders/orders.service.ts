@@ -1,0 +1,352 @@
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { PrismaService } from '../../prisma/prisma.service.js';
+import { CreateOrdersDto } from './dto/create-order.dto.js';
+import {
+  OrderApiResponseDto,
+  OrderResponseDto,
+} from './dto/order-response.dto.js';
+import { Order, OrderItem, OrderStatus, Product, User } from '@prisma/client';
+import { QueryOrderDto } from './dto/query-order.dto.js';
+import { UpdateOrderDto } from './dto/update-order.dto.js';
+
+@Injectable()
+export class OrdersService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(
+    createOrderDto: CreateOrdersDto,
+    userId: string,
+  ): Promise<OrderApiResponseDto<OrderResponseDto>> {
+    const { items, shippingAddress } = createOrderDto;
+
+    for (const item of items) {
+      const product = await this.prisma.product.findUnique({
+        where: { id: item.productId },
+      });
+
+      if (!product) {
+        throw new NotFoundException(
+          'Không tìm thấy sản phẩm with ID: ' + item.productId,
+        );
+      }
+
+      if (product.stock < item.quantity) {
+        throw new BadRequestException(
+          `Sản phẩm ${product.name} không còn đủ số lượng. Số lượng còn: ${product.stock}`,
+        );
+      }
+    }
+
+    const total = items.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
+
+    const latestCart = await this.prisma.cart.findFirst({
+      where: {
+        userId,
+        checkedOut: false,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    const order = await this.prisma.$transaction(async (tx) => {
+      const newOrder = await tx.order.create({
+        data: {
+          userId,
+          status: OrderStatus.PENDING,
+          totalAmount: total,
+          shippingAddress,
+          cartId: latestCart?.id,
+          orderItems: {
+            create: items.map((item) => ({
+              productId: item.productId,
+              quantity: item.quantity,
+              price: item.price,
+            })),
+          },
+        },
+        include: {
+          orderItems: {
+            include: {
+              product: true,
+            },
+          },
+          user: true,
+        },
+      });
+
+      for (const item of items) {
+        await tx.product.update({
+          where: { id: item.productId },
+          data: {
+            stock: {
+              decrement: item.quantity,
+            },
+          },
+        });
+      }
+
+      return newOrder;
+    });
+
+    return this.wrap(order);
+  }
+
+  async findAllForAdmin(query: QueryOrderDto): Promise<{
+    data: OrderResponseDto[];
+    total: number;
+    page: number;
+    limit: number;
+  }> {
+    const { page = 1, limit = 10, status, search } = query;
+    const skip = (page - 1) * limit;
+
+    const where: any = {};
+    if (status) where.status = status;
+    if (search)
+      where.OR = [
+        { id: { constants: search, mode: 'insensitive' } },
+        {
+          orderNumber: { constants: search, mode: 'insensitive' },
+        },
+      ];
+
+    const [orders, total] = await Promise.all([
+      this.prisma.order.findMany({
+        where,
+        skip,
+        take: limit,
+        include: {
+          orderItems: {
+            include: {
+              product: true,
+            },
+          },
+          user: true,
+        },
+        orderBy: { createdAt: 'desc' },
+      }),
+      this.prisma.order.count({ where }),
+    ]);
+
+    return {
+      data: orders.map((o) => this.map(o)),
+      total,
+      page,
+      limit,
+    };
+  }
+
+  // Get all orders by user
+
+  async findAll(
+    query: QueryOrderDto,
+    userId: string,
+  ): Promise<{
+    data: OrderResponseDto[];
+    total: number;
+    page: number;
+    limit: number;
+  }> {
+    const { page = 1, limit = 10, status, search } = query;
+    const skip = (page - 1) * limit;
+    const where: any = { userId };
+    if (status) where.status = status;
+    if (search) where.OR = [{ id: { constants: search, mode: 'insensitive' } }];
+
+    const [orders, total] = await Promise.all([
+      this.prisma.order.findMany({
+        where,
+        skip,
+        take: limit,
+        include: {
+          orderItems: {
+            include: {
+              product: true,
+            },
+          },
+          user: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+      }),
+      this.prisma.order.count({ where }),
+    ]);
+
+    return {
+      data: orders.map((o) => this.map(o)),
+      total,
+      page,
+      limit,
+    };
+  }
+
+  // find order by id admin
+  async findOne(
+    id: string,
+    userId?: string,
+  ): Promise<OrderApiResponseDto<OrderResponseDto>> {
+    const where: any = {
+      id,
+    };
+
+    if (userId) where.userId = userId;
+
+    const order = await this.prisma.order.findFirst({
+      where,
+      include: {
+        orderItems: {
+          include: {
+            product: true,
+          },
+        },
+        user: true,
+      },
+    });
+
+    if (!order) {
+      throw new NotFoundException(`Không tìm thấy đơn đặt hàng với ID: ${id}`);
+    }
+
+    return this.wrap(order);
+  }
+
+  // Update order
+  async update(
+    id: string,
+    dto: UpdateOrderDto,
+    userId?: string,
+  ): Promise<OrderApiResponseDto<OrderResponseDto>> {
+    const where: any = { id };
+    if (userId) where.userId = userId;
+
+    const existing = await this.prisma.order.findFirst({
+      where,
+    });
+
+    if (!existing) {
+      throw new NotFoundException(`Không tìm thấy đơn đặt hàng với ID: ${id}`);
+    }
+
+    const updated = await this.prisma.order.update({
+      where: { id },
+      data: dto,
+      include: {
+        orderItems: {
+          include: {
+            product: true,
+          },
+        },
+        user: true,
+      },
+    });
+
+    return this.wrap(updated);
+  }
+
+  // cancle order
+  async cancle(
+    id: string,
+    userId?: string,
+  ): Promise<OrderApiResponseDto<OrderResponseDto>> {
+    const where: any = { id };
+    if (userId) where.userId = userId;
+
+    const order = await this.prisma.order.findFirst({
+      where,
+      include: {
+        orderItems: true,
+        user: true,
+      },
+    });
+
+    if (!order) {
+      throw new NotFoundException(`Không tìm thấy đơn đặt hàng với ID: ${id}`);
+    }
+
+    if (order.status !== OrderStatus.PENDING) {
+      throw new BadRequestException('Only pendding orders can be cancelled');
+    }
+
+    const cancelled = await this.prisma.$transaction(async (tx) => {
+      for (const item of order.orderItems) {
+        await tx.product.update({
+          where: { id: item.productId },
+          data: {
+            stock: {
+              increment: item.quantity,
+            },
+          },
+        });
+      }
+
+      return tx.order.update({
+        where: { id },
+        data: { status: OrderStatus.CANCALLED },
+        include: {
+          orderItems: {
+            include: {
+              product: true,
+            },
+          },
+          user: true,
+        },
+      });
+    });
+
+    return this.wrap(cancelled);
+  }
+
+  private wrap(
+    order: Order & {
+      orderItems: (OrderItem & { product: Product })[];
+      user: User;
+    },
+  ): OrderApiResponseDto<OrderResponseDto> {
+    return {
+      success: true,
+      message: 'Xử lý thành công',
+      data: this.map(order),
+    };
+  }
+
+  private map(
+    order: Order & {
+      orderItems: (OrderItem & { product: Product })[];
+      user: User;
+    },
+  ): OrderResponseDto {
+    return {
+      id: order.id,
+      userId: order.userId,
+      status: order.status,
+      total: Number(order.totalAmount),
+      shippingAddress: order.shippingAddress ?? '',
+      items: order.orderItems.map((item) => ({
+        id: item.id,
+        productId: item.productId,
+        productName: item.product.name,
+        quantity: item.quantity,
+        price: Number(item.price),
+        subtotal: Number(item.price) * item.quantity,
+        createdAt: order.createdAt,
+        updatedAt: order.updatedAt,
+      })),
+      ...(order.user && {
+        userEmail: order.user.email,
+        userName:
+          `${order.user.firstName || ''} ${order.user.lastName || ''}`.trim(),
+      }),
+      createdAt: order.createdAt,
+      updatedAt: order.updatedAt,
+    };
+  }
+}

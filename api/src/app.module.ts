@@ -8,6 +8,9 @@ import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './modules/users/users.module.js';
 import { CategoryModule } from './modules/category/category.module.js';
 import { ProductsModule } from './modules/products/products.module.js';
+import { OrdersModule } from './modules/orders/orders.module.js';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { PaymentsModule } from './modules/payments/payments.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -21,15 +24,18 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       appSecret: process.env.OBSERVE_APP_SECRET ?? 'YOUR_APP_SECRET',
       serviceId: 'api',
     }),
-    PrismaModule,
-    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: 'env',
     }),
+    PrismaModule,
+    AuthModule,
+    ThrottlerModule.forRoot([{ ttl: 60, limit: 10 }]),
     UsersModule,
     CategoryModule,
     ProductsModule,
+    OrdersModule,
+    PaymentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

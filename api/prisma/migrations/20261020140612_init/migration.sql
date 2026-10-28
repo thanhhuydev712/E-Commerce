@@ -107,7 +107,7 @@ CREATE TABLE "carts" (
 -- CreateTable
 CREATE TABLE "payments" (
     "id" TEXT NOT NULL,
-    "amout" DECIMAL(10,2) NOT NULL,
+    "amount" DECIMAL(10,2) NOT NULL,
     "status" "PaymentStatus" NOT NULL DEFAULT 'PENDING',
     "currency" TEXT NOT NULL DEFAULT 'usd',
     "paymentMethod" TEXT,

@@ -164,6 +164,7 @@ export class UsersController {
 
   // Delete user by ID
   @Delete(':id')
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   @ApiOperation({

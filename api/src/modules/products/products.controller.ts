@@ -150,7 +150,7 @@ export class ProductsController {
   })
   async update(
     @Param('id') id: string,
-    updateProductDto: UpdateProductDto,
+    @Body() updateProductDto: UpdateProductDto,
   ): Promise<ProductResponseDto> {
     return await this.productsService.update(id, updateProductDto);
   }
@@ -159,7 +159,7 @@ export class ProductsController {
   @Patch(':id/stock')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(Role.ADMIN)
-  @ApiBearerAuth()
+  @ApiBearerAuth('JWT-auth')
   @ApiOperation({
     summary: 'Chỉnh số lượng sản phẩm',
   })
@@ -195,7 +195,7 @@ export class ProductsController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(Role.ADMIN)
-  @ApiBearerAuth()
+  @ApiBearerAuth('JWT-auth')
   @ApiOperation({
     summary: 'Xoá sản phẩm',
   })
@@ -209,7 +209,7 @@ export class ProductsController {
   })
   @ApiResponse({
     status: 400,
-    description: 'Cannot delete product in active orders',
+    description: 'Không thể xoá sản phẩm trong giỏ hàng or hoá đơn',
   })
   async delete(@Param('id') id: string): Promise<{ message: string }> {
     return await this.productsService.delete(id);
