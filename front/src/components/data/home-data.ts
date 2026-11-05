@@ -1,5 +1,3 @@
-import type { HomeCategory, ProductSectionData } from "@/src/data/types";
-
 const images = {
   pc: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=85",
   laptop:
@@ -15,6 +13,36 @@ const images = {
     "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=900&q=85",
   storage:
     "https://images.unsplash.com/photo-1597872200969-2b65d7a8ee49?auto=format&fit=crop&w=900&q=85",
+};
+
+export type Product = {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  originalPrice?: number;
+  discount?: number;
+  badge?: string;
+  specs: string[];
+  rating?: number;
+  sold?: number;
+  slug: string;
+};
+
+export type ProductSectionData = {
+  id: string;
+  title: string;
+  subtitle?: string;
+  accent?: string;
+  products: Product[];
+  viewAllHref?: string;
+};
+
+export type HomeCategory = {
+  id: string;
+  name: string;
+  icon: string;
+  href: string;
 };
 
 export const homeCategories: HomeCategory[] = [

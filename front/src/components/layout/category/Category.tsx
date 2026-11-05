@@ -479,6 +479,8 @@ export default function CategoryMenu() {
                                 <Image
                                   src={item.image}
                                   alt={item.name}
+                                  width={36}
+                                  height={36}
                                   className="h-full w-full object-contain"
                                 />
                               ) : (

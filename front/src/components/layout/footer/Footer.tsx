@@ -173,8 +173,7 @@ export default function Footer() {
             <strong className="block text-slate-300">
               CÔNG TY TNHH TIN HỌC NGÔI SAO
             </strong>
-            © {new Date().getFullYear()} - Giao diện demo phục vụ học tập và
-            phát triển dự án.
+            © - Giao diện demo phục vụ học tập và phát triển dự án.
           </span>
           <span>Điều khoản sử dụng · Chính sách bảo mật</span>
         </div>
