@@ -1,12 +1,6 @@
-// Custom decorator to extract user from request
-
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-
-export const GetUser = createParamDecorator(
-  (data: string | undefined, ctx: ExecutionContext) => {
-    const request = ctx.switchToHttp().getRequest();
-    const user = request.user;
-
-    return data ? user?.[data] : user;
-  },
+import type { AuthenticatedRequest } from '../interfaces/request-with-user.interface.js';
+export const CurrentUser = createParamDecorator(
+  (_data: unknown, context: ExecutionContext) =>
+    context.switchToHttp().getRequest<AuthenticatedRequest>().user,
 );

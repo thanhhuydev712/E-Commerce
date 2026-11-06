@@ -1,0 +1,90 @@
+/* Reset và accessibility toàn cục nằm ở base layer để utility luôn ghi đè được. */
+@layer base {
+  @keyframes rf-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  * {
+    box-sizing: border-box;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid #168358;
+    outline-offset: 4px;
+  }
+  button {
+    color: inherit;
+  }
+  svg {
+    flex-shrink: 0;
+  }
+  img,
+  svg {
+    max-width: 100%;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    margin-top: 0;
+  }
+  em {
+    font-style: normal;
+  }
+  input,
+  select,
+  textarea {
+    min-width: 0;
+  }
+  input,
+  select {
+    accent-color: var(--rf-green);
+  }
+  ::selection {
+    background: var(--rf-mint);
+    color: var(--rf-dark);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

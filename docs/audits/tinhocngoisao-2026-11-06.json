@@ -1,0 +1,770 @@
+{
+  "date": "2026-11-06",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "method": "Playwright Chromium, public pages, isolated guest contexts",
+  "limitations": [
+    "No authenticated account access",
+    "No order submission or payment",
+    "No claim of exhaustive product/filter/backend coverage",
+    "Screenshots and DOM are ignored local artifacts; hashes identify the reviewed captures"
+  ],
+  "artifactDirectory": "front/.visual-review/reference-audit",
+  "pages": [
+    {
+      "name": "account",
+      "url": "https://tinhocngoisao.com/account/login",
+      "title": "Tài khoản – TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 1861
+      },
+      "pageErrors": [
+        "starbapSetting is not defined"
+      ],
+      "visibleControlCount": 15
+    },
+    {
+      "name": "builder",
+      "url": "https://tinhocngoisao.com/pages/xay-dung-cau-hinh",
+      "title": "Build PC - Tự xây dựng cấu hình máy tính, PC giá rẻ – TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 2774
+      },
+      "pageErrors": [
+        "starbapSetting is not defined"
+      ],
+      "visibleControlCount": 22
+    },
+    {
+      "name": "cart",
+      "url": "https://tinhocngoisao.com/cart",
+      "title": "Giỏ hàng của bạn - TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 1763
+      },
+      "pageErrors": [
+        "starbapSetting is not defined"
+      ],
+      "visibleControlCount": 4
+    },
+    {
+      "name": "catalog",
+      "url": "https://tinhocngoisao.com/collections/pc-gaming",
+      "title": "PC Gaming - máy tính chơi game giá rẻ, trả góp 0% – TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1457,
+        "height": 14514
+      },
+      "pageErrors": [
+        "Cannot read properties of undefined (reading 'includes')"
+      ],
+      "visibleControlCount": 82
+    },
+    {
+      "name": "compare",
+      "url": "https://tinhocngoisao.com/pages/so-sanh-san-pham",
+      "title": "So sánh sản phẩm – TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 1857
+      },
+      "pageErrors": [
+        "starbapSetting is not defined"
+      ],
+      "visibleControlCount": 4
+    },
+    {
+      "name": "home",
+      "url": "https://tinhocngoisao.com/",
+      "title": "Tin Học Ngôi Sao - Chuyên cung cấp linh kiện PC, Laptop, Gaming Gear – TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 10738
+      },
+      "pageErrors": [
+        "starbapSetting is not defined"
+      ],
+      "visibleControlCount": 268
+    },
+    {
+      "name": "installments",
+      "url": "https://tinhocngoisao.com/pages/tra-gop",
+      "title": "Chính sách trả góp PC, Laptop, Màn hình, Gaming Gear",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 6473
+      },
+      "pageErrors": [],
+      "visibleControlCount": 0
+    },
+    {
+      "name": "news",
+      "url": "https://tinhocngoisao.com/blogs/all",
+      "title": "Tất cả bài viết – TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 2862
+      },
+      "pageErrors": [
+        "starbapSetting is not defined"
+      ],
+      "visibleControlCount": 6
+    },
+    {
+      "name": "policy",
+      "url": "https://tinhocngoisao.com/pages/chinh-sach-giao-nhan-hang-va-kiem-hang",
+      "title": "CHÍNH SÁCH GIAO, NHẬN HÀNG VÀ KIỂM HÀNG – TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 2277
+      },
+      "pageErrors": [
+        "starbapSetting is not defined"
+      ],
+      "visibleControlCount": 4
+    },
+    {
+      "name": "product",
+      "url": "https://tinhocngoisao.com/products/ban-phim-co-gaming-khong-day-rapoo-v500-pro-87-multi-mode-wireless-3-mode-brown-switch-led-6-mau",
+      "title": "Bàn phím cơ Gaming Không Dây Rapoo V500 Pro-87 Giá rẻ – TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 3516
+      },
+      "pageErrors": [
+        "starbapSetting is not defined"
+      ],
+      "visibleControlCount": 14
+    },
+    {
+      "name": "promotions",
+      "url": "https://tinhocngoisao.com/pages/tong-hop-khuyen-mai",
+      "title": "Tổng hợp khuyến mãi | TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 5241
+      },
+      "pageErrors": [],
+      "visibleControlCount": 0
+    },
+    {
+      "name": "search",
+      "url": "https://tinhocngoisao.com/search?type=product&q=rtx",
+      "title": "Kết quả tìm kiếm \"rtx\" - TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 5624
+      },
+      "pageErrors": [
+        "Cannot set properties of null (setting 'sortby')"
+      ],
+      "visibleControlCount": 67
+    },
+    {
+      "name": "showrooms",
+      "url": "https://tinhocngoisao.com/pages/he-thong-showroom-1",
+      "title": "Hệ thống showroom Tin Học Ngôi Sao",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 1542
+      },
+      "pageErrors": [],
+      "visibleControlCount": 4
+    },
+    {
+      "name": "support",
+      "url": "https://tinhocngoisao.com/pages/thong-tin-lien-he",
+      "title": "Thông tin liên hệ | Tin Học Ngôi Sao – TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 2360
+      },
+      "pageErrors": [
+        "starbapSetting is not defined"
+      ],
+      "visibleControlCount": 4
+    },
+    {
+      "name": "warranty",
+      "url": "https://tinhocngoisao.com/pages/tra-cuu-bao-hanh",
+      "title": "Tra cứu bảo hành – TINHOCNGOISAO.COM",
+      "status": 200,
+      "desktop": {
+        "width": 1340,
+        "content": 1340,
+        "height": 1631
+      },
+      "pageErrors": [
+        "starbapSetting is not defined"
+      ],
+      "visibleControlCount": 8
+    }
+  ],
+  "interactions": [
+    {
+      "id": "REF-01",
+      "title": "Tìm kiếm gợi ý khi nhập từ khóa",
+      "result": "PASS",
+      "detail": {
+        "suggestionLinks": 10
+      }
+    },
+    {
+      "id": "REF-02",
+      "title": "Submit tìm kiếm chuyển sang trang kết quả",
+      "result": "PASS",
+      "detail": {
+        "url": "https://tinhocngoisao.com/search?q=filter=(title%3Aproduct**%20rtx)%7C%7C(sku%3Aproduct%3D%20rtx)"
+      }
+    },
+    {
+      "id": "REF-03",
+      "title": "Bộ lọc và sắp xếp công khai",
+      "result": "OBSERVED",
+      "detail": {
+        "controls": [
+          {
+            "text": "PC theo giá",
+            "href": "/",
+            "class": "filter-group-title"
+          },
+          {
+            "text": "PC theo VGA",
+            "href": "/",
+            "class": "filter-group-title"
+          },
+          {
+            "text": "PC theo CPU",
+            "href": "/",
+            "class": "filter-group-title"
+          },
+          {
+            "text": "PC theo CPU",
+            "href": "/",
+            "class": "filter-group-title"
+          },
+          {
+            "text": "PC theo giá",
+            "href": "/",
+            "class": "filter-group-title"
+          },
+          {
+            "text": "CPU",
+            "href": "/collections/laptop",
+            "class": "filter-group-title"
+          },
+          {
+            "text": "Phân khúc giá",
+            "href": "/collections/laptop",
+            "class": "filter-group-title"
+          },
+          {
+            "text": "VGA",
+            "href": "/collections/laptop",
+            "class": "filter-group-title"
+          }
+        ],
+        "note": "Xác nhận hiện diện; chưa khẳng định mọi tổ hợp lọc hoạt động."
+      }
+    },
+    {
+      "id": "REF-04",
+      "title": "Nút tăng giảm số lượng sản phẩm",
+      "result": "PASS",
+      "detail": {
+        "before": "1",
+        "after": "1"
+      }
+    },
+    {
+      "id": "REF-05",
+      "title": "Thêm sản phẩm vào giỏ khách",
+      "result": "PASS",
+      "detail": {
+        "url": "https://tinhocngoisao.com/cart",
+        "note": "Chỉ giỏ khách; không tạo đơn."
+      }
+    },
+    {
+      "id": "REF-06",
+      "title": "Builder mở bộ chọn CPU",
+      "result": "OBSERVED",
+      "detail": {
+        "dialogs": 1,
+        "note": "Ảnh ghi lại trạng thái bộ chọn; chưa thử chọn mọi nhóm hoặc xuất cấu hình."
+      }
+    },
+    {
+      "id": "REF-07",
+      "title": "Lọc showroom theo tỉnh và xóa lọc",
+      "result": "PASS",
+      "detail": "Chọn tỉnh và reset hoạt động; bản đồ ngoài chưa kiểm tra chỉ đường thực tế."
+    },
+    {
+      "id": "REF-08-390",
+      "title": "Chiều ngang danh mục 390px",
+      "result": "PASS",
+      "detail": {
+        "viewport": 390,
+        "content": 390
+      }
+    },
+    {
+      "id": "REF-08-768",
+      "title": "Chiều ngang danh mục 768px",
+      "result": "PASS",
+      "detail": {
+        "viewport": 768,
+        "content": 768
+      }
+    },
+    {
+      "id": "REF-08-1340",
+      "title": "Chiều ngang danh mục 1340px",
+      "result": "FAIL",
+      "detail": "expect(received).toBeLessThanOrEqual(expected)\n\nExpected: <= 1340\nReceived:    1457"
+    },
+    {
+      "id": "REF-09",
+      "title": "Sắp xếp danh mục tăng giá",
+      "result": "OBSERVED",
+      "detail": {
+        "url": "https://tinhocngoisao.com/collections/pc-gaming",
+        "checkedPrices": [
+          14977000,
+          15757000,
+          16387000,
+          17097000,
+          18067000,
+          19177000,
+          19307000,
+          19833000,
+          21544000,
+          21497000,
+          21767000,
+          22864000,
+          24922000,
+          25520000,
+          26114000,
+          26133000,
+          26067000,
+          26640000,
+          26759000,
+          27477000,
+          29313000,
+          30320000,
+          29864000,
+          31506000,
+          31542000,
+          31955000,
+          32948000,
+          33524000,
+          33069000,
+          36238000,
+          36566000,
+          36946000,
+          37205000,
+          38555000,
+          40982000,
+          41396000,
+          45055000,
+          45787000,
+          53093000,
+          59467000
+        ],
+        "monotonic": false,
+        "note": "Giá hiển thị có cặp không tăng dần. Có thể thứ tự theo giá gốc khác giá khuyến mãi; chưa xác minh thuật toán server."
+      }
+    },
+    {
+      "id": "REF-10",
+      "title": "Mở và đóng cài đặt cookie",
+      "result": "PASS",
+      "detail": "Chỉ mở và đóng cài đặt; không xác nhận cookie quảng cáo."
+    },
+    {
+      "id": "REF-11",
+      "title": "Giới hạn số lượng sản phẩm khuyến mãi trong giỏ khách",
+      "result": "PASS",
+      "detail": "Nhập 2 nhưng sau reload còn 1; dòng hàng có data-buyone=True, trang chi tiết ghi tối đa 1 chiếc/đơn. Chưa thử sản phẩm không có điều kiện này."
+    },
+    {
+      "id": "REF-12",
+      "title": "Mở checkout khách, không gửi đơn",
+      "result": "PASS",
+      "detail": {
+        "path": "/checkouts/[shop]/[session]",
+        "visibleControls": 23,
+        "note": "Không điền thông tin và không bấm nút đặt hàng/thanh toán."
+      }
+    },
+    {
+      "id": "REF-13",
+      "title": "Xóa dòng hàng khỏi giỏ khách",
+      "result": "PASS",
+      "detail": "Không còn dòng hàng trong phiên khách khảo sát."
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "account-1340.png",
+      "bytes": 284984,
+      "sha256": "1c2b319e0913e7edc89e95ecd582c53a48ce3d1ac3e53caf06a77845fe6f88bd"
+    },
+    {
+      "file": "account-390.png",
+      "bytes": 116764,
+      "sha256": "ce60ba3c59d2dedee28d51ecd54f6c9455bc08388e86d52b0760a29961188ed3"
+    },
+    {
+      "file": "account-top-1340.png",
+      "bytes": 199507,
+      "sha256": "74ff1daf7b83d91e47e5d2289f46b5b54988763fee187df1f1be5584b0ab52fd"
+    },
+    {
+      "file": "account-top-390.png",
+      "bytes": 46578,
+      "sha256": "67810926339d6dc18c341f203803d0955baa8ab1dc23003802d42b84ef659b34"
+    },
+    {
+      "file": "builder-1340.png",
+      "bytes": 612312,
+      "sha256": "612dc2542c267bc39234c805d260d7200261d90e2902aaad51ea333b71cea3a5"
+    },
+    {
+      "file": "builder-390.png",
+      "bytes": 179976,
+      "sha256": "1e0a83a0e74cdcc7ab6b824d94868f8cf13734dc8577f672b9101f784b7e31e0"
+    },
+    {
+      "file": "builder-picker.png",
+      "bytes": 215787,
+      "sha256": "c6310ae40d9baf7c298336e46241f579ad03c84ba7701478e83bc082b1405467"
+    },
+    {
+      "file": "builder-top-1340.png",
+      "bytes": 477364,
+      "sha256": "0206aa1fa8449c30626abfc52ee3e86e1b06fc338099d009d07f4454e220ad88"
+    },
+    {
+      "file": "cart-1340.png",
+      "bytes": 266504,
+      "sha256": "f266e5851188496d3f142bd98d738b78f419affdfc937e1ffe7dc1cb128d4f50"
+    },
+    {
+      "file": "cart-390.png",
+      "bytes": 107359,
+      "sha256": "257b3534112d7e0edd6f76ed67ddb64113b103c9c040c65b2c85d1177210c461"
+    },
+    {
+      "file": "cart-cleared.png",
+      "bytes": 327742,
+      "sha256": "5c76cdb175780b5e0e762307595e3eccea35f675f384f23a35936a8ae0053ca9"
+    },
+    {
+      "file": "cart-filled-top-1340.png",
+      "bytes": 214360,
+      "sha256": "d7faad89cec8fe6dd063e12331d5b33f1fd8437fda43ac9528b4d1e8ebcb224c"
+    },
+    {
+      "file": "cart-quantity-two.png",
+      "bytes": 263704,
+      "sha256": "901aa5f73e737ccbecb449e79d963a05ef07579c662b5cae29493e26054b54df"
+    },
+    {
+      "file": "catalog-1340-top-1340.png",
+      "bytes": 460983,
+      "sha256": "32cadc1cd192e5a50d49779ce4f08a7a6e1cb5b494df8630bd12af2e67351d2f"
+    },
+    {
+      "file": "catalog-1340.png",
+      "bytes": 8539071,
+      "sha256": "8f7fb607078280414bc3db5cf5e25a31941e520d0660573fbd8a409009fe9dfe"
+    },
+    {
+      "file": "catalog-390-top-1340.png",
+      "bytes": 126383,
+      "sha256": "840886b5177a6f57c3ecfb2e4ef9a29fd343754feb842968d3357dba76afe23b"
+    },
+    {
+      "file": "catalog-390.png",
+      "bytes": 3092811,
+      "sha256": "449e759b7c705a942d541c004f476a4c1190a78c0eacb926fab683e4212b8dc7"
+    },
+    {
+      "file": "catalog-768-top-1340.png",
+      "bytes": 290050,
+      "sha256": "3481be8d3731dc13126472e9e03c9cc4e851d2ca730ecd5c766dd0dd2bd92ad4"
+    },
+    {
+      "file": "catalog-sorted.png",
+      "bytes": 514911,
+      "sha256": "77494fd574b7257ffff52d2b7ba10e6d1437158855d2e7c4d4b13cee99c90a30"
+    },
+    {
+      "file": "catalog-top-1340.png",
+      "bytes": 549675,
+      "sha256": "b62e408a45d6a3c64b1c482e0301ddd1a3c917590fe3872c16c54ed7942d7808"
+    },
+    {
+      "file": "checkout-guest.png",
+      "bytes": 108933,
+      "sha256": "b4cf78e6eff747ccd8d84544d0324ea0c3a02a6a0eca852adba25f5523cf7c62"
+    },
+    {
+      "file": "compare-1340.png",
+      "bytes": 273670,
+      "sha256": "7791b2d0efb00e648019a293db15d54332e4b94fdcc4966c2894a5180c794a8a"
+    },
+    {
+      "file": "compare-390.png",
+      "bytes": 99242,
+      "sha256": "68a2f5fa8378016fd0f417c49aaedf81be7f2f7e8ee7296cc27b51528cb7d0ca"
+    },
+    {
+      "file": "compare-top-1340.png",
+      "bytes": 187381,
+      "sha256": "a94bf16fe36b3326d1e773816e8e951c40328109b0fe56a93f73a8eff1f8e685"
+    },
+    {
+      "file": "compare-top-390.png",
+      "bytes": 40850,
+      "sha256": "36c3ec68e476ab1fb4c1c438c122583be1ea6d9e1f65036cd6102b931226143d"
+    },
+    {
+      "file": "cookie-settings.png",
+      "bytes": 504995,
+      "sha256": "6ac049144d6fec5131fbad602a0ae18cd2f8bead6ba160d4a0c2732bdedf6ebe"
+    },
+    {
+      "file": "home-1340.png",
+      "bytes": 4125615,
+      "sha256": "15b144d4c5da78c676f090439623ca9b5bcf886a305fd6974975d1f000edbbcc"
+    },
+    {
+      "file": "home-390.png",
+      "bytes": 1918281,
+      "sha256": "ae9b42bcf842503feb9188b9a99e99a54f463024457d47f81433845875a829ef"
+    },
+    {
+      "file": "home-top-1340.png",
+      "bytes": 941857,
+      "sha256": "227f808f1ffddb354b164acddc969abfd76ebb8aff32cb6f7c7b2d577450f96b"
+    },
+    {
+      "file": "installments-1340.png",
+      "bytes": 1557325,
+      "sha256": "e397c6897dec754612bae09f8267b7393f022b36d995149e89eb76cc6cc029a7"
+    },
+    {
+      "file": "installments-390.png",
+      "bytes": 785141,
+      "sha256": "fdd67ffd764febd13b012d4f0144c9712dc5b4662cf0f293ce48856e1fcb8798"
+    },
+    {
+      "file": "installments-top-1340.png",
+      "bytes": 373362,
+      "sha256": "edcf7cba5b330fc7147cb3874622b2eec3d74fe009035a98fbdb5aa853d27fa8"
+    },
+    {
+      "file": "installments-top-390.png",
+      "bytes": 149000,
+      "sha256": "983282c2d6be437dfd5ff96699128832413d5b55bca351f5869051f879d015ab"
+    },
+    {
+      "file": "news-1340.png",
+      "bytes": 841484,
+      "sha256": "88808aaa08aa7447a7d337569d279a76ebd26b275cdd52305c3543afdad7e795"
+    },
+    {
+      "file": "news-390.png",
+      "bytes": 183524,
+      "sha256": "21cbe33d83ab43f028a249400c8e3d1c1f033c5410ec8c69e4376dbfb3db7072"
+    },
+    {
+      "file": "news-top-1340.png",
+      "bytes": 579639,
+      "sha256": "05a1919352d35dd07bed95ffc8aa3e991dfc6e170c7857e89b8ccb47f093365f"
+    },
+    {
+      "file": "news-top-390.png",
+      "bytes": 86812,
+      "sha256": "d690d6a540b5ece6022fb6032a365ccfc5568035c8cbcf035f010b965ecc5aba"
+    },
+    {
+      "file": "policy-1340.png",
+      "bytes": 359227,
+      "sha256": "3dbccfdce58abfc45b44f4bb200c19457fde1c70bb73824a5887e49a067a7874"
+    },
+    {
+      "file": "policy-390.png",
+      "bytes": 180253,
+      "sha256": "8a41c6cd84e40999c968f6ca08eca20f864899f79999372d67d97a74563309c6"
+    },
+    {
+      "file": "policy-top-1340.png",
+      "bytes": 245598,
+      "sha256": "0f8fd98df001eff2b8777bb0b41fbba2a92ce715e3d842847004173deae94166"
+    },
+    {
+      "file": "policy-top-390.png",
+      "bytes": 56768,
+      "sha256": "a033f31dd519d71fe1638d31379ba26f0f099da16e99e6d4425fc027f8b655cf"
+    },
+    {
+      "file": "product-1340.png",
+      "bytes": 686067,
+      "sha256": "2796ae2cb1d1e79eee88c87361dc20931d9c0d97188aae193a87689573a3ea9a"
+    },
+    {
+      "file": "product-390.png",
+      "bytes": 407058,
+      "sha256": "0b6a95b1f1838ce0a9e1d9523b0c1ed9e14eff676e066cc9d8c3e7a7a6f9540b"
+    },
+    {
+      "file": "product-top-1340.png",
+      "bytes": 303664,
+      "sha256": "1a361a782001b54ce17b08097dc203ffd00b4bdb0dcab58eda0d3cb31a19863f"
+    },
+    {
+      "file": "promotions-1340.png",
+      "bytes": 1800300,
+      "sha256": "289b8c2999d584666a513cd5b69c9876d450de089623c333f762fe92d0eeec1b"
+    },
+    {
+      "file": "promotions-390.png",
+      "bytes": 747013,
+      "sha256": "f950e7179d6464340e6873a2d7e20edc399d4082dd91e7236c534734d3337c86"
+    },
+    {
+      "file": "promotions-top-1340.png",
+      "bytes": 513968,
+      "sha256": "cc87affb56b2d8a07d32147bf51d297812a6a84091a54747da56f14a6b4ab0f3"
+    },
+    {
+      "file": "promotions-top-390.png",
+      "bytes": 231702,
+      "sha256": "9c0e959d10c9f65a22c9c9dd6a884c6ba18ef0a1b0edba9ce3c7beede7692c86"
+    },
+    {
+      "file": "search-1340.png",
+      "bytes": 2033761,
+      "sha256": "32fe5db6ac7b9d68c32b20022ee87bffb1cca60fa93ac2c0069950deeb3b4c52"
+    },
+    {
+      "file": "search-390.png",
+      "bytes": 1398671,
+      "sha256": "fa25ae9e9c28e2cbf4c1f41ec79b21448d852fd3edd72dd0fa98683887a3d88e"
+    },
+    {
+      "file": "search-suggestions.png",
+      "bytes": 811246,
+      "sha256": "4d2ecfcb3268316e37864b1fd40838890751b39b9382542d0e967386318bd7ec"
+    },
+    {
+      "file": "search-top-1340.png",
+      "bytes": 598282,
+      "sha256": "c80d3e2397374f265f63339039cd855812ae72418439648739f8ac1fb2059dd5"
+    },
+    {
+      "file": "search-top-390.png",
+      "bytes": 89178,
+      "sha256": "3804fe545381f41a2afdca04040e8bb4e1d85782bf15fb302348b0dd160d3d51"
+    },
+    {
+      "file": "showroom-filtered.png",
+      "bytes": 145047,
+      "sha256": "db64459b296c4fb807142711c385430c198e08f916711a202790592f05af4512"
+    },
+    {
+      "file": "showrooms-1340.png",
+      "bytes": 561779,
+      "sha256": "aa8ed79f0fa5242250dba31a7ce52e087fcd98100c9584eddeb5255ad9436acc"
+    },
+    {
+      "file": "showrooms-390.png",
+      "bytes": 198226,
+      "sha256": "a2fb4b3e365e232ba480867adf41d9460fb1bf1ebe346429aceb1ea2f430936c"
+    },
+    {
+      "file": "showrooms-top-1340.png",
+      "bytes": 359717,
+      "sha256": "93e5a1246eede9f8983decb57b5c0098460380bb10f61efde13e406899bd6008"
+    },
+    {
+      "file": "showrooms-top-390.png",
+      "bytes": 78658,
+      "sha256": "e8698b29fa2b01f8a56221b7ef41f0c3566799c099644c0e876cc2d51a3ead29"
+    },
+    {
+      "file": "support-1340.png",
+      "bytes": 343356,
+      "sha256": "0373652915bf92526275ea385e5d70fc4044afaed55580571aeef31f86beb6e7"
+    },
+    {
+      "file": "support-390.png",
+      "bytes": 154088,
+      "sha256": "013252de46afdcc7842658626ec5be5adb772a7ebfd0847166954715cfea7197"
+    },
+    {
+      "file": "support-top-1340.png",
+      "bytes": 216866,
+      "sha256": "f7588c9f82549702bb289c53e179abecebcd74be8cfb9aac131e4f7c7e40a081"
+    },
+    {
+      "file": "support-top-390.png",
+      "bytes": 59736,
+      "sha256": "4cd74573be7dd7af7b44c564faad2ee3b8bf5382cc3beebe24ebe8a1be7aab72"
+    },
+    {
+      "file": "warranty-1340.png",
+      "bytes": 291885,
+      "sha256": "779763c91feb7e88217305a39292842ec2c3f373be70458941140e47091b683b"
+    },
+    {
+      "file": "warranty-390.png",
+      "bytes": 113701,
+      "sha256": "5475617807f2d5c56048c4d2e206f17e2cc66f6ab8f791353d75e22de39d808f"
+    },
+    {
+      "file": "warranty-top-1340.png",
+      "bytes": 226600,
+      "sha256": "d7d0638b85fba777a313b84225931b83f6ca437a58f977d1eb578283e113b03d"
+    },
+    {
+      "file": "warranty-top-390.png",
+      "bytes": 49165,
+      "sha256": "1c1986979ff32da7eb81b4e400edb8a0b15aa19ca5561c62139304a79fce08bc"
+    }
+  ]
+}

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,16 +23,33 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.mts",
+    "tests/**/*.ts",
+    "*.ts",
+    "*.mts",
+    ".next-local-*/types/**/*.ts",
+    ".next-local-*/dev/types/**/*.ts",
+    ".next-local-f60e1cb2416d/types/**/*.ts",
+    ".next-local-f60e1cb2416d/dev/types/**/*.ts",
+    ".next-local-e8763b252a77/types/**/*.ts",
+    ".next-local-e8763b252a77/dev/types/**/*.ts",
+    ".next-local-live-test/types/**/*.ts",
+    ".next-local-live-test/dev/types/**/*.ts",
+    ".next-local-hero-motion-build/types/**/*.ts",
+    ".next-local-hero-motion-build/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    ".next-cache-backup-*"
+  ]
 }

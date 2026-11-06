@@ -3,13 +3,7 @@ import { LoaderCircle } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "ghost"
-  | "soft"
-  | "danger"
-  | "link";
+  "primary" | "secondary" | "outline" | "ghost" | "soft" | "danger" | "link";
 
 export type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 
@@ -145,8 +139,8 @@ export default function Button({
       "gap-2 whitespace-nowrap select-none",
       "font-medium",
       "cursor-pointer",
-      "transition-all duration-200 ease-out",
-      "active:scale-[0.98]",
+      "transition-[color,background-color,border-color,box-shadow,opacity,scale] duration-200 ease-out",
+      "motion-safe:enabled:active:scale-[0.98] motion-reduce:transition-none",
       "focus-visible:outline-none",
       "focus-visible:ring-2 focus-visible:ring-emerald-500",
       "focus-visible:ring-offset-2",

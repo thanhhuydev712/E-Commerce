@@ -1,0 +1,5330 @@
+{
+  "categories": [
+    {
+      "id": "pc",
+      "name": "PC Gaming",
+      "short": "PC",
+      "icon": "pc"
+    },
+    {
+      "id": "laptop",
+      "name": "Laptop",
+      "short": "Laptop",
+      "icon": "laptop"
+    },
+    {
+      "id": "cpu",
+      "name": "CPU · Bộ vi xử lý",
+      "short": "CPU",
+      "icon": "cpu"
+    },
+    {
+      "id": "mainboard",
+      "name": "Mainboard",
+      "short": "Mainboard",
+      "icon": "board"
+    },
+    {
+      "id": "gpu",
+      "name": "VGA · Card màn hình",
+      "short": "VGA",
+      "icon": "gpu"
+    },
+    {
+      "id": "ram",
+      "name": "RAM máy tính",
+      "short": "RAM",
+      "icon": "ram"
+    },
+    {
+      "id": "ssd",
+      "name": "SSD · Lưu trữ",
+      "short": "SSD",
+      "icon": "ssd"
+    },
+    {
+      "id": "monitor",
+      "name": "Màn hình máy tính",
+      "short": "Màn hình",
+      "icon": "monitor"
+    },
+    {
+      "id": "gear",
+      "name": "Gaming Gear",
+      "short": "Gaming Gear",
+      "icon": "gear"
+    },
+    {
+      "id": "case",
+      "name": "Case · Vỏ máy",
+      "short": "Case",
+      "icon": "case"
+    },
+    {
+      "id": "psu",
+      "name": "Nguồn máy tính",
+      "short": "Nguồn",
+      "icon": "psu"
+    },
+    {
+      "id": "cooler",
+      "name": "Tản nhiệt",
+      "short": "Tản nhiệt",
+      "icon": "cooler"
+    },
+    {
+      "id": "hdd",
+      "name": "Ổ cứng HDD",
+      "short": "HDD",
+      "icon": "ssd"
+    },
+    {
+      "id": "mouse",
+      "name": "Chuột máy tính",
+      "short": "Chuột",
+      "icon": "gear"
+    },
+    {
+      "id": "headset",
+      "name": "Tai nghe",
+      "short": "Tai nghe",
+      "icon": "gear"
+    },
+    {
+      "id": "chair",
+      "name": "Ghế gaming",
+      "short": "Ghế",
+      "icon": "chair"
+    },
+    {
+      "id": "desk",
+      "name": "Bàn gaming",
+      "short": "Bàn",
+      "icon": "desk"
+    },
+    {
+      "id": "fan",
+      "name": "Fan case",
+      "short": "Fan case",
+      "icon": "cooler"
+    },
+    {
+      "id": "camera",
+      "name": "Camera",
+      "short": "Camera",
+      "icon": "camera"
+    },
+    {
+      "id": "webcam",
+      "name": "Webcam",
+      "short": "Webcam",
+      "icon": "camera"
+    },
+    {
+      "id": "printer",
+      "name": "Máy in",
+      "short": "Máy in",
+      "icon": "printer"
+    },
+    {
+      "id": "ups",
+      "name": "Bộ lưu điện",
+      "short": "UPS",
+      "icon": "psu"
+    },
+    {
+      "id": "network",
+      "name": "Thiết bị mạng",
+      "short": "Thiết bị mạng",
+      "icon": "network"
+    },
+    {
+      "id": "accessory",
+      "name": "Phụ kiện",
+      "short": "Phụ kiện",
+      "icon": "accessory"
+    },
+    {
+      "id": "software",
+      "name": "Phần mềm",
+      "short": "Phần mềm",
+      "icon": "software"
+    },
+    {
+      "id": "projector",
+      "name": "Máy chiếu",
+      "short": "Máy chiếu",
+      "icon": "projector"
+    }
+  ],
+  "products": [
+    {
+      "id": "rigforge-strike",
+      "slug": "rigforge-strike",
+      "name": "PC RIGFORGE Strike · Ryzen 5 7600 / RTX 4060",
+      "category": "pc",
+      "brand": "Rigforge",
+      "price": "21990000",
+      "oldPrice": "24630000",
+      "image": "/images/catalog/pc-1.webp",
+      "specs": [
+        "Ryzen 5 7600",
+        "RTX 4060 8GB",
+        "16GB DDR5",
+        "SSD NVMe 1TB"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "badge": "BÁN CHẠY",
+      "variants": [
+        {
+          "id": "rigforge-strike-standard",
+          "label": "Tiêu chuẩn",
+          "price": "21990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "rigforge-nova",
+      "slug": "rigforge-nova",
+      "name": "PC RIGFORGE Nova · Core i5 / RTX 4060 Ti",
+      "category": "pc",
+      "brand": "Rigforge",
+      "price": "26990000",
+      "oldPrice": "30230000",
+      "image": "/images/catalog/pc-2.webp",
+      "specs": [
+        "Core i5-14400F",
+        "RTX 4060 Ti",
+        "32GB DDR5",
+        "SSD NVMe 1TB"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "badge": "GIÁ TỐT",
+      "variants": [
+        {
+          "id": "rigforge-nova-standard",
+          "label": "Tiêu chuẩn",
+          "price": "26990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "rigforge-apex",
+      "slug": "rigforge-apex",
+      "name": "PC RIGFORGE Apex · Ryzen 7 / RTX 4070 SUPER",
+      "category": "pc",
+      "brand": "Rigforge",
+      "price": "36990000",
+      "oldPrice": "41430000",
+      "image": "/images/catalog/pc-3.webp",
+      "specs": [
+        "Ryzen 7 7700",
+        "RTX 4070 SUPER",
+        "32GB DDR5",
+        "SSD NVMe 1TB"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "badge": "HIỆU NĂNG CAO",
+      "variants": [
+        {
+          "id": "rigforge-apex-standard",
+          "label": "Tiêu chuẩn",
+          "price": "36990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "rigforge-office",
+      "slug": "rigforge-office",
+      "name": "PC RIGFORGE Office · Ryzen 5 5600G",
+      "category": "pc",
+      "brand": "Rigforge",
+      "price": "8990000",
+      "oldPrice": "10070000",
+      "image": "/images/catalog/pc-4.webp",
+      "specs": [
+        "Ryzen 5 5600G",
+        "Radeon Graphics",
+        "16GB DDR4",
+        "SSD 500GB"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "rigforge-office-standard",
+          "label": "Tiêu chuẩn",
+          "price": "8990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "rigforge-white",
+      "slug": "rigforge-white",
+      "name": "PC RIGFORGE Frost · White Edition",
+      "category": "pc",
+      "brand": "Rigforge",
+      "price": "29990000",
+      "oldPrice": "33590000",
+      "image": "/images/catalog/pc-5.webp",
+      "specs": [
+        "Ryzen 5 7600",
+        "RTX 4060 Ti",
+        "32GB DDR5 RGB",
+        "Case trắng"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "badge": "WHITE EDITION",
+      "variants": [
+        {
+          "id": "rigforge-white-standard",
+          "label": "Tiêu chuẩn",
+          "price": "29990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "rigforge-mini",
+      "slug": "rigforge-mini",
+      "name": "Mini PC RIGFORGE Nano · Nhỏ gọn, mạnh mẽ",
+      "category": "pc",
+      "brand": "Rigforge",
+      "price": "10990000",
+      "oldPrice": "12310000",
+      "image": "/images/catalog/pc-6.webp",
+      "specs": [
+        "Core i5",
+        "Intel Graphics",
+        "16GB DDR4",
+        "SSD 512GB"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "rigforge-mini-standard",
+          "label": "Tiêu chuẩn",
+          "price": "10990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "ryzen-7600",
+      "slug": "ryzen-7600",
+      "name": "CPU AMD Ryzen 5 7600 · 6 nhân 12 luồng",
+      "category": "cpu",
+      "brand": "AMD",
+      "price": "4590000",
+      "oldPrice": "5140000",
+      "image": "/images/catalog/cpu-1.webp",
+      "specs": [
+        "Socket AM5",
+        "6C / 12T",
+        "Tối đa 5.1GHz",
+        "65W"
+      ],
+      "technical": {
+        "socket": "AM5",
+        "watts": 65,
+        "integrated": true
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "badge": "ĐỀ XUẤT",
+      "variants": [
+        {
+          "id": "ryzen-7600-standard",
+          "label": "Tiêu chuẩn",
+          "price": "4590000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "ryzen-7700",
+      "slug": "ryzen-7700",
+      "name": "CPU AMD Ryzen 7 7700 · 8 nhân 16 luồng",
+      "category": "cpu",
+      "brand": "AMD",
+      "price": "6890000",
+      "oldPrice": "7720000",
+      "image": "/images/catalog/cpu-2.webp",
+      "specs": [
+        "Socket AM5",
+        "8C / 16T",
+        "Tối đa 5.3GHz",
+        "65W"
+      ],
+      "technical": {
+        "socket": "AM5",
+        "watts": 65,
+        "integrated": true
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "ryzen-7700-standard",
+          "label": "Tiêu chuẩn",
+          "price": "6890000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "intel-14400f",
+      "slug": "intel-14400f",
+      "name": "CPU Intel Core i5-14400F · 10 nhân 16 luồng",
+      "category": "cpu",
+      "brand": "Intel",
+      "price": "4590000",
+      "oldPrice": "5140000",
+      "image": "/images/catalog/cpu-3.webp",
+      "specs": [
+        "LGA1700",
+        "10C / 16T",
+        "Không iGPU",
+        "148W turbo"
+      ],
+      "technical": {
+        "socket": "LGA1700",
+        "watts": 148,
+        "integrated": false
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "intel-14400f-standard",
+          "label": "Tiêu chuẩn",
+          "price": "4590000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "msi-b650",
+      "slug": "msi-b650",
+      "name": "Mainboard MSI PRO B650M-A WIFI",
+      "category": "mainboard",
+      "brand": "MSI",
+      "price": "3690000",
+      "oldPrice": "4130000",
+      "image": "/images/catalog/mainboard-1.webp",
+      "specs": [
+        "Socket AM5",
+        "DDR5 · 4 khe",
+        "Micro ATX",
+        "Wi-Fi 6E"
+      ],
+      "technical": {
+        "socket": "AM5",
+        "ddr": "DDR5",
+        "form": "mATX",
+        "capacity": 128,
+        "slots": 4
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "msi-b650-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3690000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "asus-b760",
+      "slug": "asus-b760",
+      "name": "Mainboard ASUS PRIME B760M-A D4",
+      "category": "mainboard",
+      "brand": "ASUS",
+      "price": "2890000",
+      "oldPrice": "3240000",
+      "image": "/images/catalog/mainboard-2.webp",
+      "specs": [
+        "LGA1700",
+        "DDR4 · 4 khe",
+        "Micro ATX",
+        "2 khe M.2"
+      ],
+      "technical": {
+        "socket": "LGA1700",
+        "ddr": "DDR4",
+        "form": "mATX",
+        "capacity": 128,
+        "slots": 4
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "asus-b760-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2890000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "gigabyte-b650",
+      "slug": "gigabyte-b650",
+      "name": "Mainboard GIGABYTE B650 AORUS ELITE AX",
+      "category": "mainboard",
+      "brand": "GIGABYTE",
+      "price": "4990000",
+      "oldPrice": "5590000",
+      "image": "/images/catalog/mainboard-3.webp",
+      "specs": [
+        "Socket AM5",
+        "DDR5 · 4 khe",
+        "ATX",
+        "Wi-Fi 6E"
+      ],
+      "technical": {
+        "socket": "AM5",
+        "ddr": "DDR5",
+        "form": "ATX",
+        "capacity": 192,
+        "slots": 4
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "gigabyte-b650-standard",
+          "label": "Tiêu chuẩn",
+          "price": "4990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "rtx-4060",
+      "slug": "rtx-4060",
+      "name": "VGA ASUS Dual GeForce RTX 4060 OC 8GB",
+      "category": "gpu",
+      "brand": "ASUS",
+      "price": "7990000",
+      "oldPrice": "8950000",
+      "image": "/images/catalog/gpu-1.webp",
+      "specs": [
+        "8GB GDDR6",
+        "DLSS 3",
+        "2 quạt",
+        "Dài 227mm"
+      ],
+      "technical": {
+        "watts": 115,
+        "length": 227
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "badge": "BÁN CHẠY",
+      "variants": [
+        {
+          "id": "rtx-4060-standard",
+          "label": "Tiêu chuẩn",
+          "price": "7990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "rtx-4070",
+      "slug": "rtx-4070",
+      "name": "VGA MSI GeForce RTX 4070 SUPER VENTUS",
+      "category": "gpu",
+      "brand": "MSI",
+      "price": "16990000",
+      "oldPrice": "19030000",
+      "image": "/images/catalog/gpu-2.webp",
+      "specs": [
+        "12GB GDDR6X",
+        "DLSS 3",
+        "3 quạt",
+        "Dài 308mm"
+      ],
+      "technical": {
+        "watts": 220,
+        "length": 308
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "rtx-4070-standard",
+          "label": "Tiêu chuẩn",
+          "price": "16990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "ram-ddr5",
+      "slug": "ram-ddr5",
+      "name": "RAM Kingston FURY Beast RGB 32GB DDR5",
+      "category": "ram",
+      "brand": "Kingston",
+      "price": "2690000",
+      "oldPrice": "3010000",
+      "image": "/images/catalog/ram-1.webp",
+      "specs": [
+        "Kit 2 × 16GB",
+        "DDR5 6000MHz",
+        "RGB",
+        "AMD EXPO"
+      ],
+      "technical": {
+        "ddr": "DDR5",
+        "capacity": 32,
+        "slots": 2
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "ram-ddr5-standard",
+          "label": "32GB · Đen",
+          "price": "2690000",
+          "stock": 12
+        },
+        {
+          "id": "ram-ddr5-white",
+          "label": "32GB · Trắng",
+          "price": "2790000",
+          "stock": 4
+        },
+        {
+          "id": "ram-ddr5-64",
+          "label": "64GB · Đen",
+          "price": "4790000",
+          "stock": 0
+        }
+      ]
+    },
+    {
+      "id": "ram-ddr4",
+      "slug": "ram-ddr4",
+      "name": "RAM Corsair Vengeance LPX 16GB DDR4",
+      "category": "ram",
+      "brand": "Corsair",
+      "price": "990000",
+      "oldPrice": "1110000",
+      "image": "/images/catalog/ram-2.webp",
+      "specs": [
+        "Kit 2 × 8GB",
+        "DDR4 3200MHz",
+        "Low profile",
+        "XMP"
+      ],
+      "technical": {
+        "ddr": "DDR4",
+        "capacity": 16,
+        "slots": 2
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "ram-ddr4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "ssd-kingston",
+      "slug": "ssd-kingston",
+      "name": "SSD Kingston NV2 1TB PCIe 4.0 NVMe",
+      "category": "ssd",
+      "brand": "Kingston",
+      "price": "1490000",
+      "oldPrice": "1670000",
+      "image": "/images/catalog/ssd-1.webp",
+      "specs": [
+        "Dung lượng 1TB",
+        "M.2 2280",
+        "PCIe Gen 4",
+        "3.500 MB/s"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "ssd-kingston-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1490000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "ssd-samsung",
+      "slug": "ssd-samsung",
+      "name": "SSD Samsung 990 PRO 1TB NVMe",
+      "category": "ssd",
+      "brand": "Samsung",
+      "price": "2590000",
+      "oldPrice": "2900000",
+      "image": "/images/catalog/ssd-2.webp",
+      "specs": [
+        "Dung lượng 1TB",
+        "M.2 2280",
+        "PCIe Gen 4",
+        "7.450 MB/s"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "ssd-samsung-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2590000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "case-air",
+      "slug": "case-air",
+      "name": "Case RIGFORGE Airflow M · Kính cường lực",
+      "category": "case",
+      "brand": "Rigforge",
+      "price": "1290000",
+      "oldPrice": "1440000",
+      "image": "/images/catalog/case-1.webp",
+      "specs": [
+        "ATX / mATX",
+        "GPU tối đa 350mm",
+        "Cooler 165mm",
+        "3 fan ARGB"
+      ],
+      "technical": {
+        "form": "ATX",
+        "gpuMax": 350,
+        "coolerMax": 165
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "case-air-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1290000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "case-mini",
+      "slug": "case-mini",
+      "name": "Case RIGFORGE Compact · Mini Tower",
+      "category": "case",
+      "brand": "Rigforge",
+      "price": "890000",
+      "oldPrice": "1000000",
+      "image": "/images/catalog/case-2.webp",
+      "specs": [
+        "mATX",
+        "GPU tối đa 270mm",
+        "Cooler 155mm",
+        "2 fan"
+      ],
+      "technical": {
+        "form": "mATX",
+        "gpuMax": 270,
+        "coolerMax": 155
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "case-mini-standard",
+          "label": "Tiêu chuẩn",
+          "price": "890000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "psu-650",
+      "slug": "psu-650",
+      "name": "Nguồn Corsair CX650 · 650W 80 Plus Bronze",
+      "category": "psu",
+      "brand": "Corsair",
+      "price": "1490000",
+      "oldPrice": "1670000",
+      "image": "/images/catalog/psu-1.webp",
+      "specs": [
+        "650W",
+        "80 Plus Bronze",
+        "ATX",
+        "Quạt 120mm"
+      ],
+      "technical": {
+        "watts": 650,
+        "form": "ATX"
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "psu-650-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1490000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "psu-750",
+      "slug": "psu-750",
+      "name": "Nguồn MSI MAG A750GL · 750W Gold",
+      "category": "psu",
+      "brand": "MSI",
+      "price": "2390000",
+      "oldPrice": "2680000",
+      "image": "/images/catalog/psu-2.webp",
+      "specs": [
+        "750W",
+        "80 Plus Gold",
+        "Full modular",
+        "ATX 3.0"
+      ],
+      "technical": {
+        "watts": 750,
+        "form": "ATX"
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "psu-750-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2390000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "cooler-ak400",
+      "slug": "cooler-ak400",
+      "name": "Tản nhiệt DeepCool AK400 Digital",
+      "category": "cooler",
+      "brand": "DeepCool",
+      "price": "890000",
+      "oldPrice": "1000000",
+      "image": "/images/catalog/cooler-1.webp",
+      "specs": [
+        "AM5 / LGA1700",
+        "Cao 156mm",
+        "4 heatpipe",
+        "Quạt 120mm"
+      ],
+      "technical": {
+        "clearance": 156
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "cooler-ak400-standard",
+          "label": "Tiêu chuẩn",
+          "price": "890000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "cooler-assassin",
+      "slug": "cooler-assassin",
+      "name": "Tản nhiệt Thermalright Assassin X 120",
+      "category": "cooler",
+      "brand": "Thermalright",
+      "price": "490000",
+      "oldPrice": "550000",
+      "image": "/images/catalog/cooler-2.webp",
+      "specs": [
+        "AM5 / LGA1700",
+        "Cao 148mm",
+        "4 heatpipe",
+        "ARGB"
+      ],
+      "technical": {
+        "clearance": 148
+      },
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "cooler-assassin-standard",
+          "label": "Tiêu chuẩn",
+          "price": "490000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "monitor-asus",
+      "slug": "monitor-asus",
+      "name": "Màn hình ASUS TUF Gaming 24 inch 180Hz",
+      "category": "monitor",
+      "brand": "ASUS",
+      "price": "2990000",
+      "oldPrice": "3350000",
+      "image": "/images/catalog/monitor-1.webp",
+      "specs": [
+        "24 inch FHD",
+        "180Hz · 1ms",
+        "Fast IPS",
+        "Adaptive Sync"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "badge": "GIÁ TỐT",
+      "variants": [
+        {
+          "id": "monitor-asus-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "monitor-lg",
+      "slug": "monitor-lg",
+      "name": "Màn hình LG UltraGear 27 inch QHD 165Hz",
+      "category": "monitor",
+      "brand": "LG",
+      "price": "4990000",
+      "oldPrice": "5590000",
+      "image": "/images/catalog/monitor-2.webp",
+      "specs": [
+        "27 inch QHD",
+        "165Hz · 1ms",
+        "IPS",
+        "HDR10"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "monitor-lg-standard",
+          "label": "Tiêu chuẩn",
+          "price": "4990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "laptop-asus",
+      "slug": "laptop-asus",
+      "name": "Laptop ASUS TUF Gaming A15",
+      "category": "laptop",
+      "brand": "ASUS",
+      "price": "19990000",
+      "oldPrice": "22390000",
+      "image": "/images/catalog/laptop-1.webp",
+      "specs": [
+        "Ryzen 7 7435HS",
+        "RTX 4050",
+        "16GB DDR5",
+        "15.6 inch 144Hz"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "laptop-asus-standard",
+          "label": "Tiêu chuẩn",
+          "price": "19990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "laptop-lenovo",
+      "slug": "laptop-lenovo",
+      "name": "Laptop Lenovo LOQ 15 · Gaming everyday",
+      "category": "laptop",
+      "brand": "Lenovo",
+      "price": "21990000",
+      "oldPrice": "24630000",
+      "image": "/images/catalog/laptop-2.webp",
+      "specs": [
+        "Core i5-12450HX",
+        "RTX 4050",
+        "16GB DDR5",
+        "15.6 inch 144Hz"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "laptop-lenovo-standard",
+          "label": "Tiêu chuẩn",
+          "price": "21990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "keyboard-akko",
+      "slug": "keyboard-akko",
+      "name": "Bàn phím cơ AKKO 5075B Plus · Cream Yellow",
+      "category": "gear",
+      "brand": "AKKO",
+      "price": "1890000",
+      "oldPrice": "2120000",
+      "image": "/images/catalog/gear-1.webp",
+      "specs": [
+        "Layout 75%",
+        "3 mode",
+        "Hot-swap",
+        "RGB"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "badge": "YÊU THÍCH",
+      "variants": [
+        {
+          "id": "keyboard-akko-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1890000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "keyboard-keychron",
+      "slug": "keyboard-keychron",
+      "name": "Bàn phím Keychron K2 Pro · Wireless",
+      "category": "gear",
+      "brand": "Keychron",
+      "price": "2490000",
+      "oldPrice": "2790000",
+      "image": "/images/catalog/gear-2.webp",
+      "specs": [
+        "Layout 75%",
+        "Bluetooth",
+        "QMK / VIA",
+        "Hot-swap"
+      ],
+      "technical": {},
+      "builderEligible": true,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "keyboard-keychron-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2490000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-accessory-1",
+      "slug": "demo-accessory-1",
+      "name": "Cáp NguồnTừ Main IC847 =>(Đầu 6 pin Dương => 2 đầu 8 pin Dương)",
+      "category": "accessory",
+      "brand": "Rigforge",
+      "price": "15000",
+      "oldPrice": "20000",
+      "image": "/images/catalog/accessory-1.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-accessory-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "15000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-accessory-2",
+      "slug": "demo-accessory-2",
+      "name": "Cáp nguồn phụ(từ 8 Pin ra 4 nguồn phụ)",
+      "category": "accessory",
+      "brand": "Rigforge",
+      "price": "20000",
+      "oldPrice": "20000",
+      "image": "/images/catalog/accessory-2.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-accessory-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "20000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-accessory-3",
+      "slug": "demo-accessory-3",
+      "name": "Cáp Chia Nguồn Sata Ổ Cứng HDD-SSD (1 ra 5)",
+      "category": "accessory",
+      "brand": "Rigforge",
+      "price": "45000",
+      "oldPrice": "50000",
+      "image": "/images/catalog/accessory-3.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-accessory-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "45000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-accessory-4",
+      "slug": "demo-accessory-4",
+      "name": "Cáp Nguồn Zin 1.5M Full Load 650W-750W - Đen",
+      "category": "accessory",
+      "brand": "OEM",
+      "price": "25000",
+      "oldPrice": "30000",
+      "image": "/images/catalog/accessory-4.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-accessory-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "25000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-accessory-5",
+      "slug": "demo-accessory-5",
+      "name": "Củ sạc nhanh Lenovo MC-301 (TypeC) 30W | Màu đen",
+      "category": "accessory",
+      "brand": "Lenovo",
+      "price": "199000",
+      "oldPrice": "220000",
+      "image": "/images/catalog/accessory-5.webp",
+      "specs": [
+        "Màu đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-accessory-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "199000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-accessory-6",
+      "slug": "demo-accessory-6",
+      "name": "Nút Click Chuột Thường",
+      "category": "accessory",
+      "brand": "Rigforge",
+      "price": "10000",
+      "oldPrice": "10000",
+      "image": "/images/catalog/accessory-6.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-accessory-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "10000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-camera-1",
+      "slug": "demo-camera-1",
+      "name": "Camera WiFi trong nhà TP-Link Tapo C212 | 3MP, 2K, Hồng ngoại, 360°, Đàm thoại",
+      "category": "camera",
+      "brand": "Rigforge",
+      "price": "369000",
+      "oldPrice": "410000",
+      "image": "/images/catalog/camera-1.webp",
+      "specs": [
+        "3MP",
+        "2K",
+        "Hồng ngoại",
+        "360°"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-camera-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "369000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-camera-2",
+      "slug": "demo-camera-2",
+      "name": "Camera WiFi trong nhà IMOU Ranger 2 IPC-A32EP-L | 3MP, 2K, Hồng ngoại, 360°, Đàm thoại",
+      "category": "camera",
+      "brand": "Rigforge",
+      "price": "349000",
+      "oldPrice": "390000",
+      "image": "/images/catalog/camera-2.webp",
+      "specs": [
+        "3MP",
+        "2K",
+        "Hồng ngoại",
+        "360°"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-camera-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "349000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-camera-3",
+      "slug": "demo-camera-3",
+      "name": "Camera WiFi trong nhà iThink QI | 1MP, Full HD, Hồng ngoại, Đàm thoại",
+      "category": "camera",
+      "brand": "Rigforge",
+      "price": "210000",
+      "oldPrice": "240000",
+      "image": "/images/catalog/camera-3.webp",
+      "specs": [
+        "1MP",
+        "Full HD",
+        "Hồng ngoại",
+        "Đàm thoại"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-camera-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "210000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-camera-4",
+      "slug": "demo-camera-4",
+      "name": "Camera WiFi trong nhà EZVIZ C6N Pro | 3MP, 2K, Hồng ngoại, 360°, Đàm thoại",
+      "category": "camera",
+      "brand": "Rigforge",
+      "price": "359000",
+      "oldPrice": "400000",
+      "image": "/images/catalog/camera-4.webp",
+      "specs": [
+        "3MP",
+        "2K",
+        "Hồng ngoại",
+        "360°"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-camera-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "359000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-camera-5",
+      "slug": "demo-camera-5",
+      "name": "Camera WiFi trong nhà TP-Link Tapo C222 | 4MP, 2K, Hồng ngoại, 360°, Đàm thoại",
+      "category": "camera",
+      "brand": "Rigforge",
+      "price": "489000",
+      "oldPrice": "550000",
+      "image": "/images/catalog/camera-5.webp",
+      "specs": [
+        "4MP",
+        "2K",
+        "Hồng ngoại",
+        "360°"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-camera-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "489000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-camera-6",
+      "slug": "demo-camera-6",
+      "name": "Camera Analog trong nhà HiLook THC-T110 | 1MP, HD, Hồng ngoại",
+      "category": "camera",
+      "brand": "Rigforge",
+      "price": "199000",
+      "oldPrice": "220000",
+      "image": "/images/catalog/camera-6.webp",
+      "specs": [
+        "1MP",
+        "HD",
+        "Hồng ngoại"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-camera-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "199000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-case-1",
+      "slug": "demo-case-1",
+      "name": "Thùng máy Gaming LinkTech Bahamut M 4F M-ATX (Kèm Sẵn 4 Fan Fixed RGB) - Đen",
+      "category": "case",
+      "brand": "LinkTech",
+      "price": "539000",
+      "oldPrice": "600000",
+      "image": "/images/catalog/case-1.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-case-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "539000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-case-2",
+      "slug": "demo-case-2",
+      "name": "Thùng máy Star Office CS600 | Micro-ATX/Mini-ITX, USB 3.0, Kèm Sẵn 1 Fan 90mm, Thép 0.8mm, Đen",
+      "category": "case",
+      "brand": "STAR",
+      "price": "439000",
+      "oldPrice": "490000",
+      "image": "/images/catalog/case-2.webp",
+      "specs": [
+        "Micro-ATX/Mini-ITX",
+        "USB 3.0",
+        "Kèm Sẵn 1 Fan 90mm",
+        "Thép 0.8mm"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-case-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "439000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-case-3",
+      "slug": "demo-case-3",
+      "name": "Thùng máy Xigmatek XA-22 (EN47567) | Không Fan",
+      "category": "case",
+      "brand": "Rigforge",
+      "price": "289000",
+      "oldPrice": "320000",
+      "image": "/images/catalog/case-3.webp",
+      "specs": [
+        "Không Fan"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-case-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "289000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-case-4",
+      "slug": "demo-case-4",
+      "name": "Thùng máy NZXT H210i - Đen trắng | Mini ITX, nhập khẩu (CA-H210i-W1)",
+      "category": "case",
+      "brand": "Rigforge",
+      "price": "1399000",
+      "oldPrice": "1570000",
+      "image": "/images/catalog/case-4.webp",
+      "specs": [
+        "Mini ITX",
+        "nhập khẩu (CA-H210i-W1)"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-case-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1399000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-case-5",
+      "slug": "demo-case-5",
+      "name": "Thùng máy Case Leopard AS-01 Hồ Cá - Đen | Không kèm fan",
+      "category": "case",
+      "brand": "Rigforge",
+      "price": "949000",
+      "oldPrice": "1060000",
+      "image": "/images/catalog/case-5.webp",
+      "specs": [
+        "Không kèm fan"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-case-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "949000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-case-6",
+      "slug": "demo-case-6",
+      "name": "Thùng máy Sama A302",
+      "category": "case",
+      "brand": "Rigforge",
+      "price": "299000",
+      "oldPrice": "330000",
+      "image": "/images/catalog/case-6.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-case-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "299000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-chair-1",
+      "slug": "demo-chair-1",
+      "name": "Ghế gaming E DRA Citizen EGC236 | Đen đỏ, 120kg, Chân xoay, Da PU",
+      "category": "chair",
+      "brand": "Rigforge",
+      "price": "1689000",
+      "oldPrice": "1890000",
+      "image": "/images/catalog/chair-1.webp",
+      "specs": [
+        "Đen đỏ",
+        "120kg",
+        "Chân xoay",
+        "Da PU"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-chair-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1689000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-chair-2",
+      "slug": "demo-chair-2",
+      "name": "Ghế gaming E DRA Level E EGC229 | Đen xám, 150kg, Chân xoay, Da PU",
+      "category": "chair",
+      "brand": "Rigforge",
+      "price": "2650000",
+      "oldPrice": "2970000",
+      "image": "/images/catalog/chair-2.webp",
+      "specs": [
+        "Đen xám",
+        "150kg",
+        "Chân xoay",
+        "Da PU"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-chair-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2650000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-chair-3",
+      "slug": "demo-chair-3",
+      "name": "Ghế Gaming EDRA EGC239 REXZ | Da PU, Kê tay 3D, Piston Class 4, Đen",
+      "category": "chair",
+      "brand": "EDRA",
+      "price": "2990000",
+      "oldPrice": "3350000",
+      "image": "/images/catalog/chair-3.webp",
+      "specs": [
+        "Da PU",
+        "Kê tay 3D",
+        "Piston Class 4",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-chair-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-chair-4",
+      "slug": "demo-chair-4",
+      "name": "Ghế gaming E DRA Level E EGC229 | Đen đỏ, 150kg, Chân xoay, Da PU",
+      "category": "chair",
+      "brand": "Rigforge",
+      "price": "2650000",
+      "oldPrice": "2970000",
+      "image": "/images/catalog/chair-4.webp",
+      "specs": [
+        "Đen đỏ",
+        "150kg",
+        "Chân xoay",
+        "Da PU"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-chair-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2650000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-chair-5",
+      "slug": "demo-chair-5",
+      "name": "Ghế Warrior Gaming Raider Series WGC210 - Black / Gray | Kê chân, Tay ghế linh hoạt, Foam nguyên khối",
+      "category": "chair",
+      "brand": "Warrior",
+      "price": "1688000",
+      "oldPrice": "1890000",
+      "image": "/images/catalog/chair-5.webp",
+      "specs": [
+        "Kê chân",
+        "Tay ghế linh hoạt",
+        "Foam nguyên khối"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-chair-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1688000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-chair-6",
+      "slug": "demo-chair-6",
+      "name": "Ghế gaming CENTAUR MECHA | Đen, 150kg, Chân xoay, Da PU",
+      "category": "chair",
+      "brand": "Rigforge",
+      "price": "1490000",
+      "oldPrice": "1670000",
+      "image": "/images/catalog/chair-6.webp",
+      "specs": [
+        "Đen",
+        "150kg",
+        "Chân xoay",
+        "Da PU"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-chair-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1490000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cooler-1",
+      "slug": "demo-cooler-1",
+      "name": "Tản Nhiệt Linh kiện CPU Intel 12Th Socket 1700",
+      "category": "cooler",
+      "brand": "Rigforge",
+      "price": "145000",
+      "oldPrice": "160000",
+      "image": "/images/catalog/cooler-1.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cooler-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "145000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cooler-2",
+      "slug": "demo-cooler-2",
+      "name": "Tản nhiệt khí Leopard K400 Black | RGB, Đen",
+      "category": "cooler",
+      "brand": "Rigforge",
+      "price": "269000",
+      "oldPrice": "300000",
+      "image": "/images/catalog/cooler-2.webp",
+      "specs": [
+        "RGB",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cooler-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "269000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cooler-3",
+      "slug": "demo-cooler-3",
+      "name": "Tản nhiệt khí Leopard A220 | RGB, Đen",
+      "category": "cooler",
+      "brand": "Rigforge",
+      "price": "115000",
+      "oldPrice": "130000",
+      "image": "/images/catalog/cooler-3.webp",
+      "specs": [
+        "RGB",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cooler-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "115000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cooler-4",
+      "slug": "demo-cooler-4",
+      "name": "Tản nhiệt khí Jonsbo CR-1000 EVO | RGB, Đen",
+      "category": "cooler",
+      "brand": "Rigforge",
+      "price": "359000",
+      "oldPrice": "400000",
+      "image": "/images/catalog/cooler-4.webp",
+      "specs": [
+        "RGB",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cooler-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "359000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cooler-5",
+      "slug": "demo-cooler-5",
+      "name": "Tản nhiệt khí Leopard A50 Không LED (Kèm BackPlate) | Intel LGA 115x/1200/1700/1366, Fan 90mm, 2000RPM, Đen",
+      "category": "cooler",
+      "brand": "Leopard",
+      "price": "115000",
+      "oldPrice": "130000",
+      "image": "/images/catalog/cooler-5.webp",
+      "specs": [
+        "Intel LGA 115x/1200/1700/1366",
+        "Fan 90mm",
+        "2000RPM",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cooler-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "115000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cooler-6",
+      "slug": "demo-cooler-6",
+      "name": "Tản nhiệt khí Jonsbo CR-1200 | RGB, Đen",
+      "category": "cooler",
+      "brand": "Rigforge",
+      "price": "189000",
+      "oldPrice": "210000",
+      "image": "/images/catalog/cooler-6.webp",
+      "specs": [
+        "RGB",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cooler-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "189000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cpu-1",
+      "slug": "demo-cpu-1",
+      "name": "CPU Intel Core i5 12400F | LGA 1700, 6 nhân/12 luồng, Max 4.4 GHz",
+      "category": "cpu",
+      "brand": "Rigforge",
+      "price": "3850000",
+      "oldPrice": "4310000",
+      "image": "/images/catalog/cpu-1.webp",
+      "specs": [
+        "LGA 1700",
+        "6 nhân/12 luồng",
+        "Max 4.4 GHz"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cpu-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3850000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cpu-2",
+      "slug": "demo-cpu-2",
+      "name": "CPU Intel Core i3-14100 Tray Chính Hãng ( No box)",
+      "category": "cpu",
+      "brand": "Intel",
+      "price": "3590000",
+      "oldPrice": "4020000",
+      "image": "/images/catalog/cpu-2.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cpu-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3590000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cpu-3",
+      "slug": "demo-cpu-3",
+      "name": "CPU AMD Ryzen 5 3400G MPK + Fan Chính Hãng (No Box) (YD3400C5FHSPK) | AM4, 4 nhân/8 luồng, Max 4.2GHz",
+      "category": "cpu",
+      "brand": "AMD",
+      "price": "1790000",
+      "oldPrice": "2000000",
+      "image": "/images/catalog/cpu-3.webp",
+      "specs": [
+        "AM4",
+        "4 nhân/8 luồng",
+        "Max 4.2GHz"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cpu-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1790000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cpu-4",
+      "slug": "demo-cpu-4",
+      "name": "CPU AMD Ryzen 5 5500GT | AM4, 6 nhân/12 luồng, Max 4.4 GHz",
+      "category": "cpu",
+      "brand": "CPU SK AM4",
+      "price": "3950000",
+      "oldPrice": "4420000",
+      "image": "/images/catalog/cpu-4.webp",
+      "specs": [
+        "AM4",
+        "6 nhân/12 luồng",
+        "Max 4.4 GHz"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cpu-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3950000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cpu-5",
+      "slug": "demo-cpu-5",
+      "name": "CPU AMD Ryzen 5 5500 | AM4, 6 nhân/12 luồng, Max 4.2 GHz",
+      "category": "cpu",
+      "brand": "CPU SK AM4",
+      "price": "2350000",
+      "oldPrice": "2630000",
+      "image": "/images/catalog/cpu-5.webp",
+      "specs": [
+        "AM4",
+        "6 nhân/12 luồng",
+        "Max 4.2 GHz"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cpu-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2350000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-cpu-6",
+      "slug": "demo-cpu-6",
+      "name": "CPU Intel Core i3 14100 | LGA 1700, 4 nhân/8 luồng, Max 4.7 GHz",
+      "category": "cpu",
+      "brand": "Rigforge",
+      "price": "3690000",
+      "oldPrice": "4130000",
+      "image": "/images/catalog/cpu-6.webp",
+      "specs": [
+        "LGA 1700",
+        "4 nhân/8 luồng",
+        "Max 4.7 GHz"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-cpu-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3690000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-desk-1",
+      "slug": "demo-desk-1",
+      "name": "Bàn Gaming Chữ Y 1m2 | Thép, Mặt bàn P1PB, Chân đen / Mặt đen",
+      "category": "desk",
+      "brand": "Rigforge",
+      "price": "620000",
+      "oldPrice": "690000",
+      "image": "/images/catalog/desk-1.webp",
+      "specs": [
+        "Thép",
+        "Mặt bàn P1PB",
+        "Chân đen / Mặt đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-desk-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "620000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-desk-2",
+      "slug": "demo-desk-2",
+      "name": "Bàn Gaming Chữ K 1m2 | Thép, Mặt bàn P1PB, Chân đen / Mặt vân gỗ",
+      "category": "desk",
+      "brand": "Rigforge",
+      "price": "660000",
+      "oldPrice": "740000",
+      "image": "/images/catalog/desk-2.webp",
+      "specs": [
+        "Thép",
+        "Mặt bàn P1PB",
+        "Chân đen / Mặt vân gỗ"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-desk-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "660000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-desk-3",
+      "slug": "demo-desk-3",
+      "name": "Bàn Gaming Chữ U 1m2 | Thép, Mặt bàn P1PB, Chân đen / Mặt vân gỗ",
+      "category": "desk",
+      "brand": "Rigforge",
+      "price": "660000",
+      "oldPrice": "740000",
+      "image": "/images/catalog/desk-3.webp",
+      "specs": [
+        "Thép",
+        "Mặt bàn P1PB",
+        "Chân đen / Mặt vân gỗ"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-desk-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "660000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-desk-4",
+      "slug": "demo-desk-4",
+      "name": "Bàn Gaming Chữ U 1m2 | Thép, Mặt bàn P1PB, Chân đen / Mặt đen",
+      "category": "desk",
+      "brand": "Rigforge",
+      "price": "690000",
+      "oldPrice": "770000",
+      "image": "/images/catalog/desk-4.webp",
+      "specs": [
+        "Thép",
+        "Mặt bàn P1PB",
+        "Chân đen / Mặt đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-desk-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "690000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-desk-5",
+      "slug": "demo-desk-5",
+      "name": "Bàn Gaming Chữ K 1m2 | Thép, Mặt bàn P1PB, Chân đen / Mặt đen",
+      "category": "desk",
+      "brand": "Rigforge",
+      "price": "690000",
+      "oldPrice": "770000",
+      "image": "/images/catalog/desk-5.webp",
+      "specs": [
+        "Thép",
+        "Mặt bàn P1PB",
+        "Chân đen / Mặt đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-desk-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "690000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-desk-6",
+      "slug": "demo-desk-6",
+      "name": "Bàn Gaming Chữ Z 1m4 | Thép, Mặt bàn P1PB, Khung đen / Mặt vân gỗ",
+      "category": "desk",
+      "brand": "Rigforge",
+      "price": "770000",
+      "oldPrice": "860000",
+      "image": "/images/catalog/desk-6.webp",
+      "specs": [
+        "Thép",
+        "Mặt bàn P1PB",
+        "Khung đen / Mặt vân gỗ"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-desk-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "770000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-fan-1",
+      "slug": "demo-fan-1",
+      "name": "Quạt tản nhiệt PC OEM A1225L 12S | 120mm, Không LED, Hiệu năng cao, Khung lưới bảo vệ, 4Pin PWM, Đen",
+      "category": "fan",
+      "brand": "OEM",
+      "price": "59000",
+      "oldPrice": "70000",
+      "image": "/images/catalog/fan-1.webp",
+      "specs": [
+        "120mm",
+        "Không LED",
+        "Hiệu năng cao",
+        "Khung lưới bảo vệ"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-fan-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "59000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-fan-2",
+      "slug": "demo-fan-2",
+      "name": "Quạt tản nhiệt PC Leopard 6Pro | Fan lẻ 120mm, ARGB, Gió thuận, Đen",
+      "category": "fan",
+      "brand": "Rigforge",
+      "price": "109000",
+      "oldPrice": "120000",
+      "image": "/images/catalog/fan-2.webp",
+      "specs": [
+        "Fan lẻ 120mm",
+        "ARGB",
+        "Gió thuận",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-fan-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "109000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-fan-3",
+      "slug": "demo-fan-3",
+      "name": "Quạt tản nhiệt PC Leopard S1 Auto | Fan lẻ 120mm, ARGB, Gió ngược, Đen",
+      "category": "fan",
+      "brand": "Rigforge",
+      "price": "69000",
+      "oldPrice": "80000",
+      "image": "/images/catalog/fan-3.webp",
+      "specs": [
+        "Fan lẻ 120mm",
+        "ARGB",
+        "Gió ngược",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-fan-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "69000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-fan-4",
+      "slug": "demo-fan-4",
+      "name": "Quạt tản nhiệt PC Jungle Leopard F8 V3 Black | 2000RPM, 4Pin PWM Có Điều Tốc, Không LED, Đen",
+      "category": "fan",
+      "brand": "Leopard",
+      "price": "89000",
+      "oldPrice": "100000",
+      "image": "/images/catalog/fan-4.webp",
+      "specs": [
+        "2000RPM",
+        "4Pin PWM Có Điều Tốc",
+        "Không LED",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-fan-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "89000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-fan-5",
+      "slug": "demo-fan-5",
+      "name": "Quạt tản nhiệt PC Redmoon F3 | Fan lẻ 120mm, RGB, Đen",
+      "category": "fan",
+      "brand": "Rigforge",
+      "price": "89000",
+      "oldPrice": "100000",
+      "image": "/images/catalog/fan-5.webp",
+      "specs": [
+        "Fan lẻ 120mm",
+        "RGB",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-fan-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "89000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-fan-6",
+      "slug": "demo-fan-6",
+      "name": "Quạt tản nhiệt PC Leopard 6Pro | Fan lẻ 120mm, ARGB, Gió ngược, Đen",
+      "category": "fan",
+      "brand": "Rigforge",
+      "price": "112000",
+      "oldPrice": "130000",
+      "image": "/images/catalog/fan-6.webp",
+      "specs": [
+        "Fan lẻ 120mm",
+        "ARGB",
+        "Gió ngược",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-fan-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "112000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gear-1",
+      "slug": "demo-gear-1",
+      "name": "Combo Phím Chuột Gaming Magic KM-01L | Có dây, Led Rainbow, Đen",
+      "category": "gear",
+      "brand": "Magic",
+      "price": "109000",
+      "oldPrice": "120000",
+      "image": "/images/catalog/gear-1.webp",
+      "specs": [
+        "Có dây",
+        "Led Rainbow",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gear-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "109000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gear-2",
+      "slug": "demo-gear-2",
+      "name": "Bàn phím giả cơ văn phòng Logitech K120 | Có dây, Fullsize, Black",
+      "category": "gear",
+      "brand": "Rigforge",
+      "price": "158000",
+      "oldPrice": "180000",
+      "image": "/images/catalog/gear-2.webp",
+      "specs": [
+        "Có dây",
+        "Fullsize",
+        "Black"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gear-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "158000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gear-3",
+      "slug": "demo-gear-3",
+      "name": "Combo phím chuột văn phòng Logitech MK120 | Có dây, Fullsize, Black",
+      "category": "gear",
+      "brand": "Rigforge",
+      "price": "229000",
+      "oldPrice": "260000",
+      "image": "/images/catalog/gear-3.webp",
+      "specs": [
+        "Có dây",
+        "Fullsize",
+        "Black"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gear-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "229000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gear-4",
+      "slug": "demo-gear-4",
+      "name": "Combo phím chuột văn phòng FD LK586 | Wireless, Mini, Yellow",
+      "category": "gear",
+      "brand": "Rigforge",
+      "price": "390000",
+      "oldPrice": "440000",
+      "image": "/images/catalog/gear-4.webp",
+      "specs": [
+        "Wireless",
+        "Mini",
+        "Yellow"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gear-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "390000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gear-5",
+      "slug": "demo-gear-5",
+      "name": "Bàn phím văn phòng Motospeed K103 | Có dây, Fullsize, Black",
+      "category": "gear",
+      "brand": "Rigforge",
+      "price": "129000",
+      "oldPrice": "140000",
+      "image": "/images/catalog/gear-5.webp",
+      "specs": [
+        "Có dây",
+        "Fullsize",
+        "Black"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gear-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "129000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gear-6",
+      "slug": "demo-gear-6",
+      "name": "Bàn phím văn phòng Dell KB216 | Có dây, Fullsize, Black",
+      "category": "gear",
+      "brand": "Rigforge",
+      "price": "175000",
+      "oldPrice": "200000",
+      "image": "/images/catalog/gear-6.webp",
+      "specs": [
+        "Có dây",
+        "Fullsize",
+        "Black"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gear-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "175000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gpu-1",
+      "slug": "demo-gpu-1",
+      "name": "Card màn hình NVIDIA GeForce RTX 3050 Gigabyte WindForce OC | 6GB GDDR6, 2304 CUDA, 300W",
+      "category": "gpu",
+      "brand": "Rigforge",
+      "price": "5650000",
+      "oldPrice": "6330000",
+      "image": "/images/catalog/gpu-1.webp",
+      "specs": [
+        "6GB GDDR6",
+        "2304 CUDA",
+        "300W"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gpu-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "5650000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gpu-2",
+      "slug": "demo-gpu-2",
+      "name": "Card màn hình AMD Radeon RX 6500 XT ASUS Dual OC | 4GB GDDR6, 1024 SP, 500W",
+      "category": "gpu",
+      "brand": "Rigforge",
+      "price": "4390000",
+      "oldPrice": "4920000",
+      "image": "/images/catalog/gpu-2.webp",
+      "specs": [
+        "4GB GDDR6",
+        "1024 SP",
+        "500W"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gpu-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "4390000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gpu-3",
+      "slug": "demo-gpu-3",
+      "name": "Card màn hình NVIDIA GeForce RTX 3050 Gigabyte WindForce OC | 8GB GDDR6, 2560 CUDA, 450W",
+      "category": "gpu",
+      "brand": "Rigforge",
+      "price": "7090000",
+      "oldPrice": "7940000",
+      "image": "/images/catalog/gpu-3.webp",
+      "specs": [
+        "8GB GDDR6",
+        "2560 CUDA",
+        "450W"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gpu-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "7090000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gpu-4",
+      "slug": "demo-gpu-4",
+      "name": "Card màn hình NVIDIA GeForce RTX 3060 MSI Ventus 2X OC | 12GB GDDR6, 3584 CUDA, 550W",
+      "category": "gpu",
+      "brand": "Rigforge",
+      "price": "10250000",
+      "oldPrice": "11480000",
+      "image": "/images/catalog/gpu-4.webp",
+      "specs": [
+        "12GB GDDR6",
+        "3584 CUDA",
+        "550W"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gpu-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "10250000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gpu-5",
+      "slug": "demo-gpu-5",
+      "name": "Card màn hình NVIDIA GeForce RTX 3050 MSI Ventus 2X E OC | 6GB GDDR6, 2560 CUDA, 300W",
+      "category": "gpu",
+      "brand": "Rigforge",
+      "price": "5590000",
+      "oldPrice": "6260000",
+      "image": "/images/catalog/gpu-5.webp",
+      "specs": [
+        "6GB GDDR6",
+        "2560 CUDA",
+        "300W"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gpu-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "5590000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-gpu-6",
+      "slug": "demo-gpu-6",
+      "name": "Card màn hình MSI GeForce RTX 5060 8G VENTUS 2X OC V1| 8GB GDDR7, 3840 CUDA Cores, PCIe Gen5",
+      "category": "gpu",
+      "brand": "MSI",
+      "price": "14090000",
+      "oldPrice": "15780000",
+      "image": "/images/catalog/gpu-6.webp",
+      "specs": [
+        "8GB GDDR7",
+        "3840 CUDA Cores",
+        "PCIe Gen5"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-gpu-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "14090000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-hdd-1",
+      "slug": "demo-hdd-1",
+      "name": "Ổ cứng HDD Seagate BarraCuda 2 TB | SATA III, 3.5\" (ST2000DM008)",
+      "category": "hdd",
+      "brand": "Rigforge",
+      "price": "3790000",
+      "oldPrice": "4240000",
+      "image": "/images/catalog/hdd-1.webp",
+      "specs": [
+        "SATA III",
+        "3.5\" (ST2000DM008)"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-hdd-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3790000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-hdd-2",
+      "slug": "demo-hdd-2",
+      "name": "Ổ cứng HDD Hikvision DS-20HKVS-VX1 2TB | SATA III, 3.5 inch, 128MB Cache, Giám sát 24/7",
+      "category": "hdd",
+      "brand": "Rigforge",
+      "price": "2890000",
+      "oldPrice": "3240000",
+      "image": "/images/catalog/hdd-2.webp",
+      "specs": [
+        "SATA III",
+        "3.5 inch",
+        "128MB Cache",
+        "Giám sát 24/7"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-hdd-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2890000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-hdd-3",
+      "slug": "demo-hdd-3",
+      "name": "Ổ cứng HDD Seagate BarraCuda 4TB | SATA III, 3.5\" (ST4000DM004)",
+      "category": "hdd",
+      "brand": "Rigforge",
+      "price": "4599000",
+      "oldPrice": "5150000",
+      "image": "/images/catalog/hdd-3.webp",
+      "specs": [
+        "SATA III",
+        "3.5\" (ST4000DM004)"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-hdd-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "4599000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-hdd-4",
+      "slug": "demo-hdd-4",
+      "name": "Ổ cứng HDD Western Digital Blue 2 TB | SATA III, 3.5\" (WD20EZBX)",
+      "category": "hdd",
+      "brand": "Rigforge",
+      "price": "3850000",
+      "oldPrice": "4310000",
+      "image": "/images/catalog/hdd-4.webp",
+      "specs": [
+        "SATA III",
+        "3.5\" (WD20EZBX)"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-hdd-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3850000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-hdd-5",
+      "slug": "demo-hdd-5",
+      "name": "Ổ cứng HDD Hikvision DS-10HKVS-VX2 1TB | SATA III 6Gb/s, Cache 128MB, Chuyên dụng giám sát",
+      "category": "hdd",
+      "brand": "Rigforge",
+      "price": "2590000",
+      "oldPrice": "2900000",
+      "image": "/images/catalog/hdd-5.webp",
+      "specs": [
+        "SATA III 6Gb/s",
+        "Cache 128MB",
+        "Chuyên dụng giám sát"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-hdd-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2590000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-hdd-6",
+      "slug": "demo-hdd-6",
+      "name": "Ổ cứng HDD Hikvision DS60HKVS-VX1 6TB | SATA III 6Gb/s, 5400 RPM, 256MB Cache, Chuyên dụng giám sát 24/7",
+      "category": "hdd",
+      "brand": "Hikvision",
+      "price": "6290000",
+      "oldPrice": "7040000",
+      "image": "/images/catalog/hdd-6.webp",
+      "specs": [
+        "SATA III 6Gb/s",
+        "5400 RPM",
+        "256MB Cache",
+        "Chuyên dụng giám sát 24/7"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-hdd-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "6290000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-headset-1",
+      "slug": "demo-headset-1",
+      "name": "Tai nghe Gaming DareU EH722X Pro | Có dây, Over-ear, RGB, Đen",
+      "category": "headset",
+      "brand": "Rigforge",
+      "price": "499000",
+      "oldPrice": "560000",
+      "image": "/images/catalog/headset-1.webp",
+      "specs": [
+        "Có dây",
+        "Over-ear",
+        "RGB",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-headset-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "499000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-headset-2",
+      "slug": "demo-headset-2",
+      "name": "Tai nghe Gaming Dare-U Eh925L 7.1 | Có dây, Over-ear, RGB, Đen",
+      "category": "headset",
+      "brand": "Rigforge",
+      "price": "635000",
+      "oldPrice": "710000",
+      "image": "/images/catalog/headset-2.webp",
+      "specs": [
+        "Có dây",
+        "Over-ear",
+        "RGB",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-headset-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "635000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-headset-3",
+      "slug": "demo-headset-3",
+      "name": "Tai nghe Rapoo H120 Stereo | Có dây, On-ear, Đen",
+      "category": "headset",
+      "brand": "Rigforge",
+      "price": "249000",
+      "oldPrice": "280000",
+      "image": "/images/catalog/headset-3.webp",
+      "specs": [
+        "Có dây",
+        "On-ear",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-headset-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "249000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-headset-4",
+      "slug": "demo-headset-4",
+      "name": "Tai nghe Rapoo VH360C RGB | Màu đen, mic ngắn",
+      "category": "headset",
+      "brand": "Rigforge",
+      "price": "419000",
+      "oldPrice": "470000",
+      "image": "/images/catalog/headset-4.webp",
+      "specs": [
+        "Màu đen",
+        "mic ngắn"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-headset-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "419000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-headset-5",
+      "slug": "demo-headset-5",
+      "name": "Tai nghe Gaming Rapoo VH500C | Có dây, Over-ear, RGB, Đen",
+      "category": "headset",
+      "brand": "Rigforge",
+      "price": "399000",
+      "oldPrice": "450000",
+      "image": "/images/catalog/headset-5.webp",
+      "specs": [
+        "Có dây",
+        "Over-ear",
+        "RGB",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-headset-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "399000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-headset-6",
+      "slug": "demo-headset-6",
+      "name": "Tai nghe Gaming HP HyperX Cloud Stinger II Core 683L9AA | Có dây, Over-ear, Đen",
+      "category": "headset",
+      "brand": "Rigforge",
+      "price": "749000",
+      "oldPrice": "840000",
+      "image": "/images/catalog/headset-6.webp",
+      "specs": [
+        "Có dây",
+        "Over-ear",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-headset-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "749000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-laptop-1",
+      "slug": "demo-laptop-1",
+      "name": "Laptop ASUS TUF Gaming A15 FA506NCG-HN390W | R7-155, 16GB DDR5, SSD 512GB NVMe, RTX 3050 4GB, RGB, 15.6\" FHD 144Hz, Win 11 Home, Đen",
+      "category": "laptop",
+      "brand": "ASUS",
+      "price": "27990000",
+      "oldPrice": "31350000",
+      "image": "/images/catalog/laptop-1.webp",
+      "specs": [
+        "R7-155",
+        "16GB DDR5",
+        "SSD 512GB NVMe",
+        "RTX 3050 4GB"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-laptop-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "27990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-laptop-2",
+      "slug": "demo-laptop-2",
+      "name": "Laptop Dell 15 Pro Essential PV 15250 (VKVKD) | Intel Core 3-100U, 8GB DDR5, SSD 512GB NVMe, 15.6\" FHD IPS 120Hz, Intel Graphics, Win 11 Pro, Đen",
+      "category": "laptop",
+      "brand": "Rigforge",
+      "price": "13990000",
+      "oldPrice": "15670000",
+      "image": "/images/catalog/laptop-2.webp",
+      "specs": [
+        "Intel Core 3-100U",
+        "8GB DDR5",
+        "SSD 512GB NVMe",
+        "15.6\" FHD IPS 120Hz"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-laptop-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "13990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-laptop-3",
+      "slug": "demo-laptop-3",
+      "name": "Laptop HP 15-FD2050WM D4JK5UA | Core Ultra 5-225U, 8GB DDR5, SSD 512GB Nvme, 15.6\" FHD, Touch, Win 11, Natural Silver",
+      "category": "laptop",
+      "brand": "Rigforge",
+      "price": "16990000",
+      "oldPrice": "19030000",
+      "image": "/images/catalog/laptop-3.webp",
+      "specs": [
+        "Core Ultra 5-225U",
+        "8GB DDR5",
+        "SSD 512GB Nvme",
+        "15.6\" FHD"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-laptop-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "16990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-laptop-4",
+      "slug": "demo-laptop-4",
+      "name": "Laptop HP 250 G10 A06FDPT | i7-1355U, 16GB DDR4, SSD 512GB NVMe, 15.6\" FHD, Windows 11 Home, Bạc",
+      "category": "laptop",
+      "brand": "Rigforge",
+      "price": "21790000",
+      "oldPrice": "24400000",
+      "image": "/images/catalog/laptop-4.webp",
+      "specs": [
+        "i7-1355U",
+        "16GB DDR4",
+        "SSD 512GB NVMe",
+        "15.6\" FHD"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-laptop-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "21790000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-laptop-5",
+      "slug": "demo-laptop-5",
+      "name": "Laptop Dell 15 DC15250-5434BLK PUS (M4CFY) | i5-1334U, 8GB DDR5, SSD 512GB NVMe, 15.6\" FHD Touch, Win 11",
+      "category": "laptop",
+      "brand": "Rigforge",
+      "price": "15990000",
+      "oldPrice": "17910000",
+      "image": "/images/catalog/laptop-5.webp",
+      "specs": [
+        "i5-1334U",
+        "8GB DDR5",
+        "SSD 512GB NVMe",
+        "15.6\" FHD Touch"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-laptop-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "15990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-laptop-6",
+      "slug": "demo-laptop-6",
+      "name": "Laptop HP AI 14-HC0028TU D72BJPA | U5-225U, 16GB DDR5, SSD 512GB NVMe, 14\" FHD, Intel Graphics, W11H, Bạc",
+      "category": "laptop",
+      "brand": "HP",
+      "price": "23990000",
+      "oldPrice": "26870000",
+      "image": "/images/catalog/laptop-6.webp",
+      "specs": [
+        "U5-225U",
+        "16GB DDR5",
+        "SSD 512GB NVMe",
+        "14\" FHD"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-laptop-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "23990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mainboard-1",
+      "slug": "demo-mainboard-1",
+      "name": "Mainboard MSI PRO H610M-E DDR4 | LGA 1700, mATX, 2 khe RAM",
+      "category": "mainboard",
+      "brand": "Rigforge",
+      "price": "1590000",
+      "oldPrice": "1780000",
+      "image": "/images/catalog/mainboard-1.webp",
+      "specs": [
+        "LGA 1700",
+        "mATX",
+        "2 khe RAM"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mainboard-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1590000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mainboard-2",
+      "slug": "demo-mainboard-2",
+      "name": "Mainboard MSI H410M-A PRO D4 | Intel H410, LGA1200, mATX, 2 khe DDR4",
+      "category": "mainboard",
+      "brand": "MSI",
+      "price": "1590000",
+      "oldPrice": "1780000",
+      "image": "/images/catalog/mainboard-2.webp",
+      "specs": [
+        "Intel H410",
+        "LGA1200",
+        "mATX",
+        "2 khe DDR4"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mainboard-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1590000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mainboard-3",
+      "slug": "demo-mainboard-3",
+      "name": "Mainboard ASUS Prime B760M-F D4 DDR4 | LGA 1700, mATX, 2 khe RAM",
+      "category": "mainboard",
+      "brand": "Rigforge",
+      "price": "2150000",
+      "oldPrice": "2410000",
+      "image": "/images/catalog/mainboard-3.webp",
+      "specs": [
+        "LGA 1700",
+        "mATX",
+        "2 khe RAM"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mainboard-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2150000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mainboard-4",
+      "slug": "demo-mainboard-4",
+      "name": "Mainboard Gigabyte H610M K Rev 1.0 DDR4 | LGA 1700, mATX, 2 khe RAM",
+      "category": "mainboard",
+      "brand": "Rigforge",
+      "price": "1590000",
+      "oldPrice": "1780000",
+      "image": "/images/catalog/mainboard-4.webp",
+      "specs": [
+        "LGA 1700",
+        "mATX",
+        "2 khe RAM"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mainboard-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1590000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mainboard-5",
+      "slug": "demo-mainboard-5",
+      "name": "Mainboard VSP IC8565BK DDR3 | LGA 1150",
+      "category": "mainboard",
+      "brand": "Rigforge",
+      "price": "1090000",
+      "oldPrice": "1220000",
+      "image": "/images/catalog/mainboard-5.webp",
+      "specs": [
+        "LGA 1150"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mainboard-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1090000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mainboard-6",
+      "slug": "demo-mainboard-6",
+      "name": "Mainboard ASUS H110M-K DDR4 | LGA 1151, mATX, 2 khe RAM",
+      "category": "mainboard",
+      "brand": "Rigforge",
+      "price": "1490000",
+      "oldPrice": "1670000",
+      "image": "/images/catalog/mainboard-6.webp",
+      "specs": [
+        "LGA 1151",
+        "mATX",
+        "2 khe RAM"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mainboard-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1490000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-monitor-1",
+      "slug": "demo-monitor-1",
+      "name": "Màn hình Văn phòng Dahua DHI-LM22-A210Y | 21.45 inch, FHD, 120Hz, VA, HDMI/VGA",
+      "category": "monitor",
+      "brand": "Dahua",
+      "price": "1390000",
+      "oldPrice": "1560000",
+      "image": "/images/catalog/monitor-1.webp",
+      "specs": [
+        "21.45 inch",
+        "FHD",
+        "120Hz",
+        "VA"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-monitor-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1390000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-monitor-2",
+      "slug": "demo-monitor-2",
+      "name": "Màn hình Văn phòng Dahua DHI-LM24-A221Y | 24 inch, Full HD, IPS, 144Hz",
+      "category": "monitor",
+      "brand": "Dahua",
+      "price": "1690000",
+      "oldPrice": "1890000",
+      "image": "/images/catalog/monitor-2.webp",
+      "specs": [
+        "24 inch",
+        "Full HD",
+        "IPS",
+        "144Hz"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-monitor-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1690000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-monitor-3",
+      "slug": "demo-monitor-3",
+      "name": "Màn hình Gaming VSP IP2736G | 27 inch, FHD, 360Hz, IPS",
+      "category": "monitor",
+      "brand": "Rigforge",
+      "price": "3790000",
+      "oldPrice": "4240000",
+      "image": "/images/catalog/monitor-3.webp",
+      "specs": [
+        "27 inch",
+        "FHD",
+        "360Hz",
+        "IPS"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-monitor-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3790000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-monitor-4",
+      "slug": "demo-monitor-4",
+      "name": "Màn hình Gaming 2K VSP Aivision AG2714QS1 | 27 inch, QHD, 144Hz, IPS, 1ms | LH tư vấn trước khi lắp Arm (giá treo)",
+      "category": "monitor",
+      "brand": "Rigforge",
+      "price": "2890000",
+      "oldPrice": "3240000",
+      "image": "/images/catalog/monitor-4.webp",
+      "specs": [
+        "27 inch",
+        "QHD",
+        "144Hz",
+        "IPS"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-monitor-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2890000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-monitor-5",
+      "slug": "demo-monitor-5",
+      "name": "Màn hình Gaming 2K MSI MPG 275CQRXF | 27 inch, WQHD, Rapid VA, 240Hz, USB-C PD 98W, Chân CTH",
+      "category": "monitor",
+      "brand": "MSI",
+      "price": "4950000",
+      "oldPrice": "5540000",
+      "image": "/images/catalog/monitor-5.webp",
+      "specs": [
+        "27 inch",
+        "WQHD",
+        "Rapid VA",
+        "240Hz"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-monitor-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "4950000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-monitor-6",
+      "slug": "demo-monitor-6",
+      "name": "Màn hình Gaming 2K VSP Aivision AG2414QS1 | 24 inch, QHD, 144Hz, IPS, 1ms",
+      "category": "monitor",
+      "brand": "Rigforge",
+      "price": "2490000",
+      "oldPrice": "2790000",
+      "image": "/images/catalog/monitor-6.webp",
+      "specs": [
+        "24 inch",
+        "QHD",
+        "144Hz",
+        "IPS"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-monitor-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2490000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mouse-1",
+      "slug": "demo-mouse-1",
+      "name": "Chuột văn phòng Motospeed F333 | Có dây, 1000 DPI, 90g, Đen",
+      "category": "mouse",
+      "brand": "Rigforge",
+      "price": "79000",
+      "oldPrice": "90000",
+      "image": "/images/catalog/mouse-1.webp",
+      "specs": [
+        "Có dây",
+        "1000 DPI",
+        "90g",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mouse-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "79000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mouse-2",
+      "slug": "demo-mouse-2",
+      "name": "Chuột văn phòng Logitech B100 | Có dây, 800 DPI, 80g, Đen",
+      "category": "mouse",
+      "brand": "Rigforge",
+      "price": "78000",
+      "oldPrice": "90000",
+      "image": "/images/catalog/mouse-2.webp",
+      "specs": [
+        "Có dây",
+        "800 DPI",
+        "80g",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mouse-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "78000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mouse-3",
+      "slug": "demo-mouse-3",
+      "name": "Chuột gaming Logitech G102 Gen II Lightsync | Có dây, 8000 DPI, 85g, RGB, Đen",
+      "category": "mouse",
+      "brand": "Rigforge",
+      "price": "379000",
+      "oldPrice": "420000",
+      "image": "/images/catalog/mouse-3.webp",
+      "specs": [
+        "Có dây",
+        "8000 DPI",
+        "85g",
+        "RGB"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mouse-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "379000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mouse-4",
+      "slug": "demo-mouse-4",
+      "name": "Chuột Gaming Không Dây Dare-U EM910G | Triple Mode, 12000 DPI, Màu Đen, 59g",
+      "category": "mouse",
+      "brand": "Dare-U",
+      "price": "389000",
+      "oldPrice": "440000",
+      "image": "/images/catalog/mouse-4.webp",
+      "specs": [
+        "Triple Mode",
+        "12000 DPI",
+        "Màu Đen",
+        "59g"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mouse-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "389000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mouse-5",
+      "slug": "demo-mouse-5",
+      "name": "Chuột văn phòng Dell MS116 | Có dây, 1000 DPI, 105g, Đen",
+      "category": "mouse",
+      "brand": "Rigforge",
+      "price": "105000",
+      "oldPrice": "120000",
+      "image": "/images/catalog/mouse-5.webp",
+      "specs": [
+        "Có dây",
+        "1000 DPI",
+        "105g",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mouse-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "105000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-mouse-6",
+      "slug": "demo-mouse-6",
+      "name": "Chuột Gaming Ynxsc W108G Black | Không dây 2.4GHz, 1600 DPI, Ergonomic, Đen",
+      "category": "mouse",
+      "brand": "Ynxsc",
+      "price": "89000",
+      "oldPrice": "100000",
+      "image": "/images/catalog/mouse-6.webp",
+      "specs": [
+        "Không dây 2.4GHz",
+        "1600 DPI",
+        "Ergonomic",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-mouse-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "89000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-network-1",
+      "slug": "demo-network-1",
+      "name": "Switch 24 Port 1G TP-Link TL-SG1024D Chính Hãng",
+      "category": "network",
+      "brand": "Rigforge",
+      "price": "1690000",
+      "oldPrice": "1890000",
+      "image": "/images/catalog/network-1.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-network-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1690000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-network-2",
+      "slug": "demo-network-2",
+      "name": "Switch 16 Port 1G TP-Link TL-SG1016D Chính Hãng",
+      "category": "network",
+      "brand": "Rigforge",
+      "price": "1190000",
+      "oldPrice": "1330000",
+      "image": "/images/catalog/network-2.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-network-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1190000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-network-3",
+      "slug": "demo-network-3",
+      "name": "Phát Wifi TP-Link Archer C50 AC1200 4 anten",
+      "category": "network",
+      "brand": "Rigforge",
+      "price": "450000",
+      "oldPrice": "500000",
+      "image": "/images/catalog/network-3.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-network-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "450000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-network-4",
+      "slug": "demo-network-4",
+      "name": "USB Thu wifi TP-Link TL-WN725N",
+      "category": "network",
+      "brand": "Rigforge",
+      "price": "119000",
+      "oldPrice": "130000",
+      "image": "/images/catalog/network-4.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-network-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "119000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-network-5",
+      "slug": "demo-network-5",
+      "name": "Switch 8 Port TP-Link 10/100/1000M TL-SG108 Chính Hãng",
+      "category": "network",
+      "brand": "Rigforge",
+      "price": "459000",
+      "oldPrice": "510000",
+      "image": "/images/catalog/network-5.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-network-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "459000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-network-6",
+      "slug": "demo-network-6",
+      "name": "USB Thu wifi TP-Link TL-WN722N 150Mbps Chính Hãng",
+      "category": "network",
+      "brand": "Rigforge",
+      "price": "165000",
+      "oldPrice": "180000",
+      "image": "/images/catalog/network-6.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-network-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "165000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-pc-1",
+      "slug": "demo-pc-1",
+      "name": "PC Gaming RIGFORGE Yasuo | Intel I5 12400F, RTX 3050 6G, H610M, RAM 16GB, SSD 500GB",
+      "category": "pc",
+      "brand": "Rigforge",
+      "price": "17097000",
+      "oldPrice": "19150000",
+      "image": "/images/catalog/pc-1.webp",
+      "specs": [
+        "Intel I5 12400F",
+        "RTX 3050 6G",
+        "H610M",
+        "RAM 16GB"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-pc-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "17097000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-pc-2",
+      "slug": "demo-pc-2",
+      "name": "PC Gaming Storm E | Intel Core i3 13100F, RAM 16GB, SSD 512, RTX 3050",
+      "category": "pc",
+      "brand": "STAR",
+      "price": "16387000",
+      "oldPrice": "18350000",
+      "image": "/images/catalog/pc-2.webp",
+      "specs": [
+        "Intel Core i3 13100F",
+        "RAM 16GB",
+        "SSD 512",
+        "RTX 3050"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-pc-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "16387000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-pc-3",
+      "slug": "demo-pc-3",
+      "name": "PC Gaming Hunt E | AMD Ryzen 5 5500, B450, RAM 16GB, SSD 512GB, RX 6500XT",
+      "category": "pc",
+      "brand": "Rigforge",
+      "price": "14977000",
+      "oldPrice": "16770000",
+      "image": "/images/catalog/pc-3.webp",
+      "specs": [
+        "AMD Ryzen 5 5500",
+        "B450",
+        "RAM 16GB",
+        "SSD 512GB"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-pc-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "14977000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-pc-4",
+      "slug": "demo-pc-4",
+      "name": "PC Gaming Hunt E Plus | AMD Ryzen 5 5500, RAM 16GB, SSD 512GB, RTX 3050",
+      "category": "pc",
+      "brand": "Rigforge",
+      "price": "15757000",
+      "oldPrice": "17650000",
+      "image": "/images/catalog/pc-4.webp",
+      "specs": [
+        "AMD Ryzen 5 5500",
+        "RAM 16GB",
+        "SSD 512GB",
+        "RTX 3050"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-pc-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "15757000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-pc-5",
+      "slug": "demo-pc-5",
+      "name": "PC Gaming Storm C | Intel Core i5 12400F, RAM 16GB, SSD 512, RTX 5060",
+      "category": "pc",
+      "brand": "STAR",
+      "price": "27477000",
+      "oldPrice": "30770000",
+      "image": "/images/catalog/pc-5.webp",
+      "specs": [
+        "Intel Core i5 12400F",
+        "RAM 16GB",
+        "SSD 512",
+        "RTX 5060"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-pc-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "27477000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-pc-6",
+      "slug": "demo-pc-6",
+      "name": "PC Gaming Storm SR | Intel i5 14600KF, B760M, DDR5 16GB, 1 TB, RTX 5060 Ti",
+      "category": "pc",
+      "brand": "Rigforge",
+      "price": "36566000",
+      "oldPrice": "40950000",
+      "image": "/images/catalog/pc-6.webp",
+      "specs": [
+        "Intel i5 14600KF",
+        "B760M",
+        "DDR5 16GB",
+        "1 TB"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-pc-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "36566000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-printer-1",
+      "slug": "demo-printer-1",
+      "name": "Máy in laser đơn chức năng Pantum P2505 Chính hãng",
+      "category": "printer",
+      "brand": "Rigforge",
+      "price": "1990000",
+      "oldPrice": "2230000",
+      "image": "/images/catalog/printer-1.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-printer-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-printer-2",
+      "slug": "demo-printer-2",
+      "name": "Máy in Pantum Laser Đen Trắng P2200 chính hãng",
+      "category": "printer",
+      "brand": "Rigforge",
+      "price": "2050000",
+      "oldPrice": "2300000",
+      "image": "/images/catalog/printer-2.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-printer-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2050000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-printer-3",
+      "slug": "demo-printer-3",
+      "name": "Máy in đa chức năng laser đơn sắc Pantum M6702DW Chính hãng",
+      "category": "printer",
+      "brand": "Rigforge",
+      "price": "4000000",
+      "oldPrice": "4480000",
+      "image": "/images/catalog/printer-3.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-printer-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "4000000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-printer-4",
+      "slug": "demo-printer-4",
+      "name": "Máy in Pantum Laser Đen Trắng P2200W WiFi chính hãng",
+      "category": "printer",
+      "brand": "Rigforge",
+      "price": "2290000",
+      "oldPrice": "2560000",
+      "image": "/images/catalog/printer-4.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-printer-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2290000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-printer-5",
+      "slug": "demo-printer-5",
+      "name": "Máy in Laser Canon LBP243DW II | In đảo mặt tự động, A4, A5, USB, LAN, WiFi",
+      "category": "printer",
+      "brand": "Canon",
+      "price": "7990000",
+      "oldPrice": "8950000",
+      "image": "/images/catalog/printer-5.webp",
+      "specs": [
+        "In đảo mặt tự động",
+        "A4",
+        "A5",
+        "USB"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-printer-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "7990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-printer-6",
+      "slug": "demo-printer-6",
+      "name": "Máy in laser đen trắng HP LaserJet Pro M203dn (G3Q46A) | USB, LAN - Hàng công ty",
+      "category": "printer",
+      "brand": "Rigforge",
+      "price": "3390000",
+      "oldPrice": "3800000",
+      "image": "/images/catalog/printer-6.webp",
+      "specs": [
+        "USB",
+        "LAN - Hàng công ty"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-printer-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3390000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-projector-1",
+      "slug": "demo-projector-1",
+      "name": "Máy chiếu Panasonic PT-LB306 (Kèm dây HDMI)",
+      "category": "projector",
+      "brand": "Panasonic",
+      "price": "13990000",
+      "oldPrice": "15670000",
+      "image": "/images/catalog/projector-1.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-projector-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "13990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-projector-2",
+      "slug": "demo-projector-2",
+      "name": "Máy chiếu mini Beecube Xpress U",
+      "category": "projector",
+      "brand": "Rigforge",
+      "price": "4990000",
+      "oldPrice": "5590000",
+      "image": "/images/catalog/projector-2.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-projector-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "4990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-projector-3",
+      "slug": "demo-projector-3",
+      "name": "Máy chiếu mini Beecube Xtreme 2",
+      "category": "projector",
+      "brand": "Rigforge",
+      "price": "6660000",
+      "oldPrice": "7460000",
+      "image": "/images/catalog/projector-3.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-projector-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "6660000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-psu-1",
+      "slug": "demo-psu-1",
+      "name": "Nguồn máy tính Cooler Master Dps-750Ab-40 D 750W 80 Plus Platinum (Hp Omen) (No Box) | Non Modular, ATX",
+      "category": "psu",
+      "brand": "Rigforge",
+      "price": "1199000",
+      "oldPrice": "1340000",
+      "image": "/images/catalog/psu-1.webp",
+      "specs": [
+        "Non Modular",
+        "ATX"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-psu-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1199000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-psu-2",
+      "slug": "demo-psu-2",
+      "name": "Nguồn máy tính Jetek ST650 V3 600W Cáp Dẹt Đen | ATX, Single Rail, 2 PCIe 6+2-pin",
+      "category": "psu",
+      "brand": "Jetek",
+      "price": "699000",
+      "oldPrice": "780000",
+      "image": "/images/catalog/psu-2.webp",
+      "specs": [
+        "ATX",
+        "Single Rail",
+        "2 PCIe 6+2-pin"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-psu-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "699000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-psu-3",
+      "slug": "demo-psu-3",
+      "name": "Nguồn máy tính Jetek NS400 V2 | 250W, ATX, Non Modular",
+      "category": "psu",
+      "brand": "Jetek",
+      "price": "369000",
+      "oldPrice": "410000",
+      "image": "/images/catalog/psu-3.webp",
+      "specs": [
+        "250W",
+        "ATX",
+        "Non Modular"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-psu-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "369000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-psu-4",
+      "slug": "demo-psu-4",
+      "name": "Nguồn máy tính Antec Atom Meta V650 (230V AC) (ANTECV650EC) | Non Modular, Đen",
+      "category": "psu",
+      "brand": "Rigforge",
+      "price": "839000",
+      "oldPrice": "940000",
+      "image": "/images/catalog/psu-4.webp",
+      "specs": [
+        "Non Modular",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-psu-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "839000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-psu-5",
+      "slug": "demo-psu-5",
+      "name": "Nguồn máy tính ANTEC Atom Zen 350W | Non Modular, ATX",
+      "category": "psu",
+      "brand": "Rigforge",
+      "price": "399000",
+      "oldPrice": "450000",
+      "image": "/images/catalog/psu-5.webp",
+      "specs": [
+        "Non Modular",
+        "ATX"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-psu-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "399000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-psu-6",
+      "slug": "demo-psu-6",
+      "name": "Nguồn máy tính VSP NS450 450W Đen | ATX, Cáp dẹt",
+      "category": "psu",
+      "brand": "VSP",
+      "price": "419000",
+      "oldPrice": "470000",
+      "image": "/images/catalog/psu-6.webp",
+      "specs": [
+        "ATX",
+        "Cáp dẹt"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-psu-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "419000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ram-1",
+      "slug": "demo-ram-1",
+      "name": "RAM PC OCPC XT II Black 8GB DDR4 | (1x8GB), 3200MHz, CL16, Intel XMP 2.0 (MMX8GD432C16U)",
+      "category": "ram",
+      "brand": "OCPC",
+      "price": "1290000",
+      "oldPrice": "1440000",
+      "image": "/images/catalog/ram-1.webp",
+      "specs": [
+        "(1x8GB)",
+        "3200MHz",
+        "CL16",
+        "Intel XMP 2.0 (MMX8GD432C16U)"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ram-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1290000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ram-2",
+      "slug": "demo-ram-2",
+      "name": "RAM PC VSP 16GB DDR5 | (1x16GB), 4800MHz, CL40, Không tản nhiệt, Intel Only",
+      "category": "ram",
+      "brand": "VSP",
+      "price": "4390000",
+      "oldPrice": "4920000",
+      "image": "/images/catalog/ram-2.webp",
+      "specs": [
+        "(1x16GB)",
+        "4800MHz",
+        "CL40",
+        "Không tản nhiệt"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ram-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "4390000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ram-3",
+      "slug": "demo-ram-3",
+      "name": "RAM PC VSP 8GB DDR4 3200MHz (P/N DD04-8GDDR40173) | UDIMM, CL18, Tản nhiệt nhôm, Đen",
+      "category": "ram",
+      "brand": "VSP",
+      "price": "1270000",
+      "oldPrice": "1420000",
+      "image": "/images/catalog/ram-3.webp",
+      "specs": [
+        "UDIMM",
+        "CL18",
+        "Tản nhiệt nhôm",
+        "Đen"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ram-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1270000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ram-4",
+      "slug": "demo-ram-4",
+      "name": "RAM PC Kingmax Blade X 8GB DDR4 | (1x8GB), 3200MHz, Intel/AMD KM-LD4A-3200-08GSBK18",
+      "category": "ram",
+      "brand": "Rigforge",
+      "price": "1650000",
+      "oldPrice": "1850000",
+      "image": "/images/catalog/ram-4.webp",
+      "specs": [
+        "(1x8GB)",
+        "3200MHz",
+        "Intel/AMD KM-LD4A-3200-08GSBK18"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ram-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1650000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ram-5",
+      "slug": "demo-ram-5",
+      "name": "RAM PC VSP 8GB DDR4 3200MHz Tản Nhiệt Nhôm CL22 (DDR4-8GNDDR0188)",
+      "category": "ram",
+      "brand": "VSP",
+      "price": "1270000",
+      "oldPrice": "1420000",
+      "image": "/images/catalog/ram-5.webp",
+      "specs": [
+        "RAM máy tính",
+        "Thông số theo SKU",
+        "Bảo hành theo hãng",
+        "Dữ liệu minh họa"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ram-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1270000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ram-6",
+      "slug": "demo-ram-6",
+      "name": "RAM PC Corsair Vengeance 8GB DDR5 (CMK8GX5M1B5200C40) | (1x8GB), 5200MHz",
+      "category": "ram",
+      "brand": "Corsair Vengeance",
+      "price": "3290000",
+      "oldPrice": "3680000",
+      "image": "/images/catalog/ram-6.webp",
+      "specs": [
+        "(1x8GB)",
+        "5200MHz"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ram-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3290000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-software-1",
+      "slug": "demo-software-1",
+      "name": "Phần mềm Microsoft 365 Family EP2-36878 | 12 tháng, Dành cho tối đa 6 người, 5 thiết bị/tài khoản, Word, Excel, PowerPoint, Tổng 2TB OneDrive",
+      "category": "software",
+      "brand": "Rigforge",
+      "price": "1990000",
+      "oldPrice": "2230000",
+      "image": "/images/catalog/software-1.webp",
+      "specs": [
+        "12 tháng",
+        "Dành cho tối đa 6 người",
+        "5 thiết bị/tài khoản",
+        "Word"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-software-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-software-2",
+      "slug": "demo-software-2",
+      "name": "Phần mềm diệt virus Bkav Pro Internet Security AI | 1 PC, 3 Tháng",
+      "category": "software",
+      "brand": "Rigforge",
+      "price": "99000",
+      "oldPrice": "110000",
+      "image": "/images/catalog/software-2.webp",
+      "specs": [
+        "1 PC",
+        "3 Tháng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-software-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "99000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-software-3",
+      "slug": "demo-software-3",
+      "name": "Phần mềm diệt Virus Kaspersky Standard 1U (1 thiết bị)",
+      "category": "software",
+      "brand": "Rigforge",
+      "price": "199000",
+      "oldPrice": "220000",
+      "image": "/images/catalog/software-3.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-software-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "199000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-software-4",
+      "slug": "demo-software-4",
+      "name": "Phần mềm Microsoft Office Home and Business 2024 All Lng APAC EM Retail Online ESD (EP2-06604) | Key điện tử, Bản quyền vĩnh viễn",
+      "category": "software",
+      "brand": "Microsoft",
+      "price": "5190000",
+      "oldPrice": "5810000",
+      "image": "/images/catalog/software-4.webp",
+      "specs": [
+        "Key điện tử",
+        "Bản quyền vĩnh viễn"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-software-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "5190000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-software-5",
+      "slug": "demo-software-5",
+      "name": "Phần mềm Windows 11 Pro FPP 64-bit Eng Intl USB (HAV-00163) | Bản quyền vĩnh viễn, USB cài đặt chính hãng",
+      "category": "software",
+      "brand": "Microsoft",
+      "price": "5100000",
+      "oldPrice": "5710000",
+      "image": "/images/catalog/software-5.webp",
+      "specs": [
+        "Bản quyền vĩnh viễn",
+        "USB cài đặt chính hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-software-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "5100000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-software-6",
+      "slug": "demo-software-6",
+      "name": "Phần mềm Office Home 2024 English APAC EM Medialess - Dùng vĩnh viễn (EP2-06811) (Box)",
+      "category": "software",
+      "brand": "Microsoft",
+      "price": "2990000",
+      "oldPrice": "3350000",
+      "image": "/images/catalog/software-6.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-software-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ssd-1",
+      "slug": "demo-ssd-1",
+      "name": "Ổ cứng SSD Faspeed K7 128GB SATA (K7-128G-CD) | 2.5 inch, SATA III, 550MB/s",
+      "category": "ssd",
+      "brand": "Faspeed",
+      "price": "499000",
+      "oldPrice": "560000",
+      "image": "/images/catalog/ssd-1.webp",
+      "specs": [
+        "2.5 inch",
+        "SATA III",
+        "550MB/s"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ssd-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "499000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ssd-2",
+      "slug": "demo-ssd-2",
+      "name": "Ổ cứng SSD Patriot P300 512GB | PCIe Gen3 x4 NVMe, M.2 2280 (P300P512GM28)",
+      "category": "ssd",
+      "brand": "Rigforge",
+      "price": "2250000",
+      "oldPrice": "2520000",
+      "image": "/images/catalog/ssd-2.webp",
+      "specs": [
+        "PCIe Gen3 x4 NVMe",
+        "M.2 2280 (P300P512GM28)"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ssd-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2250000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ssd-3",
+      "slug": "demo-ssd-3",
+      "name": "Ổ cứng SSD Apacer AS2280P4 256GB | PCIe Gen3 x4 NVMe, M.2 2280 (AP256GAS2280P4-1)",
+      "category": "ssd",
+      "brand": "Apacer",
+      "price": "1350000",
+      "oldPrice": "1510000",
+      "image": "/images/catalog/ssd-3.webp",
+      "specs": [
+        "PCIe Gen3 x4 NVMe",
+        "M.2 2280 (AP256GAS2280P4-1)"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ssd-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1350000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ssd-4",
+      "slug": "demo-ssd-4",
+      "name": "Ổ cứng SSD OCPC XTL-200 256GB (SSD25S3T256GLT) | SATA III, 2.5 inch, Đọc 500MB/s, Ghi 420MB/s",
+      "category": "ssd",
+      "brand": "OCPC",
+      "price": "850000",
+      "oldPrice": "950000",
+      "image": "/images/catalog/ssd-4.webp",
+      "specs": [
+        "SATA III",
+        "2.5 inch",
+        "Đọc 500MB/s",
+        "Ghi 420MB/s"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ssd-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "850000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ssd-5",
+      "slug": "demo-ssd-5",
+      "name": "Ổ cứng SSD SSTC M100 256GB | SATA III, 2.5\"",
+      "category": "ssd",
+      "brand": "SSTC",
+      "price": "850000",
+      "oldPrice": "950000",
+      "image": "/images/catalog/ssd-5.webp",
+      "specs": [
+        "SATA III",
+        "2.5\""
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ssd-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "850000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ssd-6",
+      "slug": "demo-ssd-6",
+      "name": "Ổ Cứng SSD 480G Kingmax SMV32 Sata III (KM480GSMV32)",
+      "category": "ssd",
+      "brand": "Rigforge",
+      "price": "1790000",
+      "oldPrice": "2000000",
+      "image": "/images/catalog/ssd-6.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ssd-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1790000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ups-1",
+      "slug": "demo-ups-1",
+      "name": "UPS Santak TG750 PRO (750VA/300W)",
+      "category": "ups",
+      "brand": "Rigforge",
+      "price": "1480000",
+      "oldPrice": "1660000",
+      "image": "/images/catalog/ups-1.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ups-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1480000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ups-2",
+      "slug": "demo-ups-2",
+      "name": "Bộ lưu điện UPS HIKSEMI HS-UPS-18D-Z-EU | 18W, 4 Pin LiFePO4 8000mAh, USB, DC, POE",
+      "category": "ups",
+      "brand": "Hikvision",
+      "price": "499000",
+      "oldPrice": "560000",
+      "image": "/images/catalog/ups-2.webp",
+      "specs": [
+        "18W",
+        "4 Pin LiFePO4 8000mAh",
+        "USB",
+        "DC"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ups-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "499000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ups-3",
+      "slug": "demo-ups-3",
+      "name": "Bộ Lưu Điện UPS Hikvision DS-UPS1000-R | Offline, 1000VA/600W, 2 Outlet",
+      "category": "ups",
+      "brand": "Hikvision",
+      "price": "1200000",
+      "oldPrice": "1340000",
+      "image": "/images/catalog/ups-3.webp",
+      "specs": [
+        "Offline",
+        "1000VA/600W",
+        "2 Outlet"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ups-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "1200000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ups-4",
+      "slug": "demo-ups-4",
+      "name": "Bộ lưu điện UPS Hikvision DS-UPS2000-R | Offline, 2000VA/1200W",
+      "category": "ups",
+      "brand": "Hikvision",
+      "price": "2990000",
+      "oldPrice": "3350000",
+      "image": "/images/catalog/ups-4.webp",
+      "specs": [
+        "Offline",
+        "2000VA/1200W"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ups-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "2990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ups-5",
+      "slug": "demo-ups-5",
+      "name": "UPS Santak Blazer 1200 Pro",
+      "category": "ups",
+      "brand": "Rigforge",
+      "price": "3990000",
+      "oldPrice": "4470000",
+      "image": "/images/catalog/ups-5.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ups-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "3990000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-ups-6",
+      "slug": "demo-ups-6",
+      "name": "Bộ lưu điện UPS Hikvision DS-UPS600-R | Offline, 600VA/360W",
+      "category": "ups",
+      "brand": "Hikvision",
+      "price": "720000",
+      "oldPrice": "810000",
+      "image": "/images/catalog/ups-6.webp",
+      "specs": [
+        "Offline",
+        "600VA/360W"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-ups-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "720000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-webcam-1",
+      "slug": "demo-webcam-1",
+      "name": "Webcam VSP AI HD-2K FullHD",
+      "category": "webcam",
+      "brand": "Rigforge",
+      "price": "339000",
+      "oldPrice": "380000",
+      "image": "/images/catalog/webcam-1.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-webcam-1-standard",
+          "label": "Tiêu chuẩn",
+          "price": "339000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-webcam-2",
+      "slug": "demo-webcam-2",
+      "name": "Webcam VSP W66/W-R FullHD",
+      "category": "webcam",
+      "brand": "Rigforge",
+      "price": "559000",
+      "oldPrice": "630000",
+      "image": "/images/catalog/webcam-2.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-webcam-2-standard",
+          "label": "Tiêu chuẩn",
+          "price": "559000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-webcam-3",
+      "slug": "demo-webcam-3",
+      "name": "Webcam VSP W66/W FullHD",
+      "category": "webcam",
+      "brand": "Rigforge",
+      "price": "459000",
+      "oldPrice": "510000",
+      "image": "/images/catalog/webcam-3.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-webcam-3-standard",
+          "label": "Tiêu chuẩn",
+          "price": "459000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-webcam-4",
+      "slug": "demo-webcam-4",
+      "name": "Webcam Logitech C270 HD",
+      "category": "webcam",
+      "brand": "Rigforge",
+      "price": "399000",
+      "oldPrice": "450000",
+      "image": "/images/catalog/webcam-4.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-webcam-4-standard",
+          "label": "Tiêu chuẩn",
+          "price": "399000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-webcam-5",
+      "slug": "demo-webcam-5",
+      "name": "Webcam Logitech Brio 100 Đen Full HD (960-001587)",
+      "category": "webcam",
+      "brand": "Rigforge",
+      "price": "690000",
+      "oldPrice": "770000",
+      "image": "/images/catalog/webcam-5.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-webcam-5-standard",
+          "label": "Tiêu chuẩn",
+          "price": "690000",
+          "stock": 12
+        }
+      ]
+    },
+    {
+      "id": "demo-webcam-6",
+      "slug": "demo-webcam-6",
+      "name": "Webcam Logitech Brio 100 Trắng Full HD (960-001618)",
+      "category": "webcam",
+      "brand": "Rigforge",
+      "price": "690000",
+      "oldPrice": "770000",
+      "image": "/images/catalog/webcam-6.webp",
+      "specs": [
+        "Hàng chính hãng",
+        "Thông số theo SKU",
+        "Giá minh họa",
+        "Bảo hành theo hãng"
+      ],
+      "technical": {},
+      "builderEligible": false,
+      "stock": 12,
+      "warranty": "36 tháng",
+      "variants": [
+        {
+          "id": "demo-webcam-6-standard",
+          "label": "Tiêu chuẩn",
+          "price": "690000",
+          "stock": 12
+        }
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "id": "chon-pc",
+      "title": "Bắt đầu từ đâu khi xây dựng chiếc PC đầu tiên?",
+      "tag": "HƯỚNG DẪN",
+      "image": "photo-1587202372775-e229f172b9d7",
+      "content": "Hãy bắt đầu bằng nhu cầu và ngân sách. Chơi game, làm đồ họa và làm việc văn phòng có cách phân bổ chi phí khác nhau. CPU và mainboard cần cùng socket; RAM cần đúng thế hệ mà mainboard hỗ trợ. Hãy dành ngân sách cho nguồn có chất lượng, lưu trữ và khả năng nâng cấp. Công cụ ráp PC của Rigforge giúp bạn kiểm tra một số điều kiện này, nhưng các thông số BIOS, đầu nguồn và khoảng hở thực tế vẫn cần xác minh trước khi mua."
+    },
+    {
+      "id": "ddr4-ddr5",
+      "title": "DDR4 hay DDR5: lựa chọn nào cho cấu hình của bạn?",
+      "tag": "KIẾN THỨC",
+      "image": "photo-1562976540-1502c2145186",
+      "content": "DDR4 và DDR5 là hai thế hệ bộ nhớ khác nhau, không thể cắm thay thế cho nhau trên cùng một khe. Kiểm tra thông số mainboard trước khi chọn RAM. Ngoài dung lượng và tốc độ, hãy xem số khe, giới hạn bộ nhớ và danh sách hỗ trợ của nhà sản xuất. Những số liệu ở cửa hàng này là dữ liệu demo dùng để trải nghiệm giao diện."
+    },
+    {
+      "id": "goc-gaming",
+      "title": "Một góc máy gọn gàng, một trải nghiệm tốt hơn",
+      "tag": "GÓC SETUP",
+      "image": "photo-1587829741301-dc798b83add3",
+      "content": "Chọn màn hình đúng nhu cầu, bố trí thiết bị ở khoảng cách thoải mái và giữ đường đi của luồng khí thông thoáng. Đừng quên dành không gian cho việc bảo trì và vệ sinh. Một cấu hình cân bằng là điểm khởi đầu tốt hơn việc chỉ tập trung vào linh kiện đắt nhất."
+    },
+    {
+      "id": "chon-nguon",
+      "title": "Chọn nguồn máy tính: đọc thông số trước khi nâng cấp",
+      "tag": "KIẾN THỨC",
+      "image": "photo-1587202372775-e229f172b9d7",
+      "content": "Công suất không phải thông tin duy nhất cần đối chiếu. Hãy kiểm tra đầu cấp điện, kích thước và hướng dẫn của nhà sản xuất. Ước tính công suất trong PC Studio chỉ phục vụ bản demo, không thay việc xác nhận cấu hình thực tế."
+    },
+    {
+      "id": "luu-cau-hinh",
+      "title": "Cách lưu và mở lại cấu hình trong Rigforge PC Studio",
+      "tag": "HƯỚNG DẪN",
+      "image": "photo-1587202372775-e229f172b9d7",
+      "content": "Chọn linh kiện, kiểm tra các cảnh báo rồi đặt tên và lưu cấu hình. Bản demo lưu trên trình duyệt hiện tại. Mở mục cấu hình đã lưu để tiếp tục hoặc tạo một ý tưởng khác; dữ liệu chưa được đồng bộ tài khoản qua API."
+    },
+    {
+      "id": "doc-thong-so",
+      "title": "Đọc thông số linh kiện: những mục nên đối chiếu",
+      "tag": "KIẾN THỨC",
+      "image": "photo-1518770660439-4636190af475",
+      "content": "Socket, thế hệ RAM và kích thước là những thông số cần kiểm tra cùng nhau. Một vài thuộc tính phù hợp chưa bảo đảm toàn bộ cấu hình tương thích. Đối chiếu tài liệu nhà sản xuất cho BIOS, đầu nguồn và các khe cắm trước khi mua."
+    },
+    {
+      "id": "chon-ssd",
+      "title": "Ổ SSD và những điều cần biết khi mở rộng lưu trữ",
+      "tag": "KIẾN THỨC",
+      "image": "photo-1597872200969-2b65d7a8ee49",
+      "content": "Trước khi chọn ổ lưu trữ, kiểm tra loại kết nối và kích thước mà mainboard hỗ trợ. Giá, dung lượng và tốc độ hiển thị trong bản trải nghiệm là dữ liệu mẫu. Không suy ra khả năng hỗ trợ chỉ từ tên sản phẩm."
+    },
+    {
+      "id": "bao-hanh",
+      "title": "Lưu thông tin đơn hàng để theo dõi bảo hành dễ hơn",
+      "tag": "HƯỚNG DẪN",
+      "image": "photo-1587202372775-e229f172b9d7",
+      "content": "Theo dõi sản phẩm, thời điểm mua và thông tin serial khi có hàng thực tế. Bản demo cho phép xem đơn đã tạo và gửi yêu cầu mẫu. Chính sách, điều kiện và quy trình bảo hành thật chưa được tích hợp."
+    }
+  ]
+}

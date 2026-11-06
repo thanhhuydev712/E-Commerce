@@ -1,70 +1,36 @@
-import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+﻿import {
+  Inject,
+  Injectable,
+  OnModuleDestroy,
+  OnModuleInit,
+} from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient } from '@prisma/client';
-
-// Cho phép NestJS quản lý Service
+import { PrismaClient } from '../../generated/prisma-v2/index.js';
 @Injectable()
 export class PrismaService
   extends PrismaClient
   implements OnModuleInit, OnModuleDestroy
 {
-  constructor() {
-    // Tạo adapter giúp Prisma giao tiếp với PostgreSQL.
-    const adapter = new PrismaPg({
-      connectionString: process.env.DATABASE_URL,
-    });
-
+  readonly schema: string;
+  constructor(@Inject(ConfigService) config: ConfigService) {
     super({
-      adapter,
-      log:
-        process.env.NODE_ENV === 'development'
-          ? ['query', 'error', 'warn']
-          : ['error'],
+      transactionOptions: { maxWait: 10000, timeout: 15000 },
+      adapter: new PrismaPg(
+        {
+          connectionString: config.getOrThrow<string>('DATABASE_URL'),
+          connectionTimeoutMillis: 15000,
+          statement_timeout: 15000,
+        },
+        { schema: config.getOrThrow<string>('DATABASE_SCHEMA') },
+      ),
     });
+    this.schema = config.getOrThrow<string>('DATABASE_SCHEMA');
   }
-
-  // Kết nối Database
   async onModuleInit() {
     await this.$connect();
-    console.log('database connect successfully');
   }
-
-  // Ngắt kết nối
   async onModuleDestroy() {
     await this.$disconnect();
-    console.log('database disconnected');
-  }
-
-  // Xóa dữ liệu trong database
-  async cleanDatabase() {
-    // Ngăn việc xóa database trên môi trường production
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error('Cannot clean database in production');
-    }
-
-    // Lấy danh sách các thuộc tính của PrismaService
-    const models = Reflect.ownKeys(this);
-
-    // Duyệt qua danh sách thuộc tính
-    return Promise.all(
-      models.map(async (modelKey) => {
-        // Chỉ xử lý các key có kiểu string
-        if (typeof modelKey !== 'string') return;
-
-        // Ép kiểu để TypeScript cho phép truy cập thuộc tính động
-        const model = (this as unknown as Record<string, unknown>)[modelKey];
-
-        // Kiểm tra đây có phải đối tượng hỗ trợ deleteMany không
-        if (
-          model !== null &&
-          typeof model === 'object' &&
-          'deleteMany' in model &&
-          typeof model.deleteMany === 'function'
-        ) {
-          // Xóa tất cả bản ghi của model
-          await model.deleteMany();
-        }
-      }),
-    );
   }
 }

@@ -1,130 +1,166 @@
+import { ApiData, MessageDto } from '../../platform/api-response.js';
+import {
+  AuthResponseDto,
+  PrincipalDto,
+  SessionRestoreDto,
+} from './auth-response.dto.js';
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
-  HttpStatus,
+  Inject,
   Post,
+  Req,
+  Res,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiCookieAuth, ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
+import { ConfigService } from '@nestjs/config';
+import type { Request, Response } from 'express';
 import { AuthService } from './auth.service.js';
-import { RegisterDto } from './dto/register.dto.js';
-import { AuthResponseDto } from './dto/auth-response.dto.js';
-import { RefreshTokenGuard } from './guards/refresh-token.guards.js';
-import { GetUser } from '../../common/decorators/get-user.decorator.js';
+import {
+  RegisterDto,
+  LoginDto,
+  EmailDto,
+  ChallengeTokenDto,
+  ResetPasswordDto,
+} from './auth.dto.js';
+import {
+  AuthOriginGuard,
+  clearRefreshCookie,
+  refreshCookie,
+  setRefreshCookie,
+} from './cookie-security.js';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
-import { LoginDto } from './dto/login.dto.js';
-import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
-
+import { CurrentUser } from '../../common/decorators/get-user.decorator.js';
+import type { Principal } from '../../common/interfaces/request-with-user.interface.js';
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
-  // Register api
+  constructor(
+    @Inject(AuthService) private readonly auth: AuthService,
+    @Inject(ConfigService) private readonly config: ConfigService,
+  ) {}
+  private respond(
+    response: Response,
+    result: Awaited<ReturnType<AuthService['login']>>,
+  ) {
+    setRefreshCookie(
+      response,
+      result.refreshToken,
+      this.config,
+      result.expiresAt,
+    );
+    const { refreshToken: _token, expiresAt: _expiry, ...data } = result;
+    return data;
+  }
+  @ApiData(AuthResponseDto, 201)
   @Post('register')
-  @HttpCode(201)
-  @ApiOperation({
-    summary: 'Register a new user',
-    description: 'Tạo tài khoản người dùng',
-  })
-  @ApiResponse({
-    status: 201,
-    description: 'Đăng ký thành công',
-    type: AuthResponseDto,
-  })
-  @ApiResponse({
-    status: 400,
-    description:
-      'Yêu cầu không hợp lệ. Dữ liệu không vượt qua bước kiểm tra tính hợp lệ hoặc người dùng đã tồn tại.',
-  })
-  @ApiResponse({
-    status: 429,
-    description:
-      'Quá nhiều yêu cầu. Đã vượt quá giới hạn số lượng yêu cầu cho phép.',
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'Internal Server Error',
-    type: AuthResponseDto,
-  })
-  async register(@Body() registerDto: RegisterDto): Promise<AuthResponseDto> {
-    return this.authService.register(registerDto);
+  @UseGuards(AuthOriginGuard)
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
+  async register(
+    @Body() dto: RegisterDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    return this.respond(response, await this.auth.register(dto));
   }
-
-  // Refresh access token
-  @Post('refresh')
-  @HttpCode(HttpStatus.OK)
-  @UseGuards(RefreshTokenGuard)
-  @ApiBearerAuth('JWT-refresh')
-  @ApiOperation({
-    summary: 'Refresh access token',
-    description: 'Tạo Access Token mới bằng cách sử dụng Refresh Token hợp lệ.',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Đã tạo Access Token mới thành công.',
-    type: AuthResponseDto,
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Chưa được xác thực. Thông tin đăng nhập không hợp lệ.',
-  })
-  @ApiResponse({
-    status: 429,
-    description:
-      'Quá nhiều yêu cầu. Đã vượt quá giới hạn số lượng yêu cầu cho phép.',
-  })
-  async refresh(@GetUser('id') userId: string): Promise<AuthResponseDto> {
-    return await this.authService.refreshTokens(userId);
-  }
-
-  // Logout user and invalidate refresh token
-  @Post('logout')
-  @HttpCode(HttpStatus.OK)
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('JWT-auth')
-  @ApiOperation({
-    summary: 'Logout user',
-    description: 'Đăng xuất người dùng và vô hiệu hóa Refresh Token.',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Đăng xuất thành công',
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Chưa được xác thực. Thông tin đăng nhập không hợp lệ.',
-  })
-  @ApiResponse({
-    status: 429,
-    description:
-      'Quá nhiều yêu cầu. Đã vượt quá giới hạn số lượng yêu cầu cho phép.',
-  })
-  async logout(@GetUser('id') userId: string): Promise<{ message: string }> {
-    await this.authService.logout(userId);
-    return { message: 'Successfully logged out' };
-  }
-
-  // Login
+  @ApiData(AuthResponseDto, 200)
   @Post('login')
-  @ApiOperation({
-    summary: 'User login',
-    description:
-      'Xác thực người dùng và trả về Access Token cùng Refresh Token.',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Đăng nhập thành công',
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Chưa được xác thực. Thông tin đăng nhập không hợp lệ.',
-  })
-  @ApiResponse({
-    status: 429,
-    description:
-      'Quá nhiều yêu cầu. Đã vượt quá giới hạn số lượng yêu cầu cho phép.',
-  })
-  @HttpCode(HttpStatus.OK)
-  async login(@Body() loginDto: LoginDto): Promise<AuthResponseDto> {
-    return this.authService.login(loginDto);
+  @HttpCode(200)
+  @UseGuards(AuthOriginGuard)
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
+  async login(
+    @Body() dto: LoginDto,
+    @Req() request: Request,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    return this.respond(
+      response,
+      await this.auth.login(dto, request.headers['user-agent']),
+    );
+  }
+  @ApiData(SessionRestoreDto, 200)
+  @Post('session')
+  @HttpCode(200)
+  @ApiCookieAuth()
+  @UseGuards(AuthOriginGuard)
+  restore(@Req() request: Request) {
+    return this.auth.restore(refreshCookie(request));
+  }
+  @ApiData(AuthResponseDto, 200)
+  @Post('refresh')
+  @HttpCode(200)
+  @ApiCookieAuth()
+  @UseGuards(AuthOriginGuard)
+  async refresh(
+    @Req() request: Request,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    try {
+      return this.respond(
+        response,
+        await this.auth.refresh(refreshCookie(request)),
+      );
+    } catch (error) {
+      clearRefreshCookie(response, this.config);
+      throw error;
+    }
+  }
+  @ApiData(MessageDto, 200)
+  @Post('logout')
+  @HttpCode(200)
+  @ApiBearerAuth()
+  @UseGuards(AuthOriginGuard, JwtAuthGuard)
+  async logout(
+    @CurrentUser() user: Principal,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    const result = await this.auth.logout(user.id, user.sessionId);
+    clearRefreshCookie(response, this.config);
+    return result;
+  }
+  @ApiData(PrincipalDto)
+  @Get('me')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  me(@CurrentUser() user: Principal) {
+    return user;
+  }
+  @ApiData(MessageDto, 202)
+  @Post('forgot-password')
+  @HttpCode(202)
+  @UseGuards(AuthOriginGuard)
+  @Throttle({ default: { limit: 3, ttl: 60000 } })
+  forgot(@Body() dto: EmailDto) {
+    return this.auth.issueChallenge(dto.email, 'RESET_PASSWORD');
+  }
+  @ApiData(MessageDto, 200)
+  @Post('reset-password')
+  @HttpCode(200)
+  @UseGuards(AuthOriginGuard)
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
+  reset(@Body() dto: ResetPasswordDto) {
+    return this.auth.consumeChallenge(
+      dto.token,
+      'RESET_PASSWORD',
+      dto.newPassword,
+    );
+  }
+  @ApiData(MessageDto, 202)
+  @Post('verification/request')
+  @HttpCode(202)
+  @UseGuards(AuthOriginGuard)
+  @Throttle({ default: { limit: 3, ttl: 60000 } })
+  requestVerification(@Body() dto: EmailDto) {
+    return this.auth.issueChallenge(dto.email, 'VERIFY_EMAIL');
+  }
+  @ApiData(MessageDto, 200)
+  @Post('verification/confirm')
+  @HttpCode(200)
+  @UseGuards(AuthOriginGuard)
+  verify(@Body() dto: ChallengeTokenDto) {
+    return this.auth.consumeChallenge(dto.token, 'VERIFY_EMAIL');
   }
 }

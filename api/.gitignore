@@ -59,6 +59,10 @@ pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 /generated/prisma
+/generated/prisma-v2
+/generated/prisma-v2-before-admin-test/
+/dist-v1-before-phase01
+/.local-media/
 
 # AI tool skills
 /api/.windsurf/skills/

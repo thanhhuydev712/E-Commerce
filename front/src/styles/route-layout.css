@@ -1,0 +1,35 @@
+/* Marker route nằm ngoài các trang Next cache; selector này giữ layout đúng sau Link/Back. */
+.rf-app:has(> .rf-route-minisite) .rf-minisite-header {
+  display: block;
+}
+.rf-app:has(> .rf-route-minisite) .rf-reference-utility,
+.rf-app:has(> .rf-route-minisite) .rf-header,
+.rf-app:has(> .rf-route-minisite) .rf-reference-pills {
+  display: none;
+}
+.rf-app:has(> .rf-route-campaign) .rf-main > .rf-breadcrumb {
+  display: none;
+}
+.rf-app:has(> .rf-route-campaign) .rf-promotions-page {
+  border-radius: 0;
+}
+.rf-app:has(> .rf-route-showrooms) .rf-common-showrooms {
+  display: none;
+}
+.rf-app:has(> .rf-route-checkout) .rf-reference-utility,
+.rf-app:has(> .rf-route-checkout) .rf-reference-header-main > :not(.rf-logo),
+.rf-app:has(> .rf-route-checkout) .rf-reference-pills,
+.rf-app:has(> .rf-route-checkout) .rf-common-showrooms,
+.rf-app:has(> .rf-route-checkout) .rf-footer,
+.rf-app:has(> .rf-route-checkout) .rf-mobile-nav,
+.rf-app:has(> .rf-route-checkout) .rf-compare-float {
+  display: none;
+}
+.rf-app:has(> .rf-route-checkout) .rf-reference-header-main {
+  min-height: 65px;
+  padding-block: 10px;
+}
+.rf-app:has(> .rf-route-checkout) .rf-main {
+  padding-top: 15px;
+  padding-bottom: 30px;
+}

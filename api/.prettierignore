@@ -1,0 +1,6 @@
+node_modules/
+dist/
+dist-v1-before-phase01/
+generated/
+src/generated/
+legacy/

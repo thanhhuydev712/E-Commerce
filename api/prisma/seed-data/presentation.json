@@ -1,0 +1,1234 @@
+{
+  "heroCampaigns": [
+    {
+      "id": "gaming",
+      "eyebrow": "RIGFORGE GAMING SERIES",
+      "heading": "Cấu hình mạnh.",
+      "highlight": "Chất riêng của bạn.",
+      "description": "Từ trận đấu đầu tiên đến những chiến thắng lớn. Khám phá cấu hình dành riêng cho cách bạn chơi.",
+      "category": "pc",
+      "href": "/products?category=pc",
+      "action": "Khám phá PC Gaming",
+      "price": "8990000"
+    },
+    {
+      "id": "laptop",
+      "eyebrow": "WORK HARD. PLAY ANYWHERE.",
+      "heading": "Nhẹ hành trang.",
+      "highlight": "Mạnh trải nghiệm.",
+      "description": "Một chiếc laptop, nhiều khả năng. Tìm người đồng hành cho công việc và những điều bạn yêu thích.",
+      "category": "laptop",
+      "href": "/products?category=laptop",
+      "action": "Khám phá laptop",
+      "price": "19990000"
+    },
+    {
+      "id": "monitor",
+      "eyebrow": "YOUR NEXT LEVEL",
+      "heading": "Nhìn rộng hơn.",
+      "highlight": "Chơi trọn khung hình.",
+      "description": "Tần số quét cao, màu sắc sống động. Hoàn thiện góc máy bằng một góc nhìn mới.",
+      "category": "monitor",
+      "href": "/products?category=monitor",
+      "action": "Khám phá màn hình",
+      "price": "2990000"
+    }
+  ],
+  "featuredDeals": [
+    "rigforge-strike",
+    "rtx-4060",
+    "ram-ddr5",
+    "monitor-asus",
+    "keyboard-akko"
+  ],
+  "upgradeProducts": [
+    "ryzen-7600",
+    "msi-b650",
+    "ram-ddr5",
+    "ssd-kingston",
+    "psu-650"
+  ],
+  "collectionTabs": [
+    {
+      "id": "pc",
+      "label": "PC Gaming"
+    },
+    {
+      "id": "laptop",
+      "label": "Laptop"
+    },
+    {
+      "id": "monitor",
+      "label": "Màn hình"
+    },
+    {
+      "id": "gpu",
+      "label": "Card đồ họa"
+    },
+    {
+      "id": "gear",
+      "label": "Gaming Gear"
+    }
+  ],
+  "partnerBrands": [
+    "ASUS",
+    "AMD",
+    "MSI",
+    "GIGABYTE",
+    "Kingston",
+    "Corsair"
+  ],
+  "bannerCampaigns": [
+    {
+      "id": "asus",
+      "title": "PC Powered by ASUS",
+      "subtitle": "Bứt phá giới hạn cùng AI!",
+      "image": "/images/banners/banner-slider6.webp",
+      "alt": "Powered by ASUS — Ráp máy bằng những linh kiện tối ưu nhất",
+      "href": "/pc-builder"
+    },
+    {
+      "id": "pc",
+      "title": "PC GAMING QUỐC DÂN",
+      "subtitle": "Sẵn Windows, giá chỉ từ 15 triệu",
+      "image": "/images/banners/banner-slider1.webp",
+      "alt": "PC quốc dân — Máy tính gaming, trả góp 3 không",
+      "href": "/products?category=pc"
+    },
+    {
+      "id": "monitor",
+      "title": "MÀN HÌNH GAMING",
+      "subtitle": "Màn 2K chỉ từ 1,9 triệu",
+      "image": "/images/banners/banner-slider2.webp",
+      "alt": "Màn hình gaming — Mua một tặng một, giảm đến 1 triệu",
+      "href": "/products?category=monitor"
+    },
+    {
+      "id": "laptop",
+      "title": "KHUYẾN MÃI LAPTOP",
+      "subtitle": "Ưu đãi đến 8,6 triệu",
+      "image": "/images/banners/banner-slider3.webp",
+      "alt": "Laptop — Giảm đến 8,6 triệu, mua một tặng một",
+      "href": "/products?category=laptop"
+    },
+    {
+      "id": "gear",
+      "title": "KHUYẾN MÃI GAMING GEAR",
+      "subtitle": "Giảm đến 1,1 triệu",
+      "image": "/images/banners/banner-slider4.webp",
+      "alt": "Gaming gear — Tai nghe, loa, bàn phím và chuột, mua một được bốn",
+      "href": "/products?category=gear"
+    },
+    {
+      "id": "installments",
+      "title": "TRẢ GÓP PC – LAPTOP",
+      "subtitle": "Trả trước 0đ, trợ giá đến 500.000đ",
+      "image": "/images/banners/banner-slider5.webp",
+      "alt": "Trả trước 0 đồng — PC và laptop, kỳ hạn đến 36 tháng",
+      "href": "/pages/installments"
+    }
+  ],
+  "shelves": [
+    {
+      "id": "pc",
+      "label": "PC",
+      "headline": "CÂN MỌI\nTÁC VỤ",
+      "imageCategory": "pc",
+      "tone": "mint",
+      "tabs": [
+        {
+          "id": "gaming",
+          "label": "PC Gaming",
+          "categories": [
+            "pc"
+          ]
+        },
+        {
+          "id": "office",
+          "label": "PC văn phòng",
+          "categories": [
+            "pc"
+          ],
+          "ids": [
+            "rigforge-office",
+            "rigforge-mini"
+          ]
+        },
+        {
+          "id": "graphics",
+          "label": "PC đồ họa",
+          "categories": [
+            "pc"
+          ],
+          "match": "RTX 40|RTX 50|4070|4060"
+        },
+        {
+          "id": "ai",
+          "label": "PC AI",
+          "categories": [
+            "pc"
+          ],
+          "ids": [
+            "rigforge-apex",
+            "rigforge-nova",
+            "rigforge-strike"
+          ]
+        },
+        {
+          "id": "mini",
+          "label": "Mini PC",
+          "categories": [
+            "pc"
+          ],
+          "ids": [
+            "rigforge-mini"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "components",
+      "label": "LINH KIỆN",
+      "headline": "GIÁ TỐT\nTẬN GỐC",
+      "imageCategory": "gpu",
+      "tone": "ice",
+      "tabs": [
+        {
+          "id": "gpu",
+          "label": "VGA",
+          "categories": [
+            "gpu"
+          ]
+        },
+        {
+          "id": "intel",
+          "label": "CPU Intel",
+          "categories": [
+            "cpu"
+          ],
+          "match": "Intel|Core"
+        },
+        {
+          "id": "intel-board",
+          "label": "Mainboard Intel",
+          "categories": [
+            "mainboard"
+          ],
+          "match": "Intel|B760|H610|B860|Z890"
+        },
+        {
+          "id": "amd",
+          "label": "CPU AMD",
+          "categories": [
+            "cpu"
+          ],
+          "match": "AMD|Ryzen"
+        },
+        {
+          "id": "amd-board",
+          "label": "Mainboard AMD",
+          "categories": [
+            "mainboard"
+          ],
+          "match": "AMD|B650|B550|A520|AM4|AM5"
+        }
+      ]
+    },
+    {
+      "id": "memory",
+      "label": "RAM – SSD",
+      "headline": "TỐC ĐỘ\nTHẦN TỐC",
+      "imageCategory": "ram",
+      "tone": "mint",
+      "tabs": [
+        {
+          "id": "ddr4",
+          "label": "RAM DDR4",
+          "categories": [
+            "ram"
+          ],
+          "match": "DDR4|3200"
+        },
+        {
+          "id": "ddr5",
+          "label": "RAM DDR5",
+          "categories": [
+            "ram"
+          ],
+          "match": "DDR5|6000|5600"
+        },
+        {
+          "id": "ssd",
+          "label": "SSD",
+          "categories": [
+            "ssd"
+          ]
+        },
+        {
+          "id": "hdd",
+          "label": "HDD",
+          "categories": [
+            "hdd"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "laptops",
+      "label": "LAPTOP",
+      "headline": "MỎNG NHẸ\nMƯỢT MÀ",
+      "imageCategory": "laptop",
+      "tone": "ice",
+      "tabs": [
+        {
+          "id": "promotion",
+          "label": "Laptop khuyến mãi",
+          "categories": [
+            "laptop"
+          ]
+        },
+        {
+          "id": "gaming",
+          "label": "Laptop gaming",
+          "categories": [
+            "laptop"
+          ],
+          "match": "Gaming|TUF|LOQ|RTX"
+        },
+        {
+          "id": "office",
+          "label": "Laptop văn phòng",
+          "categories": [
+            "laptop"
+          ],
+          "match": "Vivobook|Think|Office|ProBook|IdeaPad|Inspiron|HP 1"
+        },
+        {
+          "id": "ram",
+          "label": "RAM laptop",
+          "categories": [
+            "ram"
+          ],
+          "match": "Laptop|SODIMM|SO-DIMM"
+        },
+        {
+          "id": "accessory",
+          "label": "Phụ kiện laptop",
+          "categories": [
+            "accessory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monitors",
+      "label": "MÀN HÌNH",
+      "headline": "ĐẸP HÌNH\nMƯỢT MẮT",
+      "imageCategory": "monitor",
+      "tone": "mint",
+      "tabs": [
+        {
+          "id": "promotion",
+          "label": "Màn hình khuyến mãi",
+          "categories": [
+            "monitor"
+          ]
+        },
+        {
+          "id": "gaming",
+          "label": "Màn hình gaming",
+          "categories": [
+            "monitor"
+          ],
+          "match": "Gaming|TUF|UltraGear|180Hz|165Hz"
+        },
+        {
+          "id": "office",
+          "label": "Màn hình văn phòng",
+          "categories": [
+            "monitor"
+          ],
+          "match": "Văn Phòng|Dahua|100Hz"
+        },
+        {
+          "id": "graphics",
+          "label": "Màn hình đồ họa | OLED",
+          "categories": [
+            "monitor"
+          ],
+          "match": "OLED|QHD|2K|4K|ProArt|IPS"
+        },
+        {
+          "id": "arm",
+          "label": "Arm màn hình",
+          "categories": [
+            "accessory"
+          ],
+          "match": "Arm|Giá đỡ|màn hình"
+        }
+      ]
+    },
+    {
+      "id": "gear",
+      "label": "GEAR",
+      "headline": "HÀNG CHẤT\nGIÁ MỀM",
+      "imageCategory": "gear",
+      "tone": "ice",
+      "tabs": [
+        {
+          "id": "keyboard",
+          "label": "Bàn phím",
+          "categories": [
+            "gear"
+          ]
+        },
+        {
+          "id": "mouse",
+          "label": "Chuột",
+          "categories": [
+            "mouse"
+          ]
+        },
+        {
+          "id": "headset",
+          "label": "Tai nghe",
+          "categories": [
+            "headset"
+          ]
+        },
+        {
+          "id": "desk",
+          "label": "Bàn",
+          "categories": [
+            "desk"
+          ]
+        },
+        {
+          "id": "chair",
+          "label": "Ghế",
+          "categories": [
+            "chair"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chassis",
+      "label": "CASE – FAN – NGUỒN",
+      "headline": "GIÁ TỐT\nBUILD CHẤT",
+      "imageCategory": "case",
+      "tone": "mint",
+      "tabs": [
+        {
+          "id": "case",
+          "label": "Case",
+          "categories": [
+            "case"
+          ]
+        },
+        {
+          "id": "cooler",
+          "label": "Tản nhiệt",
+          "categories": [
+            "cooler"
+          ]
+        },
+        {
+          "id": "psu",
+          "label": "Nguồn",
+          "categories": [
+            "psu"
+          ]
+        },
+        {
+          "id": "fan",
+          "label": "Fan case",
+          "categories": [
+            "fan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "office",
+      "label": "CAMERA – MÁY IN",
+      "headline": "BỀN BỈ\nCHÍNH HÃNG",
+      "imageCategory": "camera",
+      "tone": "ice",
+      "tabs": [
+        {
+          "id": "camera",
+          "label": "Camera",
+          "categories": [
+            "camera"
+          ]
+        },
+        {
+          "id": "storage",
+          "label": "Lưu trữ",
+          "categories": [
+            "ssd",
+            "hdd"
+          ]
+        },
+        {
+          "id": "webcam",
+          "label": "Webcam",
+          "categories": [
+            "webcam"
+          ]
+        },
+        {
+          "id": "printer",
+          "label": "Máy in",
+          "categories": [
+            "printer"
+          ]
+        },
+        {
+          "id": "ups",
+          "label": "UPS",
+          "categories": [
+            "ups"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "accessories",
+      "label": "PHỤ KIỆN",
+      "headline": "HÀNG CHẤT\nGIÁ TỐT",
+      "imageCategory": "network",
+      "tone": "mint",
+      "tabs": [
+        {
+          "id": "network",
+          "label": "Thiết bị mạng",
+          "categories": [
+            "network"
+          ]
+        },
+        {
+          "id": "cables",
+          "label": "Cáp chuyển",
+          "categories": [
+            "accessory"
+          ]
+        },
+        {
+          "id": "desk",
+          "label": "Phụ kiện bàn ghế",
+          "categories": [
+            "desk",
+            "chair"
+          ]
+        },
+        {
+          "id": "software",
+          "label": "Phần mềm",
+          "categories": [
+            "software"
+          ]
+        },
+        {
+          "id": "projector",
+          "label": "Máy chiếu Mini",
+          "categories": [
+            "projector"
+          ]
+        }
+      ]
+    }
+  ],
+  "storeMenu": [
+    {
+      "id": "pc",
+      "label": "PC Gaming",
+      "icon": "pc",
+      "href": "/products?category=pc",
+      "groups": [
+        {
+          "label": "Theo nhu cầu",
+          "links": [
+            {
+              "label": "PC Gaming",
+              "href": "/products?category=pc&q=Gaming"
+            },
+            {
+              "label": "PC văn phòng",
+              "href": "/products?category=pc&q=Office"
+            },
+            {
+              "label": "White Edition",
+              "href": "/products?category=pc&q=White"
+            },
+            {
+              "label": "Tự xây dựng cấu hình",
+              "href": "/pc-builder"
+            }
+          ]
+        },
+        {
+          "label": "Theo thương hiệu",
+          "links": [
+            {
+              "label": "Rigforge",
+              "href": "/products?category=pc&brand=Rigforge"
+            },
+            {
+              "label": "STAR",
+              "href": "/products?category=pc&brand=STAR"
+            }
+          ]
+        },
+        {
+          "label": "Theo khoảng giá",
+          "links": [
+            {
+              "label": "Dưới 10 triệu",
+              "href": "/products?category=pc&min=0&max=10000000"
+            },
+            {
+              "label": "10 – 20 triệu",
+              "href": "/products?category=pc&min=10000000&max=20000000"
+            },
+            {
+              "label": "20 – 30 triệu",
+              "href": "/products?category=pc&min=20000000&max=30000000"
+            },
+            {
+              "label": "Trên 30 triệu",
+              "href": "/products?category=pc&min=30000000"
+            }
+          ]
+        },
+        {
+          "label": "Theo CPU / VGA",
+          "links": [
+            {
+              "label": "PC Ryzen",
+              "href": "/products?category=pc&q=Ryzen"
+            },
+            {
+              "label": "PC Intel Core i5",
+              "href": "/products?category=pc&q=i5"
+            },
+            {
+              "label": "PC RTX 4060",
+              "href": "/products?category=pc&q=RTX%204060"
+            },
+            {
+              "label": "PC RTX 5060",
+              "href": "/products?category=pc&q=RTX%205060"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "office",
+      "label": "PC Văn phòng",
+      "icon": "pc",
+      "href": "/products?category=pc&q=Office",
+      "groups": [
+        {
+          "label": "Loại PC",
+          "links": [
+            {
+              "label": "PC văn phòng",
+              "href": "/products?category=pc&q=Office"
+            },
+            {
+              "label": "Mini PC",
+              "href": "/products?category=pc&q=Mini"
+            }
+          ]
+        },
+        {
+          "label": "Theo khoảng giá",
+          "links": [
+            {
+              "label": "Dưới 10 triệu",
+              "href": "/products?category=pc&min=0&max=10000000"
+            },
+            {
+              "label": "10 – 20 triệu",
+              "href": "/products?category=pc&min=10000000&max=20000000"
+            },
+            {
+              "label": "20 – 30 triệu",
+              "href": "/products?category=pc&min=20000000&max=30000000"
+            },
+            {
+              "label": "Trên 30 triệu",
+              "href": "/products?category=pc&min=30000000"
+            }
+          ]
+        },
+        {
+          "label": "Bộ nhớ",
+          "links": [
+            {
+              "label": "RAM DDR4",
+              "href": "/products?category=pc&q=DDR4"
+            },
+            {
+              "label": "RAM DDR5",
+              "href": "/products?category=pc&q=DDR5"
+            },
+            {
+              "label": "SSD 512GB",
+              "href": "/products?category=pc&q=512GB"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "laptop",
+      "label": "Laptop",
+      "icon": "laptop",
+      "href": "/products?category=laptop",
+      "groups": [
+        {
+          "label": "Theo thương hiệu",
+          "links": [
+            {
+              "label": "ASUS",
+              "href": "/products?category=laptop&brand=ASUS"
+            },
+            {
+              "label": "Lenovo",
+              "href": "/products?category=laptop&brand=Lenovo"
+            },
+            {
+              "label": "Rigforge",
+              "href": "/products?category=laptop&brand=Rigforge"
+            },
+            {
+              "label": "HP",
+              "href": "/products?category=laptop&brand=HP"
+            }
+          ]
+        },
+        {
+          "label": "Theo nhu cầu",
+          "links": [
+            {
+              "label": "Laptop Gaming",
+              "href": "/products?category=laptop&q=Gaming"
+            },
+            {
+              "label": "Văn phòng / học tập",
+              "href": "/products?category=laptop&q=Aspire"
+            },
+            {
+              "label": "Laptop AI",
+              "href": "/products?category=laptop&q=AI"
+            }
+          ]
+        },
+        {
+          "label": "Theo khoảng giá",
+          "links": [
+            {
+              "label": "Dưới 10 triệu",
+              "href": "/products?category=laptop&min=0&max=10000000"
+            },
+            {
+              "label": "10 – 20 triệu",
+              "href": "/products?category=laptop&min=10000000&max=20000000"
+            },
+            {
+              "label": "20 – 30 triệu",
+              "href": "/products?category=laptop&min=20000000&max=30000000"
+            },
+            {
+              "label": "Trên 30 triệu",
+              "href": "/products?category=laptop&min=30000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "components",
+      "label": "Linh kiện",
+      "icon": "cpu",
+      "href": "/products?category=cpu",
+      "groups": [
+        {
+          "label": "Linh kiện máy tính",
+          "links": [
+            {
+              "label": "CPU · Bộ vi xử lý",
+              "href": "/products?category=cpu"
+            },
+            {
+              "label": "Mainboard",
+              "href": "/products?category=mainboard"
+            },
+            {
+              "label": "VGA · Card màn hình",
+              "href": "/products?category=gpu"
+            },
+            {
+              "label": "RAM máy tính",
+              "href": "/products?category=ram"
+            },
+            {
+              "label": "SSD · Lưu trữ",
+              "href": "/products?category=ssd"
+            },
+            {
+              "label": "Ổ cứng HDD",
+              "href": "/products?category=hdd"
+            },
+            {
+              "label": "Case · Vỏ máy",
+              "href": "/products?category=case"
+            },
+            {
+              "label": "Tản nhiệt",
+              "href": "/products?category=cooler"
+            },
+            {
+              "label": "Nguồn máy tính",
+              "href": "/products?category=psu"
+            },
+            {
+              "label": "Fan case",
+              "href": "/products?category=fan"
+            }
+          ]
+        },
+        {
+          "label": "CPU",
+          "links": [
+            {
+              "label": "CPU Intel",
+              "href": "/products?category=cpu&q=Intel"
+            },
+            {
+              "label": "CPU AMD",
+              "href": "/products?category=cpu&q=AMD"
+            }
+          ]
+        },
+        {
+          "label": "RAM & lưu trữ",
+          "links": [
+            {
+              "label": "RAM DDR4",
+              "href": "/products?category=ram&q=DDR4"
+            },
+            {
+              "label": "RAM DDR5",
+              "href": "/products?category=ram&q=DDR5"
+            },
+            {
+              "label": "SSD NVMe",
+              "href": "/products?category=ssd&q=NVMe"
+            },
+            {
+              "label": "Ổ cứng HDD",
+              "href": "/products?category=hdd"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monitor",
+      "label": "Màn hình",
+      "icon": "monitor",
+      "href": "/products?category=monitor",
+      "groups": [
+        {
+          "label": "Theo thương hiệu",
+          "links": [
+            {
+              "label": "ASUS",
+              "href": "/products?category=monitor&brand=ASUS"
+            },
+            {
+              "label": "LG",
+              "href": "/products?category=monitor&brand=LG"
+            },
+            {
+              "label": "Dahua",
+              "href": "/products?category=monitor&brand=Dahua"
+            },
+            {
+              "label": "Rigforge",
+              "href": "/products?category=monitor&brand=Rigforge"
+            },
+            {
+              "label": "MSI",
+              "href": "/products?category=monitor&brand=MSI"
+            }
+          ]
+        },
+        {
+          "label": "Theo nhu cầu",
+          "links": [
+            {
+              "label": "Màn hình Gaming",
+              "href": "/products?category=monitor&q=Gaming"
+            },
+            {
+              "label": "Màn hình 2K",
+              "href": "/products?category=monitor&q=2K"
+            },
+            {
+              "label": "Màn hình IPS",
+              "href": "/products?category=monitor&q=IPS"
+            }
+          ]
+        },
+        {
+          "label": "Theo khoảng giá",
+          "links": [
+            {
+              "label": "Dưới 10 triệu",
+              "href": "/products?category=monitor&min=0&max=10000000"
+            },
+            {
+              "label": "10 – 20 triệu",
+              "href": "/products?category=monitor&min=10000000&max=20000000"
+            },
+            {
+              "label": "20 – 30 triệu",
+              "href": "/products?category=monitor&min=20000000&max=30000000"
+            },
+            {
+              "label": "Trên 30 triệu",
+              "href": "/products?category=monitor&min=30000000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gear",
+      "label": "Gaming Gear",
+      "icon": "gear",
+      "href": "/products?category=gear",
+      "groups": [
+        {
+          "label": "Ngành hàng",
+          "links": [
+            {
+              "label": "Gaming Gear",
+              "href": "/products?category=gear"
+            },
+            {
+              "label": "Chuột máy tính",
+              "href": "/products?category=mouse"
+            },
+            {
+              "label": "Tai nghe",
+              "href": "/products?category=headset"
+            }
+          ]
+        },
+        {
+          "label": "Theo thương hiệu",
+          "links": [
+            {
+              "label": "AKKO",
+              "href": "/products?category=gear&brand=AKKO"
+            },
+            {
+              "label": "Keychron",
+              "href": "/products?category=gear&brand=Keychron"
+            },
+            {
+              "label": "Magic",
+              "href": "/products?category=gear&brand=Magic"
+            },
+            {
+              "label": "Rigforge",
+              "href": "/products?category=gear&brand=Rigforge"
+            }
+          ]
+        },
+        {
+          "label": "Kết nối",
+          "links": [
+            {
+              "label": "Bàn phím cơ",
+              "href": "/products?category=gear&q=c%C6%A1"
+            },
+            {
+              "label": "Không dây",
+              "href": "/products?category=mouse&q=kh%C3%B4ng%20d%C3%A2y"
+            },
+            {
+              "label": "Bluetooth",
+              "href": "/products?category=mouse&q=Bluetooth"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "office-equipment",
+      "label": "Thiết bị văn phòng",
+      "icon": "printer",
+      "href": "/products?category=printer",
+      "groups": [
+        {
+          "label": "Ngành hàng",
+          "links": [
+            {
+              "label": "Máy in",
+              "href": "/products?category=printer"
+            },
+            {
+              "label": "Máy chiếu",
+              "href": "/products?category=projector"
+            },
+            {
+              "label": "Camera",
+              "href": "/products?category=camera"
+            },
+            {
+              "label": "Bộ lưu điện",
+              "href": "/products?category=ups"
+            },
+            {
+              "label": "Phần mềm",
+              "href": "/products?category=software"
+            },
+            {
+              "label": "Thiết bị mạng",
+              "href": "/products?category=network"
+            },
+            {
+              "label": "Webcam",
+              "href": "/products?category=webcam"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "accessory",
+      "label": "Phụ kiện",
+      "icon": "accessory",
+      "href": "/products?category=accessory",
+      "groups": [
+        {
+          "label": "Phụ kiện",
+          "links": [
+            {
+              "label": "Phụ kiện",
+              "href": "/products?category=accessory"
+            },
+            {
+              "label": "Fan case",
+              "href": "/products?category=fan"
+            },
+            {
+              "label": "Tản nhiệt",
+              "href": "/products?category=cooler"
+            },
+            {
+              "label": "Thiết bị mạng",
+              "href": "/products?category=network"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "furniture",
+      "label": "Bàn, Ghế",
+      "icon": "chair",
+      "href": "/products?category=chair",
+      "groups": [
+        {
+          "label": "Loại sản phẩm",
+          "links": [
+            {
+              "label": "Ghế gaming",
+              "href": "/products?category=chair"
+            },
+            {
+              "label": "Bàn gaming",
+              "href": "/products?category=desk"
+            }
+          ]
+        },
+        {
+          "label": "Theo thương hiệu",
+          "links": [
+            {
+              "label": "Rigforge",
+              "href": "/products?category=chair&brand=Rigforge"
+            },
+            {
+              "label": "EDRA",
+              "href": "/products?category=chair&brand=EDRA"
+            },
+            {
+              "label": "Warrior",
+              "href": "/products?category=chair&brand=Warrior"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "used",
+      "label": "Linh kiện cũ",
+      "icon": "mainboard",
+      "href": "/products?q=QSD",
+      "groups": [
+        {
+          "label": "Hàng đã qua sử dụng",
+          "links": [
+            {
+              "label": "CPU QSD",
+              "href": "/products?category=cpu&q=QSD"
+            },
+            {
+              "label": "RAM QSD",
+              "href": "/products?category=ram&q=QSD"
+            },
+            {
+              "label": "VGA QSD",
+              "href": "/products?category=gpu&q=QSD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "outlet",
+      "label": "Hàng Outlet",
+      "icon": "accessory",
+      "href": "/products?q=outlet",
+      "groups": [
+        {
+          "label": "Hàng Outlet",
+          "links": [
+            {
+              "label": "Khám phá sản phẩm Outlet",
+              "href": "/products?q=outlet"
+            },
+            {
+              "label": "Chính sách đổi trả",
+              "href": "/pages/returns"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "informationPages": {
+    "installments": {
+      "title": "Thông tin trả góp",
+      "paragraphs": [
+        "Đây là trang thông tin minh họa trong dự án Rigforge. Chưa có đối tác tài chính, đăng ký trả góp hoặc dịch vụ tín dụng được tích hợp.",
+        "Khi có dịch vụ thực tế, trang cần công khai điều kiện áp dụng, kỳ hạn, tổng chi phí, hồ sơ và liên kết tới nhà cung cấp đã được xác minh. Bản trải nghiệm hiện chỉ hỗ trợ đặt hàng mô phỏng."
+      ]
+    },
+    "about": {
+      "title": "Rigforge — Tạo chất riêng từ từng linh kiện",
+      "paragraphs": [
+        "Rigforge là giao diện cửa hàng công nghệ trong dự án học tập fullstack. Chúng mình xây dựng trải nghiệm giúp bạn khám phá sản phẩm, hiểu cấu hình và hình dung chiếc PC của riêng mình.",
+        "Website hiện sử dụng dữ liệu mẫu. Giá, tồn, ưu đãi, bảo hành và giao hàng mang tính minh họa; không có giao dịch hoặc cam kết dịch vụ thật."
+      ]
+    },
+    "shipping": {
+      "title": "Giao hàng & thanh toán",
+      "paragraphs": [
+        "Quy tắc demo: giao tiêu chuẩn 30.000₫, miễn phí với tạm tính từ 5.000.000₫. Giao nhanh cộng thêm 20.000₫. Thời gian giao trên checkout chỉ là minh họa.",
+        "Thanh toán có ba kịch bản: thành công, đang xử lý và thất bại. Không nhập thông tin thẻ thật. Không có request tới Stripe hoặc đơn vị vận chuyển."
+      ]
+    },
+    "returns": {
+      "title": "Đổi trả & hoàn tiền",
+      "paragraphs": [
+        "Bản trải nghiệm cho phép lưu yêu cầu mẫu trong tài khoản. Điều kiện đổi trả, kiểm tra hàng, phân bổ tiền hoàn và thời hạn xử lý cần được chốt khi triển khai nghiệp vụ thật.",
+        "Hủy đơn và hoàn tiền là hai trạng thái riêng. Một đơn đã hủy không tự động trở thành đã hoàn tiền."
+      ]
+    },
+    "warranty": {
+      "title": "Thông tin bảo hành",
+      "paragraphs": [
+        "Thời hạn ở mỗi sản phẩm là dữ liệu minh họa. Chính sách thực tế phải theo sản phẩm, nhà cung cấp và chứng từ hợp lệ.",
+        "Tại đây bạn có thể thử tạo yêu cầu bảo hành mẫu. Kiểm tra serial, điều kiện áp dụng và quy trình bàn giao thực tế chưa được tích hợp."
+      ]
+    },
+    "privacy": {
+      "title": "Quyền riêng tư trong bản demo",
+      "paragraphs": [
+        "Trạng thái giỏ, tài khoản mẫu, yêu thích, cấu hình và các yêu cầu được lưu trên trình duyệt. Không có API nghiệp vụ nhận dữ liệu từ bản demo.",
+        "Chỉ nhập tên, email, số điện thoại và địa chỉ giả. Không nhập mật khẩu hay thông tin thanh toán thật. Xóa dữ liệu trang trong trình duyệt sẽ xóa các bản lưu local."
+      ]
+    }
+  },
+  "showrooms": [
+    {
+      "name": "Showroom Tân Bình",
+      "location": "Khu vực Tân Bình, TP. Hồ Chí Minh",
+      "region": "south",
+      "city": "TP. Hồ Chí Minh"
+    },
+    {
+      "name": "Showroom Thủ Đức",
+      "location": "Khu vực Thủ Đức, TP. Hồ Chí Minh",
+      "region": "south",
+      "city": "TP. Hồ Chí Minh"
+    },
+    {
+      "name": "Showroom Tân Phú",
+      "location": "Khu vực Tân Phú, TP. Hồ Chí Minh",
+      "region": "south",
+      "city": "TP. Hồ Chí Minh"
+    },
+    {
+      "name": "Showroom Bình Thạnh",
+      "location": "Khu vực Bình Thạnh, TP. Hồ Chí Minh",
+      "region": "south",
+      "city": "TP. Hồ Chí Minh"
+    },
+    {
+      "name": "Showroom Quận 7",
+      "location": "Khu vực Quận 7, TP. Hồ Chí Minh",
+      "region": "south",
+      "city": "TP. Hồ Chí Minh"
+    },
+    {
+      "name": "Showroom Dĩ An",
+      "location": "Khu vực Dĩ An, Bình Dương",
+      "region": "south",
+      "city": "Bình Dương"
+    },
+    {
+      "name": "Showroom Đắk Lắk",
+      "location": "Khu vực Buôn Ma Thuột, Đắk Lắk",
+      "region": "highlands",
+      "city": "Đắk Lắk"
+    },
+    {
+      "name": "Showroom Gò Vấp",
+      "location": "Khu vực Gò Vấp, TP. Hồ Chí Minh",
+      "region": "south",
+      "city": "TP. Hồ Chí Minh"
+    }
+  ],
+  "starterBuild": {
+    "cpu": "ryzen-7600",
+    "mainboard": "msi-b650",
+    "ram": "ram-ddr5",
+    "gpu": "rtx-4060",
+    "ssd": "ssd-kingston",
+    "psu": "psu-650",
+    "case": "case-air",
+    "cooler": "cooler-ak400"
+  }
+}

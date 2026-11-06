@@ -1,0 +1,33 @@
+/* Token là nguồn giá trị chung; đổi nhận diện tại đây thay vì sửa từng section. */
+:root {
+  --rf-bg: #f3f7f9;
+  --rf-surface: #fff;
+  --rf-text: #152830;
+  --rf-muted: #687579;
+  --rf-border: #e5e9e9;
+  --rf-green: #007d60;
+  --rf-green-hover: #005c49;
+  --rf-mint: #bff5d6;
+  --rf-red: #b62e36;
+  --rf-dark: #071e29;
+  --rf-sale: #00785b;
+  --rf-radius: 12px;
+  --rf-content-gutter: 16px;
+  --rf-content: calc(var(--rf-home-width) + var(--rf-content-gutter) * 2);
+  --rf-home-width: 1540px;
+}
+
+@theme inline {
+  --font-sans: Arial, Helvetica, sans-serif;
+  --color-rf-bg: var(--rf-bg);
+  --color-rf-surface: var(--rf-surface);
+  --color-rf-text: var(--rf-text);
+  --color-rf-muted: var(--rf-muted);
+  --color-rf-border: var(--rf-border);
+  --color-rf-green: var(--rf-green);
+  --color-rf-green-hover: var(--rf-green-hover);
+  --color-rf-mint: var(--rf-mint);
+  --color-rf-red: var(--rf-red);
+  --color-rf-dark: var(--rf-dark);
+  --color-rf-sale: var(--rf-sale);
+}

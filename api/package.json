@@ -7,9 +7,15 @@
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
+    "prisma:format": "prisma format",
+    "prisma:validate": "prisma validate",
+    "prisma:generate": "prisma generate",
+    "prisma:generate:legacy": "prisma generate --schema prisma/archive/schema.v1.prisma.bak",
+    "seed:access": "node dist/modules/access/seed-access.js",
+    "seed:storefront": "node prisma/seed-storefront.cjs",
     "build": "nest build",
     "deploy": "nest deploy",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" --ignore-path .prettierignore",
     "start": "nest start --env-file .env",
     "start:dev": "nest start --watch --env-file .env",
     "start:debug": "nest start --debug --watch --env-file .env",
@@ -20,6 +26,8 @@
     "test:cov": "vitest run --coverage",
     "test:debug": "vitest --inspect-brk --no-file-parallelism",
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
+    "test:e2e:isolated": "node test/run-isolated-e2e.cjs",
+    "test:fullstack": "node test/run-fullstack.cjs",
     "postinstall": "prisma skills sync || exit 0"
   },
   "dependencies": {

@@ -1,0 +1,543 @@
+{
+  "date": "2026-11-06",
+  "schema": "public",
+  "expectedModels": 104,
+  "presentTables": 104,
+  "missingTables": [],
+  "checks": {
+    "ledger_mismatches": 0,
+    "reservation_mismatches": 0,
+    "order_total_mismatches": 0,
+    "payment_mismatches": 0,
+    "unvalidated_constraints": 0
+  },
+  "currencies": [
+    {
+      "code": "VND",
+      "minor_unit": 0
+    }
+  ],
+  "tables": [
+    {
+      "model": "User",
+      "table": "users",
+      "rows": 2
+    },
+    {
+      "model": "Role",
+      "table": "roles",
+      "rows": 2
+    },
+    {
+      "model": "Permission",
+      "table": "permissions",
+      "rows": 10
+    },
+    {
+      "model": "UserRole",
+      "table": "user_roles",
+      "rows": 1
+    },
+    {
+      "model": "RolePermission",
+      "table": "role_permissions",
+      "rows": 10
+    },
+    {
+      "model": "AuthSession",
+      "table": "auth_sessions",
+      "rows": 0
+    },
+    {
+      "model": "AuthChallenge",
+      "table": "auth_challenges",
+      "rows": 0
+    },
+    {
+      "model": "Address",
+      "table": "addresses",
+      "rows": 0
+    },
+    {
+      "model": "Currency",
+      "table": "currencies",
+      "rows": 1
+    },
+    {
+      "model": "Brand",
+      "table": "brands",
+      "rows": 38
+    },
+    {
+      "model": "Category",
+      "table": "categories",
+      "rows": 27
+    },
+    {
+      "model": "Product",
+      "table": "products",
+      "rows": 186
+    },
+    {
+      "model": "ProductCategory",
+      "table": "product_categories",
+      "rows": 186
+    },
+    {
+      "model": "MediaAsset",
+      "table": "media_assets",
+      "rows": 159
+    },
+    {
+      "model": "ProductMedia",
+      "table": "product_media",
+      "rows": 186
+    },
+    {
+      "model": "ProductVariant",
+      "table": "product_variants",
+      "rows": 188
+    },
+    {
+      "model": "ProductOption",
+      "table": "product_options",
+      "rows": 1
+    },
+    {
+      "model": "ProductOptionValue",
+      "table": "product_option_values",
+      "rows": 3
+    },
+    {
+      "model": "VariantOptionValue",
+      "table": "variant_option_values",
+      "rows": 3
+    },
+    {
+      "model": "AttributeDefinition",
+      "table": "attribute_definitions",
+      "rows": 15
+    },
+    {
+      "model": "CategoryAttribute",
+      "table": "category_attributes",
+      "rows": 0
+    },
+    {
+      "model": "ProductAttributeValue",
+      "table": "product_attribute_values",
+      "rows": 603
+    },
+    {
+      "model": "VariantAttributeValue",
+      "table": "variant_attribute_values",
+      "rows": 0
+    },
+    {
+      "model": "VariantPrice",
+      "table": "variant_prices",
+      "rows": 188
+    },
+    {
+      "model": "TaxClass",
+      "table": "tax_classes",
+      "rows": 0
+    },
+    {
+      "model": "TaxRate",
+      "table": "tax_rates",
+      "rows": 0
+    },
+    {
+      "model": "Warehouse",
+      "table": "warehouses",
+      "rows": 2
+    },
+    {
+      "model": "InventoryBalance",
+      "table": "inventory_balances",
+      "rows": 188
+    },
+    {
+      "model": "StockReservation",
+      "table": "stock_reservations",
+      "rows": 0
+    },
+    {
+      "model": "InventoryMovement",
+      "table": "inventory_movements",
+      "rows": 187
+    },
+    {
+      "model": "Supplier",
+      "table": "suppliers",
+      "rows": 0
+    },
+    {
+      "model": "SupplierVariant",
+      "table": "supplier_variants",
+      "rows": 0
+    },
+    {
+      "model": "PurchaseOrder",
+      "table": "purchase_orders",
+      "rows": 0
+    },
+    {
+      "model": "PurchaseOrderItem",
+      "table": "purchase_order_items",
+      "rows": 0
+    },
+    {
+      "model": "GoodsReceipt",
+      "table": "goods_receipts",
+      "rows": 0
+    },
+    {
+      "model": "GoodsReceiptItem",
+      "table": "goods_receipt_items",
+      "rows": 0
+    },
+    {
+      "model": "StockTransfer",
+      "table": "stock_transfers",
+      "rows": 0
+    },
+    {
+      "model": "StockTransferItem",
+      "table": "stock_transfer_items",
+      "rows": 0
+    },
+    {
+      "model": "StockCount",
+      "table": "stock_counts",
+      "rows": 0
+    },
+    {
+      "model": "StockCountItem",
+      "table": "stock_count_items",
+      "rows": 0
+    },
+    {
+      "model": "Cart",
+      "table": "carts",
+      "rows": 1
+    },
+    {
+      "model": "CartItem",
+      "table": "cart_items",
+      "rows": 0
+    },
+    {
+      "model": "CheckoutSession",
+      "table": "checkout_sessions",
+      "rows": 0
+    },
+    {
+      "model": "Order",
+      "table": "orders",
+      "rows": 0
+    },
+    {
+      "model": "OrderItem",
+      "table": "order_items",
+      "rows": 0
+    },
+    {
+      "model": "OrderAddress",
+      "table": "order_addresses",
+      "rows": 0
+    },
+    {
+      "model": "OrderItemTax",
+      "table": "order_item_taxes",
+      "rows": 0
+    },
+    {
+      "model": "OrderStatusHistory",
+      "table": "order_status_history",
+      "rows": 0
+    },
+    {
+      "model": "OrderNote",
+      "table": "order_notes",
+      "rows": 0
+    },
+    {
+      "model": "Promotion",
+      "table": "promotions",
+      "rows": 1
+    },
+    {
+      "model": "PromotionProduct",
+      "table": "promotion_products",
+      "rows": 0
+    },
+    {
+      "model": "PromotionCategory",
+      "table": "promotion_categories",
+      "rows": 0
+    },
+    {
+      "model": "Coupon",
+      "table": "coupons",
+      "rows": 1
+    },
+    {
+      "model": "PromotionRedemption",
+      "table": "promotion_redemptions",
+      "rows": 0
+    },
+    {
+      "model": "OrderDiscount",
+      "table": "order_discounts",
+      "rows": 0
+    },
+    {
+      "model": "Payment",
+      "table": "payments",
+      "rows": 0
+    },
+    {
+      "model": "PaymentAttempt",
+      "table": "payment_attempts",
+      "rows": 0
+    },
+    {
+      "model": "PaymentTransaction",
+      "table": "payment_transactions",
+      "rows": 0
+    },
+    {
+      "model": "ProviderEvent",
+      "table": "provider_events",
+      "rows": 0
+    },
+    {
+      "model": "Refund",
+      "table": "refunds",
+      "rows": 0
+    },
+    {
+      "model": "RefundAllocation",
+      "table": "refund_allocations",
+      "rows": 0
+    },
+    {
+      "model": "ReconciliationRun",
+      "table": "reconciliation_runs",
+      "rows": 0
+    },
+    {
+      "model": "ReconciliationIssue",
+      "table": "reconciliation_issues",
+      "rows": 0
+    },
+    {
+      "model": "ShippingMethod",
+      "table": "shipping_methods",
+      "rows": 0
+    },
+    {
+      "model": "ShippingZone",
+      "table": "shipping_zones",
+      "rows": 0
+    },
+    {
+      "model": "ShippingRate",
+      "table": "shipping_rates",
+      "rows": 0
+    },
+    {
+      "model": "Shipment",
+      "table": "shipments",
+      "rows": 0
+    },
+    {
+      "model": "ShipmentItem",
+      "table": "shipment_items",
+      "rows": 0
+    },
+    {
+      "model": "ShipmentEvent",
+      "table": "shipment_events",
+      "rows": 0
+    },
+    {
+      "model": "ReturnRequest",
+      "table": "return_requests",
+      "rows": 0
+    },
+    {
+      "model": "ReturnItem",
+      "table": "return_items",
+      "rows": 0
+    },
+    {
+      "model": "ReturnInspection",
+      "table": "return_inspections",
+      "rows": 0
+    },
+    {
+      "model": "ReturnReceipt",
+      "table": "return_receipts",
+      "rows": 0
+    },
+    {
+      "model": "OrderLink",
+      "table": "order_links",
+      "rows": 0
+    },
+    {
+      "model": "WarrantyPolicy",
+      "table": "warranty_policies",
+      "rows": 0
+    },
+    {
+      "model": "SerialUnit",
+      "table": "serial_units",
+      "rows": 0
+    },
+    {
+      "model": "SerialUnitEvent",
+      "table": "serial_unit_events",
+      "rows": 0
+    },
+    {
+      "model": "WarrantyClaim",
+      "table": "warranty_claims",
+      "rows": 0
+    },
+    {
+      "model": "WarrantyEvent",
+      "table": "warranty_events",
+      "rows": 0
+    },
+    {
+      "model": "Invoice",
+      "table": "invoices",
+      "rows": 0
+    },
+    {
+      "model": "InvoiceLine",
+      "table": "invoice_lines",
+      "rows": 0
+    },
+    {
+      "model": "CreditNote",
+      "table": "credit_notes",
+      "rows": 0
+    },
+    {
+      "model": "Wishlist",
+      "table": "wishlists",
+      "rows": 0
+    },
+    {
+      "model": "WishlistItem",
+      "table": "wishlist_items",
+      "rows": 0
+    },
+    {
+      "model": "Review",
+      "table": "reviews",
+      "rows": 0
+    },
+    {
+      "model": "ReviewMedia",
+      "table": "review_media",
+      "rows": 0
+    },
+    {
+      "model": "ReviewVote",
+      "table": "review_votes",
+      "rows": 0
+    },
+    {
+      "model": "ContentPage",
+      "table": "content_pages",
+      "rows": 6
+    },
+    {
+      "model": "Article",
+      "table": "articles",
+      "rows": 8
+    },
+    {
+      "model": "Banner",
+      "table": "banners",
+      "rows": 6
+    },
+    {
+      "model": "Collection",
+      "table": "collections",
+      "rows": 2
+    },
+    {
+      "model": "CollectionProduct",
+      "table": "collection_products",
+      "rows": 10
+    },
+    {
+      "model": "SupportTicket",
+      "table": "support_tickets",
+      "rows": 0
+    },
+    {
+      "model": "SupportMessage",
+      "table": "support_messages",
+      "rows": 0
+    },
+    {
+      "model": "SupportAttachment",
+      "table": "support_attachments",
+      "rows": 0
+    },
+    {
+      "model": "Notification",
+      "table": "notifications",
+      "rows": 0
+    },
+    {
+      "model": "NotificationPreference",
+      "table": "notification_preferences",
+      "rows": 0
+    },
+    {
+      "model": "NotificationDelivery",
+      "table": "notification_deliveries",
+      "rows": 0
+    },
+    {
+      "model": "IdempotencyKey",
+      "table": "idempotency_keys",
+      "rows": 0
+    },
+    {
+      "model": "OutboxEvent",
+      "table": "outbox_events",
+      "rows": 0
+    },
+    {
+      "model": "AuditLog",
+      "table": "audit_logs",
+      "rows": 4
+    },
+    {
+      "model": "StoreSetting",
+      "table": "store_settings",
+      "rows": 1
+    },
+    {
+      "model": "SavedPcBuild",
+      "table": "saved_pc_builds",
+      "rows": 0
+    },
+    {
+      "model": "SavedPcBuildComponent",
+      "table": "saved_pc_build_components",
+      "rows": 0
+    }
+  ],
+  "note": "Bảng giao dịch/lịch sử/processor chỉ phát sinh khi nghiệp vụ chạy; không thêm capture/webhook/refund giả để làm đủ số bảng."
+}

@@ -1,8 +1,0 @@
-import { Armchair, CircuitBoard, Cpu, HardDrive, Keyboard, Laptop, MemoryStick, Monitor, MonitorCog, Plug, Printer, ScanLine, type LucideIcon } from "lucide-react";
-import { homeCategories } from "@/data/home-data";
-const categoryIcons: Record<string, LucideIcon> = { monitor: Monitor, laptop: Laptop, gpu: MonitorCog, cpu: Cpu, circuit: CircuitBoard, memory: MemoryStick, storage: HardDrive, keyboard: Keyboard, chair: Armchair, printer: Printer, plug: Plug };
-export default function CategoryGrid() {
-  return <section><div className="mb-5 flex items-end justify-between border-b border-slate-200 pb-4"><div><span className="text-[10px] font-black tracking-[.18em] text-red-600">DANH MỤC</span><h2 className="mt-1 text-xl font-black sm:text-2xl">MUA SẮM THEO NHU CẦU</h2></div><a href="/collections" className="flex items-center gap-1 text-xs font-bold text-red-600">Xem tất cả <ScanLine size={15}/></a></div>
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">{homeCategories.map((category) => { const Icon = categoryIcons[category.icon] ?? Monitor; return <a key={category.id} href={category.href} className="group flex min-h-28 flex-col items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white p-4 text-center transition hover:-translate-y-1 hover:border-red-200 hover:shadow-md"><span className="grid size-12 place-items-center rounded-xl bg-slate-100 text-slate-600 transition group-hover:bg-red-50 group-hover:text-red-600"><Icon size={26} strokeWidth={1.7}/></span><strong className="text-xs font-bold text-slate-700 group-hover:text-red-600">{category.name}</strong></a>})}</div>
-  </section>;
-}

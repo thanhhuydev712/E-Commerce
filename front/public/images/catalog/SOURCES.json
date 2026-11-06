@@ -1,0 +1,771 @@
+{
+  "purpose": "Static product imagery for the requested reference-based UI demo; no runtime API integration",
+  "downloaded": "2026-11-06",
+  "assets": [
+    {
+      "file": "/images/catalog/cpu-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/i5-12th_ef60688e685f4affa651f320_95172b46b0e74a3397888cf57ca4ad1e.jpg",
+      "page": "https://tinhocngoisao.com/products/cpu-intel-core-i5-12400f-box-chinh-hang-2-50-up-to-4-40ghz"
+    },
+    {
+      "file": "/images/catalog/mainboard-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/1024__25__copy_6f3dadebd68548f6ace9948b9650e038.jpg",
+      "page": "https://tinhocngoisao.com/products/mainboard-msi-pro-h610m-e-ddr4"
+    },
+    {
+      "file": "/images/catalog/pc-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/03bbac5e-ad97-4c64-83e7-aa48d10e947c_316ba5f560a747839af2cc79756104a7.jpg",
+      "page": "https://tinhocngoisao.com/products/pc-gaming-star-yasuo-intel-i5-12400f-rtx-3050-6g-h610m-ram-16gb-ssd-500gb"
+    },
+    {
+      "file": "/images/catalog/laptop-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/lt.as._fa506ncg-hn390w_44812d0704f14042a5758d636a876489.png",
+      "page": "https://tinhocngoisao.com/products/laptop-asus-tuf-gaming-a15-fa506ncg-hn390w-r7-155-16gb-ddr5-ssd-512gb-nvme-rtx-3050-4gb-rgb-15-6-fhd-144hz-win-11-home-den"
+    },
+    {
+      "file": "/images/catalog/cpu-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/61741_cpu_intel_core_i3_14100_tr_accd76f565264dd8ac87af3de72e4100.png",
+      "page": "https://tinhocngoisao.com/products/cpu-intel-core-i3-14100-tray-chinh-hang-no-box"
+    },
+    {
+      "file": "/images/catalog/laptop-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/screenshot_43_copy_f51905c73234486da171f2f1c0eee30a.jpg",
+      "page": "https://tinhocngoisao.com/products/laptop-dell-15-pro-essential-pv-15250-vkvkd-intel-core-3-100u-8gb-ddr5-ssd-512gb-nvme-15-6-fhd-ips-120hz-intel-graphics-win-11-pro-den"
+    },
+    {
+      "file": "/images/catalog/pc-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/03bbac5e-ad97-4c64-83e7-aa48d10e947c_74896d2ba28d4df080ea3ce49ff89967.jpg",
+      "page": "https://tinhocngoisao.com/products/pc-storm-e-intel-core-i3-12100f-ram-16gb-ssd-512-rtx-3050"
+    },
+    {
+      "file": "/images/catalog/mainboard-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/m.msi.h410m-a.pro.d4_682532c969ea4516a40c4ff3b4bff1ff.png",
+      "page": "https://tinhocngoisao.com/products/mainboard-msi-h410m-a-pro-d4-intel-h410-lga1200-matx-2-khe-ddr4"
+    },
+    {
+      "file": "/images/catalog/cpu-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/cpu-amd-ryzen-5-3400g-3-7ghz-4-c__1__09ab4f1b1ec4419794f1b9a19a9b360a.jpg",
+      "page": "https://tinhocngoisao.com/products/cpu-amd-ryzen-5-3400g-mpk-fan-chinh-hang-no-box-yd3400c5fhspk-am4-4-nhan-8-luong-max-4-2ghz"
+    },
+    {
+      "file": "/images/catalog/pc-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/03bbac5e-ad97-4c64-83e7-aa48d10e947c_10caa3824ccd49b9b0a026f2ab3cdf63.jpg",
+      "page": "https://tinhocngoisao.com/products/pc-star-hunt-e-amd-ryzen-5-5500-b450m-ram-16gb-ssd-512gb-rx-6500-xt"
+    },
+    {
+      "file": "/images/catalog/mainboard-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/w692__1__copy_a4b6a876a28c4e6ebf47f05bf941be82.jpg",
+      "page": "https://tinhocngoisao.com/products/mainboard-asus-prime-b760m-f-d4-ddr4-lga-1700-matx-2-khe-ram"
+    },
+    {
+      "file": "/images/catalog/cpu-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/r5-gen-5_027c969098d941bbb045c81_c017c0670464436c979607bb5181c604.png",
+      "page": "https://tinhocngoisao.com/products/cpu-amd-ryzen-5-5500gt-3-6-ghz-up-to-4-6-ghz-6-cores-12-threads-am4"
+    },
+    {
+      "file": "/images/catalog/laptop-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/lt.hp.15-fd2050wm.nk8_f8a4bd8e8b484c1cb2ee4cf4c0c604e6.png",
+      "page": "https://tinhocngoisao.com/products/laptop-hp-15-fd2050wm-d4jk5ua-core-ultra-5-225u-8gb-ddr5-ssd-512gb-nvme-15-6-fhd-touch-win-11-natural-silver"
+    },
+    {
+      "file": "/images/catalog/pc-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/03bbac5e-ad97-4c64-83e7-aa48d10e947c_e1cda04b5f5b4586b1c9846b877c1331.jpg",
+      "page": "https://tinhocngoisao.com/products/pc-hunt-e-plus-amd-ryzen-5-5500-ram-16gb-ssd-512gb-rtx-3050"
+    },
+    {
+      "file": "/images/catalog/cpu-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/r5-gen-5_f301d9ce73554b68b20b982_af086b7dfe174c41b79149d0ae6f9d31.png",
+      "page": "https://tinhocngoisao.com/products/cpu-amd-ryzen-5-5500-up-to-4-2ghz-6-cores-12-threads-box-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/pc-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/03bbac5e-ad97-4c64-83e7-aa48d10e947c_21038f974ba2442a9d8bfff067264ddb.jpg",
+      "page": "https://tinhocngoisao.com/products/pc-storm-c-intel-core-i5-12400f-ram-16gb-ssd-512-rtx-5060"
+    },
+    {
+      "file": "/images/catalog/laptop-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/lt.hp.g10.a06fdpt5_36e2bc21eddb469da4f975198302d81a.png",
+      "page": "https://tinhocngoisao.com/products/laptop-hp-250-g10-a06fdpt-i7-1355u-16gb-ddr4-ssd-512gb-nvme-15-6-fhd-windows-11-home-bac"
+    },
+    {
+      "file": "/images/catalog/cpu-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/download__56__2cfce3efafdb4ac2b4622fc5a9875c2d.png",
+      "page": "https://tinhocngoisao.com/products/cpu-intel-core-i3-14100-box-chinh-hang-3-5-ghz-4-cores-8-threads-lga1700"
+    },
+    {
+      "file": "/images/catalog/mainboard-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/tinhocngoisao.com1__5__535b87fad6ba45bb9ceb4e9e0be23984.png",
+      "page": "https://tinhocngoisao.com/products/mainboard-gigabyte-h610m-k-ddr4-rev-1-0"
+    },
+    {
+      "file": "/images/catalog/pc-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/71j0joijt-l_d4945cca7689433a882e733634be663d.jpg",
+      "page": "https://tinhocngoisao.com/products/pc-star-storm-sr-intel-i5-14600kf-b760m-ddr5-32gb-1-tb-rtx-5060-ti"
+    },
+    {
+      "file": "/images/catalog/laptop-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/lt.de.dc15250.m4cfy.nk_bb1590416385456b94a06192f73b0d88.jpg",
+      "page": "https://tinhocngoisao.com/products/laptop-dell-15-dc15250-5434blk-pus-m4cfy-i5-1334u-8gb-ddr5-ssd-512gb-nvme-15-6-fhd-touch-win-11"
+    },
+    {
+      "file": "/images/catalog/mainboard-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/ram-ddr3-600x600_44e2e21d467442b2927127253dac48bb_large_ea58d472fd38456a8873666fb3020ceb.jpg",
+      "page": "https://tinhocngoisao.com/products/mainboard-vsp-ic8565bk-ddr3-lga-1150"
+    },
+    {
+      "file": "/images/catalog/laptop-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/lt.hp.14-hc0028tu.d72bjpa_e56fae40a0ee421890ff630335c396bf.png",
+      "page": "https://tinhocngoisao.com/products/laptop-hp-ai-14-hc0028tu-d72bjpa-u5-225u-16gb-ddr5-ssd-512gb-nvme-14-fhd-intel-graphics-w11h-bac"
+    },
+    {
+      "file": "/images/catalog/ram-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/r4.8g.3200.ocpc.xt.ii.bl_edd83c67740943ac878c05eed6d22d0a.png",
+      "page": "https://tinhocngoisao.com/products/ram-pc-ocpc-xt-ii-black-8gb-ddr4-1x8gb-3200mhz-cl16-intel-xmp-2-0-mmx8gd432c16u"
+    },
+    {
+      "file": "/images/catalog/ram-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/i_xu_ng_-_2026-05-12t083526.425_efefd5c3e8b646c9b3174e18bd6c9dfb_large_665b84abaa4249bda7683828227b6ca8.png",
+      "page": "https://tinhocngoisao.com/products/ram-pc-vsp-16gb-ddr5-1x16gb-4800mhz-cl40-khong-tan-nhiet-intel-only"
+    },
+    {
+      "file": "/images/catalog/ssd-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/2880-ssd-faspeed-60gb_f35d4be02e6b476fb8be5b50235bc3ba.png",
+      "page": "https://tinhocngoisao.com/products/o-cung-ssd-faspeed-k7-128gb-sata-k7-128g-cd-2-5-inch-sata-iii-550mb-s"
+    },
+    {
+      "file": "/images/catalog/mainboard-6.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_d0de78ce6d7f4f8fb61b9f027f098733.png",
+      "page": "https://tinhocngoisao.com/products/mainboard-asus-h110m-k-chi-nh-ha-ng"
+    },
+    {
+      "file": "/images/catalog/ram-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/r4.8g.3200.vsp.tn4_ffd923235acc4dad895de809537a69f6.png",
+      "page": "https://tinhocngoisao.com/products/ram-pc-vsp-8gb-ddr4-3200mhz-p-n-dd04-8gddr40173-udimm-cl18-tan-nhiet-nhom-den"
+    },
+    {
+      "file": "/images/catalog/ssd-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/1_0d6d3f6b70614bc1a7c53cc1ad0311b9.jpg",
+      "page": "https://tinhocngoisao.com/products/o-cung-ssd-512gb-patriot-p300-m2-2280-nvme-p300p512gm28"
+    },
+    {
+      "file": "/images/catalog/ram-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng_-_2025-12-06t083047.868_54c95cdeebf24a9f825cf98eb426bd18.jpg",
+      "page": "https://tinhocngoisao.com/products/ram-4-8g-bus-3200-ddr4-kingmax-blade-x-tan-nhiet-km-ld4a-3200-08gsbk18"
+    },
+    {
+      "file": "/images/catalog/gpu-1.webp",
+      "source": "https://product.hstatic.net/200000420363/product/geforce_rtx__3050_windforce_oc_v2_6g-01_614c69be08fb4516846c6291df9c1558.png",
+      "page": "https://tinhocngoisao.com/products/card-man-hinh-vga-gigabyte-geforce-rtx-3050-windforce-oc-v2-6g"
+    },
+    {
+      "file": "/images/catalog/ssd-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/250-27533-ssd-apacer-as2280p4-51__1__709d5690e5b144f18fab534044d52502.png",
+      "page": "https://tinhocngoisao.com/products/o-cung-ssd-apacer-as2280p4-256gb-pcie-gen3-x4-nvme-m-2-2280-ap256gas2280p4-1"
+    },
+    {
+      "file": "/images/catalog/hdd-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/seagate-brc-2tb-2_cab2768d00044a15beb006d5dc6eff67_large_981a6068d35b4a0f968ce072ffe22a45.jpg",
+      "page": "https://tinhocngoisao.com/products/o-cung-hdd-seagate-barracuda-2-tb-sata-iii-3-5-st2000dm008"
+    },
+    {
+      "file": "/images/catalog/ram-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/r4.8g.3200.vsp.tn.cl22_caa311bd50b34d11a00ab1d489659fdb.jpg",
+      "page": "https://tinhocngoisao.com/products/ram-pc-vsp-8gb-ddr4-3200mhz-tan-nhiet-nhom-cl22-ddr4-8gnddr0188"
+    },
+    {
+      "file": "/images/catalog/ssd-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/ss.256.ocpc.xtl-200_0e5e350f6b8b404897e08130ee754724.png",
+      "page": "https://tinhocngoisao.com/products/o-cung-ssd-ocpc-xtl-200-256gb-ssd25s3t256glt-sata-iii-2-5-inch-doc-500mb-s-ghi-420mb-s"
+    },
+    {
+      "file": "/images/catalog/gpu-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/tai_xuong_3644fdcb201747e3a3264c2efdd7dfd4.png",
+      "page": "https://tinhocngoisao.com/products/card-man-hinh-vga-asus-dual-radeon-rx-6500-xt-oc-edition-dual-rx6500xt-o4g-v2"
+    },
+    {
+      "file": "/images/catalog/ram-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng__10__6715af0bd22b45e2a9a9ecd33cac8d33.png",
+      "page": "https://tinhocngoisao.com/products/ram-pc-corsair-vengeance-8gb-ddr5-5200mhz-cmk8gx5m1b5200c40-1x8gb-5200mhz"
+    },
+    {
+      "file": "/images/catalog/hdd-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/h.2t.hik.ds20hkvs-vx1_ec3e46266d6348f3a63d10d71195b48c.png",
+      "page": "https://tinhocngoisao.com/products/o-cung-hdd-hikvision-ds-20hkvs-vx1-2tb-sata-iii-3-5-inch-128mb-cache-giam-sat-24-7"
+    },
+    {
+      "file": "/images/catalog/gpu-3.webp",
+      "source": "https://product.hstatic.net/200000420363/product/geforce_rtx__3050_windforce_oc_v2_8g-01_51ae19ffa28a44628f3331fb8a27f693.png",
+      "page": "https://tinhocngoisao.com/products/card-man-hinh-vga-gigabyte-geforce-rtx-3050-windforce-oc-v2-8g"
+    },
+    {
+      "file": "/images/catalog/monitor-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/l.22.dh.lm22-a210y_d1071471c1c34b6e97804605ba7fc17d.jpg",
+      "page": "https://tinhocngoisao.com/products/man-hinh-van-phong-dahua-dhi-lm22-a210y-21-45-inch-fhd-120hz-va-hdmi-vga"
+    },
+    {
+      "file": "/images/catalog/gpu-4.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_74d1af83fd7f48adb3baf2b2358f2c70.png",
+      "page": "https://tinhocngoisao.com/products/vga-msi-rtx-3060-12g-gddr6-ventus-2x-oc-lhr-geforce-rtx-3060-ventus-2x-12g-oc-lhr"
+    },
+    {
+      "file": "/images/catalog/ssd-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng_-_2026-04-29t144747.858_519865eaa2f342a3a4e363b5955ff29b.jpg",
+      "page": "https://tinhocngoisao.com/products/o-cung-ssd-sstc-m100-256gb-sata-iii-2-5"
+    },
+    {
+      "file": "/images/catalog/monitor-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/l.24.dh.dhi-lm24-a221y_f2d30a222d1048f2972dcff7f5a0e593.png",
+      "page": "https://tinhocngoisao.com/products/man-hinh-van-phong-dahua-dhi-lm24-a221y-24-inch-full-hd-ips-144hz"
+    },
+    {
+      "file": "/images/catalog/gpu-5.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_ee62b9e69a754aa382521891cda0b1b9.png",
+      "page": "https://tinhocngoisao.com/products/card-man-hinh-vga-msi-geforce-rtx-3050-ventus-2x-e-6g-oc"
+    },
+    {
+      "file": "/images/catalog/ssd-6.webp",
+      "source": "https://product.hstatic.net/200000420363/product/11_10dad6b62e8440959f9727680069f817.jpg",
+      "page": "https://tinhocngoisao.com/products/o-cung-ssd-480g-kingmax-smv32-sata-iii-km480gsmv32"
+    },
+    {
+      "file": "/images/catalog/hdd-3.webp",
+      "source": "https://product.hstatic.net/200000420363/product/sg-brc-004-2_f2052d2db47543999ccfbefc743a154e.jpg",
+      "page": "https://tinhocngoisao.com/products/o-cung-hdd-seagate-4tb-barracuda-chinh-hang-st4000dm004"
+    },
+    {
+      "file": "/images/catalog/gpu-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/v.5060.8g.msi.ventus2x.oc.v1_7aca4118384e4ea7b02199b20b9f4593.png",
+      "page": "https://tinhocngoisao.com/products/card-man-hinh-msi-geforce-rtx-5060-8g-ventus-2x-oc-v1-8gb-gddr7-3840-cuda-cores-pcie-gen5"
+    },
+    {
+      "file": "/images/catalog/monitor-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng__82__89966abf327240169922b2d8d19511bb_large_a962f017d0444e87b643d2258658e180.png",
+      "page": "https://tinhocngoisao.com/products/man-hinh-vsp-ip2736g-den-27-inch-full-hd-ips-360hz-1ms-phang"
+    },
+    {
+      "file": "/images/catalog/gear-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/km-01l-black-tach-phong_be2ddf87c1e34b5da84425cbe32bd869.jpg",
+      "page": "https://tinhocngoisao.com/products/combo-phim-chuot-gaming-magic-km-01l-co-day-led-rainbow-den"
+    },
+    {
+      "file": "/images/catalog/hdd-4.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_09b406ce89aa4bafa21f1343f7979a2b.png",
+      "page": "https://tinhocngoisao.com/products/o-cung-hdd-western-digital-blue-2-tb-sata-iii-3-5-wd20ezbx"
+    },
+    {
+      "file": "/images/catalog/monitor-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/l.27.avs.2k.ag2714qs1_50bfccd94ec44424ac80947983dcb375.jpg",
+      "page": "https://tinhocngoisao.com/products/man-hinh-gaming-2k-vsp-aivision-ag2714qs1-27-inch-qhd-144hz-ips-1ms-lh-tu-van-truoc-khi-lap-arm-gia-treo"
+    },
+    {
+      "file": "/images/catalog/gear-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_f8f19e7ee21e42e7a37fe9bfef0907c1.png",
+      "page": "https://tinhocngoisao.com/products/ban-phim-van-phong-logitech-k120-chinh-hang-den"
+    },
+    {
+      "file": "/images/catalog/gear-3.webp",
+      "source": "https://product.hstatic.net/200000420363/product/combo_phim_chuot_logitech_mk120_-__den__51c424ada06e4d0c83ea9043d276888c.png",
+      "page": "https://tinhocngoisao.com/products/combo-phim-chuot-logitech-mk120-den"
+    },
+    {
+      "file": "/images/catalog/hdd-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/uploads-product-10-2026-4d38ce32-17914540356ac76b5391639_328eb1a1b3ec471aa096d3c06d91100c.png",
+      "page": "https://tinhocngoisao.com/products/o-cung-hdd-hikvision-ds-10hkvs-vx2-1tb-sata-iii-6gb-s-cache-128mb-chuyen-dung-giam-sat"
+    },
+    {
+      "file": "/images/catalog/monitor-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/l.27.msi.2k.mpg275cqrxf_b406312312574e56a75790f9ddc59b15.png",
+      "page": "https://tinhocngoisao.com/products/man-hinh-gaming-2k-msi-mpg-275cqrxf-27-inch-wqhd-rapid-va-240hz-usb-c-pd-98w-chan-cth"
+    },
+    {
+      "file": "/images/catalog/hdd-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/h.6t.hik.ds60hkvs-vx11_69cd742321834f0e95602d0275ed457e.png",
+      "page": "https://tinhocngoisao.com/products/o-cung-hdd-hikvision-ds60hkvs-vx1-6tb-sata-iii-6gb-s-5400-rpm-256mb-cache-chuyen-dung-giam-sat-24-7"
+    },
+    {
+      "file": "/images/catalog/monitor-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/l.24.avs.2k.ag2414qs1_fd4cf2e9d7f047cf98644a280186c2ee.jpg",
+      "page": "https://tinhocngoisao.com/products/man-hinh-gaming-2k-vsp-aivision-ag2414qs1-24-inch-qhd-144hz-ips-1ms"
+    },
+    {
+      "file": "/images/catalog/mouse-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/chatgpt_image_10_07_32_27_thg_1__2026_4c6dd2a89c4f4e4d906517adb6f939c9.png",
+      "page": "https://tinhocngoisao.com/products/chuot-motospeed-f333-black"
+    },
+    {
+      "file": "/images/catalog/mouse-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng_-_2026-01-27t101310.215_90852a456f1b40c8a1cc88396d70704f.png",
+      "page": "https://tinhocngoisao.com/products/chuot-van-phong-logitech-b100-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/headset-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/tinhocngoisao.com1__6__42fba73c35e04789a57b4eaa391a4362_large_133fb1bfb6bb41fdbb107367f65220db.png",
+      "page": "https://tinhocngoisao.com/products/tai-nghe-dareu-eh722x-pro-multi-led"
+    },
+    {
+      "file": "/images/catalog/mouse-3.webp",
+      "source": "https://product.hstatic.net/200000420363/product/1_953b62f3b78d4ad8931916a08438eaca.jpg",
+      "page": "https://tinhocngoisao.com/products/chuot-logitech-g102-gen-ii-lightsync-rgb-gaming-den"
+    },
+    {
+      "file": "/images/catalog/case-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/bahamut-m__1__copy_4375aaa5dfbf416599088e094411c385.jpg",
+      "page": "https://tinhocngoisao.com/products/thung-may-gaming-linktech-bahamut-m-4f-m-atx-kem-san-4-fan-fixed-rgb-den"
+    },
+    {
+      "file": "/images/catalog/headset-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/tai-nghe-dare-u-eh925l-rgb-7.1_1f171c353bd946a5972018e00c6e606f.png",
+      "page": "https://tinhocngoisao.com/products/tai-nghe-dare-u-eh925l-rgb-7-1-black-red"
+    },
+    {
+      "file": "/images/catalog/case-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/ca.star.cs600.black_2dbcc7daf2df4476b3cce93e3ded610a.jpg",
+      "page": "https://tinhocngoisao.com/products/thung-may-star-office-cs600-micro-atx-mini-itx-usb-3-0-kem-san-1-fan-90mm-thep-0-8mm-den"
+    },
+    {
+      "file": "/images/catalog/case-3.webp",
+      "source": "https://product.hstatic.net/200000420363/product/ca_xmt_xa22_82363b655a3d47988576e9dd081aff61.jpg",
+      "page": "https://tinhocngoisao.com/products/thung-may-case-xigmatek-xa-22-en47567-no-fan"
+    },
+    {
+      "file": "/images/catalog/mouse-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/mo.du.em910g.de_4cb81a7c8e5c439ab45209576b3ffb69.png",
+      "page": "https://tinhocngoisao.com/products/chuot-gaming-khong-day-dare-u-em910g-triple-mode-12000-dpi-mau-den-59g"
+    },
+    {
+      "file": "/images/catalog/mouse-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/download__57__8b889c41b5e04505856288778d32daad.png",
+      "page": "https://tinhocngoisao.com/products/chuot-van-phong-dell-ms116-den-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/case-4.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_e25225cc8a334f8ca46aef143e083773.png",
+      "page": "https://tinhocngoisao.com/products/thung-may-case-nzxt-h210i-den-trang-mini-itx-nhap-khau-ca-h210i-w1"
+    },
+    {
+      "file": "/images/catalog/headset-3.webp",
+      "source": "https://product.hstatic.net/200000420363/product/2-1-1__1__a6b4827d05fa4c8aa1f4c80a6726c6d1.png",
+      "page": "https://tinhocngoisao.com/products/tai-nghe-rapoo-co-day-h120-stereo-black"
+    },
+    {
+      "file": "/images/catalog/gear-4.webp",
+      "source": "https://product.hstatic.net/200000420363/product/combo-phim-_-chuot-_-lot-chuot-_-tay-dem-lk586-5_a703cc1d1d4d4b0486de927e2bdee565.png",
+      "page": "https://tinhocngoisao.com/products/combo-phim-chuot-lot-chuot-tay-dem-lk586"
+    },
+    {
+      "file": "/images/catalog/mouse-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/download__43__8afc3df8bf5c474185bacd04525c2017.png",
+      "page": "https://tinhocngoisao.com/products/chuot-gaming-ynxsc-w108g-black-khong-day-2-4ghz-1600-dpi-ergonomic-den"
+    },
+    {
+      "file": "/images/catalog/headset-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/tai-nghe-rapoo-vh360c-rgb-2_4250505491274c57baf975155df7cb82.png",
+      "page": "https://tinhocngoisao.com/products/tai-nghe-rapoo-vh360c-rgb-mau-den-mic-ngan"
+    },
+    {
+      "file": "/images/catalog/headset-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng_-_2026-04-29t155903.690_5c47becc034e40f8bd83667cc899940c.png",
+      "page": "https://tinhocngoisao.com/products/tai-nghe-gaming-rapoo-vh500c-virtual-7-1-rgb"
+    },
+    {
+      "file": "/images/catalog/headset-6.webp",
+      "source": "https://product.hstatic.net/200000420363/product/ming-hp-hyperx-cloud-stinger-ii-core-683l9aa-den-tinhocngoisao.com---5_74e9bec8a2574ef59a0bb90205045405.jpg",
+      "page": "https://tinhocngoisao.com/products/tai-nghe-gaming-hp-hyperx-cloud-stinger-ii-core-683l9aa-co-day-over-ear-den"
+    },
+    {
+      "file": "/images/catalog/gear-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/tinhocngoisao.com1_338289071cfa4_c805e0b1be63450e8900cdda0ef62750.png",
+      "page": "https://tinhocngoisao.com/products/ban-phim-motospeed-k103-black"
+    },
+    {
+      "file": "/images/catalog/psu-1.webp",
+      "source": "https://product.hstatic.net/200000420363/product/nguon-cooler-master-dps-750ab-40-d-750w_17bb59fdfd5f4910b9209f6f7a66575a.png",
+      "page": "https://tinhocngoisao.com/products/nguon-cooler-master-dps-750ab-40-d-750w-platinum-no-box"
+    },
+    {
+      "file": "/images/catalog/case-5.webp",
+      "source": "https://product.hstatic.net/200000420363/product/bk2_3814d30fce4c4ba78cd1d44de907f44e.png",
+      "page": "https://tinhocngoisao.com/products/thung-may-case-leopard-as-01-ho-ca-den-khong-kem-fan"
+    },
+    {
+      "file": "/images/catalog/cooler-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/95162605695373948_8995162605695373948_62326f6acdf26a35868d9e7573b984ba_6ad4f4a7cc054ae7824e82b06ef1047a.png",
+      "page": "https://tinhocngoisao.com/products/tan-nhiet-linh-kien-cpu-intel-12th-socket-1700"
+    },
+    {
+      "file": "/images/catalog/psu-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/p.jt.st650.v36_f376ed1af88441dd94acea85e550622f.png",
+      "page": "https://tinhocngoisao.com/products/nguon-may-tinh-jetek-st650-v3-600w-cap-det-den-atx-single-rail-2-pcie-6-2-pin"
+    },
+    {
+      "file": "/images/catalog/case-6.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_9e09081ee49b427e9bfd0328d5d63938.png",
+      "page": "https://tinhocngoisao.com/products/case-sama-a302"
+    },
+    {
+      "file": "/images/catalog/cooler-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/k4002_ce43fc0bc3f64df0a8c703291ed9cec0.png",
+      "page": "https://tinhocngoisao.com/products/tan-nhiet-khi-leopard-k400-rgb-black-support-2011"
+    },
+    {
+      "file": "/images/catalog/gear-6.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web-recovered_34b9c6593df14e04a0e30fa3c9f6a53a.png",
+      "page": "https://tinhocngoisao.com/products/ban-phim-van-phong-dell-kb216-chinh-hang-den"
+    },
+    {
+      "file": "/images/catalog/psu-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/p.jt.ns400.v22_19bc64b5528942dd893b6b7f3259b1fa.png",
+      "page": "https://tinhocngoisao.com/products/nguon-may-tinh-jetek-ns400-v2-250w-atx-non-modular"
+    },
+    {
+      "file": "/images/catalog/cooler-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng_-_2025-12-11t140718.858_70b7de88da434dbdae3760e516982bbd.jpg",
+      "page": "https://tinhocngoisao.com/products/tan-nhiet-khi-leopard-a220-fan-92mm-led-rgb-fixed-1200-1700-den"
+    },
+    {
+      "file": "/images/catalog/psu-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/download_-_2026-10-29t144537.612_787da202a6d349a99e1d23c9955bca67.png",
+      "page": "https://tinhocngoisao.com/products/nguon-may-tinh-antec-atom-meta-v650-230v-ac-antecv650ec-non-modular-den"
+    },
+    {
+      "file": "/images/catalog/fan-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/f.ca.a1225l.12s.black3_bb01658abfd24be0b13124dde8038833.png",
+      "page": "https://tinhocngoisao.com/products/quat-tan-nhiet-pc-oem-a1225l-12s-120mm-khong-led-hieu-nang-cao-khung-luoi-bao-ve-4pin-pwm-den"
+    },
+    {
+      "file": "/images/catalog/cooler-4.webp",
+      "source": "https://product.hstatic.net/200000420363/product/tan-nhiet-cpu-jonsbo-cr-1000-evo-rgb_fc65c36d565c461ab80cc7ddc2964c14.jpg",
+      "page": "https://tinhocngoisao.com/products/tan-nhiet-khi-cpu-jonsbo-cr-1000-evo-rgb-black"
+    },
+    {
+      "file": "/images/catalog/camera-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/01-1_large_20230826003415l_7be8b_c6c016592a12427fbfc5281747060e7d.jpg",
+      "page": "https://tinhocngoisao.com/products/camera-ip-wifi-tp-link-tapo-c212"
+    },
+    {
+      "file": "/images/catalog/fan-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/fan-case-leopard-f6-pro-argb-4_6df61ed85c564da883e6ec6653de874d.jpg",
+      "page": "https://tinhocngoisao.com/products/fan-case-leopard-f6-pro-argb-den-gio-thuan-4-mat-vo-cuc"
+    },
+    {
+      "file": "/images/catalog/cooler-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng_-_2026-05-18t093853.178_14b686cc289c4368a07e26cdd127b321.png",
+      "page": "https://tinhocngoisao.com/products/tan-nhiet-khi-leopard-a50-khong-led-kem-backplate-intel-lga-115x-1200-1700-1366-fan-90mm-2000rpm-den"
+    },
+    {
+      "file": "/images/catalog/psu-5.webp",
+      "source": "https://product.hstatic.net/200000420363/product/antec-atom-zen-350-_230v-ac__a2693f34fc374e268ca452fb3ce1600a.png",
+      "page": "https://tinhocngoisao.com/products/nguon-antec-atom-zen-350-230v-ac-no-box"
+    },
+    {
+      "file": "/images/catalog/camera-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_017559056c444cfa97a4a2f9b12ec57c.png",
+      "page": "https://tinhocngoisao.com/products/camera-ip-imou-ipc-a32ep-l-2k-3mp"
+    },
+    {
+      "file": "/images/catalog/cooler-6.webp",
+      "source": "https://product.hstatic.net/200000420363/product/1_93e06f9aea44419896b00a85dac5a310.jpg",
+      "page": "https://tinhocngoisao.com/products/tan-nhiet-cpu-jonsbo-cr-1200-rgb-cooling-air"
+    },
+    {
+      "file": "/images/catalog/psu-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng_-_20226-05-14t145458.163_966f85ecb75542a2a534c1a84c038aad.jpg",
+      "page": "https://tinhocngoisao.com/products/nguon-may-tinh-vsp-ns450-450w-den-atx-cap-det"
+    },
+    {
+      "file": "/images/catalog/camera-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/camera-ip-thong-minh-ithink-qi-3_ed98b1ef395945b386b5a43da5312eee.jpg",
+      "page": "https://tinhocngoisao.com/products/camera-ip-thong-minh-ithink-qi"
+    },
+    {
+      "file": "/images/catalog/camera-4.webp",
+      "source": "https://product.hstatic.net/200000420363/product/23_69de2da96f984afdaa516576f4e0e55f.png",
+      "page": "https://tinhocngoisao.com/products/camera-wifi-thong-minh-ezviz-c6n-pro-2k-3mp"
+    },
+    {
+      "file": "/images/catalog/camera-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/tai_xuong__1__7f14d8da9da04d20b3_ddcad9bba4e7494ebde2c93fdc86a8af.jpg",
+      "page": "https://tinhocngoisao.com/products/camera-ip-tp-link-tapo-c222-wifi-4mp"
+    },
+    {
+      "file": "/images/catalog/webcam-1.webp",
+      "source": "https://product.hstatic.net/200000420363/product/wc_ai_hd-2k-7_9b87ad62330740abbf338c234674a2d6.jpg",
+      "page": "https://tinhocngoisao.com/products/webcam-ai-hd-2k-full-hd-1080p"
+    },
+    {
+      "file": "/images/catalog/fan-3.webp",
+      "source": "https://product.hstatic.net/200000420363/product/tinhocngoisao.com1__8__06c39480eb3740dcb0ee4ddc1e721ca2.png",
+      "page": "https://tinhocngoisao.com/products/fan-case-leopard-s1-auto-rgb-den-gio-nguoc-cam-nguon-truc-tiep"
+    },
+    {
+      "file": "/images/catalog/webcam-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/download__73__74d574a6127a4d11b8d8a266f929da3c.png",
+      "page": "https://tinhocngoisao.com/products/webcam-vsp-w66-w-r-full-hd-1080p"
+    },
+    {
+      "file": "/images/catalog/fan-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/f.ca.lp.f8.v3.black_28c4cc0d47854b7489925c31986e74a9.png",
+      "page": "https://tinhocngoisao.com/products/quat-tan-nhiet-pc-jungle-leopard-f8-v3-black-2000rpm-4pin-pwm-co-dieu-toc-khong-led-den"
+    },
+    {
+      "file": "/images/catalog/webcam-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/wc_ai_w66-r-2_fbeb7e353ed6426baaea27a93dc925dc_large__1__283f4a95f1834ed2bf53c87d7f75162d.png",
+      "page": "https://tinhocngoisao.com/products/webcam-vsp-w66-w-full-hd-1080p"
+    },
+    {
+      "file": "/images/catalog/fan-5.webp",
+      "source": "https://product.hstatic.net/200000420363/product/fan-case-redmoon-f3-led-rgb-4_cc342dfba4f74ddea74b837b48cb792c.jpg",
+      "page": "https://tinhocngoisao.com/products/fan-case-redmoon-f3-led-rgb-den-fan-le"
+    },
+    {
+      "file": "/images/catalog/webcam-4.webp",
+      "source": "https://product.hstatic.net/200000420363/product/wc-lgt-c270-3-new_f58aa5f99ec64a599d474807f8321b49.jpg",
+      "page": "https://tinhocngoisao.com/products/webcam-logitech-c270-hd-720p"
+    },
+    {
+      "file": "/images/catalog/webcam-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/download__71__af42ae89c810486db06c988da719c449.png",
+      "page": "https://tinhocngoisao.com/products/webcam-logitech-brio-100-black-960-001587"
+    },
+    {
+      "file": "/images/catalog/fan-6.webp",
+      "source": "https://product.hstatic.net/200000420363/product/fan-case-leopard-f6-pro-argb-4_dc873f268b564764afb04106d2ec15a9.jpg",
+      "page": "https://tinhocngoisao.com/products/fan-case-leopard-f6-pro-argb-den-4-mat-vo-cuc-gio-nguoc"
+    },
+    {
+      "file": "/images/catalog/ups-1.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_8af08a4055eb41979d30990822dd7fa9.png",
+      "page": "https://tinhocngoisao.com/products/ups-santak-tg750-pro-750va-300w"
+    },
+    {
+      "file": "/images/catalog/ups-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/ups.hik.hs-ups-18d-z-eu_66e63ed5cc48455dad993c253db7c725.png",
+      "page": "https://tinhocngoisao.com/products/bo-luu-dien-ups-hiksemi-hs-ups-18d-z-eu-18w-4-pin-lifepo4-8000mah-usb-dc-poe"
+    },
+    {
+      "file": "/images/catalog/printer-1.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_951aff6ed59b4ba891d8365e2ddc19d6.png",
+      "page": "https://tinhocngoisao.com/products/may-in-laser-don-chuc-nang-pantum-p2505-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/webcam-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/download__72__33a493a7d5b34a54a8ce921a03bbc4c2.png",
+      "page": "https://tinhocngoisao.com/products/webcam-logitech-brio-100-white-960-001618"
+    },
+    {
+      "file": "/images/catalog/ups-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/ups.hik.ds-ups1000-r_c80a9606316f4555b3fa68640c3a20d1.png",
+      "page": "https://tinhocngoisao.com/products/bo-luu-dien-ups-hikvision-ds-ups1000-r-offline-1000va-600w-2-outlet"
+    },
+    {
+      "file": "/images/catalog/camera-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/camera-dome-hilook-thc-t110-1-0_265e7c3818354125a5da893c43f022ff.jpg",
+      "page": "https://tinhocngoisao.com/products/camera-dome-hilook-thc-t110-1-0-megapixel-vo-nhua"
+    },
+    {
+      "file": "/images/catalog/printer-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/tinhocngoisao.com1__9__e39dbcd8a1cb4cf4be8cf3a9821653fd_large_5933b4ccefb044f6b77f1efda1c77e56.jpg",
+      "page": "https://tinhocngoisao.com/products/may-in-pantum-laser-den-trang-p2200-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/printer-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/_new_-anh-sp-web_0d2e48fed18848228a90231f1c13e12f_large_96f5b93904e541c69689153ac55d374a.jpg",
+      "page": "https://tinhocngoisao.com/products/may-in-da-chuc-nang-laser-don-sac-pantum-m6702dw-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/ups-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/ds-ups2000-r_copy_ccdfdea23f074c4bbbfb8ac4a7b829e2.jpg",
+      "page": "https://tinhocngoisao.com/products/bo-luu-dien-ups-hikvision-ds-ups2000-r-offline-2000va-1200w"
+    },
+    {
+      "file": "/images/catalog/printer-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/tinhocngoisao.com1__4__e0d04b862e9f4147aa8ed5062d947820_large_ad6a635786c246949674b5ddc0458044.jpg",
+      "page": "https://tinhocngoisao.com/products/may-in-pantum-laser-den-trang-p2200w-wifi-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/network-1.webp",
+      "source": "https://product.hstatic.net/200000420363/product/2_b1e8e638174241879cf0e162bb4d945b.jpg",
+      "page": "https://tinhocngoisao.com/products/switch-24-port-1g-tp-link-tl-sg1024d-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/accessory-1.webp",
+      "source": "https://product.hstatic.net/200000420363/product/vga-cable_aaf7cc170d264c37ad7e3b456f07504d.jpg",
+      "page": "https://tinhocngoisao.com/products/cap-nguon-vga-tu-main-ic847-vga-dau-6-pin-duong-2-dau-8-pin-duong"
+    },
+    {
+      "file": "/images/catalog/printer-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/mi.cn.lbp243dw-ii1_8bb26a2998b243ada2b2981a22e0a8f5.png",
+      "page": "https://tinhocngoisao.com/products/may-in-laser-canon-lbp243dw-ii-in-dao-mat-tu-dong-a4-a5-usb-lan-wifi"
+    },
+    {
+      "file": "/images/catalog/network-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/2_ab5b2efada9d45fdbf18660d02e61176.jpg",
+      "page": "https://tinhocngoisao.com/products/switch-16-port-1g-tp-link-tl-sg1016d-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/ups-5.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-_nh-sp-web_bb7395a9cae74634bf388e30d1c0cbcf.png",
+      "page": "https://tinhocngoisao.com/products/ups-santak-blazer-1200-pro"
+    },
+    {
+      "file": "/images/catalog/accessory-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/cap_ng_vga_4ide-8p-600x600_ea57dfd514504158b559806f6d5d2d3c.jpg",
+      "page": "https://tinhocngoisao.com/products/cap-nguon-phu-vga-tu-8-pin-ra-4-nguon-phu"
+    },
+    {
+      "file": "/images/catalog/printer-6.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_6ff75c73671846d980acb4e435029174.png",
+      "page": "https://tinhocngoisao.com/products/ma-y-in-laser-den-tra-ng-hp-laserjet-pro-m203dn-g3q46a-usb-lan"
+    },
+    {
+      "file": "/images/catalog/accessory-3.webp",
+      "source": "https://product.hstatic.net/200000420363/product/cap_st_1-5_c086e95c8d614385b86d25a2061f6803.jpg",
+      "page": "https://tinhocngoisao.com/products/cap-chia-nguon-sata-o-cung-hdd-ssd-1-ra-5"
+    },
+    {
+      "file": "/images/catalog/ups-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/ups.hik.ds-ups600-r_d17b7bb6912a47b1a7bc6fb43465017b.png",
+      "page": "https://tinhocngoisao.com/products/bo-luu-dien-ups-hikvision-ds-ups600-r-offline-600va-360w"
+    },
+    {
+      "file": "/images/catalog/network-3.webp",
+      "source": "https://product.hstatic.net/200000420363/product/2_2d6962b16525465dab1e30029a7c62ee.jpg",
+      "page": "https://tinhocngoisao.com/products/phat-wifi-tp-link-archer-c50-ac1200-4-anten"
+    },
+    {
+      "file": "/images/catalog/projector-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng__63__2467da2964d149208eeb8c1db9d697d2.png",
+      "page": "https://tinhocngoisao.com/products/may-chieu-panasonic-pt-lb306-kem-day-hdmi"
+    },
+    {
+      "file": "/images/catalog/accessory-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng__3_-removebg-preview_fb51b365eda44691b33c49697907ad76.jpg",
+      "page": "https://tinhocngoisao.com/products/cap-nguon-zin-1-5m-full-load-650w-750w-den"
+    },
+    {
+      "file": "/images/catalog/software-1.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/tai_xu_ng_4af71e3ccad24e84ae686c5e4a7d6377_large_3c98377c9c5f429ca55f404d4ea1d043.png",
+      "page": "https://tinhocngoisao.com/products/phan-mem-microsoft-365-family-ep2-36878-12-thang-danh-cho-toi-da-6-nguoi-5-thiet-bi-tai-khoan-word-excel-powerpoint-tong-2tb-onedrive"
+    },
+    {
+      "file": "/images/catalog/accessory-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/z7479788548508_a3e884421babc85c7ab56ca86530ef98_a3e8dfd574964f348b15fbbcc51a982e.jpg",
+      "page": "https://tinhocngoisao.com/products/cu-sa-c-nhanh-lenovo-mc-301-typec-30w-ma-u-den"
+    },
+    {
+      "file": "/images/catalog/projector-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/tai-xuong-_1__0b8497a7ba9a46918178d5a7b80b7c42.png",
+      "page": "https://tinhocngoisao.com/products/may-chieu-mini-beecube-xpress-u"
+    },
+    {
+      "file": "/images/catalog/network-4.webp",
+      "source": "https://product.hstatic.net/200000420363/product/2_12c67fb68ca146f0abfc9d8092d8a0b0.jpg",
+      "page": "https://tinhocngoisao.com/products/usb-thu-wifi-tp-link-tl-wn725n"
+    },
+    {
+      "file": "/images/catalog/accessory-6.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web-recovered_0a63d6b0b1e748809cae0cfc0e91a35e.png",
+      "page": "https://tinhocngoisao.com/products/nut-click-chuot"
+    },
+    {
+      "file": "/images/catalog/network-5.webp",
+      "source": "https://product.hstatic.net/200000420363/product/2_7dbfc59483bc4f06a9d0b85f484f4ae1.jpg",
+      "page": "https://tinhocngoisao.com/products/switch-8-port-tp-link-10-100-1000m-tl-sg108-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/projector-3.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_bfe59281912b4132bbc8d96dd352bf45.png",
+      "page": "https://tinhocngoisao.com/products/may-chieu-mini-beecube-xtreme-2"
+    },
+    {
+      "file": "/images/catalog/network-6.webp",
+      "source": "https://product.hstatic.net/200000420363/product/2_c6fc1bdf6bc7480fab4788f804dabb09.jpg",
+      "page": "https://tinhocngoisao.com/products/usb-thu-wifi-tp-link-tl-wn722n-150mbps-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/chair-1.webp",
+      "source": "https://product.hstatic.net/200000420363/product/tinhocngoisao.com1__4__b672313daefd409eaa4dec97833b1a2b.jpg",
+      "page": "https://tinhocngoisao.com/products/ghe-gaming-e-dra-citizen-egc236-new-citizen-chan-xoay-den-do"
+    },
+    {
+      "file": "/images/catalog/desk-1.webp",
+      "source": "https://product.hstatic.net/200000420363/product/_new_-anh-sp-web_fe89ebef5dca4f11b68619f886e29951.png",
+      "page": "https://tinhocngoisao.com/products/ban-gaming-chu-y-chan-den-mat-den"
+    },
+    {
+      "file": "/images/catalog/chair-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/gh.ed.egc229.de.xa_bab7b5d1cad847a792897d900a32ee73.jpg",
+      "page": "https://tinhocngoisao.com/products/ghe-gaming-e-dra-level-e-egc229-den-xam"
+    },
+    {
+      "file": "/images/catalog/chair-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/gh.ed.egc239.rexz.de_b3e74ffeb1b64869843aeab3694d54a6.jpg",
+      "page": "https://tinhocngoisao.com/products/ghe-gaming-edra-egc239-rexz-da-pu-ke-tay-3d-piston-class-4-den"
+    },
+    {
+      "file": "/images/catalog/desk-2.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/z7957212366800_7d263abc0c6bc4c5b6e7c7a38b9c5c3a_4ae04d370bb24efda2ece71053ef1ec5.jpg",
+      "page": "https://tinhocngoisao.com/products/ban-gaming-chu-k-chan-den-mat-van-go"
+    },
+    {
+      "file": "/images/catalog/software-2.webp",
+      "source": "https://product.hstatic.net/200000420363/product/tai_xuong_-_2023-12-07t150352.533_06a407e869374756b7b3d15013b31563.png",
+      "page": "https://tinhocngoisao.com/products/phan-mem-diet-virus-bkav-pro-internet-security-ai-1-pc-3-tha-ng"
+    },
+    {
+      "file": "/images/catalog/chair-4.webp",
+      "source": "https://product.hstatic.net/200000420363/product/gh.ed.egc229.de.do_59966f7a0ad04c348666dd446679dd78.jpg",
+      "page": "https://tinhocngoisao.com/products/ghe-gaming-e-dra-level-e-egc229-den-do"
+    },
+    {
+      "file": "/images/catalog/desk-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/z7966216792956_284800525fd174c60be6b17b206d97c9_2a4e3cc5013242b183f1f7825ffccca6.jpg",
+      "page": "https://tinhocngoisao.com/products/ban-gaming-chu-u-chan-den-mat-van-go"
+    },
+    {
+      "file": "/images/catalog/desk-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/z7966214833166_1b6febc31ee4564fcca70ee6a7952086_1cc39ae1513a41cabe1cebe6291607a6.jpg",
+      "page": "https://tinhocngoisao.com/products/ban-gaming-chu-u-chan-den-mat-den"
+    },
+    {
+      "file": "/images/catalog/desk-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/z7957212539421_b8c08dbcd30ce8bdaaee67518a5cba9e_6171f51ff72b471783898d1675edf954.jpg",
+      "page": "https://tinhocngoisao.com/products/ban-gaming-chu-k-chan-den-mat-den"
+    },
+    {
+      "file": "/images/catalog/desk-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/z7555354752121_2613128bdc32c5ead1938b7d5d117529_584c177cc2804b32a886b3b791cde9ac.jpeg",
+      "page": "https://tinhocngoisao.com/products/ban-gaming-chu-z-1m4-khung-den-mat-van-go"
+    },
+    {
+      "file": "/images/catalog/software-3.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/2025_a07a5240ac6f4150a816fe32b98af477.jpg",
+      "page": "https://tinhocngoisao.com/products/phan-mem-diet-virus-kaspersky-standard-1u-1-thiet-bi"
+    },
+    {
+      "file": "/images/catalog/chair-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/gh.wro.wgc210.de.xa__1__copy_86698ca376e1495fa42d3428d250a06b.jpg",
+      "page": "https://tinhocngoisao.com/products/ghe-warrior-gaming-raider-series-wgc210-black-gray-ke-chan-tay-ghe-linh-hoat-foam-nguyen-khoi"
+    },
+    {
+      "file": "/images/catalog/chair-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/tinhocngoisao.com1__2__5a1a6f93b9b64b158e81fe0110b097ec.jpeg",
+      "page": "https://tinhocngoisao.com/products/ghe-gaming-centaur-mecha-chan-xoay-kim-loai-mau-den"
+    },
+    {
+      "file": "/images/catalog/software-4.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/s.ohab.2024.apac.code.ch_ca2931d0ce5b4dbfb167411eff1190de.png",
+      "page": "https://tinhocngoisao.com/products/phan-mem-microsoft-office-home-and-business-2024-all-lng-apac-em-retail-online-esd-ep2-06604-key-dien-tu-ban-quyen-vinh-vien"
+    },
+    {
+      "file": "/images/catalog/software-5.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/t_i_xu_ng_-_2026-05-14t171327.872_cc4c96e94a7c495abe1874a977d9be5c.png",
+      "page": "https://tinhocngoisao.com/products/phan-mem-windows-11-pro-fpp-64-bit-eng-intl-usb-hav-00163-ban-quyen-vinh-vien-usb-cai-dat-chinh-hang"
+    },
+    {
+      "file": "/images/catalog/software-6.webp",
+      "source": "https://cdn.hstatic.net/products/200000420363/tinhocngoisao.com1_a1d072d17b7646c8a136bd54d0445761.jpg",
+      "page": "https://tinhocngoisao.com/products/phan-mem-office-home-2024-ep2-06811-vinh-vien-1-thiet-bi-word-excel-powerpoint"
+    }
+  ]
+}

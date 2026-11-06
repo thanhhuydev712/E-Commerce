@@ -12,9 +12,16 @@
 
 # testing
 /coverage
+/test-results/
+/test-results-local/
+/playwright-report/
+/.visual-review/
 
 # next.js
 /.next/
+/.next-local/
+/.next-local-*/
+/.next-cache-backup-*/
 /out/
 
 # production
@@ -26,6 +33,7 @@
 
 # debug
 npm-debug.log*
+/debug.log
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*

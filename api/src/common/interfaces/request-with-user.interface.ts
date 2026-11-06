@@ -1,9 +1,12 @@
-import { Request } from 'express';
-
-export interface RequestWithUser extends Request {
-  user: {
-    id: string;
-    email: string;
-    role: string;
-  };
+import type { Request } from 'express';
+export interface Principal {
+  id: string;
+  sessionId: string;
+  email: string;
+  roleCodes: string[];
+  permissions: string[];
+}
+export interface AuthenticatedRequest extends Request {
+  user: Principal;
+  requestId: string;
 }
