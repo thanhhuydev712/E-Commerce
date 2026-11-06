@@ -107,7 +107,7 @@ export function HeroSection() {
       if (event.target === element && event.propertyName === "transform")
         settle();
     };
-    element?.addEventListener("transitionend", onEnd, { once: true });
+    element?.addEventListener("transitionend", onEnd);
     // Reduced motion hoặc tab nền có thể không phát transitionend.
     const timer = window.setTimeout(settle, SLIDE_MS + 80);
     return () => {
