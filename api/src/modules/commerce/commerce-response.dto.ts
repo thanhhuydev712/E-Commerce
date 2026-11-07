@@ -39,7 +39,7 @@ export class QuoteResponseDto extends TotalsDto {
     string | null;
   @ApiProperty({ type: String, nullable: true, format: 'uuid' }) promotionId:
     string | null;
-  @ApiProperty({ type: [String], enum: ['COD'] }) methods: string[];
+  @ApiProperty({ type: [String], enum: ['COD', 'STRIPE'] }) methods: string[];
   @ApiProperty() taxIncluded: boolean;
 }
 class OrderLineDto {
@@ -69,6 +69,10 @@ export class OrderResponseDto extends TotalsDto {
   @ApiProperty({ enum: ['processing', 'cancelled'] }) status: string;
   @ApiProperty() backendStatus: string;
   @ApiProperty({ enum: ['paid', 'pending'] }) payment: string;
+  @ApiProperty({ enum: ['COD', 'STRIPE'] }) paymentMethod: string;
+  @ApiProperty() paymentStatus: string;
+  @ApiProperty({ type: Date, nullable: true }) paymentDeadline: Date | null;
+  @ApiProperty() canPay: boolean;
   @ApiProperty({ type: [OrderLineDto] }) lines: OrderLineDto[];
   @ApiProperty() customer: string;
   @ApiProperty() address: string;

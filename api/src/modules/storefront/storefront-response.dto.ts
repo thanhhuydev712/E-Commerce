@@ -4,6 +4,11 @@ class StorefrontVariantDto {
   @ApiProperty() sku: string;
   @ApiProperty() label: string;
   @ApiProperty({ description: 'Integer VND string' }) price: string;
+  @ApiProperty({
+    description:
+      'Compare-at amount for this SKU, or its current price when unset',
+  })
+  oldPrice: string;
   @ApiProperty() stock: number;
 }
 class StorefrontReviewDto {
@@ -29,7 +34,8 @@ class StorefrontProductDto {
     unknown
   >;
   @ApiProperty() builderEligible: boolean;
-  @ApiProperty({ type: [StorefrontVariantDto] }) variants: StorefrontVariantDto[];
+  @ApiProperty({ type: [StorefrontVariantDto] })
+  variants: StorefrontVariantDto[];
   @ApiProperty() stock: number;
   @ApiProperty() warranty: string;
   @ApiPropertyOptional() badge?: string;
@@ -59,9 +65,12 @@ class StorefrontPageDto {
   @ApiProperty({ type: StorefrontPageBodyDto }) body: StorefrontPageBodyDto;
 }
 export class StorefrontResponseDto {
-  @ApiProperty({ type: [StorefrontProductDto] }) products: StorefrontProductDto[];
-  @ApiProperty({ type: [StorefrontCategoryDto] }) categories: StorefrontCategoryDto[];
-  @ApiProperty({ type: [StorefrontArticleDto] }) articles: StorefrontArticleDto[];
+  @ApiProperty({ type: [StorefrontProductDto] })
+  products: StorefrontProductDto[];
+  @ApiProperty({ type: [StorefrontCategoryDto] })
+  categories: StorefrontCategoryDto[];
+  @ApiProperty({ type: [StorefrontArticleDto] })
+  articles: StorefrontArticleDto[];
   @ApiProperty({ type: [StorefrontPageDto] }) pages: StorefrontPageDto[];
   @ApiProperty({
     type: Object,

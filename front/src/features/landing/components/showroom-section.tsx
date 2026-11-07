@@ -58,13 +58,7 @@ export function ShowroomSection() {
             </p>
             <p>
               <Phone size={13} />
-              <span>
-                Tiếp nhận bảo hành:
-                <br />
-                T2 – T7 | 08:30 – 12:00;
-                <br />
-                13:00 – 17:30 (minh họa)
-              </span>
+              <span>Liên hệ hỗ trợ để được hướng dẫn tiếp nhận bảo hành.</span>
             </p>
           </article>
         ))}

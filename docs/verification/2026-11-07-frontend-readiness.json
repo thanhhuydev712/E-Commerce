@@ -1,0 +1,480 @@
+{
+  "date": "2026-11-07",
+  "scope": "Next production local + Nest + isolated PostgreSQL test schema, Chromium only",
+  "broad": {
+    "report": "front/.visual-review/codex_live_test_00ae21d3b7e54932b544574d09ed63f9/results.json",
+    "stats": {
+      "startTime": "2026-11-06T18:34:21.266Z",
+      "duration": 1731926.3029999998,
+      "expected": 73,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "e2e/hero-carousel.spec.ts",
+        "title": "banner trượt mềm và nối vòng hai chiều bằng một chiều rộng ảnh",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/hero-carousel.spec.ts",
+        "title": "bắt đầu kéo giữa transition giữ nguyên vị trí ảnh đang hiển thị",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/hero-carousel.spec.ts",
+        "title": "banner quảng cáo dọc hiện trên laptop, giữ hover và không tràn ngang",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/hero-carousel.spec.ts",
+        "title": "hero tự chuyển đúng 3 giây, bắt đầu lại sau chọn tay và quay về đầu",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/hero-carousel.spec.ts",
+        "title": "mỗi caption chọn đúng ảnh, mũi tên lặp vòng và link banner dẫn đúng trang",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/hero-carousel.spec.ts",
+        "title": "kéo chuột đổi hai chiều, kéo ngắn trả về và không mở nhầm liên kết",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/hero-carousel.spec.ts",
+        "title": "header full width và banner dọc hai bên ẩn nửa, mũi tên giữ nguyên",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/hero-carousel.spec.ts",
+        "title": "bàn phím giữ slide đang đọc và chỉ focus link của slide active",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/hero-carousel.spec.ts",
+        "title": "mobile giữ nguyên tỷ lệ banner và đưa caption active vào vùng nhìn",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "không cuộn ngang khi thanh cuộn dọc chiếm chỗ trên Windows",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các khối trang chủ, showroom và footer thẳng mép slide ở 1920px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các khối trang chủ, showroom và footer thẳng mép slide ở 1340px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các khối trang chủ, showroom và footer thẳng mép slide ở 1024px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các khối trang chủ, showroom và footer thẳng mép slide ở 768px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các khối trang chủ, showroom và footer thẳng mép slide ở 390px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các khối trang chủ, showroom và footer thẳng mép slide ở 360px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "chiều rộng dùng chung khi chuyển sang catalog và quay lại",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các trang dùng chung giới hạn nội dung ở 1920px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các trang dùng chung giới hạn nội dung ở 1024px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các trang dùng chung giới hạn nội dung ở 768px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các trang dùng chung giới hạn nội dung ở 390px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing-width.spec.ts",
+        "title": "các trang dùng chung giới hạn nội dung ở 360px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "landing đổi chiến dịch, nhóm sản phẩm và giữ giỏ sau refresh",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "menu có thể dùng bàn phím, tìm kiếm dẫn đến kết quả mẫu",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "landing đủ các khối, tab chiến dịch và rail hoạt động trên mobile",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "blog lọc theo nhóm, từ khóa và có trạng thái không tìm thấy",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "landing không gọi Stripe trực tiếp và không tải renderer 3D",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "landing không tràn ngang ở 360px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "landing không tràn ngang ở 390px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "landing không tràn ngang ở 768px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "landing không tràn ngang ở 1024px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "landing không tràn ngang ở 1340px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "landing không tràn ngang ở 1920px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "CTA studio mở builder và quy tắc DDR bắt được xung đột",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/landing.spec.ts",
+        "title": "mọi liên kết trên landing có trang đích, URL lạ trả 404",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/motion.spec.ts",
+        "title": "hover và đóng dialog giữ đúng tương tác với motion no-preference",
+        "status": "unexpected"
+      },
+      {
+        "file": "e2e/motion.spec.ts",
+        "title": "hover và đóng dialog giữ đúng tương tác với motion reduce",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "phiên hết hạn xóa dữ liệu riêng và yêu cầu đăng nhập lại",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "lỗi proxy HTML được trình bày thành thông báo dễ hiểu",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "Mua ngay khi chưa đăng nhập giữ đúng trang đăng nhập và đích quay lại",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "lưu cấu hình thất bại giữ dialog và linh kiện để thử lại",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "đặt hàng hiển thị đang gửi, chặn bấm lặp và phục hồi khi API lỗi",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "SKU đã ẩn không làm sập giỏ hoặc checkout",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "mất WebGL quay về 2D và giữ nguyên cấu hình",
+        "status": "unexpected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "renderer 3D nghỉ khi cảnh đứng yên và vẫn bật đèn khi giảm chuyển động",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "toàn bộ mẫu trang có nội dung và không tràn ngang ở 360px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "toàn bộ mẫu trang có nội dung và không tràn ngang ở 390px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "toàn bộ mẫu trang có nội dung và không tràn ngang ở 768px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "toàn bộ mẫu trang có nội dung và không tràn ngang ở 1024px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "toàn bộ mẫu trang có nội dung và không tràn ngang ở 1440px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "toàn bộ mẫu trang có nội dung và không tràn ngang ở 1920px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "gợi ý tìm kiếm không dấu dùng được bằng bàn phím và đóng bằng Escape",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "menu chia nhóm linh kiện và link con áp bộ lọc đúng",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "sắp xếp giữ danh mục từ route và tiền tăng dần, refresh giữ trạng thái",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "khoảng min/max và bỏ chip lọc cho kết quả đúng, không mất thương hiệu từ route",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "facet RAM kết hợp query và trạng thái không có kết quả",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "mobile bật bộ lọc, chọn thương hiệu và xóa chip",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "ảnh sản phẩm phóng to và đóng trả focus, neo thông số đổi nội dung",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "showroom lọc liên hoàn, chọn điểm và reset",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "trang khuyến mãi neo đúng nhóm, sản phẩm đi được tới giỏ",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "trang tin có tìm kiếm, danh sách và bài viết liên quan",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "header theo URL khi đi từ campaign tới catalog và quay lại từ checkout",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "so sánh giữ hai sản phẩm và có thể bỏ từng sản phẩm",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "các template storefront không tràn ngang hoặc lỗi JS ở 390px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "các template storefront không tràn ngang hoặc lỗi JS ở 768px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/reference-storefront.spec.ts",
+        "title": "các template storefront không tràn ngang hoặc lỗi JS ở 1340px",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/runtime.spec.ts",
+        "title": "PC Studio mở 3D, đổi góc nhìn và về 2D không phát sinh pageerror",
+        "status": "expected"
+      },
+      {
+        "file": "live/storefront.spec.ts",
+        "title": "real API: catalog, register, persistent cart, address, saved PC, COD order and cancel",
+        "status": "expected"
+      },
+      {
+        "file": "live/storefront.spec.ts",
+        "title": "forged browser demo state cannot authenticate, and API errors never create fake orders",
+        "status": "expected"
+      },
+      {
+        "file": "live/storefront.spec.ts",
+        "title": "account forms persist profile, support and preferences; unknown serial never creates warranty data",
+        "status": "expected"
+      },
+      {
+        "file": "unit/compatibility.spec.ts",
+        "title": "thiếu thông số không được kết luận socket hoặc DDR phù hợp",
+        "status": "expected"
+      },
+      {
+        "file": "unit/compatibility.spec.ts",
+        "title": "socket khác và DDR khác phải bị chặn",
+        "status": "expected"
+      },
+      {
+        "file": "unit/compatibility.spec.ts",
+        "title": "ID cũ hoặc linh kiện sai nhóm vẫn được tính là chưa hoàn thiện",
+        "status": "expected"
+      },
+      {
+        "file": "unit/compatibility.spec.ts",
+        "title": "không báo sai kích thước hoặc nguồn khi thiếu dữ liệu kỹ thuật",
+        "status": "expected"
+      },
+      {
+        "file": "unit/compatibility.spec.ts",
+        "title": "cấu hình hết hàng bị chặn nhưng CPU có iGPU không bắt buộc VGA rời",
+        "status": "expected"
+      }
+    ]
+  },
+  "regression": {
+    "report": "front/.visual-review/codex_live_test_be501915c955454da4fd4fe7b1117078/results.json",
+    "stats": {
+      "startTime": "2026-11-06T23:24:32.692Z",
+      "duration": 79936.556,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "e2e/motion.spec.ts",
+        "title": "hover và đóng dialog giữ đúng tương tác với motion no-preference",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/motion.spec.ts",
+        "title": "hover và đóng dialog giữ đúng tương tác với motion reduce",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "đổi mật khẩu xóa phiên trên giao diện trước khi quay lại đăng nhập",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "cấu hình cũ không vẽ linh kiện đã mất hoặc đếm là đã chọn",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "mất WebGL quay về 2D và giữ nguyên cấu hình",
+        "status": "expected"
+      },
+      {
+        "file": "e2e/readiness.spec.ts",
+        "title": "renderer 3D nghỉ khi cảnh đứng yên và vẫn bật đèn khi giảm chuyển động",
+        "status": "expected"
+      }
+    ]
+  },
+  "staticChecks": {
+    "lint": "passed",
+    "formatCheck": "passed",
+    "typescript": "passed",
+    "productionBuild": "passed"
+  },
+  "responsive": {
+    "routes": 20,
+    "widths": [
+      360,
+      390,
+      768,
+      1024,
+      1440,
+      1920
+    ],
+    "combinations": 120,
+    "passed": true,
+    "observedBrokenLoadedImages": 0
+  },
+  "recovery": {
+    "rootRetryRefetch": true,
+    "initialRequests": 2,
+    "restoredRequests": 3,
+    "noWebGLFallback": true,
+    "selectionPreserved": 8,
+    "sceneScreenshot": true
+  },
+  "catalogReadSamples": {
+    "bytes": 147392,
+    "milliseconds": [
+      6812,
+      3128,
+      2752
+    ],
+    "concurrentE2E": true,
+    "stagingBenchmark": false
+  },
+  "limits": [
+    "No clean full 77-test rerun after final changes; broad 73/75 and related regression 6/6 are separate runs",
+    "No Firefox/WebKit, physical device or screen-reader verification",
+    "3D uses illustrative category geometry, not real SKU fit/collision",
+    "No Docker/Nginx/AWS deployment verification",
+    "COD scope; online payment, shipping and complete admin workflows not accepted"
+  ]
+}

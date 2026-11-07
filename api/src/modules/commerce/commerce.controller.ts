@@ -18,6 +18,7 @@ import { CurrentUser } from '../../common/decorators/get-user.decorator.js';
 import type { Principal } from '../../common/interfaces/request-with-user.interface.js';
 import { CommerceService } from './commerce.service.js';
 import { OrderService } from './order.service.js';
+import { StripePaymentService } from './stripe-payment.service.js';
 import { ApiData } from '../../platform/api-response.js';
 import {
   CartResponseDto,
@@ -43,6 +44,7 @@ export class CommerceController {
   constructor(
     @Inject(CommerceService) private readonly commerce: CommerceService,
     @Inject(OrderService) private readonly orders: OrderService,
+    @Inject(StripePaymentService) private readonly payments: StripePaymentService,
   ) {}
   @Post('warranty/lookup') lookup(
     @CurrentUser() user: Principal,
@@ -102,7 +104,7 @@ export class CommerceController {
     @CurrentUser() user: Principal,
     @Param('id', DatabaseUuidPipe) id: string,
   ) {
-    return this.orders.cancel(user.id, id);
+    return this.payments.cancel(user.id, id);
   }
   @Get('wishlist') wishlist(@CurrentUser() user: Principal) {
     return this.commerce.wishlist(user.id);

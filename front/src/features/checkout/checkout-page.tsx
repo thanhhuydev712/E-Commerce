@@ -6,7 +6,7 @@ import { api } from "@/src/catalog/api-client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Minus, Plus, ShieldCheck, Trash2 } from "lucide-react";
 import { money } from "@/src/catalog/model";
-import { useShop, type Order } from "@/src/providers/shop-provider";
+import { useShop } from "@/src/providers/shop-provider";
 import { Breadcrumb, Empty, ProductImage } from "@/src/components/storefront";
 import { OrderSummary } from "./components/order-summary";
 
@@ -141,7 +141,7 @@ function CheckoutForm() {
   const [district, setDistrict] = useState("");
   const [city, setCity] = useState("TP. Hồ Chí Minh");
   const [method, setMethod] = useState("standard");
-  const [payment, setPayment] = useState<Order["payment"]>("pending");
+  const [payment, setPayment] = useState<"COD" | "STRIPE">("COD");
   const [coupon, setCoupon] = useState(query.get("coupon") ?? "");
   const [appliedCoupon, setAppliedCoupon] = useState(query.get("coupon") ?? "");
   const [quoted, setQuoted] = useState<{
@@ -150,12 +150,14 @@ function CheckoutForm() {
     discount: string;
     shipping: string;
     total: string;
+    methods: string[];
   } | null>(null);
   const [quoteError, setQuoteError] = useState<{
     fingerprint: string;
     message: string;
   } | null>(null);
   const submitting = useRef(false);
+  const [placing, setPlacing] = useState(false);
   const input = useMemo(
     () => ({
       customer: customer.trim(),
@@ -184,6 +186,7 @@ function CheckoutForm() {
         discount: string;
         shipping: string;
         total: string;
+        methods: string[];
       }>("/me/checkout/quote", { method: "POST", body: input })
         .then((data) => {
           if (active) {
@@ -236,6 +239,19 @@ function CheckoutForm() {
   const applyCoupon = () => {
     setAppliedCoupon(coupon.trim().toUpperCase());
   };
+  if (shop.cart.some((line) => !variantById(line.variantId)))
+    return (
+      <section className="my-8 rounded-lg border bg-white p-6">
+        <h1>Kiểm tra lại giỏ hàng</h1>
+        <p role="alert">
+          Một số sản phẩm không còn khả dụng. Vui lòng xóa hoặc thay sản phẩm
+          trước khi đặt hàng.
+        </p>
+        <Link className={tw.btn_btn_outline} href="/cart">
+          Quay lại giỏ hàng
+        </Link>
+      </section>
+    );
   if (!shop.cart.length)
     return (
       <>
@@ -250,6 +266,7 @@ function CheckoutForm() {
         Đặt hàng
       </h1>
       <form
+        aria-busy={placing}
         className="rf-checkout-reference-layout grid grid-cols-[minmax(0,_1.25fr)_minmax(0,_0.9fr)] items-start gap-7.5 max-[768px]:grid-cols-[minmax(0,_1fr)] max-[768px]:gap-5"
         onSubmit={async (e) => {
           e.preventDefault();
@@ -257,18 +274,23 @@ function CheckoutForm() {
             router.push(login);
             return;
           }
-          if (submitting.current) return;
+          if (submitting.current || shop.cartPending) return;
           submitting.current = true;
-          const id = await shop.placeOrder({
-            phone,
-            customer: customer.trim(),
-            address: input.address,
-            payment,
-            couponCode: appliedCoupon,
-            express: method === "express",
-          });
-          if (id) router.push("/checkout/result/" + id);
-          else submitting.current = false;
+          setPlacing(true);
+          try {
+            const id = await shop.placeOrder({
+              phone,
+              customer: customer.trim(),
+              address: input.address,
+              payment,
+              couponCode: appliedCoupon,
+              express: method === "express",
+            });
+            if (id) router.push("/checkout/result/" + id);
+          } finally {
+            submitting.current = false;
+            setPlacing(false);
+          }
         }}
       >
         <div className="rf-checkout-left grid min-w-0 gap-4">
@@ -296,7 +318,7 @@ function CheckoutForm() {
                 value={customer}
                 onChange={(e) => setCustomer(e.target.value)}
                 placeholder="Nguyễn Văn Demo"
-                autoComplete="off"
+                autoComplete="name"
               />
             </label>
             <label>
@@ -309,7 +331,7 @@ function CheckoutForm() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="0900000000"
-                autoComplete="off"
+                autoComplete="tel"
               />
             </label>
             <label>
@@ -319,7 +341,7 @@ function CheckoutForm() {
                 maxLength={100}
                 value={shop.user?.email ?? ""}
                 readOnly
-                autoComplete="off"
+                autoComplete="email"
               />
             </label>
             <label>
@@ -337,7 +359,7 @@ function CheckoutForm() {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="123 Đường Demo"
-                autoComplete="off"
+                autoComplete="street-address"
               />
             </label>
             <label>
@@ -360,7 +382,7 @@ function CheckoutForm() {
             </label>
             <p className="rf-form-hint text-[12px] text-rf-muted">
               Môi trường development: chỉ dùng thông tin giả. Thông tin giao
-              hàng được gửi đến server và lưu cùng đơn COD.
+              hàng được gửi đến server và lưu cùng đơn hàng.
             </p>
           </section>
           <section className={tw.panel}>
@@ -415,10 +437,15 @@ function CheckoutForm() {
               {(
                 [
                   [
-                    "pending",
+                    "COD",
                     "Thanh toán khi giao hàng (COD)",
                     "Đơn chờ xác nhận, chưa ghi nhận đã thu tiền.",
                   ],
+                  ...(confirmed?.methods.includes("STRIPE") ? [[
+                    "STRIPE",
+                    "Thanh toán thẻ qua Stripe (thử nghiệm)",
+                    "Đặt đơn rồi tiếp tục nhập thẻ thử nghiệm trên trang Stripe.",
+                  ] as const] : []),
                 ] as const
               ).map(([id, label, description]) => (
                 <label key={id}>
@@ -436,7 +463,7 @@ function CheckoutForm() {
               ))}
             </fieldset>
             <p className="rf-form-hint text-[12px] text-rf-muted">
-              Không nhập thông tin thẻ thật. Chưa kết nối cổng thanh toán.
+              Chỉ dùng thẻ thử nghiệm khi thanh toán Stripe. Phương thức khả dụng được xác nhận trong báo giá.
             </p>
           </section>
           <Link className={tw.text_link} href="/cart">
@@ -539,7 +566,12 @@ function CheckoutForm() {
               total={String(subtotal - discount + shipping)}
             />
             {shop.user ? (
-              <button className={tw.btn_full}>Tạo đơn hàng COD</button>
+              <button
+                className={tw.btn_full}
+                disabled={placing || shop.cartPending > 0}
+              >
+                {placing ? "Đang tạo đơn hàng…" : payment === "STRIPE" ? "Tạo đơn và tiếp tục thanh toán" : "Tạo đơn hàng COD"}
+              </button>
             ) : (
               <Link className={tw.btn_full} href={login}>
                 Đăng nhập để đặt hàng

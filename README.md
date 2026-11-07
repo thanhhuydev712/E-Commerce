@@ -63,6 +63,7 @@ E-Commerce/
 | [Project status](docs/PROJECT_STATUS.md) | Hiện trạng quan sát từ mã nguồn và ưu tiên rà soát |
 | [Roadmap](docs/ROADMAP.md) | Khung phát triển 20 giai đoạn |
 | [Quality](docs/QUALITY.md) | Quy trình Git, kiểm thử, bảo mật và Definition of Done |
+| [Rà soát FE, UI/UX và PC Studio](docs/FRONTEND_READINESS_AUDIT.md) | Ma trận trình duyệt, các lỗi đã sửa, bản production local và những việc còn lại trước công khai |
 | [Khảo sát Tin Học Ngôi Sao](docs/REFERENCE_SITE_AUDIT.md) | Bố cục, kết quả thao tác thực tế, ma trận 103 mục và khoảng cách còn lại của storefront |
 
 Nguồn bối cảnh gồm bản bàn giao lịch sử (file được nhắc trước đây hiện không có ở root), các yêu cầu người dùng và rà soát mã nguồn. Ưu tiên hướng dẫn tại root, `docs/` và `front/docs/`; phân biệt mốc lịch sử v1 với trạng thái mới nhất trong PROJECT_STATUS. README frontend đã có hướng dẫn dự án, README backend còn cần đối chiếu với mã hiện tại.

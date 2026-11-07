@@ -52,7 +52,7 @@ Nếu dùng Try it out trên Swagger ở origin API (ví dụ localhost:3001), t
 
 Access/refresh JWT có secret, audience và type riêng; verify chỉ cho HS256. Session lưu SHA-256 của token ngẫu nhiên/đã ký, không lưu token thô. Mỗi request xác thực đọc lại session, user ACTIVE và role/permission từ database. Logout, reset/đổi password, khóa/archive tài khoản và thay đổi quyền có hiệu lực với các access token đã cấp theo trạng thái server.
 
-Bổ sung 07/11/2026: frontend dùng `/auth/session` để khôi phục sau reload. Token được khôi phục có iat/exp neo vào lần cấp refresh gần nhất, không tạo cửa sổ mới; khi hết cửa sổ, server trả requiresRefresh và client mới gọi rotate. Request bootstrap bị huỷ do chuyển trang không tiêu thụ cookie. Session cũ/revoked/khóa tài khoản bị từ chối; bootstrap không xoá cookie mới từ một response chạy song song. Access token vẫn chỉ ở bộ nhớ.
+Bổ sung 07/11/2026: frontend dùng `/auth/session` để khôi phục sau reload. Token được khôi phục có iat/exp neo vào lần cấp refresh gần nhất, không tạo cửa sổ mới; khi hết cửa sổ, server trả requiresRefresh và client mới gọi rotate. Bootstrap với token hiện hành chỉ đọc; request bị huỷ do chuyển trang không tiêu thụ cookie. Token cũ có chữ ký hợp lệ cũng đi qua chính sách revoke family khi reuse; session revoked/khóa tài khoản bị từ chối. Bootstrap không ghi Set-Cookie; access token vẫn chỉ ở bộ nhớ.
 
 Refresh được serialize dưới khóa user. Token đã rotate nhưng được dùng lại sẽ revoke family; revocation phải commit trước khi trả 401. **Hai refresh đồng thời có thể khiến family bị thu hồi theo chính sách nghiêm ngặt**: frontend phải dùng một refresh đang chạy chung (single-flight), không retry song song cookie cũ. Chưa có grace window; không coi reuse là refresh thành công.
 

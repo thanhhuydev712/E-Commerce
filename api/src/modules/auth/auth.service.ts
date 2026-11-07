@@ -217,7 +217,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid refresh token');
     return payload;
   }
-  // Page bootstrap is read-only: aborting a navigation must not consume the cookie.
+  // Valid page bootstrap is read-only: navigation must not consume the cookie.
   // Keep the original access window; restoring a page never extends JWT lifetime.
   async restore(token: string) {
     const payload = await this.parseRefresh(token);
@@ -231,12 +231,16 @@ export class AuthService {
       session.familyId !== payload.fid ||
       session.revokedAt ||
       session.expiresAt <= new Date() ||
-      session.user.status !== 'ACTIVE' ||
-      !hashesMatch(tokenHash(token), session.tokenHash)
+      session.user.status !== 'ACTIVE'
     )
       throw new UnauthorizedException(
         'Session is invalid or no longer current',
       );
+    if (!hashesMatch(tokenHash(token), session.tokenHash)) {
+      // Reuse the locked revocation path; stale credentials must not bypass it.
+      await this.refresh(token);
+      throw new UnauthorizedException('Session is no longer current');
+    }
     const expiresIn =
       payload.iat +
       this.config.getOrThrow<number>('JWT_EXPIRES_IN') -

@@ -195,7 +195,7 @@ describe.skipIf(!process.env.TEST_DATABASE_URL)(
         .send({ email: 'NEW@example.test', password })
         .expect(409);
     });
-    it('restores pages without consuming refresh or extending access expiry; rejects stale and revoked cookies', async () => {
+    it('restores valid pages without consuming refresh or extending access expiry; revokes stale and rejects revoked cookies', async () => {
       const session = await login('bob');
       const jwt = app.get(JwtService);
       const original = jwt.decode<{ exp: number }>(session.accessToken);
@@ -236,16 +236,19 @@ describe.skipIf(!process.env.TEST_DATABASE_URL)(
       await request(app.getHttpServer())
         .get('/api/v1/me')
         .set('Authorization', bearer(rotated.body.data.accessToken))
-        .expect(200);
+        .expect(401);
+      expect(
+        (
+          await prisma.authSession.findUniqueOrThrow({
+            where: { id: before.id },
+          })
+        ).revokeReason,
+      ).toBe('TOKEN_REUSE');
       await request(app.getHttpServer())
         .post('/api/v1/auth/session')
         .set('Cookie', cookie(session.refreshToken))
         .expect(403);
       const activeCookie = rotated.headers['set-cookie'][0].split(';')[0];
-      await prisma.authSession.update({
-        where: { id: before.id },
-        data: { revokedAt: new Date() },
-      });
       await request(app.getHttpServer())
         .post('/api/v1/auth/session')
         .set('Origin', origin)

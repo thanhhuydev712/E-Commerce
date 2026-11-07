@@ -14,14 +14,14 @@ const tw = {
 };
 
 // Error boundary chỉ hiển thị thông báo thân thiện, không đưa stack trace ra giao diện.
-export default function StoreError({ reset }: { reset: () => void }) {
+export default function StoreError({ retry }: { retry: () => void }) {
   return (
     <div className={tw.empty}>
       <h1>Trang chưa tải được.</h1>
       <p>
         Thử lại để tiếp tục. Các thao tác đã lưu trên server được giữ nguyên.
       </p>
-      <button className={tw.btn} onClick={reset}>
+      <button className={tw.btn} onClick={retry}>
         Thử lại
       </button>
     </div>

@@ -86,6 +86,8 @@ export function CartPage() {
   const shop = useShop();
   const [coupon, setCoupon] = useState("");
   const subtotal = totalOf(shop.cart);
+  const unavailable = shop.cart.some((line) => !variantById(line.variantId));
+  if (!shop.ready) return <p role="status">Đang tải giỏ hàng…</p>;
   return (
     <>
       <Breadcrumb current="Giỏ hàng" />
@@ -110,7 +112,24 @@ export function CartPage() {
         <div className={tw.cart_layout}>
           <div className={tw.panel_cart_lines}>
             {shop.cart.map((line) => {
-              const { product, variant } = variantById(line.variantId)!;
+              const found = variantById(line.variantId);
+              if (!found)
+                return (
+                  <article className={tw.cart_line} key={line.variantId}>
+                    <p role="alert">
+                      Sản phẩm không còn khả dụng. Hãy xóa sản phẩm này hoặc
+                      chọn sản phẩm khác.
+                    </p>
+                    <button
+                      className="rounded border px-4 py-2 text-rf-green"
+                      disabled={shop.cartPending > 0}
+                      onClick={() => shop.setQuantity(line.variantId, 0)}
+                    >
+                      Xóa sản phẩm không còn khả dụng
+                    </button>
+                  </article>
+                );
+              const { product, variant } = found;
               return (
                 <article className={tw.cart_line} key={line.variantId}>
                   <Link href={`/products/${product.slug}`}>
@@ -131,7 +150,7 @@ export function CartPage() {
                   <div className={tw.quantity}>
                     <button
                       aria-label={`Giảm ${product.name}`}
-                      disabled={line.quantity <= 1}
+                      disabled={line.quantity <= 1 || shop.cartPending > 0}
                       onClick={() =>
                         shop.setQuantity(line.variantId, line.quantity - 1)
                       }
@@ -141,7 +160,9 @@ export function CartPage() {
                     <span>{line.quantity}</span>
                     <button
                       aria-label={`Tăng ${product.name}`}
-                      disabled={line.quantity >= variant.stock}
+                      disabled={
+                        line.quantity >= variant.stock || shop.cartPending > 0
+                      }
                       onClick={() =>
                         shop.setQuantity(line.variantId, line.quantity + 1)
                       }
@@ -155,6 +176,7 @@ export function CartPage() {
                   <button
                     className={tw.icon_btn}
                     aria-label={`Xóa ${product.name}`}
+                    disabled={shop.cartPending > 0}
                     onClick={() => shop.setQuantity(line.variantId, 0)}
                   >
                     <Trash2 size={16} />
@@ -200,12 +222,19 @@ export function CartPage() {
               total={String(subtotal)}
               shippingLabel="Tính ở bước tiếp theo"
             />
-            <Link
-              className={tw.btn_full}
-              href={`/checkout${coupon.trim() ? "?coupon=" + encodeURIComponent(coupon.trim().toUpperCase()) : ""}`}
-            >
-              Tiến hành đặt hàng <ArrowRight size={17} />
-            </Link>
+            {unavailable ? (
+              <p role="alert">
+                Xóa sản phẩm không còn khả dụng để tiếp tục đặt hàng. Tổng trên
+                chỉ gồm sản phẩm còn khả dụng.
+              </p>
+            ) : (
+              <Link
+                className={tw.btn_full}
+                href={`/checkout${coupon.trim() ? "?coupon=" + encodeURIComponent(coupon.trim().toUpperCase()) : ""}`}
+              >
+                Tiến hành đặt hàng <ArrowRight size={17} />
+              </Link>
+            )}
             <p className="rf-secure-note flex items-center justify-center text-rf-muted text-[9px] mt-3.75 mb-0 mx-0 gap-1.5">
               <LockKeyhole size={13} />
               Giá và ưu đãi được xác nhận tại checkout

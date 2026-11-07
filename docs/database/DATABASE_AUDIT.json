@@ -1,5 +1,6 @@
 {
-  "date": "2026-11-06",
+  "date": "2026-11-07",
+  "observedAt": "2026-11-06T18:07:42.224Z",
   "schema": "public",
   "expectedModels": 104,
   "presentTables": 104,
@@ -51,7 +52,7 @@
     {
       "model": "AuthChallenge",
       "table": "auth_challenges",
-      "rows": 0
+      "rows": 1
     },
     {
       "model": "Address",

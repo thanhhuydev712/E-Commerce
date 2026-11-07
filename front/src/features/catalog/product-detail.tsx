@@ -217,7 +217,8 @@ export function ProductDetail({ product }: { product: Product }) {
           </div>
           <div className={tw.detail_price}>
             <strong>{money(variant.price)}</strong>
-            <del>{money(product.oldPrice)}</del>
+            {BigInt(variant.oldPrice ?? variant.price) >
+              BigInt(variant.price) && <del>{money(variant.oldPrice)}</del>}
             <small>Giá tham khảo trong bản trải nghiệm</small>
           </div>
           <fieldset className={tw.detail_offer}>
@@ -288,7 +289,7 @@ export function ProductDetail({ product }: { product: Product }) {
             </div>
             <button
               className={tw.btn}
-              disabled={!variant.stock}
+              disabled={!variant.stock || shop.cartPending > 0}
               onClick={() => shop.add(variantId, quantity)}
             >
               <Plus size={17} />
@@ -296,16 +297,15 @@ export function ProductDetail({ product }: { product: Product }) {
             </button>
             <button
               className={tw.btn_btn_dark}
-              disabled={!variant.stock}
-              onClick={() => {
+              disabled={!variant.stock || shop.cartPending > 0}
+              onClick={async () => {
                 if (
                   (shop.cart.find((l) => l.variantId === variantId)?.quantity ??
                     0) +
                     quantity <=
                   variant.stock
                 ) {
-                  shop.add(variantId, quantity);
-                  router.push("/cart");
+                  if (await shop.add(variantId, quantity)) router.push("/cart");
                 } else shop.notify("Số lượng vượt tồn khả dụng.");
               }}
             >

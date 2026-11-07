@@ -55,5 +55,15 @@ export function validateEnvironment(input: Record<string, unknown>) {
   )
     throw new Error('Production origins must use HTTPS');
   result.ALLOWED_ORIGINS = origins.join(',');
+  for (const [name, prefix] of [
+    ['STRIPE_SECRET_KEY', 'sk_test_'], ['STRIPE_WEBHOOK_SECRET', 'whsec_'],
+  ]) {
+    if (input[name] && (typeof input[name] !== 'string' || !String(input[name]).startsWith(prefix)))
+      throw new Error(`Invalid ${name}; only Stripe test mode is supported`);
+  }
+  const storefront = String(input.STOREFRONT_URL || origins[0]);
+  if (!origins.includes(storefront))
+    throw new Error('STOREFRONT_URL must be an allowed origin');
+  result.STOREFRONT_URL = storefront;
   return result;
 }

@@ -164,6 +164,8 @@ export function ProductCard({
 }) {
   const shop = useShop();
   const router = useRouter();
+  const purchase = product.variants[0];
+  const canBuy = !!purchase?.stock && !shop.cartPending;
   // Tính từ tiền nguyên: không dùng float cho tiền. % chỉ phục vụ badge hiển thị.
   const discount =
     BigInt(product.oldPrice) === BigInt(0)
@@ -217,17 +219,18 @@ export function ProductCard({
             <div className={tw.reference_card_actions}>
               <button
                 className="rf-card-add grid place-items-center w-10.75 shrink-0 bg-white bg-none text-rf-green max-[768px]:w-8.5"
-                disabled={!product.variants[0].stock}
+                disabled={!canBuy}
                 aria-label={`Thêm ${product.name} vào giỏ`}
-                onClick={() => shop.add(product.variants[0].id)}
+                onClick={() => purchase && shop.add(purchase.id)}
               >
                 <ShoppingCart size={20} />
               </button>
               <button
                 className={tw.card_buy}
-                disabled={!product.variants[0].stock}
-                onClick={() => {
-                  const selected = product.variants[0];
+                disabled={!canBuy}
+                onClick={async () => {
+                  if (!purchase) return;
+                  const selected = purchase;
                   if (
                     (shop.cart.find((line) => line.variantId === selected.id)
                       ?.quantity ?? 0) >= selected.stock
@@ -235,8 +238,7 @@ export function ProductCard({
                     shop.notify("Số lượng vượt tồn khả dụng.");
                     return;
                   }
-                  shop.add(selected.id);
-                  router.push("/cart");
+                  if (await shop.add(selected.id)) router.push("/cart");
                 }}
               >
                 <Rocket size={17} />
@@ -297,11 +299,12 @@ export function ProductCard({
         </div>
         <div className={tw.card_bottom}>
           <span>
-            <Check size={12} /> Có sẵn
+            <Check size={12} /> {purchase?.stock ? "Có sẵn" : "Hết hàng"}
           </span>
           <button
             className={tw.add_btn}
-            onClick={() => shop.add(product.variants[0].id)}
+            disabled={!canBuy}
+            onClick={() => purchase && shop.add(purchase.id)}
             aria-label={`Thêm ${product.name} vào giỏ`}
           >
             <Plus size={19} />

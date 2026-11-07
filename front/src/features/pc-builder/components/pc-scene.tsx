@@ -3,6 +3,7 @@ import {
   Component,
   Suspense,
   useEffect,
+  useLayoutEffect,
   useRef,
   type ComponentRef,
   type ReactNode,
@@ -39,17 +40,26 @@ function Box({
 function Fan({
   position,
   powered,
+  animate = true,
   color = "#42f4b8",
   rotation = [0, 0, 0],
 }: {
   position: Vec;
   powered: boolean;
+  animate?: boolean;
   color?: string;
   rotation?: Vec;
 }) {
   const blades = useRef<Group>(null);
+  const invalidate = useThree((state) => state.invalidate);
+  useEffect(() => {
+    invalidate();
+  }, [powered, animate, invalidate]);
   useFrame((_, delta) => {
-    if (blades.current && powered) blades.current.rotation.z += delta * 7;
+    if (blades.current && powered && animate) {
+      blades.current.rotation.z += Math.min(delta, 0.1) * 7;
+      invalidate();
+    }
   });
   return (
     <group position={position} rotation={rotation}>
@@ -92,6 +102,10 @@ function AnimatedPart({
 }) {
   const ref = useRef<Group>(null);
   const initialized = useRef(false);
+  const invalidate = useThree((state) => state.invalidate);
+  useEffect(() => {
+    invalidate();
+  }, [exploded, reduceMotion, invalidate]);
   const offsets: Record<Slot, Vec> = {
     cpu: [-0.9, 0.4, 1.7],
     mainboard: [-0.7, 0.1, 1.1],
@@ -127,6 +141,13 @@ function AnimatedPart({
       target[2],
       t,
     );
+    if (
+      Math.abs(ref.current.position.x - target[0]) +
+        Math.abs(ref.current.position.y - target[1]) +
+        Math.abs(ref.current.position.z - target[2]) >
+      0.001
+    )
+      invalidate();
   });
   return <group ref={ref}>{children}</group>;
 }
@@ -190,6 +211,7 @@ function Machine({
               position={[0.865, y, 0]}
               rotation={[0, Math.PI / 2, 0]}
               powered={powered}
+              animate={!reduceMotion}
             />
           ))}
           <Box position={[0, -1.05, 0]} size={[1.64, 0.03, 1.15]} />
@@ -313,6 +335,7 @@ function Machine({
               key={x}
               position={[x, -0.28, 0.395]}
               powered={powered}
+              animate={!reduceMotion}
               color="#a596ff"
             />
           ))}
@@ -369,7 +392,11 @@ function Machine({
               color="#c5cbd0"
             />
           ))}
-          <Fan position={[-0.23, 0.49, 0.23]} powered={powered} />
+          <Fan
+            position={[-0.23, 0.49, 0.23]}
+            powered={powered}
+            animate={!reduceMotion}
+          />
         </group>,
       )}
     </group>
@@ -414,21 +441,6 @@ function SceneControls({ resetVersion }: { resetVersion: number }) {
   );
 }
 
-function ContextLossGuard({ onError }: { onError: () => void }) {
-  const gl = useThree((state) => state.gl);
-  useEffect(() => {
-    const canvas = gl.domElement;
-    const handleLoss = (event: Event) => {
-      event.preventDefault();
-      onError();
-    };
-    canvas.addEventListener("webglcontextlost", handleLoss);
-    // Gỡ listener trước khi renderer dispose: đóng scene chủ động không phải lỗi GPU.
-    return () => canvas.removeEventListener("webglcontextlost", handleLoss);
-  }, [gl, onError]);
-  return null;
-}
-
 export default function PcScene({
   onError,
   cameraReset,
@@ -442,9 +454,23 @@ export default function PcScene({
   onError: () => void;
   cameraReset: number;
 }) {
+  const canvas = useRef<HTMLCanvasElement>(null);
+  // Gắn trước paint của canvas, không chờ cây scene bất đồng bộ hoàn tất.
+  // Mất context ngay lúc mở 3D cũng phải về 2D, giữ nguyên editor.
+  useLayoutEffect(() => {
+    const element = canvas.current;
+    const handleLoss = (event: Event) => {
+      event.preventDefault();
+      onError();
+    };
+    element?.addEventListener("webglcontextlost", handleLoss);
+    return () => element?.removeEventListener("webglcontextlost", handleLoss);
+  }, [onError]);
   return (
     <SceneBoundary onError={onError}>
       <Canvas
+        ref={canvas}
+        frameloop="demand"
         shadows="percentage"
         camera={{ position: [4, 2.1, 5], fov: 39 }}
         dpr={[1, 1.5]}
@@ -472,7 +498,6 @@ export default function PcScene({
           <shadowMaterial opacity={0.25} />
         </mesh>
         <SceneControls resetVersion={cameraReset} />
-        <ContextLossGuard onError={onError} />
       </Canvas>
     </SceneBoundary>
   );

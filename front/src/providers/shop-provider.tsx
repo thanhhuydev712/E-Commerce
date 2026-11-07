@@ -13,6 +13,7 @@ import {
   ApiError,
   refreshSession,
   setAccessToken,
+  SESSION_EXPIRED,
 } from "@/src/catalog/api-client";
 import { useCatalog } from "@/src/catalog/catalog-provider";
 import type { Build } from "@/src/features/pc-builder/lib/compatibility";
@@ -24,6 +25,10 @@ export type Order = {
   status: "processing" | "cancelled";
   backendStatus: string;
   payment: "paid" | "pending" | "failed";
+  paymentMethod: "COD" | "STRIPE";
+  paymentStatus: string;
+  paymentDeadline: string | null;
+  canPay: boolean;
   lines: {
     id: string;
     name: string;
@@ -55,6 +60,7 @@ type Snapshot = {
   toast: string;
   user: User | null;
   cart: CartLine[];
+  cartPending: number;
   orders: Order[];
   wishlist: string[];
   compare: string[];
@@ -64,7 +70,7 @@ type CheckoutData = {
   customer: string;
   address: string;
   phone: string;
-  payment: Order["payment"];
+  payment: "COD" | "STRIPE";
   couponCode?: string;
   express: boolean;
 };
@@ -83,6 +89,7 @@ function createStore(
     toast: "",
     user: null,
     cart: [],
+    cartPending: 0,
     orders: [],
     wishlist: [],
     compare: [],
@@ -92,10 +99,11 @@ function createStore(
     initialization: Promise<void> | null = null,
     timer: ReturnType<typeof setTimeout> | undefined;
   const listeners = new Set<() => void>();
-  let cartQueue = Promise.resolve(),
+  let cartQueue = Promise.resolve(true),
     placing: Promise<string | null> | null = null;
   let pending: { fingerprint: string; quoteId: string; key: string } | null =
     null;
+  let sessionVersion = 0;
   const emit = (update: Partial<Snapshot>) => {
     state = { ...state, ...update };
     listeners.forEach((fn) => fn());
@@ -111,6 +119,12 @@ function createStore(
         ? cause.message
         : "Không thể kết nối backend. Vui lòng thử lại.",
     );
+  const clearSession = () => {
+    sessionVersion += 1;
+    pending = null;
+    setAccessToken(null);
+    emit({ user: null, cart: [], orders: [], wishlist: [], builds: [] });
+  };
   const initialize = () => {
     if (initialization) return initialization;
     initialization = (async () => {
@@ -150,6 +164,7 @@ function createStore(
     return false;
   };
   async function loadPrivate() {
+    const version = sessionVersion;
     const [user, cart, orders, wishlist, builds] = await Promise.all([
       api<Account>("/me"),
       api<{ lines: CartLine[] }>("/me/cart"),
@@ -157,17 +172,34 @@ function createStore(
       api<string[]>("/me/wishlist"),
       api<Snapshot["builds"]>("/me/builds"),
     ]);
-    emit({ user: userView(user), cart: cart.lines, orders, wishlist, builds });
+    if (version === sessionVersion)
+      emit({
+        user: userView(user),
+        cart: cart.lines,
+        orders,
+        wishlist,
+        builds,
+      });
   }
   const queueCart = (run: () => Promise<{ lines: CartLine[] }>) => {
+    const intendedUser = state.user?.id;
+    emit({ cartPending: state.cartPending + 1 });
     cartQueue = cartQueue
       .then(async () => {
-        if (!(await signedIn())) return;
+        if (intendedUser && intendedUser !== state.user?.id) return false;
+        if (!(await signedIn())) return false;
+        const version = sessionVersion;
         const result = await run();
+        if (version !== sessionVersion) return false;
         emit({ cart: result.lines });
         notify("Đã cập nhật giỏ hàng");
+        return true;
       })
-      .catch(error);
+      .catch((cause) => {
+        error(cause);
+        return false;
+      })
+      .finally(() => emit({ cartPending: Math.max(0, state.cartPending - 1) }));
     return cartQueue;
   };
   return {
@@ -185,6 +217,10 @@ function createStore(
     initialize,
     dispose: () => clearTimeout(timer),
     notify,
+    expireSession: () => {
+      clearSession();
+      notify("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.");
+    },
     login: async (data: {
       email: string;
       password: string;
@@ -202,6 +238,7 @@ function createStore(
           },
         },
       );
+      clearSession();
       setAccessToken(result.accessToken);
       emit({ user: userView(result.user) });
       await loadPrivate();
@@ -210,8 +247,7 @@ function createStore(
     logout: async () => {
       try {
         await api("/auth/logout", { method: "POST" });
-        setAccessToken(null);
-        emit({ user: null, cart: [], orders: [], wishlist: [], builds: [] });
+        clearSession();
       } catch (cause) {
         error(cause);
       }
@@ -279,6 +315,7 @@ function createStore(
       placing = (async () => {
         await cartQueue;
         if (!(await signedIn())) return null;
+        const version = sessionVersion;
         const fingerprint = JSON.stringify([state.user?.id, state.cart, data]);
         try {
           if (!pending || pending.fingerprint !== fingerprint) {
@@ -292,6 +329,7 @@ function createStore(
                 couponCode: data.couponCode || undefined,
               },
             });
+            if (version !== sessionVersion) return null;
             pending = {
               fingerprint,
               quoteId: quote.id,
@@ -300,16 +338,17 @@ function createStore(
           }
           const order = await api<Order>("/me/orders", {
             method: "POST",
-            body: { quoteId: pending.quoteId, method: "COD" },
+            body: { quoteId: pending.quoteId, method: data.payment },
             key: pending.key,
           });
+          if (version !== sessionVersion) return null;
           pending = null;
           emit({
             cart: [],
             orders: [order, ...state.orders.filter((o) => o.id !== order.id)],
           });
           await catalog().refreshCatalog().catch(error);
-          notify("Đã tạo đơn hàng COD");
+          notify(data.payment === "STRIPE" ? "Đã tạo đơn, tiếp tục thanh toán Stripe test" : "Đã tạo đơn hàng COD");
           return order.id;
         } catch (cause) {
           if (cause instanceof ApiError && cause.status === 409) pending = null;
@@ -336,7 +375,8 @@ function createStore(
     retryPayment: async () =>
       notify("Thanh toán online chưa được bật; đơn COD vẫn chưa thanh toán."),
     saveBuild: async (name: string, build: Build) => {
-      if (!(await signedIn())) return;
+      if (!(await signedIn())) return false;
+      const version = sessionVersion;
       try {
         const components = Object.fromEntries(
           Object.entries(build).flatMap(([slot, id]) => {
@@ -344,15 +384,17 @@ function createStore(
             return p ? [[slot, p.databaseId]] : [];
           }),
         );
-        emit({
-          builds: await api<Snapshot["builds"]>("/me/builds", {
-            method: "POST",
-            body: { name, components },
-          }),
+        const builds = await api<Snapshot["builds"]>("/me/builds", {
+          method: "POST",
+          body: { name, components },
         });
+        if (version !== sessionVersion) return false;
+        emit({ builds });
         notify("Đã lưu cấu hình vào tài khoản");
+        return true;
       } catch (cause) {
         error(cause);
+        return false;
       }
     },
     deleteBuild: async (id: string) => {
@@ -381,6 +423,11 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     void store.initialize();
     return store.dispose;
+  }, [store]);
+  useEffect(() => {
+    const expired = () => store.expireSession();
+    window.addEventListener(SESSION_EXPIRED, expired);
+    return () => window.removeEventListener(SESSION_EXPIRED, expired);
   }, [store]);
   return (
     <Context.Provider value={store}>

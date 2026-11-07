@@ -271,7 +271,7 @@ export default function BuilderPage({ savedId }: { savedId?: string }) {
         Đang mở cấu hình…
       </div>
     );
-  return <BuilderEditor savedId={savedId} />;
+  return <BuilderEditor key={savedId ?? "new"} savedId={savedId} />;
 }
 
 function BuilderEditor({ savedId }: { savedId?: string }) {
@@ -290,6 +290,8 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
   const [reduce, setReduce] = useState(false);
   const [budget, setBudget] = useState("25000000");
   const [save, setSave] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const [name, setName] = useState("Cấu hình của tôi");
   const [search, setSearch] = useState("");
   const [reset, setReset] = useState(false);
@@ -314,7 +316,14 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
     (s, id) => s + BigInt(productById(id)?.price ?? "0"),
     BigInt(0),
   );
-  const selected = Object.keys(build).length;
+  const selectedSlots = slots.filter((slot) => {
+    const product = productById(build[slot] ?? "");
+    return product?.builderEligible && product.category === slot;
+  });
+  const selected = selectedSlots.length;
+  const sceneBuild: Build = Object.fromEntries(
+    selectedSlots.map((slot) => [slot, build[slot]]),
+  );
   const sceneError = useCallback(() => {
     setView("2d");
     shop.notify(
@@ -514,9 +523,9 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
             {view === "3d" ? (
               <Scene
                 cameraReset={camera}
-                build={build}
+                build={sceneBuild}
                 exploded={exploded}
-                powered={powered && !reduce}
+                powered={powered}
                 panelOpen={open}
                 reduceMotion={reduce}
                 onError={sceneError}
@@ -531,20 +540,23 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
               >
                 <ProductArt category="pc" />
                 <div className={tw.item_2d_tags}>
-                  {slots
-                    .filter((s) => build[s])
-                    .map((s) => (
-                      <span key={s}>
-                        <CategoryIcon id={s} size={13} />
-                        {categories.find((c) => c.id === s)?.short}
-                        <Check size={12} />
-                      </span>
-                    ))}
+                  {selectedSlots.map((s) => (
+                    <span key={s}>
+                      <CategoryIcon id={s} size={13} />
+                      {categories.find((c) => c.id === s)?.short}
+                      <Check size={12} />
+                    </span>
+                  ))}
                 </div>
                 {!selected && (
                   <p>Bắt đầu chọn linh kiện hoặc thử cấu hình đề xuất</p>
                 )}
               </div>
+            )}
+            {view === "3d" && !selected && (
+              <p className="pointer-events-none absolute inset-0 m-0 grid place-items-center px-8 text-center text-sm text-white">
+                Chọn linh kiện hoặc dùng cấu hình đề xuất để xem mô hình 3D.
+              </p>
             )}
             <div className={tw.viewport_caption}>
               <span>
@@ -563,17 +575,24 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
               <Layers3 size={16} />
               {exploded ? "Thu gọn" : "Tách linh kiện"}
             </button>
-            <button aria-pressed={open} onClick={() => setOpen(!open)}>
+            <button
+              disabled={view !== "3d"}
+              aria-pressed={open}
+              onClick={() => setOpen(!open)}
+            >
               <Expand size={16} />
               {open ? "Đóng kính" : "Mở kính"}
             </button>
-            <button onClick={() => setCamera((c) => c + 1)}>
+            <button
+              disabled={view !== "3d"}
+              onClick={() => setCamera((c) => c + 1)}
+            >
               <RotateCcw size={16} />
               Góc nhìn
             </button>
             <button
               className={powered ? "on" : ""}
-              disabled={!!missing.length || !!errors.length}
+              disabled={!powered && (!!missing.length || !!errors.length)}
               aria-pressed={powered}
               onClick={() => setPowered(!powered)}
             >
@@ -661,7 +680,10 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
           <button
             className={tw.btn_btn_outline_full}
             disabled={!selected}
-            onClick={() => setSave(true)}
+            onClick={() => {
+              setSaveError("");
+              setSave(true);
+            }}
           >
             <Save size={16} />
             Lưu cấu hình
@@ -689,6 +711,16 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
             onChange={(e) => setSearch(e.target.value)}
           />
           <div className={tw.picker_list}>
+            {!products.some(
+              (p) =>
+                p.builderEligible &&
+                p.category === picker &&
+                p.name.toLowerCase().includes(search.toLowerCase()),
+            ) && (
+              <p role="status">
+                Không tìm thấy linh kiện phù hợp. Thử từ khóa khác.
+              </p>
+            )}
             {products
               .filter(
                 (p) =>
@@ -720,6 +752,9 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
                     </div>
                     <button
                       className={tw.btn}
+                      disabled={
+                        !p.variants.some((variant) => variant.stock > 0)
+                      }
                       onClick={() => {
                         change({ ...build, [picker]: p.id });
                         setPicker(null);
@@ -737,10 +772,24 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
       {save && (
         <Dialog title="Lưu cấu hình của bạn" onClose={() => setSave(false)}>
           <form
-            onSubmit={(e) => {
+            aria-busy={saving}
+            onSubmit={async (e) => {
               e.preventDefault();
-              shop.saveBuild(name.trim() || "Cấu hình của tôi", build);
-              setSave(false);
+              if (saving) return;
+              setSaving(true);
+              setSaveError("");
+              try {
+                if (
+                  await shop.saveBuild(name.trim() || "Cấu hình của tôi", build)
+                )
+                  setSave(false);
+                else
+                  setSaveError(
+                    "Chưa lưu được cấu hình. Kiểm tra kết nối và thử lại; các linh kiện vẫn được giữ.",
+                  );
+              } finally {
+                setSaving(false);
+              }
             }}
             className={tw.form}
           >
@@ -755,8 +804,9 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
               />
             </label>
             <p>Cấu hình được lưu vào tài khoản của bạn.</p>
-            <button className={tw.btn}>
-              Lưu cấu hình <Save size={16} />
+            {saveError && <p role="alert">{saveError}</p>}
+            <button className={tw.btn} disabled={saving}>
+              {saving ? "Đang lưu…" : "Lưu cấu hình"} <Save size={16} />
             </button>
           </form>
         </Dialog>

@@ -30,7 +30,7 @@ Carousel tự chuyển mỗi 3 giây, lặp vòng; có mũi tên trước/sau, k
 
 Nút tạm dừng/bật lại giúp người dùng chủ động đọc ảnh; tự chuyển cũng dừng khi dùng bàn phím trong carousel hoặc bỏ qua tick khi tab trình duyệt bị ẩn. Chọn slide bằng chuột tiếp tục chu kỳ tự chuyển. Slide không active dùng `inert` và `aria-hidden` để tránh focus nhầm; `prefers-reduced-motion` loại bỏ hiệu ứng trượt. Toàn bộ CSS trình bày landing cũ đã chuyển vào utility Tailwind trong từng component, gồm các trạng thái và breakpoint; CSS toàn cục chỉ còn token, mặc định/accessibility và selector layout theo route.
 
-Kiểm thử tương tác tại `tests/e2e/hero-carousel.spec.ts`; đồng hồ Playwright kiểm mốc 2.999/3.000 ms sau khi Next hoàn tất streaming/hydration. Script chụp ảnh `scripts/review-landing.mjs` đọc ảnh đầu tiên trong track mới. Kết quả và giới hạn kiểm chứng được ghi tại [PROJECT_STATUS.md](../../docs/PROJECT_STATUS.md).
+Kiểm thử tương tác tại `tests/e2e/hero-carousel.spec.ts`; đồng hồ Playwright kiểm mốc 2.999/3.000 ms sau khi Next hoàn tất streaming/hydration. Script chụp ảnh `scripts/review-landing.mjs` đợi ảnh của slide active, bỏ qua clone ở đầu track. Kết quả và giới hạn kiểm chứng được ghi tại [PROJECT_STATUS.md](../../docs/PROJECT_STATUS.md).
 
 ## Dữ liệu và ảnh
 

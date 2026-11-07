@@ -93,6 +93,12 @@ Context chỉ truyền instance store ổn định. Action đọc snapshot mới
 
 Địa chỉ/ticket/preferences/review gọi API có ownership. Chỉ compare lưu local dưới key `rigforge-compare-v2`; state demo v1 không dùng làm phiên hay nguồn đơn. Không fallback sang fixture khi API lỗi.
 
+Rà soát ngày 07/11/2026: action giỏ trả kết quả thành công và cung cấp `cartPending` để khóa thao tác trong lúc gửi; “Mua ngay” chỉ chuyển trang sau khi thêm giỏ thành công. API client xử lý proxy không trả JSON/HTTP 204 và phát `SESSION_EXPIRED` khi không khôi phục được phiên. Store xóa dữ liệu riêng, đánh số phiên để bỏ response giỏ/cấu hình/đơn đến trễ. `useApiResource` gắn kết quả với path/phiên reload, tránh hiển thị tài nguyên cũ dưới URL mới. Checkout kiểm SKU không còn trong catalog và thể hiện trạng thái tạo đơn; save dialog chỉ đóng khi API xác nhận lưu.
+
+PC Studio dùng `frameloop="demand"`: lắp/tách linh kiện và quạt đang chạy mới yêu cầu frame tiếp; OrbitControls tự yêu cầu render khi camera thay đổi. Giảm chuyển động dừng quạt nhưng giữ ánh sáng bật máy. Listener mất WebGL context được gắn lên ref canvas trong layout effect trước paint, không đợi cây scene; error boundary xử lý khi không tạo được WebGL. Mô hình chỉ nhận linh kiện đúng nhóm còn trong catalog; không phải model kích thước thật theo SKU. Quy tắc thiếu thông số tạo warning, không kết luận socket/DDR/kích thước/công suất phù hợp từ giá trị mặc định 0/undefined.
+
+Error boundary của App Router dùng `retry()` (Next 16.4) để tải lại server data; `reset()` chỉ xóa trạng thái lỗi. Global error tự import stylesheet vì thay thế root layout. [Báo cáo rà soát](../../docs/FRONTEND_READINESS_AUDIT.md) ghi bằng chứng và phần chưa được nghiệm thu.
+
 ## Server, client và tải tài nguyên
 
 Root layout đọc catalog runtime dưới Suspense; các section dùng CatalogProvider là Client Components. Hero/tab, rail, blog có filter, button dùng store, dialog và header tương tác cần client. Header không còn đọc pathname; lớp Suspense ở layout vẫn được giữ để cô lập hydration.

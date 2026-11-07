@@ -152,7 +152,7 @@ export default function AccountPage({ segments }: { segments: string[] }) {
           <button onClick={() => void shop.logout()}>Đăng xuất</button>
         </nav>
       </aside>
-      <main className="min-w-0">{content}</main>
+      <div className="min-w-0">{content}</div>
     </div>
   );
 }
@@ -472,6 +472,8 @@ function Security() {
               method: "PATCH",
               body: { currentPassword: current, newPassword: password },
             });
+            shop.expireSession();
+            shop.notify("Đã đổi mật khẩu. Vui lòng đăng nhập lại.");
             router.replace("/login");
           } catch (cause) {
             shop.notify((cause as Error).message);

@@ -171,7 +171,10 @@ export class StorefrontService {
           .filter(Boolean),
         technical,
         builderEligible: attrs.store_builder_eligible === true,
-        variants: row.variants.map(({ oldPrice: _old, ...variant }) => variant),
+        variants: row.variants.map((variant) => ({
+          ...variant,
+          oldPrice: variant.oldPrice ?? variant.price,
+        })),
         stock: row.variants.reduce((sum, v) => sum + v.stock, 0),
         warranty: String(attrs.store_warranty ?? ''),
         reviews: row.reviews,

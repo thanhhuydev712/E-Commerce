@@ -17,7 +17,9 @@ for (const width of widths.length ? widths : [1340, 390]) {
   await page.goto("http://localhost:3000", { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
   await page
-    .locator(".rf-reference-hero-image img")
+    .locator(
+      '.rf-reference-hero-image [aria-roledescription="slide"]:not([inert]) img',
+    )
     .first()
     .evaluate(async (image) => {
       await image.decode();

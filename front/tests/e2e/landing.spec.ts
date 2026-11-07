@@ -195,9 +195,9 @@ test("mọi liên kết trên landing có trang đích, URL lạ trả 404", asy
       ...new Set(anchors.map((anchor) => anchor.getAttribute("href")!)),
     ]);
   // Bound concurrency for a remote test database while still checking every link.
-  for (let index = 0; index < links.length; index += 2)
+  for (let index = 0; index < links.length; index += 4)
     await Promise.all(
-      links.slice(index, index + 2).map(async (href) => {
+      links.slice(index, index + 4).map(async (href) => {
         const response = await request.get(href);
         expect(response.status(), href).toBe(200);
       }),

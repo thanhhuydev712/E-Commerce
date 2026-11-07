@@ -21,20 +21,47 @@ export function checkBuild(build: Build, productById: Lookup): Check[] {
   const { cpu, mainboard, ram, gpu, psu, cooler } = selected;
   const chassis = selected.case;
   const checks: Check[] = [];
+  for (const slot of slots) {
+    const product = selected[slot];
+    if (
+      build[slot] &&
+      (!product || !product.builderEligible || product.category !== slot)
+    )
+      checks.push({
+        level: "error",
+        message: `Linh kiện ở nhóm ${slot} không còn phù hợp. Vui lòng chọn lại.`,
+      });
+    if (product && !product.variants.some((variant) => variant.stock > 0))
+      checks.push({
+        level: "error",
+        message: `${product.name} hiện hết hàng.`,
+      });
+  }
   if (cpu && mainboard)
     checks.push(
-      cpu.technical.socket === mainboard.technical.socket
-        ? { level: "ok", message: "CPU và mainboard cùng socket." }
-        : {
-            level: "error",
-            message: `CPU ${cpu.technical.socket} không phù hợp mainboard ${mainboard.technical.socket}.`,
-          },
+      !cpu.technical.socket || !mainboard.technical.socket
+        ? {
+            level: "warning",
+            message:
+              "Chưa có đủ thông tin socket để đối chiếu CPU và mainboard.",
+          }
+        : cpu.technical.socket === mainboard.technical.socket
+          ? { level: "ok", message: "CPU và mainboard cùng socket." }
+          : {
+              level: "error",
+              message: `CPU ${cpu.technical.socket} không phù hợp mainboard ${mainboard.technical.socket}.`,
+            },
     );
   if (mainboard && ram)
     checks.push(
-      mainboard.technical.ddr === ram.technical.ddr
-        ? { level: "ok", message: "RAM đúng thế hệ mainboard hỗ trợ." }
-        : { level: "error", message: "RAM và mainboard khác thế hệ DDR." },
+      !mainboard.technical.ddr || !ram.technical.ddr
+        ? {
+            level: "warning",
+            message: "Chưa có đủ thông tin thế hệ DDR để đối chiếu RAM.",
+          }
+        : mainboard.technical.ddr === ram.technical.ddr
+          ? { level: "ok", message: "RAM đúng thế hệ mainboard hỗ trợ." }
+          : { level: "error", message: "RAM và mainboard khác thế hệ DDR." },
     );
   if (
     mainboard &&
@@ -46,25 +73,31 @@ export function checkBuild(build: Build, productById: Lookup): Check[] {
       level: "error",
       message: "Mainboard ATX không vừa case mATX đã chọn.",
     });
-  if (
-    gpu &&
-    chassis &&
-    (gpu.technical.length ?? 0) > (chassis.technical.gpuMax ?? 0)
-  )
-    checks.push({
-      level: "error",
-      message: "Card đồ họa dài hơn khoảng trống của case.",
-    });
-  if (
-    cooler &&
-    chassis &&
-    (cooler.technical.clearance ?? 0) > (chassis.technical.coolerMax ?? 0)
-  )
-    checks.push({
-      level: "error",
-      message: "Tản nhiệt cao hơn giới hạn của case.",
-    });
-  if (cpu && !cpu.technical.integrated && !gpu)
+  if (gpu && chassis) {
+    if (!gpu.technical.length || !chassis.technical.gpuMax)
+      checks.push({
+        level: "warning",
+        message: "Chưa đủ kích thước để kiểm tra VGA có vừa case.",
+      });
+    else if (gpu.technical.length > chassis.technical.gpuMax)
+      checks.push({
+        level: "error",
+        message: "Card đồ họa dài hơn khoảng trống của case.",
+      });
+  }
+  if (cooler && chassis) {
+    if (!cooler.technical.clearance || !chassis.technical.coolerMax)
+      checks.push({
+        level: "warning",
+        message: "Chưa đủ kích thước để kiểm tra tản nhiệt có vừa case.",
+      });
+    else if (cooler.technical.clearance > chassis.technical.coolerMax)
+      checks.push({
+        level: "error",
+        message: "Tản nhiệt cao hơn giới hạn của case.",
+      });
+  }
+  if (cpu && cpu.technical.integrated === false && !gpu)
     checks.push({
       level: "error",
       message: "CPU không có đồ họa tích hợp: cần chọn VGA.",
@@ -72,15 +105,22 @@ export function checkBuild(build: Build, productById: Lookup): Check[] {
   const watts = estimateWatts(build, productById);
   if (psu)
     checks.push(
-      (psu.technical.watts ?? 0) < watts * 1.3
+      !psu.technical.watts ||
+        (cpu && !cpu.technical.watts) ||
+        (gpu && !gpu.technical.watts)
         ? {
-            level: "error",
-            message: "Nguồn chưa đủ khoảng dự phòng 30% theo ước tính demo.",
+            level: "warning",
+            message: "Chưa đủ dữ liệu công suất để kết luận nguồn phù hợp.",
           }
-        : {
-            level: "ok",
-            message: "Nguồn đủ khoảng dự phòng theo ước tính demo.",
-          },
+        : psu.technical.watts < watts * 1.3
+          ? {
+              level: "error",
+              message: "Nguồn chưa đủ khoảng dự phòng 30% theo ước tính demo.",
+            }
+          : {
+              level: "ok",
+              message: "Nguồn đủ khoảng dự phòng theo ước tính demo.",
+            },
     );
   checks.push({
     level: "warning",
@@ -96,6 +136,8 @@ export const estimateWatts = (build: Build, productById: Lookup) =>
 export const missingSlots = (build: Build, productById: Lookup) =>
   slots.filter(
     (s) =>
-      !build[s] &&
+      (!build[s] ||
+        !productById(build[s]!)?.builderEligible ||
+        productById(build[s]!)?.category !== s) &&
       (s !== "gpu" || !productById(build.cpu ?? "")?.technical.integrated),
   );

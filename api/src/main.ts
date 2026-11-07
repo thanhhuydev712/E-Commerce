@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module.js';
 import { configureHttp } from './platform/http.js';
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { rawBody: true });
   configureHttp(app);
   app.enableShutdownHooks();
   await app.listen(app.get(ConfigService).getOrThrow<number>('PORT'));

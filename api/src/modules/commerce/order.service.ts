@@ -14,6 +14,7 @@ import { CommerceService } from './commerce.service.js';
 import { publicCatalogScope } from '../catalog/catalog-read.js';
 import { productLock, catalogReadLock } from '../catalog/catalog-locks.js';
 import type { PlaceOrderDto, QuoteDto } from './commerce.dto.js';
+import { StripeGateway } from './stripe.gateway.js';
 type Quote = {
   cartId: string;
   cartVersion: number;
@@ -44,6 +45,7 @@ export class OrderService {
   constructor(
     @Inject(PrismaService) private readonly prisma: PrismaService,
     @Inject(CommerceService) private readonly commerce: CommerceService,
+    @Inject(StripeGateway) private readonly stripe: StripeGateway,
   ) {}
   async price(
     tx: DbTransaction,
@@ -207,7 +209,7 @@ export class OrderService {
           id: quote.id,
           expiresAt: quote.expiresAt,
           ...snapshot,
-          methods: ['COD'],
+          methods: this.stripe.enabled ? ['COD', 'STRIPE'] : ['COD'],
           taxIncluded: true,
         };
       },
@@ -217,12 +219,7 @@ export class OrderService {
   async place(userId: string, key: string | undefined, dto: PlaceOrderDto) {
     if (!key || !/^[a-zA-Z0-9._:-]{8,96}$/.test(key))
       throw new BadRequestException('Idempotency-Key is required');
-    if (dto.method !== 'COD')
-      throw new ServiceUnavailableException({
-        code: 'STRIPE_TEST_NOT_READY',
-        message:
-          'Stripe test requires webhook/signature processing before online checkout is enabled',
-      });
+    if (dto.method === 'STRIPE') this.stripe.assertAvailable();
     const requestHash = hash(dto);
     const id = await this.prisma.$transaction(
       async (tx) => {
@@ -273,6 +270,11 @@ export class OrderService {
           );
         const orderId = randomUUID(),
           number = `RF-${Date.now()}-${randomUUID().slice(0, 6).toUpperCase()}`;
+        if (dto.method === 'STRIPE' &&
+          (BigInt(snapshot.total) <= 0n || BigInt(snapshot.total) > BigInt(Number.MAX_SAFE_INTEGER)))
+          throw new ConflictException('Order amount is unsupported for Stripe');
+        const paymentDeadline = dto.method === 'STRIPE' ? new Date(Date.now() + 60 * 60 * 1000) : null;
+        const initialStatus = dto.method === 'STRIPE' ? 'PENDING_PAYMENT' : 'CONFIRMED';
         await tx.order.create({
           data: {
             id: orderId,
@@ -280,7 +282,7 @@ export class OrderService {
             userId,
             checkoutSessionId: quote.id,
             source: 'WEB',
-            status: 'CONFIRMED',
+            status: initialStatus,
             currencyCode: 'VND',
             subtotal: BigInt(snapshot.subtotal),
             discountTotal: BigInt(snapshot.discount),
@@ -288,8 +290,9 @@ export class OrderService {
             taxTotal: 0n,
             grandTotal: BigInt(snapshot.total),
             customerEmailSnapshot: user.email,
-            pricingSnapshot: { ...snapshot, method: 'COD', taxIncluded: true },
+            pricingSnapshot: { ...snapshot, method: dto.method, taxIncluded: true },
             placedAt: new Date(),
+            paymentDeadline,
           },
         });
         await tx.orderAddress.create({
@@ -378,7 +381,8 @@ export class OrderService {
                 balanceId: balance.id,
                 orderItemId: item.id,
                 quantity,
-                status: 'COMMITTED',
+                status: dto.method === 'STRIPE' ? 'ACTIVE' : 'COMMITTED',
+                expiresAt: paymentDeadline,
                 operationKey: `order:${orderId}:${item.id}:${balance.id}`,
               },
             });
@@ -407,7 +411,8 @@ export class OrderService {
               couponId: snapshot.couponId,
               userId,
               orderId,
-              status: 'APPLIED',
+              status: dto.method === 'STRIPE' ? 'RESERVED' : 'APPLIED',
+              reservedUntil: paymentDeadline,
               operationKey: `coupon:${orderId}`,
             },
           });
@@ -423,9 +428,9 @@ export class OrderService {
         await tx.orderStatusHistory.create({
           data: {
             orderId,
-            toStatus: 'CONFIRMED',
+            toStatus: initialStatus,
             actorId: userId,
-            reason: 'Đặt hàng COD',
+            reason: dto.method === 'STRIPE' ? 'Chờ thanh toán Stripe test' : 'Đặt hàng COD',
             operationKey: `placed:${orderId}`,
           },
         });
@@ -442,7 +447,7 @@ export class OrderService {
             userId,
             type: 'ORDER',
             title: 'Đặt hàng thành công',
-            body: `Đơn ${number} đang được xử lý, thanh toán khi nhận hàng.`,
+            body: dto.method === 'STRIPE' ? `Đơn ${number} đang chờ thanh toán Stripe test.` : `Đơn ${number} đang được xử lý, thanh toán khi nhận hàng.`,
             resourceType: 'ORDER',
             resourceId: orderId,
             dedupeKey: `placed:${orderId}`,
@@ -455,7 +460,7 @@ export class OrderService {
             action: 'ORDER_PLACE',
             entityType: 'ORDER',
             entityId: orderId,
-            afterRedacted: { number, method: 'COD', amount: snapshot.total },
+            afterRedacted: { number, method: dto.method, amount: snapshot.total },
           },
         });
         await tx.idempotencyKey.create({
@@ -518,9 +523,14 @@ export class OrderService {
       id: row.id,
       number: row.number,
       createdAt: row.placedAt,
-      status: row.status === 'CANCELLED' ? 'cancelled' : 'processing',
+      status: ['CANCELLED', 'EXPIRED'].includes(row.status) ? 'cancelled' : 'processing',
       backendStatus: row.status,
       payment: row.payment?.status === 'PAID' ? 'paid' : 'pending',
+      paymentMethod: (row.pricingSnapshot as { method?: string }).method ?? 'COD',
+      paymentStatus: row.payment?.status ?? 'UNPAID',
+      paymentDeadline: row.paymentDeadline,
+      canPay: row.status === 'PENDING_PAYMENT' && row.payment?.capturedAmount === 0n &&
+        !!row.paymentDeadline && row.paymentDeadline > new Date(),
       lines: row.orderItems.map((l) => ({
         id: l.id,
         name: `${l.productNameSnapshot}${l.variantNameSnapshot ? ' · ' + l.variantNameSnapshot : ''}`,
@@ -539,16 +549,25 @@ export class OrderService {
         row.payment?.capturedAmount === 0n,
     };
   }
-  async cancel(userId: string, id: string) {
+  async cancel(userId: string, id: string, stripeExpired = false) {
     await this.prisma.$transaction(
       async (tx) => {
         await this.commerce.userLock(tx, userId);
+        await this.closeUnpaid(tx, userId, id, 'CANCELLED', stripeExpired);
+      },
+      { timeout: 45000 },
+    );
+    return this.detail(userId, id);
+  }
+  /** Caller holds the same user row lock as place/cancel/payment processing. */
+  async closeUnpaid(tx: DbTransaction, userId: string, id: string,
+    status: 'CANCELLED' | 'EXPIRED', stripeExpired = false) {
         const order = await tx.order.findFirst({
           where: { id, userId },
           include: { payment: true, orderItems: true },
         });
         if (!order) throw new NotFoundException('Order not found');
-        if (order.status === 'CANCELLED') return;
+        if (['CANCELLED', 'EXPIRED'].includes(order.status)) return;
         if (
           !['CONFIRMED', 'PENDING_PAYMENT'].includes(order.status) ||
           order.payment?.capturedAmount !== 0n
@@ -556,6 +575,9 @@ export class OrderService {
           throw new ConflictException(
             'Order cannot be cancelled; contact support',
           );
+        if (!stripeExpired && await tx.paymentAttempt.count({ where: {
+          paymentId: order.payment!.id, status: { in: ['CREATED', 'PENDING', 'UNKNOWN'] },
+        } })) throw new ConflictException('Stripe session must be expired before releasing stock');
         for (const productId of [
           ...new Set(
             (
@@ -584,7 +606,7 @@ export class OrderService {
           });
           await tx.stockReservation.update({
             where: { id: reservation.id },
-            data: { status: 'RELEASED' },
+            data: { status: status === 'EXPIRED' ? 'EXPIRED' : 'RELEASED' },
           });
           await tx.inventoryMovement.create({
             data: {
@@ -604,9 +626,9 @@ export class OrderService {
         await tx.order.update({
           where: { id },
           data: {
-            status: 'CANCELLED',
+            status,
             cancelledAt: new Date(),
-            cancellationReason: 'Customer cancellation',
+            cancellationReason: status === 'EXPIRED' ? 'Payment session expired' : 'Customer cancellation',
             version: { increment: 1 },
           },
         });
@@ -618,7 +640,7 @@ export class OrderService {
           data: {
             orderId: id,
             fromStatus: order.status,
-            toStatus: 'CANCELLED',
+            toStatus: status,
             actorId: userId,
             operationKey: `cancelled:${id}`,
           },
@@ -627,14 +649,18 @@ export class OrderService {
           data: {
             actorId: userId,
             actorType: 'USER',
-            action: 'ORDER_CANCEL',
+            action: status === 'EXPIRED' ? 'ORDER_EXPIRE' : 'ORDER_CANCEL',
             entityType: 'ORDER',
             entityId: id,
           },
         });
-      },
-      { timeout: 45000 },
-    );
-    return this.detail(userId, id);
+        await tx.paymentAttempt.updateMany({
+          where: { paymentId: order.payment!.id, status: { in: ['CREATED', 'PENDING', 'UNKNOWN'] } },
+          data: { status: 'CANCELLED', settledAt: new Date() },
+        });
+        await tx.payment.updateMany({
+          where: { id: order.payment!.id, capturedAmount: 0n },
+          data: { status: 'UNPAID', version: { increment: 1 } },
+        });
   }
 }

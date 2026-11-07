@@ -6,6 +6,8 @@ import { useShop } from "@/src/providers/shop-provider";
 import type { Order } from "@/src/providers/shop-provider";
 import { useApiResource } from "@/src/hooks/use-api-resource";
 import { Breadcrumb, Empty } from "@/src/components/storefront";
+import { useEffect } from "react";
+import { StripePaymentActions } from "./stripe-payment-actions";
 
 // Utility Tailwind v4; marker rf-* chỉ phục vụ trạng thái, selector và kiểm thử.
 const tw = {
@@ -35,7 +37,13 @@ const tw = {
 // Dữ liệu nghiệp vụ từ CatalogProvider/ShopProvider kết nối API.
 export function PaymentResult({ id }: { id: string }) {
   const shop = useShop();
-  const { data: order, error } = useApiResource<Order>(`/me/orders/${id}`);
+  const { data: order, error, reload } = useApiResource<Order>(`/me/orders/${id}`);
+  const waiting = order?.paymentMethod === "STRIPE" && order.backendStatus === "PENDING_PAYMENT";
+  useEffect(() => {
+    if (!waiting) return;
+    const timer = setTimeout(reload, 5000);
+    return () => clearTimeout(timer);
+  }, [waiting, order, reload]);
   if (!shop.ready) return <p role="status">Đang khôi phục tài khoản…</p>;
   if (!shop.user)
     return (
@@ -70,7 +78,8 @@ export function PaymentResult({ id }: { id: string }) {
           ĐƠN HÀNG CỦA BẠN
         </span>
         <h1>
-          {order.payment === "paid"
+          {order.status === "cancelled" ? "Đơn hàng đã hủy hoặc hết hạn."
+            : order.payment === "paid"
             ? "Cấu hình mới đã có điểm bắt đầu!"
             : order.payment === "failed"
               ? "Đơn đã tạo, thanh toán chưa thành công."
@@ -80,7 +89,9 @@ export function PaymentResult({ id }: { id: string }) {
           Mã đơn <strong>{id}</strong> · Tổng cộng{" "}
           <strong>{money(order.total)}</strong>
         </p>
-        <p>Trạng thái được xác minh từ backend. COD chưa ghi nhận thu tiền.</p>
+        <p>{order.paymentMethod === "STRIPE" ? "Trạng thái được xác minh từ Stripe qua backend; quay lại trang này không tự xác nhận đã thanh toán." : "COD chưa ghi nhận thu tiền; thanh toán khi nhận hàng."}</p>
+        <StripePaymentActions order={order} reload={reload} />
+        <button type="button" onClick={reload} className={tw.btn_btn_outline}>Cập nhật trạng thái</button>
         <div className="rf-form-actions flex items-center flex-wrap mt-5.5 gap-3">
           <Link href={`/account/orders/${id}`} className={tw.btn}>
             Xem chi tiết đơn <ArrowRight size={17} />

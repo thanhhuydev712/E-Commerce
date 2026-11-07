@@ -1,5 +1,7 @@
 # Chạy database – backend – frontend
 
+Checklist thao tác dành cho người tự test: [Thiết lập, import và test từng bước](MANUAL_TEST.md).
+
 Ngày 06/11/2026: schema có 104 model. Hai model mới `SavedPcBuild` và `SavedPcBuildComponent` lưu cấu hình PC có người sở hữu, FK sản phẩm và slot duy nhất. Không thêm bảng chỉ để tăng số lượng công nghệ.
 
 ## Database phát triển
@@ -57,7 +59,7 @@ npm run test:e2e:isolated
 npm run test:fullstack
 ```
 
-`TEST_DATABASE_URL` nếu có được ưu tiên; nếu không, runner development lấy DATABASE_URL để tạo schema test ngẫu nhiên rồi tự xoá schema đó. Không truncate hay seed public/legacy. Tài khoản kết nối test phải có quyền CREATE SCHEMA. Runner fullstack cần backend đã build, dependencies hai ứng dụng và Chromium Playwright đã cài; sử dụng cổng riêng 3401/3002 và cache Next riêng, không tái dùng server đang phát triển.
+`TEST_DATABASE_URL` nếu có được ưu tiên; nếu không, runner development lấy DATABASE_URL để tạo schema test ngẫu nhiên rồi tự xoá schema đó. Không truncate hay seed public/legacy. Tài khoản kết nối test phải có quyền CREATE SCHEMA. Runner fullstack cần backend đã build, dependencies hai ứng dụng và Chromium Playwright đã cài; sử dụng cổng riêng 3401/3002 và cache Next riêng, không tái dùng server đang phát triển. Khoá độc quyền `api/.tmp/fullstack-run.lock` và kiểm tra cổng ngăn hai lượt UI chạy trùng; lượt sau phải chờ lượt trước hoàn tất. Runner chỉ dừng tiến trình và xoá schema/media do chính lượt đó tạo.
 
 Bộ fullstack điều khiển trình duyệt qua Next → Nest → PostgreSQL thật, kiểm catalog/media, đăng ký, phục hồi phiên, giỏ sau xoá localStorage/reload, địa chỉ, cấu hình PC, COD, huỷ đơn, quyền admin và dữ liệu local giả không đăng nhập được. JSON/trace đặt trong `front/.visual-review/codex_live_test_*/`, bị gitignore vì trace có thể chứa token của tài khoản test.
 
@@ -70,4 +72,16 @@ npm run format:check
 npm run build
 ```
 
-Build thành công không thay thế kiểm thử luồng FE–BE, và suite dev chưa thay thế kiểm thử production sau Nginx. Kết quả thật của lượt gần nhất được ghi ở PROJECT_STATUS; không suy diễn từ việc có file test.
+`front/npm run test:e2e` chạy cả UI và hành trình API thật qua runner riêng; `api/npm run test:fullstack` chạy ba ca tích hợp trọng tâm. Các test cũ dựa vào đăng nhập/đơn hàng/coupon/bảo hành giả trong localStorage đã được thay bằng hành trình thật và các trường hợp bị từ chối. Test hero, responsive, motion, tìm kiếm/lọc, so sánh và renderer 3D được giữ. Bảo hành không còn kết quả serial demo giả; email tài khoản lấy từ phiên đăng nhập; coupon phải được server xác nhận.
+
+Có thể kiểm bản production local trong cùng schema test, từ `front/`:
+
+```powershell
+$env:LIVE_FRONTEND_MODE = 'production'
+npm.cmd run test:e2e
+Remove-Item Env:LIVE_FRONTEND_MODE
+```
+
+Runner build/start Next với cùng `API_INTERNAL_URL` trỏ backend test và output `.next-local-live-production`; mặc định vẫn là dev. Khóa runner và kiểm cổng vẫn áp dụng. Đây là production build local, chưa phải Docker/Nginx/AWS. [Rà soát FE và PC Studio](FRONTEND_READINESS_AUDIT.md) ghi ma trận UI/UX, lỗi đã sửa và giới hạn.
+
+Build thành công không thay thế kiểm thử luồng FE–BE, và suite local chưa thay thế kiểm thử sau Nginx. Kết quả thật của lượt gần nhất được ghi ở PROJECT_STATUS; không suy diễn từ việc có file test.

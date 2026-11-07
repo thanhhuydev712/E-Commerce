@@ -65,7 +65,7 @@ export function ShowroomsPage() {
   const [region, setRegion] = useState("");
   const [city, setCity] = useState("");
   const [room, setRoom] = useState("");
-  const [selected, setSelected] = useState(showrooms[0].name);
+  const [selected, setSelected] = useState(showrooms[0]?.name ?? "");
   const matches = showrooms.filter(
     (r) =>
       (!region || r.region === region) &&
@@ -168,6 +168,11 @@ export function ShowroomsPage() {
         </div>
         <div className="rf-showroom-explorer grid grid-cols-[0.85fr_1.2fr] items-start gap-6.5 max-[1024px]:grid-cols-[1fr_1fr] max-[1024px]:gap-3.75 max-[768px]:grid-cols-[1fr]">
           <div className={tw.showroom_list}>
+            {!matches.length && (
+              <p role="status">
+                Chưa có showroom phù hợp. Bạn có thể đổi hoặc xóa bộ lọc.
+              </p>
+            )}
             {matches.map((r) => (
               <button
                 className={r.name === current?.name ? "active" : ""}

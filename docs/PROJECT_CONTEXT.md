@@ -30,7 +30,7 @@ Từ **06/11/2026**, runtime Auth/Accounts/Access dùng Role/Permission/UserRole
 ## Các quyết định còn mở
 
 1. Thương hiệu, ngành hàng và bộ dữ liệu demo cuối cùng; Rigforge hiện là dấu hiệu giao diện.
-2. Currency đã chốt **VND, minor_unit=0** theo yêu cầu ngày 05/11/2026; giá giữ trị số hiện có, không quy đổi FX. Database v2 đã migrate; API/payment adapter còn cần chuyển sang quy tắc này. Dữ liệu v1 trong schema lưu trữ giữ nguyên currency gốc.
+2. Currency đã chốt **VND, minor_unit=0** theo yêu cầu ngày 05/11/2026; giá giữ trị số hiện có, không quy đổi FX. Database và API v2 hiện dùng VND nguyên, trả JSON dạng chuỗi; Stripe processor v2 chưa triển khai. Dữ liệu v1 trong schema lưu trữ giữ nguyên currency gốc.
 3. Chính sách giao hàng, hủy đơn, giữ/trừ/hoàn tồn kho và hoàn tiền.
 4. Nơi lưu token trên frontend, thời hạn phiên và chính sách nhiều thiết bị.
 5. AWS là nền tảng triển khai đã được yêu cầu. Baseline đề xuất EC2 + Compose/Nginx, ECR, RDS private, SSM/OIDC và CloudWatch; ngân sách, domain/region, kích cỡ tài nguyên, lưu ảnh và provider email còn cần chốt khi cài đặt. Không tự thêm ECS/Kubernetes hoặc dịch vụ mới chỉ để tăng stack.

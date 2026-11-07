@@ -15,8 +15,9 @@ for (const reducedMotion of ["no-preference", "reduce"] as const) {
       .poll(() => photo.evaluate((el) => getComputedStyle(el).scale))
       .toBe(reducedMotion === "reduce" ? "none" : "1.04");
     const after = (await card.boundingBox())!;
-    expect(after.width).toBe(before.width);
-    expect(after.height).toBe(before.height);
+    // Chromium có thể làm tròn khác nhau ~0.00005 px giữa hai frame GPU.
+    expect(after.width).toBeCloseTo(before.width, 2);
+    expect(after.height).toBeCloseTo(before.height, 2);
     expect(
       await page.evaluate(
         () =>

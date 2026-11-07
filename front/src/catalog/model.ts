@@ -12,6 +12,7 @@ export type Variant = {
   sku: string;
   label: string;
   price: string;
+  oldPrice: string;
   stock: number;
 };
 export type Specs = {

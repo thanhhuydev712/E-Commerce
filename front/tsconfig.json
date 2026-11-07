@@ -45,7 +45,9 @@
     ".next-local-live-test/types/**/*.ts",
     ".next-local-live-test/dev/types/**/*.ts",
     ".next-local-hero-motion-build/types/**/*.ts",
-    ".next-local-hero-motion-build/dev/types/**/*.ts"
+    ".next-local-hero-motion-build/dev/types/**/*.ts",
+    ".next-local-live-production/types/**/*.ts",
+    ".next-local-live-production/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
