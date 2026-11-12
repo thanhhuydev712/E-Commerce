@@ -347,8 +347,16 @@ function createStore(
             cart: [],
             orders: [order, ...state.orders.filter((o) => o.id !== order.id)],
           });
-          await catalog().refreshCatalog().catch(error);
-          notify(data.payment === "STRIPE" ? "Đã tạo đơn, tiếp tục thanh toán Stripe test" : "Đã tạo đơn hàng COD");
+          void catalog()
+            .refreshCatalog()
+            .catch(() =>
+              notify("Đơn đã tạo; chưa cập nhật được giá và tồn kho hiển thị."),
+            );
+          notify(
+            data.payment === "STRIPE"
+              ? "Đã tạo đơn, tiếp tục thanh toán Stripe test"
+              : "Đã tạo đơn hàng COD",
+          );
           return order.id;
         } catch (cause) {
           if (cause instanceof ApiError && cause.status === 409) pending = null;
@@ -366,7 +374,11 @@ function createStore(
           method: "POST",
         });
         emit({ orders: state.orders.map((o) => (o.id === id ? order : o)) });
-        await catalog().refreshCatalog();
+        void catalog()
+          .refreshCatalog()
+          .catch(() =>
+            notify("Đơn đã hủy; chưa cập nhật được giá và tồn kho hiển thị."),
+          );
         notify("Đã hủy đơn và giải phóng tồn giữ");
       } catch (cause) {
         error(cause);

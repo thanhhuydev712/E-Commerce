@@ -3,6 +3,7 @@ import {
   createContext,
   useContext,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -59,11 +60,15 @@ export function CatalogProvider({
   children: ReactNode;
 }) {
   const [data, setData] = useState(initialData);
+  const refreshVersion = useRef(0);
   const catalog = useMemo(
     () => ({
       ...createCatalog(data),
-      refreshCatalog: async () =>
-        setData(await api<StorefrontSnapshot>("/storefront")),
+      refreshCatalog: async () => {
+        const version = ++refreshVersion.current;
+        const updated = await api<StorefrontSnapshot>("/storefront");
+        if (version === refreshVersion.current) setData(updated);
+      },
     }),
     [data],
   );

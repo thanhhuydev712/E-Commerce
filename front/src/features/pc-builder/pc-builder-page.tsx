@@ -1,7 +1,6 @@
 "use client";
 import { useCatalog } from "@/src/catalog/catalog-provider";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -36,8 +35,10 @@ import {
   Dialog,
   Empty,
   ProductArt,
+  ProductImage,
 } from "@/src/components/storefront";
 import { useShop } from "@/src/providers/shop-provider";
+import { PhotoAssembly } from "./components/photo-assembly";
 
 // Utility Tailwind v4; marker rf-* chỉ phục vụ trạng thái, selector và kiểm thử.
 const tw = {
@@ -60,17 +61,6 @@ const tw = {
     "rf-btn rf-btn-outline inline-flex items-center justify-center min-h-11 bg-transparent bg-none text-rf-text",
     "text-[12px] font-bold leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-rf-border",
     "border-solid border rounded-[6px] gap-2.5 print:hidden hover:bg-[#edf4ef] hover:bg-none hover:border-[#9ccab5]",
-  ].join(" "),
-  builder_reference_hero: [
-    "rf-builder-reference-hero grid grid-cols-[2.3fr_1fr] mb-6.25 gap-3.75 [&>a]:relative [&>a]:min-h-57.5",
-    "[&>a]:rounded-[8px] [&>a]:overflow-hidden [&_img]:object-cover [&>a>strong]:relative [&>a>strong]:z-1",
-    "[&>a>strong]:flex [&>a>strong]:flex-col [&>a>strong]:justify-center [&>a>strong]:h-full",
-    "[&>a>strong]:bg-[linear-gradient(90deg,_#092c30ed_30%,_transparent_80%)] [&>a>strong]:bg-transparent",
-    "[&>a>strong]:text-white [&>a>strong]:text-[38px] [&>a>strong]:p-7.5 [&_strong_span]:text-[13px]",
-    "[&_strong_span]:text-[#bff5d6] [&>div]:grid [&>div]:gap-3 [&>div_a]:block [&>div_a]:relative [&>div_a]:min-h-25",
-    "[&>div_a]:rounded-[8px] [&>div_a]:overflow-hidden max-[768px]:grid-cols-[1fr] max-[768px]:[&>div]:hidden",
-    "max-[768px]:[&>a]:min-h-41.25 max-[768px]:[&>a>strong]:text-[28px] max-[768px]:[&>a>strong]:p-5",
-    "max-[768px]:[&_strong_span]:text-[10px]",
   ].join(" "),
   build_cost_bar: [
     "rf-build-cost-bar flex items-center border-t border-t-rf-border border-r border-r-rf-border border-b",
@@ -98,8 +88,8 @@ const tw = {
     "rf-builder-layout rf-builder-reference-layout grid grid-cols-[minmax(0,_1fr)_320px] [border-top-width:0]",
     "[border-top-style:none] border-t-current border-r [border-right-style:solid] border-r-rf-border border-b",
     "[border-bottom-style:solid] border-b-rf-border border-l [border-left-style:solid] border-l-rf-border rounded-tl-[0]",
-    "rounded-tr-[0] rounded-br-[10px] rounded-bl-[10px] overflow-hidden max-[1200px]:grid-cols-[255px_minmax(0,_1fr)]",
-    "max-[768px]:flex max-[768px]:flex-col max-[768px]:grid-cols-[1fr] print:block [&_.rf-build-slots]:col-span-full",
+    "rounded-tr-[0] rounded-br-[10px] rounded-bl-[10px] overflow-hidden max-[1200px]:grid-cols-[minmax(0,_1fr)]",
+    "max-[768px]:flex max-[768px]:flex-col max-[768px]:grid-cols-[1fr] print:block",
     "[&_.rf-build-slot]:min-h-19 [&_.rf-build-slot]:px-5 [&_.rf-build-slot]:py-3.75 [&_.rf-slot-select]:grid",
     "[&_.rf-slot-select]:grid-cols-[130px_1fr_150px] [&_.rf-slot-select]:items-center [&_.rf-slot-select]:gap-3.75",
     "[&_.rf-slot-select>small]:text-[13px] [&_.rf-slot-select>strong]:text-[14px] [&_.rf-slot-select>span]:text-right",
@@ -130,37 +120,6 @@ const tw = {
   icon_btn: [
     "rf-icon-btn inline-flex items-center justify-center bg-transparent bg-none min-w-9 min-h-9 p-2 border-current",
     "border-none [border-width:medium] rounded-[6px] print:hidden! hover:bg-[#edf4f0] hover:bg-none",
-  ].join(" "),
-  studio_top: [
-    "rf-studio-top flex items-center justify-between p-4.5 [&>span]:flex [&>span]:items-center [&>span]:text-[10px]",
-    "[&>span]:tracking-[1px] [&>span]:gap-2 [&_small]:text-[8px] [&_small]:tracking-[0] [&_small]:opacity-[0.6]",
-    "[&>div]:flex [&>div]:border-[#426052] [&>div]:border-solid [&>div]:border [&>div]:rounded-[5px]",
-    "[&_button]:bg-transparent [&_button]:bg-none [&_button]:text-[#a4bcb0] [&_button]:text-[9px] [&_button]:px-2",
-    "[&_button]:py-1 [&_button]:border-current [&_button]:border-none [&_button]:[border-width:0]",
-    '[&_button[aria-pressed="true"]]:bg-[#41654f] [&_button[aria-pressed="true"]]:bg-none',
-    '[&_button[aria-pressed="true"]]:text-[#d4f6e0]',
-  ].join(" "),
-  item_2d_machine: [
-    "h-full flex flex-col items-center justify-center pt-0 pb-11.25 px-5 [&>p]:text-[11px] [&>p]:text-[#8eab9b]",
-    "[&>p]:max-w-55 [&>p]:text-center [&>.rf-product-art]:w-85",
-    "[&>.rf-product-art]:[filter:drop-shadow(0_20px_20px_#0004)]",
-    "[&.exploded>.rf-product-art]:[transform:scale(0.85)_rotate(-7deg)]",
-  ].join(" "),
-  item_2d_tags: [
-    "rf-2d-tags flex flex-wrap justify-center gap-1.5 [&>span]:flex [&>span]:items-center [&>span]:text-[8px]",
-    "[&>span]:bg-[#42655222] [&>span]:bg-none [&>span]:px-1.75 [&>span]:py-1 [&>span]:border-[#486c5655]",
-    "[&>span]:border-solid [&>span]:border [&>span]:rounded-[4px] [&>span]:gap-1",
-  ].join(" "),
-  viewport_caption: [
-    "rf-viewport-caption absolute bottom-2 left-2.5 right-2.5 text-center pointer-events-none [&>span]:block",
-    "[&>span]:text-[9px] [&>small]:block [&>small]:text-[8px] [&>small]:opacity-[0.5] [&>small]:mt-1.25",
-  ].join(" "),
-  scene_controls: [
-    "rf-scene-controls flex flex-wrap justify-center border-t [border-top-style:solid] border-t-[#8aa79522] px-2.5 py-3.5",
-    "gap-1.75 [&>button]:flex [&>button]:items-center [&>button]:bg-[#ffffff08] [&>button]:bg-none [&>button]:text-[8px]",
-    "[&>button]:text-[#adc7b8] [&>button]:px-2 [&>button]:py-1.75 [&>button]:border-[#8aa79533] [&>button]:border-solid",
-    "[&>button]:border [&>button]:rounded-[4px] [&>button]:gap-1.5 print:hidden! [&>button.on]:text-[#5af2ba]",
-    "[&>button.on]:border-[#5af2ba55]",
   ].join(" "),
   build_summary: [
     "rf-build-summary bg-white bg-none border-l [border-left-style:solid] border-l-rf-border px-4.5 py-5.5",
@@ -286,7 +245,7 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
   const [view, setView] = useState<"2d" | "3d">("2d");
   const [exploded, setExploded] = useState(false);
   const [powered, setPowered] = useState(false);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [reduce, setReduce] = useState(false);
   const [budget, setBudget] = useState("25000000");
   const [save, setSave] = useState(false);
@@ -296,6 +255,10 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
   const [search, setSearch] = useState("");
   const [reset, setReset] = useState(false);
   const [camera, setCamera] = useState(0);
+  const [cameraView, setCameraView] = useState<
+    "perspective" | "front" | "side"
+  >("perspective");
+  const [accent, setAccent] = useState("#6ee7b7");
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const change = () => setReduce(media.matches);
@@ -327,7 +290,7 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
   const sceneError = useCallback(() => {
     setView("2d");
     shop.notify(
-      "3D chưa khả dụng trên thiết bị này. Bạn vẫn tiếp tục chọn linh kiện ở chế độ 2D.",
+      "Mô hình 3D chưa khả dụng. Bạn vẫn có thể xem bản ghép ảnh và tiếp tục chọn linh kiện.",
     );
   }, [shop]);
   if (savedId && shop.ready && !saved)
@@ -354,38 +317,42 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
           Cấu hình đã lưu ({shop.builds.length})
         </Link>
       </div>
-      <div className={tw.builder_reference_hero}>
-        <Link href="/products?category=pc">
-          <Image
-            src="/images/banners/banner-slider1.webp"
-            alt="PC Gaming minh họa"
-            fill
-            sizes="(max-width: 767px) 100vw, 800px"
-          />
-          <strong>
-            PC RIGFORGE
-            <br />
-            <span>TỰ CHỌN CẤU HÌNH CỦA BẠN</span>
-          </strong>
-        </Link>
-        <div>
-          <Link href="/products?category=monitor">
-            <Image
-              src="/images/banners/banner-slider2.webp"
-              alt="Màn hình gaming minh họa"
-              fill
-              sizes="350px"
-            />
-          </Link>
-          <Link href="/products?category=gear">
-            <Image
-              src="/images/banners/banner-slider4.webp"
-              alt="Gaming Gear minh họa"
-              fill
-              sizes="350px"
-            />
-          </Link>
-        </div>
+      <div
+        className="mb-6 grid gap-3 sm:grid-cols-3"
+        aria-label="Cách xây dựng cấu hình"
+      >
+        {[
+          [
+            "01",
+            "Chọn linh kiện",
+            "Tự chọn hoặc bắt đầu với cấu hình đề xuất.",
+          ],
+          [
+            "02",
+            "Khám phá bộ máy",
+            "Xem từng lớp ảnh, đổi góc hoặc xoay mô hình 3D.",
+          ],
+          [
+            "03",
+            "Lưu cấu hình",
+            "Lưu vào tài khoản hoặc thêm linh kiện vào giỏ.",
+          ],
+        ].map(([index, title, description]) => (
+          <div
+            key={index}
+            className="flex items-start gap-3 rounded-xl border border-rf-border bg-white px-4 py-3"
+          >
+            <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-rf-green/8 text-xs font-semibold text-rf-green">
+              {index}
+            </span>
+            <div>
+              <strong className="text-sm font-semibold">{title}</strong>
+              <p className="mb-0 mt-1 text-xs leading-relaxed text-rf-muted">
+                {description}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
       <div className={tw.build_cost_bar}>
         <div>
@@ -493,17 +460,20 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
             );
           })}
         </section>
-        <section className="rf-studio min-w-0 bg-[radial-gradient(ellipse_at_45%_40%,_#344640,_#101c19_70%)] bg-transparent text-[#a4bcb0] max-[768px]:-order-1 print:hidden">
-          <div className={tw.studio_top}>
-            <span>
-              <Box size={17} /> PC STUDIO <small>Hình minh họa</small>
+        <section
+          className="rf-studio col-span-full row-start-1 w-full min-w-0 overflow-hidden bg-[#0c151b] text-slate-300 max-[768px]:-order-1 print:hidden"
+          aria-label="Không gian lắp ráp PC"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/8 px-5 py-4">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-white">
+              <Box size={17} className="text-emerald-300" /> PC STUDIO
             </span>
-            <div>
+            <div className="flex gap-1 rounded-lg border border-white/10 bg-black/20 p-1 [&_button]:min-h-9 [&_button]:rounded-md [&_button]:px-3 [&_button]:text-xs [&_button]:transition-colors [&_button:hover]:bg-white/5 [&_button[aria-pressed=true]]:bg-emerald-300/15 [&_button[aria-pressed=true]]:text-emerald-200">
               <button
                 aria-pressed={view === "2d"}
                 onClick={() => setView("2d")}
               >
-                2D
+                Ảnh ghép
               </button>
               <button
                 aria-pressed={view === "3d"}
@@ -513,61 +483,136 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
               </button>
             </div>
           </div>
-          <div
-            className={
-              `rf-viewport ${powered ? "powered" : ""}` +
-              " " +
-              "relative h-120 max-[768px]:h-90 [&.powered]:bg-[radial-gradient(ellipse_at_50%_45%,_#40a77815,_transparent_60%)] [&.powered]:bg-transparent"
-            }
-          >
+          <div className="rf-studio-appearance flex flex-wrap items-center justify-between gap-3 border-b border-white/8 bg-[#101c24] px-4 py-3">
+            <div
+              className="flex flex-wrap gap-1"
+              role="group"
+              aria-label="Góc xem bộ máy"
+            >
+              {(
+                [
+                  ["perspective", "Góc 3/4"],
+                  ["front", "Trực diện"],
+                  ["side", "Góc bên"],
+                ] as const
+              ).map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  aria-pressed={cameraView === value}
+                  onClick={() => {
+                    setCameraView(value);
+                    setCamera((version) => version + 1);
+                  }}
+                  className={`min-h-10 rounded-lg px-3 text-xs transition-colors motion-reduce:transition-none ${cameraView === value ? "bg-white/10 text-white" : "text-slate-400 hover:bg-white/5 hover:text-white"}`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div
+              className="flex items-center gap-2"
+              role="group"
+              aria-label="Màu ánh sáng"
+            >
+              <span className="mr-1 text-[11px] text-slate-400">Ánh sáng</span>
+              {(
+                [
+                  ["#6ee7b7", "Ngọc lục bảo"],
+                  ["#c4b5fd", "Tím"],
+                  ["#67e8f9", "Xanh băng"],
+                ] as const
+              ).map(([color, label]) => (
+                <button
+                  key={color}
+                  type="button"
+                  aria-label={`Ánh sáng ${label}`}
+                  aria-pressed={accent === color}
+                  onClick={() => setAccent(color)}
+                  className={`grid size-10 place-items-center rounded-full border transition-colors motion-reduce:transition-none ${accent === color ? "border-white/60 bg-white/10" : "border-transparent hover:bg-white/5"}`}
+                >
+                  <span
+                    className="grid size-5 place-items-center rounded-full text-[#10202a]"
+                    style={{ backgroundColor: color }}
+                  >
+                    {accent === color && <Check size={13} />}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className={`rf-viewport relative ${powered ? "powered" : ""}`}>
             {view === "3d" ? (
-              <Scene
+              <div
+                className="rf-scene-stage relative isolate h-[560px] w-full min-w-0 overflow-hidden bg-[#080c16] max-[768px]:h-[450px]"
+                data-powered={powered}
+              >
+                <div
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-x-[12%] top-[8%] h-4/5 rounded-full blur-3xl transition-[opacity,scale] duration-700 motion-reduce:transition-none ${powered ? "scale-100 opacity-100" : "scale-90 opacity-35"}`}
+                  style={{
+                    backgroundImage: `radial-gradient(ellipse,${accent}38,transparent 68%)`,
+                  }}
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,#ffffff06,transparent_35%,transparent_70%,#ffffff03)]"
+                />
+                <div className="absolute left-4 top-4 z-10 flex items-center gap-2 rounded-full border border-white/8 bg-[#0b1325b3] px-3 py-2 text-[10px] tracking-widest text-slate-400">
+                  <span
+                    className={`size-1.5 rounded-full ${powered ? "bg-emerald-300 shadow-[0_0_8px_#6ee7b7]" : "bg-slate-600"}`}
+                  />
+                  {powered ? "ĐANG BẬT MÁY" : "KHÔNG GIAN CỦA BẠN"}
+                </div>
+                <div className="relative h-full">
+                  <Scene
+                    cameraReset={camera}
+                    cameraView={cameraView}
+                    accent={accent}
+                    build={sceneBuild}
+                    exploded={exploded}
+                    powered={powered}
+                    panelOpen={open}
+                    reduceMotion={reduce}
+                    onError={sceneError}
+                  />
+                </div>
+              </div>
+            ) : (
+              <PhotoAssembly
                 cameraReset={camera}
+                cameraView={cameraView}
+                onFrontView={() => {
+                  setCameraView("front");
+                  setCamera((version) => version + 1);
+                }}
+                accent={accent}
                 build={sceneBuild}
                 exploded={exploded}
                 powered={powered}
                 panelOpen={open}
                 reduceMotion={reduce}
-                onError={sceneError}
+                onChoose={(slot) => {
+                  setPicker(slot);
+                  setSearch("");
+                }}
               />
-            ) : (
-              <div
-                className={
-                  `rf-2d-machine ${exploded ? "exploded" : ""}` +
-                  " " +
-                  tw.item_2d_machine
-                }
-              >
-                <ProductArt category="pc" />
-                <div className={tw.item_2d_tags}>
-                  {selectedSlots.map((s) => (
-                    <span key={s}>
-                      <CategoryIcon id={s} size={13} />
-                      {categories.find((c) => c.id === s)?.short}
-                      <Check size={12} />
-                    </span>
-                  ))}
-                </div>
-                {!selected && (
-                  <p>Bắt đầu chọn linh kiện hoặc thử cấu hình đề xuất</p>
-                )}
-              </div>
             )}
             {view === "3d" && !selected && (
               <p className="pointer-events-none absolute inset-0 m-0 grid place-items-center px-8 text-center text-sm text-white">
                 Chọn linh kiện hoặc dùng cấu hình đề xuất để xem mô hình 3D.
               </p>
             )}
-            <div className={tw.viewport_caption}>
-              <span>
-                {view === "3d"
-                  ? "Kéo để xoay · Cuộn để phóng to"
-                  : "Bản xem tổng quan · Chuyển 3D để xem lắp ráp"}
-              </span>
-              <small>Model hình học minh họa, chưa đúng từng SKU</small>
-            </div>
+            {view === "3d" && (
+              <div className="rf-viewport-caption flex flex-wrap items-center justify-between gap-2 border-t border-white/6 bg-[#0c1420] px-4 py-3 text-[11px] text-slate-400">
+                <span>Kéo để xoay · Cuộn để phóng to</span>
+                <span className="text-[10px] text-slate-500">
+                  Mô hình minh họa, chưa đúng từng SKU
+                </span>
+              </div>
+            )}
           </div>
-          <div className={tw.scene_controls}>
+          <div className="flex flex-wrap items-center justify-center gap-2 border-t border-white/8 bg-[#0e1b22] p-4 [&>button]:inline-flex [&>button]:min-h-11 [&>button]:items-center [&>button]:gap-2 [&>button]:rounded-lg [&>button]:border [&>button]:border-white/10 [&>button]:bg-white/4 [&>button]:px-3 [&>button]:text-xs [&>button]:transition-colors [&>button:hover]:bg-white/10 [&>button[aria-pressed=true]]:border-emerald-300/30 [&>button[aria-pressed=true]]:text-emerald-200">
             <button
               aria-pressed={exploded}
               onClick={() => setExploded(!exploded)}
@@ -575,18 +620,11 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
               <Layers3 size={16} />
               {exploded ? "Thu gọn" : "Tách linh kiện"}
             </button>
-            <button
-              disabled={view !== "3d"}
-              aria-pressed={open}
-              onClick={() => setOpen(!open)}
-            >
+            <button aria-pressed={open} onClick={() => setOpen(!open)}>
               <Expand size={16} />
               {open ? "Đóng kính" : "Mở kính"}
             </button>
-            <button
-              disabled={view !== "3d"}
-              onClick={() => setCamera((c) => c + 1)}
-            >
+            <button onClick={() => setCamera((c) => c + 1)}>
               <RotateCcw size={16} />
               Góc nhìn
             </button>
@@ -600,7 +638,7 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
               {powered ? "Tắt máy" : "Bật thử"}
             </button>
           </div>
-          <label className="rf-motion-toggle flex justify-center text-[9px] pt-0 pb-3.5 px-2.5 gap-1.25">
+          <label className="rf-motion-toggle flex items-center justify-center gap-2 bg-[#0e1b22] px-4 pb-4 text-xs text-slate-400">
             <input
               type="checkbox"
               checked={reduce}
@@ -739,7 +777,9 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
                 ).filter((c) => c.level === "error");
                 return (
                   <div key={p.id}>
-                    <ProductArt category={p.category} />
+                    <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg [&_.rf-product-photo]:h-full [&_.rf-product-photo]:min-h-0 [&_.rf-product-photo]:w-full">
+                      <ProductImage product={p} />
+                    </div>
                     <div>
                       <strong>{p.name}</strong>
                       <small>{p.specs.join(" · ")}</small>

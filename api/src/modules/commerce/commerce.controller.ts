@@ -44,7 +44,8 @@ export class CommerceController {
   constructor(
     @Inject(CommerceService) private readonly commerce: CommerceService,
     @Inject(OrderService) private readonly orders: OrderService,
-    @Inject(StripePaymentService) private readonly payments: StripePaymentService,
+    @Inject(StripePaymentService)
+    private readonly payments: StripePaymentService,
   ) {}
   @Post('warranty/lookup') lookup(
     @CurrentUser() user: Principal,

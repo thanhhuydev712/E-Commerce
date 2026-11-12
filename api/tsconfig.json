@@ -1,5 +1,5 @@
 {
-  "exclude": ["node_modules", "dist", "dist-v1-before-phase01", "legacy", "src/generated", "generated"],
+  "exclude": ["node_modules", "dist", "dist-local-*", ".dist-audit-*", "dist-v1-before-phase01", "legacy", "src/generated", "generated"],
   "compilerOptions": {
     "module": "nodenext",
     "moduleResolution": "nodenext",

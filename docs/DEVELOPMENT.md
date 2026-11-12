@@ -1,6 +1,10 @@
 # Phát triển trên máy cá nhân
 
+Hướng dẫn mở nhanh trên Windows: [LOCAL_START.md](LOCAL_START.md).
+
 Ngày **06/11/2026**, backend có identity/catalog và commerce COD tích hợp; kết quả kiểm tra tại [PROJECT_STATUS.md](PROJECT_STATUS.md), contract [danh tính](API_IDENTITY_V2.md) và [catalog/giá/ảnh/kho](API_CATALOG_V2.md). Kế hoạch Docker/CI/staging/demo và AWS nằm ở [DEPLOYMENT_PLAN.md](DEPLOYMENT_PLAN.md), chưa có cấu hình chạy tương ứng trong repository.
+
+Cập nhật **08/11/2026**: có [Stripe Checkout sandbox v2](STRIPE_V2.md). Hướng dẫn đó bổ sung/thay thế các ghi chú payment v2 chưa triển khai ở mốc cũ bên dưới; Stripe vẫn không bắt buộc để boot và chạy COD.
 
 ## Điều kiện
 
@@ -37,6 +41,8 @@ Tạo hoặc cập nhật `api/.env` theo [`api/.env.example`](../api/.env.examp
 | `NODE_ENV` | `development` cho local; `production` bật Secure cookie, yêu cầu origin HTTPS và hiện chặn email challenge local |
 | `TEST_DATABASE_URL` | Tùy chọn kết nối riêng cho E2E; runner tạo schema test ngẫu nhiên, không reset/truncate public |
 | `MEDIA_ROOT` | Thư mục ảnh upload local, mặc định `.local-media` tương đối working directory api; cần storage bền vững/backup khi triển khai |
+| `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` | Tùy chọn, chỉ sandbox; cả hai cần có để bật Stripe Checkout v2 |
+| `STOREFRONT_URL` | Origin frontend dùng cho URL quay lại Stripe; phải nằm trong ALLOWED_ORIGINS, mặc định origin đầu tiên |
 
 Nguồn hiện tại: `api/src/platform/environment.ts` và `app.module.ts`. Npm scripts Nest nạp `.env` bằng `--env-file`, Prisma config dùng `dotenv/config`, ConfigModule hiện cũng trỏ `.env`. Khi làm CI phải truyền env test một cách rõ ràng, không để ConfigModule vô tình dùng database phát triển. Các biến Stripe/Observe từng xuất hiện ở v1 không phải yêu cầu boot của AppModule hiện tại.
 
@@ -48,10 +54,10 @@ Trong `api/`, sau khi cấu hình DATABASE_URL tới database phát triển:
 Set-Location api
 npx prisma generate
 npm.cmd run build
-npm.cmd run seed:access
-npx prisma migrate status
+npx.cmd prisma migrate status
 # Lịch sử hiện có bao gồm upgrade v2; đọc SQL và phần cảnh báo bên dưới trước khi áp dụng:
-npx prisma migrate deploy
+npx.cmd prisma migrate deploy
+npm.cmd run seed:access
 ```
 
 `migrate deploy` áp dụng migration đã có. Khi phát triển thay đổi schema mới, cân nhắc `migrate dev --name <ten_thay_doi>` trên database phát triển riêng và xem lại SQL. Không dùng reset/cleanDatabase cho dữ liệu cần giữ.
@@ -65,14 +71,14 @@ Terminal 1, từ root:
 ```powershell
 Set-Location api
 $env:PORT = '3001'
-npm run start:dev
+npm.cmd run start:dev
 ```
 
 Terminal 2, từ root:
 
 ```powershell
 Set-Location front
-npm run dev
+npm.cmd run dev -- --port 3000
 ```
 
 Storefront: `http://localhost:3000`. API: `http://localhost:3001/api/v1`. Swagger: `http://localhost:3001/api/docs`.
@@ -99,6 +105,6 @@ E2E backend scaffold đã lưu trong legacy, thay bằng `test/identity.e2e-spec
 
 ## Production
 
-Backend có `start:prod` gọi `node dist/main`; `tsconfig.build.json` hiện override `rootDir` thành `./src`. Phải kiểm entrypoint và đường dẫn generated client từ artifact Linux thực tế khi đóng gói. Frontend có `npm run start` sau build; kế hoạch Docker chọn standalone nhưng chưa sửa config. Chưa có runbook deployment đã kiểm chứng.
+Backend có `start:prod` gọi `scripts/run-built.cjs api`; Windows dùng output `dist-local-<hash-tài-khoản>`, Linux giữ `dist`. Build/start cần cùng tài khoản Windows. `tsconfig.build.json` override `rootDir` thành `./src`. Phải kiểm entrypoint và đường dẫn generated client từ artifact Linux thực tế khi đóng gói. Frontend có `npm run start` sau build; kế hoạch Docker chọn standalone nhưng chưa sửa config. Chưa có runbook deployment đã kiểm chứng.
 
 Thiết kế đích: Nginx nhận HTTPS, Next/Nest chạy container nội bộ, RDS private, image phát hành theo digest qua GitHub Actions/ECR/SSM. Cần kiểm env production, proxy/cookie/Origin, TLS DB, migration và rollback theo [kế hoạch hạ tầng](DEPLOYMENT_PLAN.md). Email challenge hiện chỉ có adapter local và sẽ từ chối ở production; phải giải quyết hoặc ghi rõ giới hạn chức năng trước nghiệm thu. Không đổi `NODE_ENV` thành development trên AWS để bỏ qua điều kiện này.

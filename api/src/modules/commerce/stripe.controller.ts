@@ -1,7 +1,21 @@
-import { Controller, Headers, HttpCode, Inject, Param, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Headers,
+  HttpCode,
+  Inject,
+  Param,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import type { RawBodyRequest } from '@nestjs/common';
 import type { Request } from 'express';
-import { ApiBearerAuth, ApiHeader, ApiProperty, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiHeader,
+  ApiProperty,
+  ApiTags,
+} from '@nestjs/swagger';
 import { SkipThrottle } from '@nestjs/throttler';
 import { CurrentUser } from '../../common/decorators/get-user.decorator.js';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
@@ -17,20 +31,29 @@ class StripeCheckoutResponseDto {
 @ApiTags('payments')
 @Controller()
 export class StripeController {
-  constructor(@Inject(StripePaymentService) private readonly payments: StripePaymentService) {}
+  constructor(
+    @Inject(StripePaymentService)
+    private readonly payments: StripePaymentService,
+  ) {}
   @Post('me/orders/:id/stripe-checkout')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiData(StripeCheckoutResponseDto, 200)
   @HttpCode(200)
-  checkout(@CurrentUser() user: Principal, @Param('id', DatabaseUuidPipe) id: string) {
+  checkout(
+    @CurrentUser() user: Principal,
+    @Param('id', DatabaseUuidPipe) id: string,
+  ) {
     return this.payments.checkout(user.id, id);
   }
   @Post('webhooks/stripe')
   @HttpCode(200)
   @SkipThrottle()
   @ApiHeader({ name: 'Stripe-Signature', required: true })
-  webhook(@Req() req: RawBodyRequest<Request>, @Headers('stripe-signature') signature?: string) {
+  webhook(
+    @Req() req: RawBodyRequest<Request>,
+    @Headers('stripe-signature') signature?: string,
+  ) {
     return this.payments.webhook(req.rawBody, signature);
   }
 }

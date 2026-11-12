@@ -47,7 +47,7 @@ Mở http://localhost:3000. API mặc định cổng 3001; Swagger `/api/docs`, 
 
 Đăng ký tài khoản bằng email giả, chọn sản phẩm và thêm giỏ, tải lại trang để kiểm dữ liệu đã lưu, nhập địa chỉ giả rồi đặt COD. Sau đó mở chi tiết và huỷ đơn để kiểm lịch sử/reservation. Khách chưa đăng nhập sẽ được yêu cầu đăng nhập. Admin API kiểm permission thật; không tự cấp admin cho tài khoản mới.
 
-Đây vẫn là môi trường demo với dữ liệu giả; chưa có giao vận/thu tiền thực. Stripe chưa bật cho tới khi có processor/webhook v2. Xem [contract và giới hạn](API_STOREFRONT_COMMERCE_V2.md).
+Đây vẫn là môi trường demo với dữ liệu giả; chưa có giao vận/thu tiền thực. Từ 08/11/2026 có [Stripe Checkout sandbox v2](STRIPE_V2.md), chỉ bật khi cấu hình test key và webhook secret. Xem [contract và giới hạn](API_STOREFRONT_COMMERCE_V2.md).
 
 ## Kiểm thử tự động
 

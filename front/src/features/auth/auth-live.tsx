@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { useId, useState } from "react";
+import { ArrowRight, Eye, EyeOff } from "lucide-react";
 import { api } from "@/src/catalog/api-client";
 import { useShop } from "@/src/providers/shop-provider";
 import { authStyles as tw } from "./auth-styles";
@@ -39,9 +39,11 @@ function AccountForm({
 }) {
   const shop = useShop(),
     router = useRouter();
+  const passwordId = useId();
   const [email, setEmail] = useState(""),
     [name, setName] = useState(""),
     [password, setPassword] = useState(""),
+    [showPassword, setShowPassword] = useState(false),
     [error, setError] = useState(""),
     [busy, setBusy] = useState(false);
   return (
@@ -89,17 +91,37 @@ function AccountForm({
             autoComplete="email"
           />
         </label>
-        <label>
-          Mật khẩu
-          <input
-            required
-            type="password"
-            minLength={register ? 12 : 1}
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            autoComplete={register ? "new-password" : "current-password"}
-          />
-        </label>
+        <div className="grid gap-1.75">
+          <label htmlFor={passwordId} className="text-xs font-semibold">
+            Mật khẩu
+          </label>
+          <div className="relative">
+            <input
+              id={passwordId}
+              required
+              type={showPassword ? "text" : "password"}
+              className="pr-12!"
+              minLength={register ? 12 : 1}
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              autoComplete={register ? "new-password" : "current-password"}
+            />
+            <button
+              type="button"
+              className="absolute inset-y-0 right-0 inline-flex w-11 items-center justify-center rounded-r-[5px] text-rf-muted transition-colors duration-200 hover:text-rf-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rf-green motion-reduce:transition-none"
+              aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+              aria-controls={passwordId}
+              aria-pressed={showPassword}
+              onClick={() => setShowPassword((visible) => !visible)}
+            >
+              {showPassword ? (
+                <EyeOff size={18} aria-hidden="true" />
+              ) : (
+                <Eye size={18} aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
         {register && (
           <p className="text-xs text-rf-muted">
             Mật khẩu mới ít nhất 12 ký tự, tối đa 72 byte UTF-8.

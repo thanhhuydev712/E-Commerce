@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-08",
+  "scope": "Stripe Checkout sandbox v2, signed webhook/ledger, expiry/reconciliation and storefront integration",
+  "staticChecks": {
+    "prismaGenerateV2": "passed",
+    "backendBuild": "passed",
+    "backendLint": "passed",
+    "frontendProductionBuild": "passed, 30 route shells",
+    "frontendLint": "passed",
+    "frontendFormat": "passed",
+    "unitTests": { "passed": 12, "command": "api: npm.cmd test" },
+    "localDocumentationLinks": { "checked": 93, "missing": 0 }
+  },
+  "apiTests": {
+    "command": "npm.cmd run test:e2e:isolated -- test/stripe.e2e-spec.ts test/storefront.e2e-spec.ts --no-file-parallelism --testTimeout=180000 --bail=1 --reporter=verbose -t \"releases expired|rolls back|expires orders|Database seed and storefront commerce\"",
+    "finalSelectedRun": { "exitCode": 0, "passed": 12, "skipped": 6 },
+    "stripeUniquePassingCases": 9,
+    "stripeEvidence": "Six cases passed before an overall test timeout in expiry/reconciliation; the remaining three passed in the selected run with a 180-second test limit. No claim of all nine passing together in a final clean run.",
+    "storefrontCodPassingCases": 9,
+    "provider": "fake gateway; genuine Stripe SDK signing/verification with fixture secret",
+    "database": "real PostgreSQL; fresh random test schema/media, cleaned by each suite",
+    "coverage": [
+      "invalid signature rejected before persistence",
+      "ownership and server amount; concurrent checkout returns same attempt/session",
+      "duplicate event and duplicate intent capture protection",
+      "amount/account/mode mismatch; old expiry cannot regress paid state",
+      "webhook received before provider create response",
+      "timeout after provider creation remains UNKNOWN and reuses provider key",
+      "expire provider Session before cancellation; late capture requests financial review without restoring inventory",
+      "Session expiry releases once; retrieved Session repairs a missing webhook",
+      "DB write failure rolls back capture, order and inbox; same event can retry",
+      "orders without a Session expire; inbox payload excludes PII/payment URLs",
+      "COD placement/cancellation/coupon allocation and last-unit concurrency regression"
+    ]
+  },
+  "browserTests": {
+    "frontend": "Next production build local",
+    "backend": "Nest test environment, PostgreSQL random isolated schema",
+    "browser": "Chromium",
+    "initialRun": {
+      "passed": 4,
+      "failed": 2,
+      "report": "front/.visual-review/codex_live_test_7f508c98622847639d9dd227c3918cd1/results.json",
+      "failures": "Alert selector also matched Next route announcer, an in-flight intercepted quote needed teardown waiting, and COD assertion referenced old UI copy. Tests corrected."
+    },
+    "selectedRerun": {
+      "command": "npm.cmd run test:fullstack -- tests/e2e/stripe-payment.spec.ts tests/live/storefront.spec.ts --grep \"Stripe|real API:\"",
+      "environment": { "LIVE_INCLUDE_UI": "1", "LIVE_FRONTEND_MODE": "production" },
+      "exitCode": 0,
+      "passed": 4,
+      "retries": 0,
+      "report": "front/.visual-review/codex_live_test_ee42eeef0748466a98b752d896bc6480/results.json"
+    },
+    "coverage": [
+      "Stripe selection sends STRIPE method without client amount",
+      "forged success query cannot mark an unpaid order paid",
+      "provider error permits retry and remains visible during status polling",
+      "navigation uses Stripe Checkout host; server paid state removes payment button",
+      "real catalog/register/cart/address/saved PC/COD order/cancel journey",
+      "account persistence and forged localStorage rejection passed in initial run"
+    ],
+    "stripeProviderResponses": "intercepted UI fixtures; no card payment calls reach Stripe",
+    "fullUiSuiteRun": false
+  },
+  "stripeProviderSmoke": {
+    "command": "node test/stripe-sandbox-smoke.mjs",
+    "environment": { "RUN_STRIPE_SANDBOX_SMOKE": "1" },
+    "exitCode": 0,
+    "account": "verified using configured test key; identifiers omitted",
+    "mode": "TEST",
+    "amount": "1000000",
+    "currency": "VND",
+    "checkoutCreated": true,
+    "sameIdempotencyKeySameSession": true,
+    "sessionRetrieved": true,
+    "adaptivePricing": false,
+    "checkoutExpired": true,
+    "databaseAccess": false,
+    "cardEnteredOrChargeConfirmed": false
+  },
+  "limitations": [
+    "No live payments, 3DS/decline flow or card-entry-to-real-provider-webhook browser journey verified",
+    "Late capture creates a Refund REQUESTED; no automatic provider refund or approval workflow",
+    "UNKNOWN without Session ID stops automatic create retry after 23 hours; requires reconciliation",
+    "No full identity/catalog regression or complete UI suite run in this task",
+    "No Docker/Nginx/AWS deployment, shipping or email provider implementation",
+    "No changes to public/legacy data, no commit/push/deploy; other workspace edits preserved"
+  ]
+}

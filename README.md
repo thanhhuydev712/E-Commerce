@@ -11,10 +11,10 @@ Frontend mang phong cách cửa hàng PC, linh kiện và gaming gear. Ngày 06/
 | Storefront | Next.js 16.4.2, React 19.3.0, TypeScript, Tailwind CSS 4 | `front/` |
 | REST API | NestJS 12, TypeScript 6, JWT, Swagger | `api/` |
 | Database | PostgreSQL, Prisma 7.10.x, adapter-pg | `api/prisma/` |
-| Thanh toán | Stripe SDK 23; mã PaymentIntent v1 trong legacy, chưa xác nhận tích hợp v2 | `api/legacy/` |
+| Thanh toán | Stripe SDK 23; Checkout sandbox v2, webhook chữ ký, chống lặp và expiry; refund chưa đầy đủ | `api/src/modules/commerce/` |
 | Kiểm tra chất lượng | Vitest, Supertest, Oxlint, ESLint | Cấu hình riêng từng ứng dụng |
 
-Phiên bản trên được đọc từ package.json ngày 05/11/2026; xem lockfile để biết phiên bản được khóa. Ngày 06/11/2026, người dùng yêu cầu bổ sung **Docker, CI/CD, Nginx và AWS Deployment sau FE–BE**; đã có [kế hoạch hạ tầng](docs/DEPLOYMENT_PLAN.md), chưa cài đặt hoặc nghiệm thu deployment. Admin UI đọc tổng quan có phân quyền thật; webhook Stripe và workflow quản trị đầy đủ vẫn cần hoàn thiện. [Chạy, seed và test tích hợp](docs/STOREFRONT_INTEGRATION.md).
+Phiên bản trên được đọc từ package.json ngày 05/11/2026; xem lockfile để biết phiên bản được khóa. Ngày 06/11/2026, người dùng yêu cầu bổ sung **Docker, CI/CD, Nginx và AWS Deployment sau FE–BE**; đã có [kế hoạch hạ tầng](docs/DEPLOYMENT_PLAN.md), chưa cài đặt hoặc nghiệm thu deployment. Admin UI đọc tổng quan có phân quyền thật; workflow quản trị/refund đầy đủ vẫn cần hoàn thiện. Từ 08/11 có [Stripe Checkout sandbox v2](docs/STRIPE_V2.md). [Chạy, seed và test tích hợp](docs/STOREFRONT_INTEGRATION.md).
 
 ## Bản đồ thư mục
 
@@ -40,11 +40,53 @@ E-Commerce/
 
 ## Bắt đầu
 
-Đọc [hướng dẫn môi trường](docs/DEVELOPMENT.md) trước khi cài và chạy. Hai ứng dụng cài dependencies riêng bằng npm. Dùng frontend cổng 3000 và backend cổng 3001; validator môi trường backend hiện mặc định `PORT=3001`.
+### Chuẩn bị lần đầu
 
-- API đề xuất ở local: `http://localhost:3001/api/v1`.
-- Swagger: `http://localhost:3001/api/docs`.
-- Storefront: `http://localhost:3000`.
+Dùng PowerShell trong Cursor/VS Code. Hai ứng dụng có dependencies riêng; nếu chưa cài, chạy từ root dự án:
+
+```powershell
+Set-Location D:\Cursor\E-Commerce
+npm.cmd --prefix api ci
+npm.cmd --prefix front ci
+```
+
+Cấu hình `api/.env` theo [file mẫu](api/.env.example): PostgreSQL, hai JWT secret khác nhau dài ít nhất 32 ký tự, `PORT=3001` và origin frontend `http://localhost:3000`. Giữ nguyên `.env` đã cấu hình. Database mới cần chuẩn bị migration/seed theo [hướng dẫn môi trường](docs/DEVELOPMENT.md); database đang dùng không cần chạy lại migration/seed chỉ để mở dự án.
+
+### Backend — terminal 1
+
+```powershell
+Set-Location D:\Cursor\E-Commerce\api
+npm.cmd run prisma:generate
+npm.cmd run start:dev
+```
+
+Chờ `Found 0 errors` và `Nest application successfully started`.
+
+### Frontend — terminal 2
+
+```powershell
+Set-Location D:\Cursor\E-Commerce\front
+npm.cmd run dev -- --port 3000
+```
+
+Chờ `Ready`, sau đó mở:
+
+- Website: <http://localhost:3000>.
+- API: <http://localhost:3001/api/v1>.
+- Swagger: <http://localhost:3001/api/docs>.
+- Kiểm tra database: <http://localhost:3001/api/v1/health/ready> — cần trả `{"status":"ready"}`.
+
+### Stripe sandbox — terminal 3, khi thử thanh toán
+
+Đăng nhập CLI bằng `stripe login` nếu chưa đăng nhập, rồi chạy nguyên dòng:
+
+```powershell
+stripe listen --events checkout.session.completed,checkout.session.expired --forward-to http://localhost:3001/api/v1/webhooks/stripe
+```
+
+Lấy `whsec_...` listener hiển thị, cập nhật `STRIPE_WEBHOOK_SECRET` trong `api/.env`, rồi khởi động lại backend. Backend cũng cần `STRIPE_SECRET_KEY` dạng `sk_test_...`; xem [hướng dẫn Stripe](docs/STRIPE_V2.md). Không thêm dấu `\` trước dấu `:` hoặc cuối URL. Stripe không bắt buộc khi chạy COD.
+
+Giữ các terminal server/listener mở; dùng Ctrl+C để dừng. Dùng `npm.cmd` trên PowerShell để tránh lỗi `npm.ps1`. Nếu cổng 3000/3001 đang bận, dừng server cũ trước khi chạy lại. Xem [cách xử lý lỗi khởi động Windows](docs/LOCAL_START.md) cho lỗi database, thiếu module hoặc quyền cache.
 
 ## Tài liệu dự án
 

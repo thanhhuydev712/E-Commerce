@@ -2,6 +2,8 @@
 
 Các route dưới đây nằm trong AppModule hiện tại, prefix `/api/v1`. JSON thành công dùng `{ data, meta }`; tiền trả về chuỗi số nguyên VND. Dữ liệu development nằm ở PostgreSQL, không lấy từ fixture frontend.
 
+Cập nhật 08/11/2026: đã bổ sung [Stripe Checkout v2 sandbox](STRIPE_V2.md), gồm Session từ giá đơn, webhook chữ ký và phục hồi/expiry. Giới hạn refund và giao vận vẫn áp dụng.
+
 ## Luồng dữ liệu
 
 Next.js server đọc `GET /storefront` bằng `API_INTERNAL_URL` lúc có request. Browser gọi `/api/v1` cùng origin qua rewrite của Next ở local. CatalogProvider chứa snapshot public; ShopProvider khôi phục phiên bằng `/auth/session` với HttpOnly cookie và giữ access token trong bộ nhớ. Bootstrap chỉ đọc, giữ nguyên hạn access ban đầu; chỉ rotate qua `/auth/refresh` khi cửa sổ access hết hạn. Sau đó các thao tác tài khoản/giỏ/đơn gọi API có bearer token. So sánh sản phẩm là tuỳ chọn giao diện lưu local, không dùng làm danh tính hay nguồn giá.
@@ -16,7 +18,8 @@ Next.js server đọc `GET /storefront` bằng `API_INTERNAL_URL` lúc có reque
 | `PUT /me/cart` | Đặt số lượng các dòng gửi lên; số lượng 0 xoá dòng |
 | `POST /me/cart/items`, `/me/cart/build` | Cộng SKU/cấu hình vào giỏ; kiểm trạng thái, giá và tồn |
 | `POST /me/checkout/quote` | Báo giá từ server, địa chỉ/điện thoại, phí và coupon; hiệu lực 10 phút |
-| `POST /me/orders` | `{ quoteId, method: "COD" }`, bắt buộc `Idempotency-Key` |
+| `POST /me/orders` | `{ quoteId, method: "COD" hoặc "STRIPE" }`, bắt buộc `Idempotency-Key` |
+| `POST /me/orders/:id/stripe-checkout` | Tạo/tái sử dụng Stripe Checkout Session của chủ đơn; trả URL hoặc null khi phiên đã đóng |
 | `GET /me/orders`, `/me/orders/:id` | Đơn thuộc tài khoản, snapshot tiền/địa chỉ và lịch sử thực |
 | `POST /me/orders/:id/cancel` | Huỷ khi còn đủ điều kiện, giải phóng reservation đúng một lần |
 | `GET /me/wishlist`, `POST /me/wishlist/:productId` | Danh sách yêu thích và bật/tắt sản phẩm |
@@ -40,7 +43,7 @@ Hai request cùng idempotency key/nội dung trả cùng đơn; dùng lại key 
 ## Giới hạn hiện tại
 
 - COD hoạt động ở mức tạo/huỷ đơn và giữ tồn. Chưa có xuất kho, đơn vị vận chuyển hoặc đối soát thu hộ; không gọi đây là vận hành bán hàng hoàn chỉnh.
-- Có Stripe test key nhưng thiếu webhook secret và chưa có processor v2 xác minh chữ ký/idempotency. UI chỉ cho COD; gửi STRIPE trả 503 `STRIPE_TEST_NOT_READY`. Không gọi Stripe trong seed/test này, không ghi paid từ URL.
+- Stripe Checkout v2 chỉ bật khi đủ test key/webhook secret; thiếu cấu hình trả 503 `STRIPE_TEST_NOT_READY`. Xác nhận tiền qua webhook hoặc retrieve từ provider, không ghi paid từ URL. [Thiết lập, kiểm thử và giới hạn](STRIPE_V2.md).
 - Giỏ yêu cầu tài khoản; khách bấm thêm được chuyển đến đăng nhập. Chưa merge giỏ khách.
 - Yêu cầu đổi trả/bảo hành trên UI được lưu thành support ticket, chưa phải phê duyệt return/refund/warranty. Chứng từ/tracking chỉ xuất dữ liệu đã có, không tạo lịch sử giả.
 - Recovery có API nhưng chưa cấu hình gửi email thực. Media local cần volume/storage bền vững và cơ chế dọn file mồ côi trước triển khai.

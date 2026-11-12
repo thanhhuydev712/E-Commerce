@@ -33,7 +33,8 @@ const tw = {
   ].join(" "),
   container_reference_header_main: [
     "rf-container rf-reference-header-main max-w-none w-full flex items-center min-h-26.25 px-[50px] mx-auto",
-    "gap-5.5 max-[768px]:min-h-28.25 max-[768px]:flex-wrap max-[768px]:px-4 max-[768px]:py-2.5 max-[768px]:gap-2.75",
+    "gap-5.5 max-[768px]:min-h-28.25 max-[768px]:grid max-[768px]:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]",
+    "max-[768px]:px-4 max-[768px]:py-2.5 max-[768px]:gap-2.75",
     "print:p-0 max-[1024px]:min-h-22.5 max-[1024px]:gap-3.75 [&_.rf-logo]:w-35 [&_.rf-logo_img]:w-35",
     "[&_.rf-logo>span]:text-[6px] [&_.rf-logo>span]:tracking-[1.5px] [&_.rf-menu-button]:w-auto",
     "[&_.rf-menu-button]:min-w-36.25 [&_.rf-menu-button]:h-11.75 [&_.rf-menu-button]:bg-white [&_.rf-menu-button]:bg-none",
@@ -55,10 +56,14 @@ const tw = {
     "max-[768px]:[&_.rf-menu-button]:min-w-8 max-[768px]:[&_.rf-menu-button]:shadow-none",
     "max-[768px]:[&_.rf-menu-button]:p-1.25 max-[768px]:[&_.rf-menu-button]:border-current",
     "max-[768px]:[&_.rf-menu-button]:border-none max-[768px]:[&_.rf-menu-button]:[border-width:0]",
-    "max-[768px]:[&_.rf-logo]:w-32.5 max-[768px]:[&_.rf-header-action]:ml-auto max-[768px]:[&_.rf-search]:order-5",
+    "max-[768px]:[&_.rf-logo]:w-32.5 max-[768px]:[&_.rf-logo]:col-start-2 max-[768px]:[&_.rf-logo]:row-start-1",
+    "max-[768px]:[&_.rf-logo]:items-center max-[768px]:[&_.rf-logo_img]:w-full",
+    "max-[768px]:[&_.rf-menu-button]:col-start-1 max-[768px]:[&_.rf-menu-button]:row-start-1",
+    "max-[768px]:[&_.rf-menu-button]:justify-self-start max-[768px]:[&_.rf-header-action]:ml-auto max-[768px]:[&_.rf-search]:order-5",
     "max-[768px]:[&_.rf-search]:basis-full max-[768px]:[&_.rf-search]:h-9.75 max-[768px]:[&_.rf-search_input]:text-[12px]",
     "max-[768px]:[&_.rf-search_button]:text-[11px] max-[768px]:[&_.rf-search-wrap]:order-5",
-    "max-[768px]:[&_.rf-search-wrap]:basis-full max-[1024px]:[&_.rf-menu-button>svg:last-child]:hidden",
+    "max-[768px]:[&_.rf-search-wrap]:basis-full max-[768px]:[&_.rf-search-wrap]:col-span-full",
+    "max-[768px]:[&_.rf-search-wrap]:row-start-2 max-[1024px]:[&_.rf-menu-button>svg:last-child]:hidden",
   ].join(" "),
   menu_button: [
     "flex items-center w-55.5 shrink-0 bg-[#edf5ef] bg-none [border-top-width:0] [border-top-style:none] border-t-current",
@@ -177,31 +182,33 @@ export function StoreHeader() {
             <ChevronDown size={13} />
           </button>
           <StoreSearch />
-          <Link
-            className={tw.header_action_account_action}
-            aria-label="Tài khoản"
-            href={shop.user ? "/account" : "/login"}
-          >
-            <UserRound size={29} />
-            <span>
-              {shop.user ? "Xin chào," : "Đăng nhập/Đăng ký"}
-              <strong>
-                {shop.user?.name ?? "Tài khoản"}
-                <ChevronDown size={12} />
-              </strong>
-            </span>
-          </Link>
-          <Link
-            className={tw.header_cart}
-            href="/cart"
-            aria-label={`Giỏ hàng ${quantity} sản phẩm`}
-          >
-            <span>
-              <ShoppingCart size={28} />
-              <b>{quantity}</b>
-            </span>
-            <strong>Giỏ hàng</strong>
-          </Link>
+          <div className="contents max-[768px]:col-start-3 max-[768px]:row-start-1 max-[768px]:flex max-[768px]:items-center max-[768px]:justify-self-end max-[768px]:gap-2.75">
+            <Link
+              className={tw.header_action_account_action}
+              aria-label="Tài khoản"
+              href={shop.user ? "/account" : "/login"}
+            >
+              <UserRound size={29} />
+              <span>
+                {shop.user ? "Xin chào," : "Đăng nhập/Đăng ký"}
+                <strong>
+                  {shop.user?.name ?? "Tài khoản"}
+                  <ChevronDown size={12} />
+                </strong>
+              </span>
+            </Link>
+            <Link
+              className={tw.header_cart}
+              href="/cart"
+              aria-label={`Giỏ hàng ${quantity} sản phẩm`}
+            >
+              <span>
+                <ShoppingCart size={28} />
+                <b>{quantity}</b>
+              </span>
+              <strong>Giỏ hàng</strong>
+            </Link>
+          </div>
         </div>
         {menu && (
           <div className="rf-container rf-menu-wrap max-w-none w-full absolute top-full left-0 right-0 z-50 px-[50px] mx-auto max-[768px]:px-4 print:p-0">

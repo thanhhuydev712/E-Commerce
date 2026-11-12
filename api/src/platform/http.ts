@@ -153,7 +153,7 @@ export function configureHttp(app: INestApplication) {
       .setTitle('E-Commerce API')
       .setVersion('1.0')
       .setDescription(
-        'Identity and catalog APIs backed by v2, including VND pricing, local media and basic inventory. JSON: { data, meta }; errors: { error, meta }. Money: integer strings. Auth POST requires an allowed Origin. Refresh token: HttpOnly cookie.',
+        'Identity, catalog and commerce v2, including COD and Stripe Checkout sandbox with signed webhooks. JSON: { data, meta }; errors: { error, meta }. Money: integer VND strings. Auth POST requires an allowed Origin. Refresh token: HttpOnly cookie.',
       )
       .addBearerAuth()
       .addCookieAuth('refresh_token')

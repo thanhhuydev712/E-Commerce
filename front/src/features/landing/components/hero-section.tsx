@@ -290,7 +290,7 @@ export function HeroSection() {
                       src={campaign.image}
                       alt={campaign.alt}
                       fill
-                      loading="eager"
+                      loading={position === track.index ? "eager" : "lazy"}
                       fetchPriority={!clone && index === 0 ? "high" : "low"}
                       sizes="(max-width: 1023px) calc(100vw - 32px), (max-width: 1668px) calc(100vw - 128px), 1540px"
                       draggable={false}

@@ -170,7 +170,7 @@ test("cấu hình cũ không vẽ linh kiện đã mất hoặc đếm là đã 
   await page.goto(`/pc-builder/saved/${id}`);
   await expect(page.locator(".rf-build-slots h2")).toContainText("0/8");
   await expect(page.locator(".rf-build-slot.selected")).toHaveCount(0);
-  await expect(page.locator(".rf-2d-tags span")).toHaveCount(0);
+  await expect(page.locator(".rf-photo-stage [data-slot]")).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: "Bật thử", exact: true }),
   ).toBeDisabled();
@@ -254,24 +254,24 @@ test("SKU đã ẩn không làm sập giỏ hoặc checkout", async ({ page }) =
   expect(errors).toEqual([]);
 });
 
-test("mất WebGL quay về 2D và giữ nguyên cấu hình", async ({ page }) => {
+test("mất WebGL quay về ảnh ghép và giữ nguyên cấu hình", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   await expect(
     page.getByRole("button", { name: "Góc nhìn", exact: true }),
-  ).toBeDisabled();
+  ).toBeEnabled();
   await page.getByRole("button", { name: "3D", exact: true }).click();
   const canvas = page.locator(".rf-viewport canvas");
   await expect(canvas).toBeVisible();
   await canvas.evaluate((el) =>
     el.dispatchEvent(new Event("webglcontextlost", { cancelable: true })),
   );
-  await expect(page.locator(".rf-2d-machine")).toBeVisible();
+  await expect(page.locator(".rf-photo-assembly")).toBeVisible();
   await expect(page.locator(".rf-build-slot.selected")).toHaveCount(8);
   await expect(
-    page.getByRole("button", { name: "2D", exact: true }),
+    page.getByRole("button", { name: "Ảnh ghép", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
   expect(errors).toEqual([]);
 });
@@ -311,6 +311,9 @@ test("renderer 3D nghỉ khi cảnh đứng yên và vẫn bật đèn khi giả
       await new Promise((resolve) => setTimeout(resolve, 400));
       return metrics.pcDraws - before;
     });
+  await expect.poll(idle).toBe(0);
+  await page.getByRole("button", { name: "Trực diện", exact: true }).click();
+  await page.getByRole("button", { name: "Ánh sáng Tím", exact: true }).click();
   await expect.poll(idle).toBe(0);
   await page.getByRole("checkbox", { name: "Giảm chuyển động" }).uncheck();
   const before = await draws();

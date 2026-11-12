@@ -153,7 +153,15 @@ test("real API: catalog, register, persistent cart, address, saved PC, COD order
   await expect(page).toHaveURL(new RegExp("/checkout/result/" + order.id));
   await page.reload();
   await expect(
-    page.getByText("Trạng thái được xác minh từ backend.", { exact: false }),
+    page.getByRole("heading", {
+      name: "Đơn đã tạo, đang chờ xác nhận thanh toán.",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("COD chưa ghi nhận thu tiền; thanh toán khi nhận hàng.", {
+      exact: true,
+    }),
   ).toBeVisible();
   await page.goto("/account/orders/" + order.id);
   await expect(

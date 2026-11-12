@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { api } from "@/src/catalog/api-client";
-export function useApiResource<T>(path: string) {
+export function useApiResource<T>(path: string, keepPreviousData = false) {
   const [version, setVersion] = useState(0);
   const [result, setResult] = useState<{
     path: string;
@@ -33,9 +33,10 @@ export function useApiResource<T>(path: string) {
   }, [path, version]);
   const reload = useCallback(() => setVersion((value) => value + 1), []);
   // Đổi URL không được tạm hiển thị dữ liệu/thao tác của tài nguyên trước đó.
-  const current = result?.path === path && result.version === version;
+  const samePath = result?.path === path;
+  const current = samePath && result.version === version;
   return {
-    data: current ? result.data : null,
+    data: samePath && (current || keepPreviousData) ? result.data : null,
     error: current ? result.error : "",
     loading: !current,
     reload,

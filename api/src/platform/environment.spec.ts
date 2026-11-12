@@ -40,4 +40,22 @@ describe('API environment and response contract', () => {
       at: '2026-11-06T00:00:00.000Z',
     });
   });
+  it('only permits Stripe test keys and an allowlisted storefront return origin', () => {
+    expect(() =>
+      validateEnvironment({ ...valid, STRIPE_SECRET_KEY: 'sk_live_fixture' }),
+    ).toThrow();
+    expect(() =>
+      validateEnvironment({
+        ...valid,
+        STOREFRONT_URL: 'https://attacker.test',
+      }),
+    ).toThrow();
+    expect(
+      validateEnvironment({
+        ...valid,
+        STRIPE_SECRET_KEY: 'sk_test_fixture',
+        STRIPE_WEBHOOK_SECRET: 'whsec_fixture',
+      }),
+    ).toMatchObject({ STOREFRONT_URL: 'http://localhost:3000' });
+  });
 });

@@ -65,11 +65,17 @@ export function OrderDetail({ id, section }: { id: string; section?: string }) {
         </>
       ) : section === "payment" ? (
         <>
-          <h2>{order.paymentMethod === "STRIPE" ? "Thanh toán Stripe test" : "Thanh toán COD"}</h2>
+          <h2>
+            {order.paymentMethod === "STRIPE"
+              ? "Thanh toán Stripe test"
+              : "Thanh toán COD"}
+          </h2>
           <p>
             {order.payment === "paid"
               ? "Đã thanh toán"
-              : order.paymentMethod === "STRIPE" ? "Chưa được xác nhận thanh toán Stripe." : "Chưa thanh toán; thu khi giao hàng."}
+              : order.paymentMethod === "STRIPE"
+                ? "Chưa được xác nhận thanh toán Stripe."
+                : "Chưa thanh toán; thu khi giao hàng."}
           </p>
           <p>Tổng tiền: {money(order.total)}</p>
           <StripePaymentActions order={order} reload={reload} />

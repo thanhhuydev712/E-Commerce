@@ -270,11 +270,18 @@ export class OrderService {
           );
         const orderId = randomUUID(),
           number = `RF-${Date.now()}-${randomUUID().slice(0, 6).toUpperCase()}`;
-        if (dto.method === 'STRIPE' &&
-          (BigInt(snapshot.total) <= 0n || BigInt(snapshot.total) > BigInt(Number.MAX_SAFE_INTEGER)))
+        if (
+          dto.method === 'STRIPE' &&
+          (BigInt(snapshot.total) <= 0n ||
+            BigInt(snapshot.total) > BigInt(Number.MAX_SAFE_INTEGER))
+        )
           throw new ConflictException('Order amount is unsupported for Stripe');
-        const paymentDeadline = dto.method === 'STRIPE' ? new Date(Date.now() + 60 * 60 * 1000) : null;
-        const initialStatus = dto.method === 'STRIPE' ? 'PENDING_PAYMENT' : 'CONFIRMED';
+        const paymentDeadline =
+          dto.method === 'STRIPE'
+            ? new Date(Date.now() + 60 * 60 * 1000)
+            : null;
+        const initialStatus =
+          dto.method === 'STRIPE' ? 'PENDING_PAYMENT' : 'CONFIRMED';
         await tx.order.create({
           data: {
             id: orderId,
@@ -290,7 +297,11 @@ export class OrderService {
             taxTotal: 0n,
             grandTotal: BigInt(snapshot.total),
             customerEmailSnapshot: user.email,
-            pricingSnapshot: { ...snapshot, method: dto.method, taxIncluded: true },
+            pricingSnapshot: {
+              ...snapshot,
+              method: dto.method,
+              taxIncluded: true,
+            },
             placedAt: new Date(),
             paymentDeadline,
           },
@@ -430,7 +441,10 @@ export class OrderService {
             orderId,
             toStatus: initialStatus,
             actorId: userId,
-            reason: dto.method === 'STRIPE' ? 'Chờ thanh toán Stripe test' : 'Đặt hàng COD',
+            reason:
+              dto.method === 'STRIPE'
+                ? 'Chờ thanh toán Stripe test'
+                : 'Đặt hàng COD',
             operationKey: `placed:${orderId}`,
           },
         });
@@ -447,7 +461,10 @@ export class OrderService {
             userId,
             type: 'ORDER',
             title: 'Đặt hàng thành công',
-            body: dto.method === 'STRIPE' ? `Đơn ${number} đang chờ thanh toán Stripe test.` : `Đơn ${number} đang được xử lý, thanh toán khi nhận hàng.`,
+            body:
+              dto.method === 'STRIPE'
+                ? `Đơn ${number} đang chờ thanh toán Stripe test.`
+                : `Đơn ${number} đang được xử lý, thanh toán khi nhận hàng.`,
             resourceType: 'ORDER',
             resourceId: orderId,
             dedupeKey: `placed:${orderId}`,
@@ -460,7 +477,11 @@ export class OrderService {
             action: 'ORDER_PLACE',
             entityType: 'ORDER',
             entityId: orderId,
-            afterRedacted: { number, method: dto.method, amount: snapshot.total },
+            afterRedacted: {
+              number,
+              method: dto.method,
+              amount: snapshot.total,
+            },
           },
         });
         await tx.idempotencyKey.create({
@@ -523,14 +544,20 @@ export class OrderService {
       id: row.id,
       number: row.number,
       createdAt: row.placedAt,
-      status: ['CANCELLED', 'EXPIRED'].includes(row.status) ? 'cancelled' : 'processing',
+      status: ['CANCELLED', 'EXPIRED'].includes(row.status)
+        ? 'cancelled'
+        : 'processing',
       backendStatus: row.status,
       payment: row.payment?.status === 'PAID' ? 'paid' : 'pending',
-      paymentMethod: (row.pricingSnapshot as { method?: string }).method ?? 'COD',
+      paymentMethod:
+        (row.pricingSnapshot as { method?: string }).method ?? 'COD',
       paymentStatus: row.payment?.status ?? 'UNPAID',
       paymentDeadline: row.paymentDeadline,
-      canPay: row.status === 'PENDING_PAYMENT' && row.payment?.capturedAmount === 0n &&
-        !!row.paymentDeadline && row.paymentDeadline > new Date(),
+      canPay:
+        row.status === 'PENDING_PAYMENT' &&
+        row.payment?.capturedAmount === 0n &&
+        !!row.paymentDeadline &&
+        row.paymentDeadline > new Date(),
       lines: row.orderItems.map((l) => ({
         id: l.id,
         name: `${l.productNameSnapshot}${l.variantNameSnapshot ? ' · ' + l.variantNameSnapshot : ''}`,
@@ -560,107 +587,125 @@ export class OrderService {
     return this.detail(userId, id);
   }
   /** Caller holds the same user row lock as place/cancel/payment processing. */
-  async closeUnpaid(tx: DbTransaction, userId: string, id: string,
-    status: 'CANCELLED' | 'EXPIRED', stripeExpired = false) {
-        const order = await tx.order.findFirst({
-          where: { id, userId },
-          include: { payment: true, orderItems: true },
-        });
-        if (!order) throw new NotFoundException('Order not found');
-        if (['CANCELLED', 'EXPIRED'].includes(order.status)) return;
-        if (
-          !['CONFIRMED', 'PENDING_PAYMENT'].includes(order.status) ||
-          order.payment?.capturedAmount !== 0n
-        )
-          throw new ConflictException(
-            'Order cannot be cancelled; contact support',
-          );
-        if (!stripeExpired && await tx.paymentAttempt.count({ where: {
-          paymentId: order.payment!.id, status: { in: ['CREATED', 'PENDING', 'UNKNOWN'] },
-        } })) throw new ConflictException('Stripe session must be expired before releasing stock');
-        for (const productId of [
-          ...new Set(
-            (
-              await tx.productVariant.findMany({
-                where: { id: { in: order.orderItems.map((l) => l.variantId) } },
-                select: { productId: true },
-              })
-            ).map((v) => v.productId),
-          ),
-        ].sort())
-          await productLock(tx, this.prisma.schema, productId);
-        const reservations = await tx.stockReservation.findMany({
-          where: {
-            orderItem: { orderId: id },
-            status: { in: ['ACTIVE', 'COMMITTED'] },
-          },
-          orderBy: { balanceId: 'asc' },
-        });
-        for (const reservation of reservations) {
-          await tx.inventoryBalance.update({
-            where: { id: reservation.balanceId },
-            data: {
-              reserved: { decrement: reservation.quantity },
-              version: { increment: 1 },
-            },
-          });
-          await tx.stockReservation.update({
-            where: { id: reservation.id },
-            data: { status: status === 'EXPIRED' ? 'EXPIRED' : 'RELEASED' },
-          });
-          await tx.inventoryMovement.create({
-            data: {
-              balanceId: reservation.balanceId,
-              onHandDelta: 0,
-              reservedDelta: -reservation.quantity,
-              unavailableDelta: 0,
-              kind: 'RELEASE',
-              operationKey: `cancel:${reservation.id}`,
-              sourceType: 'ORDER',
-              sourceId: id,
-              actorId: userId,
-              occurredAt: new Date(),
-            },
-          });
-        }
-        await tx.order.update({
-          where: { id },
-          data: {
-            status,
-            cancelledAt: new Date(),
-            cancellationReason: status === 'EXPIRED' ? 'Payment session expired' : 'Customer cancellation',
-            version: { increment: 1 },
-          },
-        });
-        await tx.promotionRedemption.updateMany({
-          where: { orderId: id },
-          data: { status: 'RELEASED' },
-        });
-        await tx.orderStatusHistory.create({
-          data: {
-            orderId: id,
-            fromStatus: order.status,
-            toStatus: status,
-            actorId: userId,
-            operationKey: `cancelled:${id}`,
-          },
-        });
-        await tx.auditLog.create({
-          data: {
-            actorId: userId,
-            actorType: 'USER',
-            action: status === 'EXPIRED' ? 'ORDER_EXPIRE' : 'ORDER_CANCEL',
-            entityType: 'ORDER',
-            entityId: id,
-          },
-        });
-        await tx.paymentAttempt.updateMany({
-          where: { paymentId: order.payment!.id, status: { in: ['CREATED', 'PENDING', 'UNKNOWN'] } },
-          data: { status: 'CANCELLED', settledAt: new Date() },
-        });
-        await tx.payment.updateMany({
-          where: { id: order.payment!.id, capturedAmount: 0n },
-          data: { status: 'UNPAID', version: { increment: 1 } },
-        });
+  async closeUnpaid(
+    tx: DbTransaction,
+    userId: string,
+    id: string,
+    status: 'CANCELLED' | 'EXPIRED',
+    stripeExpired = false,
+  ) {
+    const order = await tx.order.findFirst({
+      where: { id, userId },
+      include: { payment: true, orderItems: true },
+    });
+    if (!order) throw new NotFoundException('Order not found');
+    if (['CANCELLED', 'EXPIRED'].includes(order.status)) return;
+    if (
+      !['CONFIRMED', 'PENDING_PAYMENT'].includes(order.status) ||
+      order.payment?.capturedAmount !== 0n
+    )
+      throw new ConflictException('Order cannot be cancelled; contact support');
+    if (
+      !stripeExpired &&
+      (await tx.paymentAttempt.count({
+        where: {
+          paymentId: order.payment!.id,
+          status: { in: ['CREATED', 'PENDING', 'UNKNOWN'] },
+        },
+      }))
+    )
+      throw new ConflictException(
+        'Stripe session must be expired before releasing stock',
+      );
+    for (const productId of [
+      ...new Set(
+        (
+          await tx.productVariant.findMany({
+            where: { id: { in: order.orderItems.map((l) => l.variantId) } },
+            select: { productId: true },
+          })
+        ).map((v) => v.productId),
+      ),
+    ].sort())
+      await productLock(tx, this.prisma.schema, productId);
+    const reservations = await tx.stockReservation.findMany({
+      where: {
+        orderItem: { orderId: id },
+        status: { in: ['ACTIVE', 'COMMITTED'] },
+      },
+      orderBy: { balanceId: 'asc' },
+    });
+    for (const reservation of reservations) {
+      await tx.inventoryBalance.update({
+        where: { id: reservation.balanceId },
+        data: {
+          reserved: { decrement: reservation.quantity },
+          version: { increment: 1 },
+        },
+      });
+      await tx.stockReservation.update({
+        where: { id: reservation.id },
+        data: { status: status === 'EXPIRED' ? 'EXPIRED' : 'RELEASED' },
+      });
+      await tx.inventoryMovement.create({
+        data: {
+          balanceId: reservation.balanceId,
+          onHandDelta: 0,
+          reservedDelta: -reservation.quantity,
+          unavailableDelta: 0,
+          kind: 'RELEASE',
+          operationKey: `cancel:${reservation.id}`,
+          sourceType: 'ORDER',
+          sourceId: id,
+          actorId: status === 'EXPIRED' ? undefined : userId,
+          occurredAt: new Date(),
+        },
+      });
+    }
+    await tx.order.update({
+      where: { id },
+      data: {
+        status,
+        cancelledAt: new Date(),
+        cancellationReason:
+          status === 'EXPIRED'
+            ? 'Payment session expired'
+            : 'Customer cancellation',
+        version: { increment: 1 },
+      },
+    });
+    await tx.promotionRedemption.updateMany({
+      where: { orderId: id },
+      data: { status: 'RELEASED' },
+    });
+    await tx.orderStatusHistory.create({
+      data: {
+        orderId: id,
+        fromStatus: order.status,
+        toStatus: status,
+        actorId: status === 'EXPIRED' ? undefined : userId,
+        operationKey: `cancelled:${id}`,
+      },
+    });
+    await tx.auditLog.create({
+      data: {
+        actorId: status === 'EXPIRED' ? undefined : userId,
+        actorType: status === 'EXPIRED' ? 'SYSTEM' : 'USER',
+        action: status === 'EXPIRED' ? 'ORDER_EXPIRE' : 'ORDER_CANCEL',
+        entityType: 'ORDER',
+        entityId: id,
+      },
+    });
+    await tx.paymentAttempt.updateMany({
+      where: {
+        paymentId: order.payment!.id,
+        status: { in: ['CREATED', 'PENDING', 'UNKNOWN'] },
+      },
+      data: { status: 'CANCELLED', settledAt: new Date() },
+    });
+    await tx.payment.updateMany({
+      where: { id: order.payment!.id, capturedAmount: 0n },
+      data: { status: 'UNPAID', version: { increment: 1 } },
+    });
   }
 }

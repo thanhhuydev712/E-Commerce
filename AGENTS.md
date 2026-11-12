@@ -12,6 +12,15 @@ Xây dựng website thương mại điện tử fullstack để chủ dự án v
 4. Đọc tài liệu theo công việc: [nghiệp vụ](docs/REQUIREMENTS.md), [kiến trúc](docs/ARCHITECTURE.md), [môi trường](docs/DEVELOPMENT.md), [lộ trình](docs/ROADMAP.md), [chất lượng](docs/QUALITY.md), [kế hoạch Docker/CI/CD/Nginx/AWS](docs/DEPLOYMENT_PLAN.md).
 5. Đọc mã nguồn, package.json và AGENTS.md trong thư mục liên quan trước khi sửa. Với frontend, tuân thủ thêm `front/AGENTS.md` và đọc hướng dẫn Next.js cục bộ mà file đó chỉ định.
 
+## Sub-agent theo chức năng và tiết kiệm token
+
+- Quy trình và mẫu bàn giao: [docs/SUB_AGENTS.md](docs/SUB_AGENTS.md); vai trò tại `.codex/agents/`.
+- Tác vụ nhỏ: agent chính tự làm. Với tác vụ đủ lớn và có đầu ra độc lập, dùng một sub-agent đúng chức năng; không mặc định gọi tất cả vai trò. Nếu người dùng yêu cầu cách chia khác, làm theo yêu cầu đó.
+- Mặc định tối đa một agent con đồng thời theo `.codex/config.toml`; agent con không tạo thêm agent. Chỉ tăng mức song song khi người dùng yêu cầu.
+- Khi công cụ hỗ trợ, giao ngữ cảnh mới cùng mục tiêu, file được sửa, bằng chứng đã đọc và tiêu chí nghiệm thu; không sao chép toàn bộ lịch sử chat.
+- Agent chính vẫn đọc tài liệu nền ở trên. Agent con có thể dùng bản bàn giao có nguồn thay vì đọc lại toàn bộ tài liệu nền; phải đọc quy tắc thư mục và phần tài liệu/mã cần xác minh cho nhiệm vụ.
+- Agent chính giữ contract, file dùng chung và tài liệu trạng thái; không giao sửa trùng file hoặc chạy runner tranh tài nguyên. Báo cáo ngắn, kết quả thật; không hứa tỷ lệ giảm token khi chưa đo cả cha lẫn con.
+
 ## Bản đồ mã nguồn
 
 - `api/`: NestJS, TypeScript, Prisma, PostgreSQL. Ngày 07/11/2026: AppModule nạp platform/auth/accounts/access/catalog/pricing/media/inventory/storefront/commerce với client v2; giỏ/checkout/đơn COD hoạt động ở phạm vi tạo/huỷ và reservation, Stripe processor v2 chưa triển khai. Mã v1 ở `api/legacy/`. Đọc AppModule/controller thực tế và PROJECT_STATUS trước khi khẳng định route đã hoạt động.

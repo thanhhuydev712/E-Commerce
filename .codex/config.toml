@@ -1,0 +1,4 @@
+# Giới hạn agent con đồng thời; không phải giới hạn token hay tổng số lần gọi.
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 1

@@ -57,7 +57,10 @@ describe.skipIf(!process.env.TEST_DATABASE_URL)(
         ALLOWED_ORIGINS: 'http://localhost:3000',
         MEDIA_ROOT: mediaRoot,
       });
-      delete process.env.STRIPE_SECRET_KEY;
+      // Empty values override ConfigModule's .env loading; deleting would allow
+      // developer sandbox credentials to be loaded again inside this test app.
+      process.env.STRIPE_SECRET_KEY = '';
+      process.env.STRIPE_WEBHOOK_SECRET = '';
       db = new Client({
         connectionString: process.env.TEST_DATABASE_URL,
         connectionTimeoutMillis: 15000,

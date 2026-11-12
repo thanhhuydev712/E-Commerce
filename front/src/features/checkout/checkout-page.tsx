@@ -441,11 +441,15 @@ function CheckoutForm() {
                     "Thanh toán khi giao hàng (COD)",
                     "Đơn chờ xác nhận, chưa ghi nhận đã thu tiền.",
                   ],
-                  ...(confirmed?.methods.includes("STRIPE") ? [[
-                    "STRIPE",
-                    "Thanh toán thẻ qua Stripe (thử nghiệm)",
-                    "Đặt đơn rồi tiếp tục nhập thẻ thử nghiệm trên trang Stripe.",
-                  ] as const] : []),
+                  ...(confirmed?.methods.includes("STRIPE")
+                    ? [
+                        [
+                          "STRIPE",
+                          "Thanh toán thẻ qua Stripe (thử nghiệm)",
+                          "Đặt đơn rồi tiếp tục nhập thẻ thử nghiệm trên trang Stripe.",
+                        ] as const,
+                      ]
+                    : []),
                 ] as const
               ).map(([id, label, description]) => (
                 <label key={id}>
@@ -463,7 +467,8 @@ function CheckoutForm() {
               ))}
             </fieldset>
             <p className="rf-form-hint text-[12px] text-rf-muted">
-              Chỉ dùng thẻ thử nghiệm khi thanh toán Stripe. Phương thức khả dụng được xác nhận trong báo giá.
+              Chỉ dùng thẻ thử nghiệm khi thanh toán Stripe. Phương thức khả
+              dụng được xác nhận trong báo giá.
             </p>
           </section>
           <Link className={tw.text_link} href="/cart">
@@ -570,7 +575,11 @@ function CheckoutForm() {
                 className={tw.btn_full}
                 disabled={placing || shop.cartPending > 0}
               >
-                {placing ? "Đang tạo đơn hàng…" : payment === "STRIPE" ? "Tạo đơn và tiếp tục thanh toán" : "Tạo đơn hàng COD"}
+                {placing
+                  ? "Đang tạo đơn hàng…"
+                  : payment === "STRIPE"
+                    ? "Tạo đơn và tiếp tục thanh toán"
+                    : "Tạo đơn hàng COD"}
               </button>
             ) : (
               <Link className={tw.btn_full} href={login}>

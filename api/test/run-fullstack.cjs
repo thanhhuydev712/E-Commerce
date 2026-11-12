@@ -6,6 +6,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const { randomBytes, randomUUID } = require('node:crypto');
 const { createServer } = require('node:net');
+const { builtFile } = require('../scripts/build-path.cjs');
 const root = path.resolve(__dirname, '..'),
   front = path.resolve(root, '../front');
 const schema = `codex_live_test_${randomUUID().replaceAll('-', '')}`;
@@ -56,11 +57,13 @@ async function run() {
     JWT_SECRET: randomBytes(48).toString('hex'),
     JWT_REFRESH_SECRET: randomBytes(48).toString('hex'),
     ALLOWED_ORIGINS: base,
+    STOREFRONT_URL: base,
     MEDIA_ROOT: mediaRoot,
     PORT: '3401',
   };
-  delete env.STRIPE_SECRET_KEY;
-  delete env.STRIPE_WEBHOOK_SECRET;
+  // ConfigModule reads .env too; explicit empty values prevent reloading keys.
+  env.STRIPE_SECRET_KEY = '';
+  env.STRIPE_WEBHOOK_SECRET = '';
   try {
     await db.connect();
     connected = true;
@@ -85,14 +88,14 @@ async function run() {
       timeout: 150000,
       windowsHide: true,
     });
-    execFileSync(process.execPath, ['dist/modules/access/seed-access.js'], {
+    execFileSync(process.execPath, [builtFile('modules', 'access', 'seed-access.js')], {
       cwd: root,
       env,
       stdio: 'pipe',
       timeout: 60000,
       windowsHide: true,
     });
-    const backend = spawn(process.execPath, ['dist/main.js'], {
+    const backend = spawn(process.execPath, [builtFile('main.js')], {
       cwd: root,
       env,
       stdio: 'ignore',
