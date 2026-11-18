@@ -16,40 +16,40 @@ const tw = {
   panel_prose: [
     "rf-panel rf-prose bg-rf-surface bg-none mb-5 w-full leading-[1.9] p-6.5 border-rf-border border-solid border",
     "rounded-[var(--rf-radius)] [&_h2]:text-[19px] [&_h1]:text-[34px] [&_h1]:tracking-[-0.7px] [&_h1]:leading-[1.4]",
-    "max-[768px]:p-4.5 [&_p]:text-[#5f7164] max-[768px]:[&_h1]:text-[27px] [&_.rf-eyebrow]:mb-2.5",
+    "max-[768px]:p-4.5 [&_p]:text-rf-body [&_p]:text-[#5f7164] max-[768px]:[&_h1]:text-[27px] [&_.rf-eyebrow]:mb-2.5",
   ].join(" "),
   text_link: [
-    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-[12px] font-semibold p-0",
+    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-rf-small font-semibold p-0",
     "border-current border-none [border-width:0] gap-1.75 hover:underline hover:[text-underline-offset:4px]",
   ].join(" "),
   article_page_prose: [
     "rf-article-page rf-prose w-full leading-[1.9] mx-auto my-8.75 [&_h1]:text-[36px] [&_h1]:leading-[1.4]",
-    "[&_h1]:tracking-[-1px] [&_p]:text-[#5f7164] max-[768px]:[&_h1]:text-[27px] [&_.rf-eyebrow]:mb-2.5",
+    "[&_h1]:tracking-[-1px] [&_p]:text-rf-body [&_p]:text-[#5f7164] max-[768px]:[&_h1]:text-[27px] [&_.rf-eyebrow]:mb-2.5",
     "[&_.rf-article-visual]:min-h-70 [&_.rf-article-visual]:my-7.5 [&_.rf-article-visual]:rounded-[10px]",
     "max-[768px]:[&_.rf-article-visual]:min-h-50",
   ].join(" "),
   btn: [
-    "rf-btn inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-[12px] font-bold",
+    "rf-btn inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-rf-small font-bold",
     "leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-transparent border-solid border",
     "rounded-[6px] gap-2.5 print:hidden hover:bg-rf-green-hover hover:bg-none",
   ].join(" "),
   panel_related_articles: [
     "rf-panel rf-related-articles bg-rf-surface bg-none mb-5 p-6.5 border-rf-border border-solid border",
     "rounded-[var(--rf-radius)] [&_h2]:text-[17px] [&_h1]:text-[26px] [&_h1]:tracking-[-0.7px] max-[768px]:p-4.5",
-    "[&_ol]:pl-6 [&_ol]:text-[14px] [&_li]:leading-[1.6] [&_li]:mx-0 [&_li]:my-4",
+    "[&_ol]:pl-6 [&_ol]:text-rf-body [&_li]:leading-[1.6] [&_li]:mx-0 [&_li]:my-4",
   ].join(" "),
   page_heading: [
     "rf-page-heading flex justify-between items-center mx-0 my-7.5 gap-5 [&_h1]:text-[32px] [&_h1]:tracking-[-1px]",
     "[&_h1]:leading-[1.2] [&_h1]:mt-2 [&_h1]:mb-2.5 [&_h1]:mx-0 [&_h1_small]:text-[20px] [&_h1_small]:text-rf-muted",
-    "[&_p]:text-rf-muted [&_p]:text-[13px] [&_p]:mb-0 max-[768px]:flex-wrap max-[768px]:mx-0 max-[768px]:my-6",
+    "[&_p]:text-rf-muted [&_p]:text-rf-body [&_p]:mb-0 max-[768px]:flex-wrap max-[768px]:mx-0 max-[768px]:my-6",
     "max-[768px]:[&_h1]:text-[27px]",
   ].join(" "),
   account_stats: [
     "rf-account-stats grid grid-cols-[repeat(3,_1fr)] mx-0 my-7.5 gap-4.5 [&>a]:flex [&>a]:flex-col [&>a]:bg-white",
     "[&>a]:bg-none [&>a]:p-6 [&>a]:border-rf-border [&>a]:border-solid [&>a]:border [&>a]:rounded-[9px]",
-    "[&_svg]:text-[#5f9270] [&_strong]:text-[32px] [&_strong]:mt-3 [&_span]:text-[11px] [&_span]:text-rf-muted",
+    "[&_svg]:text-[#5f9270] [&_strong]:text-[32px] [&_strong]:mt-3 [&_span]:text-rf-caption [&_span]:text-rf-muted",
     "max-[768px]:gap-2.25 max-[768px]:[&>a]:px-3 max-[768px]:[&>a]:py-3.75 max-[768px]:[&_strong]:text-[26px]",
-    "max-[768px]:[&_span]:text-[9px]",
+    "max-[768px]:[&_span]:text-rf-caption",
   ].join(" "),
   panel: [
     "rf-panel rf-faq bg-rf-surface bg-none mb-5 p-6.5 border-rf-border border-solid border rounded-[var(--rf-radius)]",
@@ -57,11 +57,11 @@ const tw = {
   ].join(" "),
   category_tiles: [
     "rf-category-tiles grid grid-cols-[repeat(12,_1fr)] gap-2.5 [&>a]:flex [&>a]:flex-col [&>a]:items-center",
-    "[&>a]:justify-center [&>a]:bg-white [&>a]:bg-none [&>a]:min-h-24 [&>a]:text-[10px] [&>a]:font-semibold",
+    "[&>a]:justify-center [&>a]:text-center [&>a]:px-1 [&>a]:bg-white [&>a]:bg-none [&>a]:min-h-24 [&>a]:text-rf-caption [&>a]:font-semibold",
     "[&>a]:[transition:border-color_0.2s,_transform_0.2s] [&>a]:border-rf-border [&>a]:border-solid [&>a]:border",
     "[&>a]:rounded-[9px] [&>a]:gap-3 [&>a_svg]:text-[#577567] max-[1200px]:grid-cols-[repeat(6,_1fr)]",
     "max-[1200px]:[&>a]:min-h-22 max-[768px]:grid-cols-[repeat(4,_1fr)] max-[768px]:gap-2 max-[768px]:[&>a]:min-h-20.5",
-    "max-[768px]:[&>a]:text-[9px] max-[768px]:[&>a]:gap-2.25 max-[768px]:[&>a_svg]:w-6 max-[768px]:[&>a_svg]:h-6",
+    "max-[768px]:[&>a]:text-rf-caption max-[768px]:[&>a]:gap-2.25 max-[768px]:[&>a_svg]:w-6 max-[768px]:[&>a_svg]:h-6",
     "[&>a:hover]:[transform:translateY(-3px)] [&>a:hover]:border-[#a3c9b5]",
   ].join(" "),
 };
@@ -74,7 +74,7 @@ export function InformationPage({ slug }: { slug: string }) {
     <>
       <Breadcrumb current={page.title} />
       <article className={tw.panel_prose}>
-        <span className="rf-eyebrow inline-flex items-center text-[10px] font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-[9px] max-[768px]:tracking-[1px]">
+        <span className="rf-eyebrow inline-flex items-center text-rf-caption font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-rf-caption max-[768px]:tracking-[1px]">
           RIGFORGE · THÔNG TIN MINH HỌA
         </span>
         <h1>{page.title}</h1>
@@ -102,7 +102,7 @@ export function ArticlesPage({ slug }: { slug?: string }) {
         />
         <div className="rf-news-article-layout grid grid-cols-[1.65fr_1fr] items-start gap-6.25 max-[768px]:grid-cols-[1fr] [&_.rf-article-page]:max-w-full [&_.rf-article-page]:m-0">
           <article className={tw.article_page_prose}>
-            <span className="rf-eyebrow inline-flex items-center text-[10px] font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-[9px] max-[768px]:tracking-[1px]">
+            <span className="rf-eyebrow inline-flex items-center text-rf-caption font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-rf-caption max-[768px]:tracking-[1px]">
               {article.tag} · NỘI DUNG MINH HỌA
             </span>
             <h1>{article.title}</h1>
@@ -148,7 +148,7 @@ export function SupportPage() {
       <Breadcrumb current="Trung tâm hỗ trợ" />
       <div className={tw.page_heading}>
         <div>
-          <span className="rf-eyebrow inline-flex items-center text-[10px] font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-[9px] max-[768px]:tracking-[1px]">
+          <span className="rf-eyebrow inline-flex items-center text-rf-caption font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-rf-caption max-[768px]:tracking-[1px]">
             ĐỒNG HÀNH CÙNG BẠN
           </span>
           <h1>Bạn cần hỗ trợ điều gì?</h1>

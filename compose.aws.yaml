@@ -1,0 +1,37 @@
+# Áp cùng compose.deploy.yaml trên EC2 đã có IAM/CloudWatch; local không dùng file này.
+x-cloud-logging: &cloud-logging
+  driver: awslogs
+  options:
+    awslogs-region: ${AWS_REGION:?Set AWS region}
+    awslogs-group: ${CONTAINER_LOG_GROUP:?Set stack container log group}
+    awslogs-stream: ${DEPLOY_ENVIRONMENT}-containers
+    awslogs-multiline-pattern: ^$
+services:
+  migrate:
+    logging: !override
+      <<: *cloud-logging
+      options:
+        awslogs-region: ${AWS_REGION}
+        awslogs-group: ${CONTAINER_LOG_GROUP}
+        awslogs-stream: ${DEPLOY_ENVIRONMENT}-migrate
+  api:
+    logging: !override
+      <<: *cloud-logging
+      options:
+        awslogs-region: ${AWS_REGION}
+        awslogs-group: ${CONTAINER_LOG_GROUP}
+        awslogs-stream: ${DEPLOY_ENVIRONMENT}-api
+  front:
+    logging: !override
+      <<: *cloud-logging
+      options:
+        awslogs-region: ${AWS_REGION}
+        awslogs-group: ${CONTAINER_LOG_GROUP}
+        awslogs-stream: ${DEPLOY_ENVIRONMENT}-front
+  nginx:
+    logging: !override
+      <<: *cloud-logging
+      options:
+        awslogs-region: ${AWS_REGION}
+        awslogs-group: ${CONTAINER_LOG_GROUP}
+        awslogs-stream: ${DEPLOY_ENVIRONMENT}-nginx

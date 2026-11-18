@@ -12,12 +12,12 @@ const tw = {
   ].join(" "),
   deal_heading: [
     "rf-deal-heading flex items-center justify-between mb-5 gap-4 [&_h2]:flex [&_h2]:items-center [&_h2]:text-[26px]",
-    "[&_h2]:text-[#1b5135] [&_h2]:tracking-[-0.7px] [&_h2]:mx-0 [&_h2]:my-1.25 [&_h2]:gap-2 [&_p]:text-[10px]",
-    "[&_p]:text-[#6a846c] [&_p]:m-0 [&>a]:flex [&>a]:items-center [&>a]:text-[#306541] [&>a]:text-[11px]",
+    "[&_h2]:text-[#1b5135] [&_h2]:tracking-[-0.7px] [&_h2]:mx-0 [&_h2]:my-1.25 [&_h2]:gap-2 [&_p]:text-rf-body",
+    "[&_p]:text-[#6a846c] [&_p]:m-0 [&>a]:flex [&>a]:items-center [&>a]:text-[#306541] [&>a]:text-rf-caption",
     "[&>a]:font-semibold [&>a]:gap-2.5 max-[768px]:items-start max-[768px]:[&_h2]:text-[21px] max-[768px]:[&_h2]:gap-1.25",
-    "max-[768px]:[&_p]:text-[8px] max-[768px]:[&>a]:text-[8px] max-[768px]:[&>a]:max-w-18.75 max-[768px]:[&>a]:gap-1",
-    "max-[768px]:[&>a_svg]:w-3 [&_.rf-eyebrow]:text-[8px] [&_.rf-eyebrow]:tracking-[1.5px] [&_.rf-eyebrow]:text-[#557e5e]",
-    "max-[768px]:[&_.rf-eyebrow]:text-[6px] max-[768px]:[&_.rf-eyebrow]:tracking-[1px]",
+    "max-[768px]:[&_p]:text-rf-body max-[768px]:[&>a]:text-rf-caption max-[768px]:[&>a]:max-w-18.75 max-[768px]:[&>a]:gap-1",
+    "max-[768px]:[&>a_svg]:w-3 [&_.rf-eyebrow]:text-rf-caption [&_.rf-eyebrow]:tracking-[1.5px] [&_.rf-eyebrow]:text-[#557e5e]",
+    "max-[768px]:[&_.rf-eyebrow]:text-rf-caption max-[768px]:[&_.rf-eyebrow]:tracking-[1px]",
   ].join(" "),
   product_grid_grid_five: [
     "rf-product-grid rf-grid-five grid grid-cols-[repeat(5,_minmax(0,_1fr))] gap-3.25",
@@ -28,9 +28,9 @@ const tw = {
     "max-[768px]:[&>.rf-product-card:last-child:nth-child(odd)]:hidden",
   ].join(" "),
   deal_footer: [
-    "rf-deal-footer flex items-center justify-between text-[10px] text-[#5d7d63] px-0.25 py-3.75 gap-3.5 [&_span]:flex",
+    "rf-deal-footer flex items-center justify-between text-rf-caption text-[#5d7d63] px-0.25 py-3.75 gap-3.5 [&_span]:flex",
     "[&_span]:items-center [&_span]:gap-1.75 [&_a]:flex [&_a]:items-center [&_a]:font-semibold [&_a]:gap-1.75",
-    "max-[768px]:[&>span]:hidden max-[768px]:justify-center max-[768px]:text-[9px]",
+    "max-[768px]:[&>span]:hidden max-[768px]:justify-center max-[768px]:text-rf-caption",
   ].join(" "),
 };
 
@@ -42,7 +42,7 @@ export function DealsSection() {
     <section className={tw.deal_section} aria-labelledby="deals-heading">
       <div className={tw.deal_heading}>
         <div>
-          <span className="rf-eyebrow inline-flex items-center text-[10px] font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-[9px] max-[768px]:tracking-[1px]">
+          <span className="rf-eyebrow inline-flex items-center text-rf-caption font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-rf-caption max-[768px]:tracking-[1px]">
             GIÁ TỐT CHO CẤU HÌNH MỚI
           </span>
           <h2 id="deals-heading">

@@ -1,0 +1,139 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, master, develop]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      application: ${{ steps.detect.outputs.application }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+      - id: detect
+        shell: bash
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import { execFileSync } from 'node:child_process';
+          const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
+          const base = event.pull_request?.base.sha ?? event.before;
+          let application = true;
+          if (base && /^[0-9a-f]{40}$/.test(base) && !/^0+$/.test(base)) {
+            const files = execFileSync('git', ['diff', '--name-only', base, 'HEAD'], { encoding: 'utf8' }).trim().split('\n');
+            application = files.some(file => !file.endsWith('.md') && /^(api\/|front\/|infra\/|\.github\/|compose(?:\.[a-z]+)?\.yaml$|\.env\.docker\.example$|\.gitignore$|\.nvmrc$)/.test(file));
+          }
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `application=${application}\n`);
+          JS
+
+  application:
+    needs: changes
+    if: needs.changes.outputs.application == 'true'
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://build:build@127.0.0.1:5432/build
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            api/package-lock.json
+            front/package-lock.json
+      - name: API — install, generate, lint, build, unit
+        working-directory: api
+        run: |
+          npm pkg delete scripts.postinstall
+          npm ci
+          npm run prisma:generate
+          npm run lint
+          npm run build
+          npm test
+      - name: Release manifest contracts
+        run: node --test infra/scripts/release.test.mjs
+      - name: Frontend — install, lint, format, build
+        working-directory: front
+        run: |
+          npm ci
+          npm run lint
+          npm run format:check
+          npm run build
+
+  docker:
+    needs: changes
+    if: needs.changes.outputs.application == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+      - name: Create disposable local credentials
+        run: node infra/scripts/init-docker-env.mjs
+      - name: Build, baseline fresh Docker database and start
+        run: docker compose --env-file .env.docker up --detach --build --wait --wait-timeout 180
+      - name: Seed disposable database
+        run: docker compose --env-file .env.docker --profile tools run --rm seed
+      - name: Smoke through Nginx
+        run: node infra/scripts/smoke-docker.mjs
+      - name: Production TLS, read-only preview and isolated restore drill
+        run: node infra/scripts/check-production.mjs
+      - name: Diagnostics on failure
+        if: failure()
+        run: docker compose --env-file .env.docker logs --tail 80 api front nginx migrate
+      - name: Stop this job's stack
+        if: always()
+        run: docker compose --env-file .env.docker down
+
+  infrastructure:
+    needs: changes
+    if: needs.changes.outputs.application == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: CloudFormation schema and IAM resource types
+        run: |
+          pipx install cfn-lint==1.60.1
+          cfn-lint infra/aws/cloudformation.yaml
+      - name: Shell syntax and static analysis
+        run: |
+          for script in infra/aws/bootstrap.sh infra/deploy/*.sh infra/scripts/*.sh; do bash -n "$script"; done
+          shellcheck infra/aws/bootstrap.sh infra/deploy/*.sh infra/scripts/*.sh
+      - name: GitHub Actions contracts
+        run: docker run --rm -v "$PWD:/repo:ro" -w /repo rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667 -shellcheck=
+      - name: Offline deployment parser and rollback state-machine fixtures
+        run: |
+          docker build -t rigforce-deploy-tests:local -f infra/tests/deploy/Dockerfile infra/tests/deploy
+          docker run --rm --network none --mount "type=bind,src=$PWD,dst=/repo,readonly" rigforce-deploy-tests:local
+
+  required:
+    if: always()
+    needs: [changes, application, docker, infrastructure]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check results, including docs-only changes
+        env:
+          CHANGES: ${{ needs.changes.result }}
+          APPLICATION: ${{ needs.application.result }}
+          DOCKER: ${{ needs.docker.result }}
+          INFRASTRUCTURE: ${{ needs.infrastructure.result }}
+        run: |
+          test "$CHANGES" = success
+          test "$APPLICATION" = success -o "$APPLICATION" = skipped
+          test "$DOCKER" = success -o "$DOCKER" = skipped
+          test "$INFRASTRUCTURE" = success -o "$INFRASTRUCTURE" = skipped

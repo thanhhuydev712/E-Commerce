@@ -1,4 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
+import { WELCOME_PROMOTION_COOKIE } from "./src/config/welcome-promotion";
+
+const baseURL = process.env.LIVE_BASE_URL ?? "http://127.0.0.1:3002";
 export default defineConfig({
   testDir: process.env.LIVE_INCLUDE_UI === "1" ? "./tests" : "./tests/live",
   workers: 1,
@@ -19,7 +22,23 @@ export default defineConfig({
   use: {
     actionTimeout: 30000,
     navigationTimeout: 60000,
-    baseURL: process.env.LIVE_BASE_URL ?? "http://127.0.0.1:3002",
+    baseURL,
+    // Các suite nghiệp vụ bắt đầu ở phiên đã xem quảng bá; suite popup tự dùng phiên mới.
+    storageState: {
+      cookies: [
+        {
+          name: WELCOME_PROMOTION_COOKIE,
+          value: "seen",
+          domain: new URL(baseURL).hostname,
+          path: "/",
+          expires: -1,
+          httpOnly: false,
+          secure: new URL(baseURL).protocol === "https:",
+          sameSite: "Lax",
+        },
+      ],
+      origins: [],
+    },
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
   },

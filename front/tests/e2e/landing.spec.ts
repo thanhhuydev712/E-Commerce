@@ -1,42 +1,20 @@
 import { registerRealAccount } from "../helpers/real-account";
 import { expect, test } from "@playwright/test";
 
-test("landing đổi chiến dịch, nhóm sản phẩm và giữ giỏ sau refresh", async ({
-  page,
-}) => {
+test("landing dẫn tới sản phẩm và giữ giỏ sau refresh", async ({ page }) => {
   await registerRealAccount(page);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "PC, linh kiện và gaming gear Rigforge",
+    "Cấu hình của bạn.",
   );
-  await page.getByRole("button", { name: "Banner sau", exact: true }).click();
-  await expect(page.locator("#hero-slide-pc")).toHaveAttribute(
-    "aria-hidden",
-    "false",
-  );
-  await page.getByRole("button", { name: "Banner trước", exact: true }).click();
-  await expect(page.locator("#hero-slide-asus")).toHaveAttribute(
-    "aria-hidden",
-    "false",
-  );
-
-  const collections = page.locator(".rf-reference-shelf").first();
-  await collections
-    .getByRole("button", { name: "PC văn phòng", exact: true })
-    .click();
-  await expect(collections.locator(".rf-reference-card")).toHaveCount(2);
-  await expect(collections.locator(".rf-shelf-more a")).toHaveAttribute(
-    "href",
-    "/products?category=pc",
-  );
-
+  // Một dải hàng trên landing; thao tác mua ở trang chi tiết thật.
   await page
-    .locator(".rf-reference-campaign")
-    .getByRole("button", { name: /^Thêm .+ vào giỏ$/ })
+    .locator(".rf-reference-flash .rf-reference-card-name")
     .first()
     .click();
+  await page.getByRole("button", { name: "Thêm vào giỏ", exact: true }).click();
   await expect(
     page.getByRole("link", { name: "Giỏ hàng 1 sản phẩm", exact: true }),
   ).toBeVisible();
@@ -67,37 +45,34 @@ test("menu có thể dùng bàn phím, tìm kiếm dẫn đến kết quả mẫ
   await expect(page.locator(".rf-product-card").first()).toBeVisible();
 });
 
-test("landing đủ các khối, tab chiến dịch và rail hoạt động trên mobile", async ({
+test("landing có bài viết, đối tác và rail sản phẩm hoạt động trên mobile", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await expect(page.locator(".rf-reference-shelf")).toHaveCount(9);
-  await expect(page.locator(".rf-directory-grid>a")).toHaveCount(20);
-  await expect(page.locator(".rf-showroom-grid>article")).toHaveCount(8);
-  const campaign = page.locator(".rf-reference-campaign");
-  await campaign.getByRole("button", { name: /MÀN HÌNH GAMING/ }).click();
-  await expect(campaign.locator("h2")).toHaveText("MÀN HÌNH GAMING");
-  await expect(campaign.locator(".rf-campaign-more")).toHaveAttribute(
-    "href",
-    "/products?category=monitor",
-  );
-  const viewport = campaign.locator(".rf-reference-rail-viewport");
-  await campaign.getByRole("button", { name: "Sản phẩm tiếp theo" }).click();
+  await expect(page.locator(".rf-forge-home > section")).toHaveCount(9);
+  await expect(page.locator(".rf-landing-collection")).toHaveCount(3);
+  await expect(page.locator(".rf-forge-article")).toHaveCount(3);
+  await expect(page.locator(".rf-brand-tile")).toHaveCount(6);
+  await expect(page.locator(".rf-directory-grid>a")).toHaveCount(8);
+  await expect(page.locator(".rf-showroom-shell")).toBeHidden();
+  const featured = page.locator(".rf-reference-flash");
+  const viewport = featured.locator(".rf-reference-rail-viewport");
+  await featured.getByRole("button", { name: "Sản phẩm tiếp theo" }).click();
   await expect
     .poll(() => viewport.evaluate((el) => el.scrollLeft))
     .toBeGreaterThan(50);
-  await campaign.getByRole("button", { name: "Sản phẩm trước" }).click();
+  await featured.getByRole("button", { name: "Sản phẩm trước" }).click();
   await expect
     .poll(() => viewport.evaluate((el) => el.scrollLeft))
     .toBeLessThan(5);
 });
 
-test("blog lọc theo nhóm, từ khóa và có trạng thái không tìm thấy", async ({
+test("trang bài viết lọc theo nhóm, từ khóa và có trạng thái không tìm thấy", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/articles");
   const blog = page.getByRole("region", { name: "Blog tin tức" });
   await expect(blog.locator(".rf-popular-posts li")).toHaveCount(8);
   await blog.getByRole("button", { name: "Hướng dẫn", exact: true }).click();
@@ -110,6 +85,43 @@ test("blog lọc theo nhóm, từ khóa và có trạng thái không tìm thấy
     .getByRole("textbox", { name: "Tìm bài viết" })
     .fill("khongcobai123");
   await expect(blog.getByText(/Không tìm thấy bài viết phù hợp/)).toBeVisible();
+});
+
+test("logo thương hiệu tải local và dẫn tới bộ lọc sản phẩm", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const section = page.locator(".rf-reference-brands");
+  await section.scrollIntoViewIfNeeded();
+  const logos = section.locator(".rf-brand-tile img");
+  await expect(logos).toHaveCount(6);
+  await expect
+    .poll(() =>
+      logos.evaluateAll((images) =>
+        images.every(
+          (image) =>
+            image instanceof HTMLImageElement &&
+            image.complete &&
+            image.naturalWidth > 0,
+        ),
+      ),
+    )
+    .toBe(true);
+  for (const logo of await logos.all()) {
+    await expect(logo).toHaveAttribute("alt", /^Logo .+/);
+    await expect(logo).toHaveAttribute(
+      "src",
+      /^(?:\/images\/brands\/|\/_next\/image\?url=%2Fimages%2Fbrands%2F)/,
+    );
+  }
+  const first = section.locator(".rf-brand-tile").first();
+  const destination = await first.getAttribute("href");
+  expect(destination).toMatch(/^\/products\?brand=/);
+  await first.focus();
+  await page.keyboard.press("Enter");
+  await expect
+    .poll(() => new URL(page.url()).pathname + new URL(page.url()).search)
+    .toBe(destination);
 });
 
 test("landing không gọi Stripe trực tiếp và không tải renderer 3D", async ({

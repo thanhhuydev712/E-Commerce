@@ -213,7 +213,6 @@ export function HeroSection() {
           setFocused(false);
       }}
     >
-      <h1 className="sr-only">PC, linh kiện và gaming gear Rigforge</h1>
       <div className="relative overflow-hidden">
         <div
           className="rf-reference-hero-image touch-pan-y touch-pinch-zoom cursor-grab overflow-hidden select-none active:cursor-grabbing"
@@ -320,7 +319,7 @@ export function HeroSection() {
         </button>
         <button
           type="button"
-          className="absolute right-2 bottom-2 grid size-8 place-items-center rounded-full border-0 bg-black/40 text-white! hover:bg-black/60 focus-visible:-outline-offset-4!"
+          className="absolute right-2 bottom-2 grid size-8 place-items-center rounded-full border-0 bg-black/40 text-white! hover:bg-black/60 aria-pressed:bg-rf-green aria-pressed:hover:bg-rf-green-hover focus-visible:-outline-offset-4!"
           aria-label={
             paused ? "Bật tự động chuyển banner" : "Tạm dừng chuyển banner"
           }
@@ -344,13 +343,15 @@ export function HeroSection() {
             aria-pressed={active === index}
             aria-controls={"hero-slide-" + campaign.id}
             className={
-              "relative flex min-h-20 w-44 shrink-0 flex-col items-center justify-center gap-1 border-0 border-b-[3px] border-solid bg-white px-3 py-4 text-center text-slate-800! transition-colors hover:bg-slate-50 focus-visible:-outline-offset-4! md:min-h-24 md:w-auto " +
-              (active === index ? "border-b-[#ed1b2f]" : "border-b-transparent")
+              "relative flex min-h-20 w-44 shrink-0 flex-col items-center justify-center gap-1 border-0 border-b-[3px] border-solid px-3 py-4 text-center text-slate-800! transition-colors focus-visible:-outline-offset-4! md:min-h-24 md:w-auto " +
+              (active === index
+                ? "border-b-[#ed1b2f] bg-red-50 hover:bg-red-100"
+                : "border-b-transparent bg-white hover:bg-slate-50")
             }
           >
             <span
               className={
-                "text-xs leading-5 lg:text-sm " +
+                "text-rf-caption leading-5 lg:text-rf-body " +
                 (active === index ? "font-bold" : "font-normal")
               }
             >
@@ -358,7 +359,7 @@ export function HeroSection() {
             </span>
             <span
               className={
-                "text-xs leading-5 " +
+                "text-rf-caption leading-5 " +
                 (active === index ? "font-semibold" : "font-normal")
               }
             >

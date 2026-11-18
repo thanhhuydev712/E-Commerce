@@ -1,111 +1,121 @@
 import { expect, test } from "@playwright/test";
 
-test("PC Studio mở 3D, đổi góc nhìn và về ảnh ghép không phát sinh pageerror", async ({
+test("PC Studio chỉ dùng ảnh sản phẩm và giữ cấu hình khi đổi góc ảnh ghép", async ({
   page,
 }) => {
   test.setTimeout(60000);
   const errors: string[] = [];
+  const modelRequests: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/pc-builder");
-  await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
-  await page.getByRole("button", { name: "3D", exact: true }).click();
-  await expect(page.locator(".rf-viewport canvas")).toBeVisible({
-    timeout: 30000,
+  page.on("request", (request) => {
+    if (/pc[-_]scene|\.glb(?:[?#]|$)/i.test(request.url()))
+      modelRequests.push(request.url());
   });
-  await page
-    .locator(".rf-viewport canvas")
-    .evaluate((canvas) =>
-      canvas.setAttribute("data-runtime-id", "original-canvas"),
-    );
+  await page.goto("/pc-builder");
+  await expect(
+    page.getByRole("button", { name: "3D", exact: true }),
+  ).toHaveCount(0);
+  await expect(page.locator("#pc-studio-photo-status")).toContainText(
+    "Ảnh ghép lấy từ từng sản phẩm đang chọn trong catalog",
+  );
+  await expect(page.locator("#pc-studio-photo-status")).toContainText(
+    "chưa phải ảnh bộ máy đã lắp",
+  );
+  await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
+  await expect(page.locator(".rf-build-slot.selected")).toHaveCount(8);
+  const assembly = page.locator(".rf-photo-assembly");
+  await expect(assembly).toBeVisible();
+  await expect(page.locator(".rf-photo-stage [data-slot]")).toHaveCount(8);
   await page.getByRole("button", { name: "Tách linh kiện" }).click();
-  for (const preset of ["Trực diện", "Góc bên", "Góc 3/4"]) {
+  await expect(assembly).toHaveAttribute("data-exploded", "true");
+  for (const [preset, value] of [
+    ["Trực diện", "front"],
+    ["Góc bên", "side"],
+    ["Góc 3/4", "perspective"],
+  ]) {
     await page.getByRole("button", { name: preset, exact: true }).click();
     await expect(
       page.getByRole("button", { name: preset, exact: true }),
     ).toHaveAttribute("aria-pressed", "true");
-    await expect(page.locator(".rf-viewport canvas")).toHaveAttribute(
-      "data-runtime-id",
-      "original-canvas",
-    );
+    await expect(assembly).toHaveAttribute("data-camera-view", value);
   }
   await page.getByRole("button", { name: "Góc nhìn", exact: true }).click();
-  await expect(page.locator(".rf-viewport canvas")).toBeVisible();
-  await expect(page.locator(".rf-viewport canvas")).toHaveAttribute(
-    "data-runtime-id",
-    "original-canvas",
-  );
-  await page.getByRole("button", { name: "Ảnh ghép", exact: true }).click();
-  await expect(page.locator(".rf-photo-assembly")).toBeVisible();
+  await expect(assembly).toBeVisible();
+  await expect(
+    page.getByText("Ảnh ghép sản phẩm", { exact: true }),
+  ).toBeVisible();
+  await expect(page.locator(".rf-build-slot.selected")).toHaveCount(8);
+  await expect(page.locator(".rf-viewport canvas")).toHaveCount(0);
+  await expect(page.locator(".rf-scene-stage")).toHaveCount(0);
+  expect(modelRequests).toEqual([]);
   expect(errors).toEqual([]);
 });
 
-test("góc và màu 3D thay đổi hình render trên cùng canvas", async ({
+test("ảnh ghép giữ điều khiển màu nền, độ rõ case và linh kiện trên desktop/mobile", async ({
   page,
 }, testInfo) => {
   test.setTimeout(90000);
-  const shaderErrors: string[] = [];
-  page.on("console", (message) => {
-    if (
-      message.type() === "error" &&
-      /WebGLProgram|WebGLShader|VALIDATE_STATUS|INVALID_OPERATION/.test(
-        message.text(),
-      )
-    )
-      shaderErrors.push(message.text());
-  });
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
+  const assembly = page.locator(".rf-photo-assembly");
+  await expect(assembly).toBeVisible();
   await page.getByRole("button", { name: "Ánh sáng Tím", exact: true }).click();
-  await page.getByRole("button", { name: "Bật thử", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Ánh sáng Tím", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Bật nền sáng", exact: true }).click();
+  await expect(assembly).toHaveAttribute("data-powered", "true");
   await page
     .locator(".rf-studio")
     .screenshot({ path: testInfo.outputPath("photo-assembled.png") });
   await page
     .getByRole("button", { name: "Tách linh kiện", exact: true })
     .click();
+  await expect(assembly).toHaveAttribute("data-exploded", "true");
   await page
     .locator(".rf-studio")
     .screenshot({ path: testInfo.outputPath("photo-exploded.png") });
   await page.getByRole("button", { name: "Thu gọn", exact: true }).click();
-  await page.getByRole("button", { name: "3D", exact: true }).click();
-  const canvas = page.locator(".rf-viewport canvas");
-  await expect(canvas).toBeVisible();
-  await canvas.evaluate((node) =>
-    node.setAttribute("data-runtime-id", "visual-canvas"),
-  );
-  const perspective = await canvas.screenshot();
+  await expect(assembly).toHaveAttribute("data-exploded", "false");
+  await page.getByRole("button", { name: "Làm mờ case", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Hiện rõ case", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  const caseLayer = page.locator('.rf-photo-stage [data-slot="case"]');
+  await expect(caseLayer).toHaveAttribute("data-muted", "true");
+  await page.getByRole("button", { name: "Hiện rõ case", exact: true }).click();
+  await expect(caseLayer).toHaveAttribute("data-muted", "false");
+  await page.getByRole("button", { name: "Trực diện", exact: true }).click();
+  await expect(assembly).toHaveAttribute("data-camera-view", "front");
   await page
-    .locator(".rf-studio")
-    .screenshot({ path: testInfo.outputPath("scene-perspective.png") });
+    .getByRole("button", { name: "Ánh sáng Xanh băng", exact: true })
+    .click();
+  await expect(
+    page.getByRole("button", { name: "Ánh sáng Xanh băng", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
   await page.setViewportSize({ width: 390, height: 844 });
   await expect
     .poll(
-      async () => (await page.locator(".rf-scene-stage").boundingBox())!.width,
+      async () => (await page.locator(".rf-photo-stage").boundingBox())!.width,
     )
     .toBeLessThan(391);
-  await expect
-    .poll(() =>
-      canvas.evaluate(
-        (node) =>
-          Math.abs(
-            (node as HTMLCanvasElement).width / node.clientWidth -
-              Math.min(window.devicePixelRatio, 1.5),
-          ) < 0.05,
-      ),
-    )
-    .toBe(true);
-  await page.evaluate(
-    () =>
-      new Promise<void>((resolve) =>
-        requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
-      ),
-  );
-  await expect(canvas).toHaveAttribute("data-runtime-id", "visual-canvas");
+  await page.getByRole("button", { name: "Chi tiết RAM", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Chi tiết RAM", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await expect(
+    page.locator(".rf-photo-inspector").getByRole("heading", {
+      name: "RAM",
+      exact: true,
+    }),
+  ).toBeVisible();
   await page
-    .locator(".rf-scene-stage")
-    .screenshot({ path: testInfo.outputPath("scene-perspective-mobile.png") });
+    .locator(".rf-studio")
+    .screenshot({ path: testInfo.outputPath("photo-mobile.png") });
   expect(
     await page.evaluate(
       () =>
@@ -113,35 +123,10 @@ test("góc và màu 3D thay đổi hình render trên cùng canvas", async ({
         document.documentElement.clientWidth,
     ),
   ).toBe(false);
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.getByRole("button", { name: "Trực diện", exact: true }).click();
-  await expect
-    .poll(async () => (await canvas.screenshot()).equals(perspective))
-    .toBe(false);
-  await page
-    .locator(".rf-studio")
-    .screenshot({ path: testInfo.outputPath("scene-front.png") });
-  // Cố định nền DOM để phép đo màu chỉ phản ánh hình WebGL, không phải halo CSS.
-  const neutralBackground = await page.addStyleTag({
-    content:
-      '.rf-scene-stage > [aria-hidden="true"] { visibility: hidden !important; }',
-  });
-  const front = await canvas.screenshot();
-  await page
-    .getByRole("button", { name: "Ánh sáng Xanh băng", exact: true })
-    .click();
-  await expect
-    .poll(async () => (await canvas.screenshot()).equals(front))
-    .toBe(false);
-  await expect(canvas).toHaveAttribute("data-runtime-id", "visual-canvas");
-  await neutralBackground.evaluate((node) =>
-    node.parentNode?.removeChild(node),
-  );
-  await page.getByRole("button", { name: "Ảnh ghép", exact: true }).click();
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.getByRole("button", { name: "Chi tiết RAM", exact: true }).click();
-  await page
-    .locator(".rf-studio")
-    .screenshot({ path: testInfo.outputPath("photo-mobile.png") });
-  expect(shaderErrors).toEqual([]);
+  await expect(page.locator(".rf-build-slot.selected")).toHaveCount(8);
+  await expect(
+    page.getByRole("button", { name: "3D", exact: true }),
+  ).toHaveCount(0);
+  await expect(page.locator(".rf-viewport canvas")).toHaveCount(0);
+  expect(errors).toEqual([]);
 });

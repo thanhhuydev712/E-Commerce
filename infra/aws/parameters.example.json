@@ -1,0 +1,19 @@
+[
+  {"ParameterKey":"EnvironmentName","ParameterValue":"staging"},
+  {"ParameterKey":"Owner","ParameterValue":"REPLACE_OWNER"},
+  {"ParameterKey":"DomainName","ParameterValue":"staging.example.com"},
+  {"ParameterKey":"GitHubRepository","ParameterValue":"REPLACE_OWNER/REPLACE_REPO"},
+  {"ParameterKey":"GitHubOidcProviderArn","ParameterValue":"arn:aws:iam::111122223333:oidc-provider/token.actions.githubusercontent.com"},
+  {"ParameterKey":"GitHubReleaseEnvironment","ParameterValue":"staging"},
+  {"ParameterKey":"GitHubDeployEnvironment","ParameterValue":"staging"},
+  {"ParameterKey":"AmiId","ParameterValue":"ami-REPLACE_AL2023_X86_64"},
+  {"ParameterKey":"PublicAvailabilityZone","ParameterValue":"REPLACE_REGION_AZ_A"},
+  {"ParameterKey":"DatabaseAvailabilityZoneB","ParameterValue":"REPLACE_REGION_AZ_B"},
+  {"ParameterKey":"DbEngineVersion","ParameterValue":"17.REPLACE_SUPPORTED_MINOR"},
+  {"ParameterKey":"BootstrapBucket","ParameterValue":"replace-unique-private-foundation-bucket"},
+  {"ParameterKey":"BootstrapKey","ParameterValue":"foundation/REPLACE_COMMIT/bootstrap.tar.gz"},
+  {"ParameterKey":"BootstrapVersionId","ParameterValue":"REPLACE_S3_VERSION_ID"},
+  {"ParameterKey":"BootstrapSha256","ParameterValue":"REPLACE_64_CHARACTER_SHA256"},
+  {"ParameterKey":"MonthlyBudgetUsd","ParameterValue":"REPLACE_APPROVED_MONTHLY_USD"},
+  {"ParameterKey":"AlertEmail","ParameterValue":"replace@example.com"}
+]

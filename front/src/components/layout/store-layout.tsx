@@ -7,18 +7,19 @@ import Link from "next/link";
 import { BrandLogo } from "@/src/components/storefront";
 import { StoreRouteMarker } from "./store-route-marker";
 import { motion } from "@/src/components/ui/motion";
+import { WelcomePromotion } from "@/src/features/landing/components/welcome-promotion";
 
 // Utility Tailwind v4; marker rf-* chỉ phục vụ trạng thái, selector và kiểm thử.
 const tw = {
   minisite_header: [
     "rf-minisite-header hidden bg-white bg-none [&>div]:min-h-18.75 [&>div]:flex [&>div]:items-center",
     "[&>div]:justify-between [&>div]:gap-7 [&_nav]:flex [&_nav]:items-center [&_nav]:justify-around [&_nav]:flex-1",
-    "[&_nav]:text-[17px] [&_nav]:font-[750] [&_nav]:gap-7.5 [&>div>span]:text-rf-green [&>div>span]:text-[12px]",
+    "[&_nav]:text-[17px] [&_nav]:font-[750] [&_nav]:gap-7.5 [&>div>span]:text-rf-green [&>div>span]:text-rf-caption",
     "[&>div>span]:px-5 [&>div>span]:py-2.25 [&>div>span]:border-rf-green [&>div>span]:border-solid [&>div>span]:border-2",
     "[&>div>span]:rounded-[25px] max-[768px]:[&>div]:flex-wrap max-[768px]:[&>div]:justify-center",
     "max-[768px]:[&>div]:py-3 max-[768px]:[&>div]:gap-2.5 max-[768px]:[&_nav]:order-2 max-[768px]:[&_nav]:basis-full",
-    "max-[768px]:[&_nav]:text-[13px] max-[768px]:[&_nav]:gap-3 max-[768px]:[&>div>span]:hidden [&_.rf-logo]:w-32.5",
-    "[&_.rf-logo_img]:w-32.5 [&_.rf-logo>span]:hidden",
+    "max-[768px]:[&_nav]:text-rf-caption max-[768px]:[&_nav]:gap-3 max-[768px]:[&>div>span]:hidden [&_.rf-logo]:w-32.5",
+    "[&_.rf-logo>small]:hidden",
   ].join(" "),
 };
 
@@ -63,8 +64,11 @@ export function StoreLayout({ children }: { children: ReactNode }) {
       >
         {children}
       </main>
+      <Suspense fallback={null}>
+        <WelcomePromotion />
+      </Suspense>
       {/* Clip nền showroom 100vw trong bề rộng trang, kể cả khi scrollbar chiếm chỗ. */}
-      <div className="overflow-x-clip">
+      <div className="rf-showroom-shell overflow-x-clip">
         <div className="rf-container rf-common-showrooms max-w-[var(--rf-content)] w-full mt-8.75 px-[var(--rf-content-gutter)] mx-auto max-[768px]:px-4 print:p-0">
           <ShowroomSection />
         </div>

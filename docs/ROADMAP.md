@@ -35,6 +35,8 @@ Kế hoạch thực hiện chính nằm ở [DEPLOYMENT_PLAN.md](DEPLOYMENT_PLAN
 
 ## Thứ tự ưu tiên cho phiên tiếp theo
 
+**Ưu tiên hiện tại — 17/11/2026:** theo [RELEASE_PLAN.md](RELEASE_PLAN.md), mục tiêu trước tiên là public preview giới thiệu/trải nghiệm, chưa nhận đơn thật. Triển khai từng đợt P0–P5; không bắt đầu lại FE–BE đã tích hợp hoặc coi Stripe sandbox là chưa có. Danh sách bên dưới là thứ tự rà soát từ mốc ban đầu, cần đối chiếu PROJECT_STATUS trước khi dùng để giao việc.
+
 1. Thiết lập môi trường local/test, xác minh generate/build/lint; ghi lại lỗi thực tế, tránh dùng database có dữ liệu cần giữ.
 2. Làm đúng luồng login/refresh/logout và ownership trước khi kết nối tài khoản frontend.
 3. Sửa nguồn giá, tồn kho và trạng thái checkout; bổ sung test sửa giá và đặt/hủy đồng thời.

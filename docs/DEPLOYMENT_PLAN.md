@@ -2,7 +2,11 @@
 
 Ngày lập: **06/11/2026**. Người dùng đã yêu cầu bổ sung bốn nhóm công nghệ sau phần frontend/backend. **Định hướng công nghệ đã được yêu cầu; cấu hình chi tiết dưới đây là thiết kế đề xuất để triển khai từng bước.** Tài liệu này không xác nhận đã có container, pipeline hoặc tài nguyên AWS.
 
+**Cập nhật 17/11/2026:** mốc đầu là [website công khai giới thiệu/trải nghiệm, chưa nhận đơn thật](RELEASE_PLAN.md). Các quan sát ngày 06/11 ở mục 1 là lịch sử: FE–BE, runner test cô lập và Stripe sandbox đã phát triển tiếp; đọc PROJECT_STATUS/STRIPE_V2 trước triển khai. `API_INTERNAL_URL` hiện là origin backend không có `/api/v1`; Next dùng `distDir` tùy biến. Giữ thiết kế hạ tầng, áp tiêu chí nghiệp vụ theo phạm vi public preview thay vì tự yêu cầu mở bán thật.
+
 ## 1. Mục tiêu và phạm vi
+
+**Phần đã bắt đầu ngày 17/11:** [DOCKER_GUIDE.md](DOCKER_GUIDE.md) hướng dẫn bộ lab local có Dockerfiles/Compose/Nginx, migration/seed riêng và định nghĩa CI. Đây không phải AWS/CD đã vận hành. Do legacy history không chạy được từ DB trống, lab mới dùng baseline v2 + migration sau cutover qua config riêng; không đổi lịch sử DB hiện hữu. Các mô tả chưa có Docker/runner dưới mốc 06/11 là lịch sử, cần đối chiếu PROJECT_STATUS.
 
 Đưa ứng dụng từ máy phát triển lên một môi trường demo có HTTPS, quy trình phát hành lặp lại được, kiểm tra tự động, theo dõi lỗi và khả năng phục hồi. Chủ dự án cần tự giải thích được request đi đâu, image được tạo thế nào, credential nằm ở đâu và xử lý ra sao khi một bản phát hành lỗi.
 
@@ -196,7 +200,7 @@ location / {
 ### Header, auth, cache và giới hạn
 
 - Nginx edge phải ghi đè forwarded headers từ client; backend chỉ trust proxy đã biết/đúng topology một hop, không `trust proxy=true` tùy tiện. Kiểm IP dùng cho throttling và `X-Forwarded-Proto=https` qua proxy; giới hạn request không được gom mọi khách thành IP Nginx.
-- Browser gọi đường dẫn tương đối `/api/v1`, cùng origin storefront. Khi dev chạy hai port, cấu hình API origin local hoặc proxy dev riêng. Server Component gọi qua `API_INTERNAL_URL=http://api:3001/api/v1` ở runtime; đây là biến **đề xuất**, chưa được mã hiện tại đọc. Server-side request phải chủ động chuyển credential cần thiết và dùng origin từ cấu hình tin cậy; không tin header tùy ý để vượt `AuthOriginGuard`.
+- Browser gọi đường dẫn tương đối `/api/v1`, cùng origin storefront; dev hiện có Next rewrite. Server Component hiện đọc `API_INTERNAL_URL=http://api:3001` ở runtime và tự nối `/api/v1`; không thêm prefix vào biến này. Next rewrite có thể đóng destination lúc build, nên kiểm riêng đường đi Nginx và server fetch khi promote image. Server-side request phải chủ động chuyển credential cần thiết và dùng origin từ cấu hình tin cậy; không tin header tùy ý để vượt `AuthOriginGuard`.
 - Giữ chính sách refresh cookie hiện có: HttpOnly, Secure khi production, SameSite Lax, path `/api/v1/auth`, host-only. CORS chỉ allow exact origin, credentials khi cần; test Origin hợp lệ/thiếu/giả, refresh, logout qua HTTPS. Cùng origin không tự thay thế chống CSRF.
 - Không đưa JWT/DB/email/Stripe secret vào `NEXT_PUBLIC_*`. Giá trị public bị đóng vào bundle lúc build, nên đổi env runtime không thay nó. Dùng URL tương đối và cấu hình server runtime để promote cùng image giữa staging/demo; với public value khác nhau phải thiết kế config runtime an toàn hoặc ghi rõ cần build riêng. Chế độ render/cache Next phải cho phép đọc biến runtime, không vô tình prerender dữ liệu riêng tư. [Next environment variables](https://nextjs.org/docs/app/guides/environment-variables).
 - Giai đoạn đầu không bật proxy cache cho HTML/API/tài khoản/checkout hoặc response có cookie. Asset theo hash có thể giữ cache header của Next. Không cache token, lỗi auth, RSC hay dữ liệu người dùng; không tắt buffering toàn hệ thống nếu chỉ cần streaming ở frontend.
@@ -209,7 +213,7 @@ location / {
 | --- | --- | --- |
 | API hiện đọc | `NODE_ENV`, `PORT`, `DATABASE_URL`, `DATABASE_SCHEMA`, `ALLOWED_ORIGINS` | Runtime; DB URL là secret, schema phải đúng môi trường |
 | Auth hiện đọc | `JWT_SECRET`, `JWT_REFRESH_SECRET`, `JWT_EXPIRES_IN`, `REFRESH_TTL_SECONDS` | Secret tách theo môi trường, access/refresh khác nhau; rotation có kế hoạch vô hiệu phiên |
-| FE đề xuất | `API_INTERNAL_URL`; URL browser tương đối | Chỉ server được đọc địa chỉ nội bộ; chưa có contract env này trong code |
+| FE hiện đọc | `API_INTERNAL_URL`; URL browser tương đối `/api/v1` | Origin backend không kèm API prefix; server fetch và Next rewrite tự nối đường dẫn |
 | Deploy đề xuất | `AWS_REGION`, ECR repo, instance ID, role ARN, image digest, domain | GitHub environment variables/manifest; không phải credential bí mật |
 | Payment/email khi có adapter | Stripe test secret/webhook secret và cấu hình provider email | Chuẩn hóa tên biến trong code + `.env.example` khi triển khai; không yêu cầu Stripe key để boot module chưa dùng |
 | TLS với RDS | CA bundle và cấu hình xác minh TLS | Artifact CA công khai được pin/cập nhật; DB password ở secret store |
@@ -333,3 +337,9 @@ Mỗi đợt chia thành PR nhỏ, giải thích theo **mục tiêu → kiến t
 5. Khi có khách thật: uptime, RPO/RTO, bảo vệ dữ liệu, Stripe live/currency, refund và đối soát; cân nhắc Multi-AZ/ALB/nhiều app instance/cache coordination theo phép đo và yêu cầu.
 
 Nguồn kỹ thuật được đối chiếu ngày 06/11/2026: tài liệu chính thức được liên kết tại từng phần và hướng dẫn Next.js cục bộ trong `front/node_modules/next/dist/docs/` (self-hosting, environment variables, output). Chi tiết dịch vụ/giá/phiên bản cần kiểm tra lại ở thời điểm cài đặt.
+
+## Cập nhật triển khai bộ local/CI/AWS — 18/11/2026
+
+Người dùng chưa có account/domain, yêu cầu hoàn thiện bộ triển khai trước. Thiết kế trên đã được cụ thể thành [INFRASTRUCTURE_GUIDE](INFRASTRUCTURE_GUIDE.md), production Compose/HTTPS, [CloudFormation/bootstrap](../infra/aws/README.md), [operational helpers](../infra/deploy/README.md) và workflow CI/Release/Deploy. Preview production đóng tài khoản/ghi đơn/Stripe, DB runtime SELECT-only; thay cho định hướng sandbox checkout mở có điều kiện khi chưa có boundary.
+
+Đã kiểm production Docker với CA tạm, hai DB roles, migration strict TLS, wrong-CA rejection, restore DB/media và recreate. Chưa push/run Actions/provision/deploy AWS; validation CloudFormation/Bash/Actions là kiểm tĩnh. Backup RDS được cấu hình trong template, media cần operator EBS snapshot/restore trước host replacement; chưa có automatic media S3 backup. Kết quả/giới hạn mới nhất tại [PROJECT_STATUS](PROJECT_STATUS.md) và [verification](verification/2026-11-18-production-local.json). Không dùng checklist thiết kế như bằng chứng nghiệm thu cloud.

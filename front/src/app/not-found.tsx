@@ -8,7 +8,7 @@ const tw = {
     "[&_p]:max-w-112.5 [&_p]:mb-6.25",
   ].join(" "),
   btn: [
-    "rf-btn inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-[12px] font-bold",
+    "rf-btn inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-rf-control font-bold",
     "leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-transparent border-solid border",
     "rounded-[6px] gap-2.5 print:hidden hover:bg-rf-green-hover hover:bg-none",
   ].join(" "),
@@ -18,7 +18,7 @@ export default function NotFound() {
   return (
     <main className="rf-container [--rf-content:calc(var(--rf-home-width)+var(--rf-content-gutter)*2)] min-[1024px]:[--rf-content-gutter:64px] max-w-[var(--rf-content)] w-full px-[var(--rf-content-gutter)] mx-auto max-[768px]:px-4 print:p-0">
       <div className={tw.empty + " my-15"}>
-        <span className="rf-eyebrow inline-flex items-center text-[10px] font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-[9px] max-[768px]:tracking-[1px]">
+        <span className="rf-eyebrow inline-flex items-center text-rf-caption font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:tracking-[1px]">
           RIGFORGE · 404
         </span>
         <h1>Trang bạn tìm chưa có ở đây.</h1>

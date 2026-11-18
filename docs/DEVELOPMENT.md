@@ -2,6 +2,8 @@
 
 Hướng dẫn mở nhanh trên Windows: [LOCAL_START.md](LOCAL_START.md).
 
+**Bổ sung 17/11/2026:** có [lab Docker/Nginx local](DOCKER_GUIDE.md), Dockerfiles/Compose và định nghĩa CI. Lab dùng `.env.docker`, DB/volume riêng và baseline dành cho DB mới; không thay lệnh/môi trường host bên dưới. Cấu hình lab chưa phải AWS production; đọc PROJECT_STATUS để biết kiểm tra đã chạy.
+
 Ngày **06/11/2026**, backend có identity/catalog và commerce COD tích hợp; kết quả kiểm tra tại [PROJECT_STATUS.md](PROJECT_STATUS.md), contract [danh tính](API_IDENTITY_V2.md) và [catalog/giá/ảnh/kho](API_CATALOG_V2.md). Kế hoạch Docker/CI/staging/demo và AWS nằm ở [DEPLOYMENT_PLAN.md](DEPLOYMENT_PLAN.md), chưa có cấu hình chạy tương ứng trong repository.
 
 Cập nhật **08/11/2026**: có [Stripe Checkout sandbox v2](STRIPE_V2.md). Hướng dẫn đó bổ sung/thay thế các ghi chú payment v2 chưa triển khai ở mốc cũ bên dưới; Stripe vẫn không bắt buộc để boot và chạy COD.
@@ -9,7 +11,7 @@ Cập nhật **08/11/2026**: có [Stripe Checkout sandbox v2](STRIPE_V2.md). Hư
 ## Điều kiện
 
 - Windows/PowerShell là môi trường chủ dự án đang dùng.
-- Có Node.js/npm tương thích với dependencies và PostgreSQL dành riêng cho local/test. Repository chưa pin Node bằng `engines` hoặc file phiên bản; đề xuất xác minh rồi pin Node 24 patch phù hợp trước khi chuẩn hóa Docker/CI.
+- Node được pin tại `.nvmrc` thành 24.19.0; Docker/CI dùng cùng patch. Có npm và PostgreSQL dành riêng cho local/test; PostgreSQL 17 được chọn và kiểm cho lab Docker, không suy ra major DB host/RDS.
 - Backend hiện nạp platform/auth/accounts/access/catalog/pricing/media/inventory/storefront/commerce v2, không nạp Payments v1 trong legacy; không yêu cầu Stripe key để boot. Khi triển khai payment v2 chỉ dùng Stripe test key ở local/test/demo.
 - Chạy lệnh dưới đây từ root repository, trừ các khối ghi rõ thư mục.
 
@@ -36,6 +38,7 @@ Tạo hoặc cập nhật `api/.env` theo [`api/.env.example`](../api/.env.examp
 | `JWT_EXPIRES_IN` | Số giây của access token, validator mặc định 900 và tối đa 3600 |
 | `REFRESH_TTL_SECONDS` | Validator mặc định 604800, tối đa 2592000 giây |
 | `PORT` | Validator mặc định `3001`, tránh trùng Next.js cổng 3000 |
+| `TRUST_PROXY_HOPS` | Mặc định 0 cho host; 1 chỉ cho topology một proxy tin cậy, không publish API bỏ qua proxy |
 | `DATABASE_SCHEMA` | Schema nghiệp vụ, mặc định từ URL hoặc `public`; validator không cho dùng `legacy_v1` |
 | `ALLOWED_ORIGINS` | Local: `http://localhost:3000,http://localhost:3001` để gọi từ frontend và đăng nhập ngay trên Swagger; nhiều origin phân cách bằng dấu phẩy |
 | `NODE_ENV` | `development` cho local; `production` bật Secure cookie, yêu cầu origin HTTPS và hiện chặn email challenge local |
@@ -47,6 +50,8 @@ Tạo hoặc cập nhật `api/.env` theo [`api/.env.example`](../api/.env.examp
 Nguồn hiện tại: `api/src/platform/environment.ts` và `app.module.ts`. Npm scripts Nest nạp `.env` bằng `--env-file`, Prisma config dùng `dotenv/config`, ConfigModule hiện cũng trỏ `.env`. Khi làm CI phải truyền env test một cách rõ ràng, không để ConfigModule vô tình dùng database phát triển. Các biến Stripe/Observe từng xuất hiện ở v1 không phải yêu cầu boot của AppModule hiện tại.
 
 ## 3. Prisma và database local
+
+**Phát hiện 18/11:** lịch sử v1 hiện không bootstrap được từ DB trống do migration sửa `amout`. Các lệnh mặc định bên dưới giữ cho history DB hiện hữu, không phải bằng chứng clean bootstrap thành công. Với **database Docker mới**, dùng job/config fresh history theo [DOCKER_GUIDE](DOCKER_GUIDE.md), không sửa SQL/checksum cũ và không đổi history DB đang có dữ liệu.
 
 Trong `api/`, sau khi cấu hình DATABASE_URL tới database phát triển:
 
@@ -108,3 +113,7 @@ E2E backend scaffold đã lưu trong legacy, thay bằng `test/identity.e2e-spec
 Backend có `start:prod` gọi `scripts/run-built.cjs api`; Windows dùng output `dist-local-<hash-tài-khoản>`, Linux giữ `dist`. Build/start cần cùng tài khoản Windows. `tsconfig.build.json` override `rootDir` thành `./src`. Phải kiểm entrypoint và đường dẫn generated client từ artifact Linux thực tế khi đóng gói. Frontend có `npm run start` sau build; kế hoạch Docker chọn standalone nhưng chưa sửa config. Chưa có runbook deployment đã kiểm chứng.
 
 Thiết kế đích: Nginx nhận HTTPS, Next/Nest chạy container nội bộ, RDS private, image phát hành theo digest qua GitHub Actions/ECR/SSM. Cần kiểm env production, proxy/cookie/Origin, TLS DB, migration và rollback theo [kế hoạch hạ tầng](DEPLOYMENT_PLAN.md). Email challenge hiện chỉ có adapter local và sẽ từ chối ở production; phải giải quyết hoặc ghi rõ giới hạn chức năng trước nghiệm thu. Không đổi `NODE_ENV` thành development trên AWS để bỏ qua điều kiện này.
+
+## Production rehearsal và bộ AWS — 18/11/2026
+
+Sau khi build các image lab, chạy `node infra/scripts/check-production.mjs` từ root để dựng một stack TLS/database/roles riêng, thử preview và backup/restore rồi tự cleanup project test. 8081/8443 phải trống. Không dùng `compose.deploy.yaml` để thay thế cấu hình npm/dev hoặc ghép đè với lab. Đọc [INFRASTRUCTURE_GUIDE](INFRASTRUCTURE_GUIDE.md) về môi trường/CI/release và [infra/aws/README](../infra/aws/README.md) cho provisioning sau khi có account. Không có secret AWS cần thiết để học/test local.

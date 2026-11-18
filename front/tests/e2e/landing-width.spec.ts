@@ -5,10 +5,7 @@ test("không cuộn ngang khi thanh cuộn dọc chiếm chỗ trên Windows", a
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await page
-    .getByRole("region", { name: "Chiến dịch nổi bật", exact: true })
-    .getByRole("button", { name: "Tạm dừng chuyển banner" })
-    .click();
+  await expect(page.locator("#forge-intro-heading")).toBeVisible();
   // Headless thường dùng scrollbar phủ nội dung, bỏ sót lỗi nền 100vw.
   await page.evaluate(() => {
     document.documentElement.style.scrollbarGutter = "stable";
@@ -28,7 +25,7 @@ test("không cuộn ngang khi thanh cuộn dọc chiếm chỗ trên Windows", a
 });
 
 for (const width of [1920, 1340, 1024, 768, 390, 360]) {
-  test(`các khối trang chủ, showroom và footer thẳng mép slide ở ${width}px`, async ({
+  test(`chín khối trang chủ và footer thẳng mép ở ${width}px`, async ({
     page,
   }, testInfo) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
@@ -36,21 +33,22 @@ for (const width of [1920, 1340, 1024, 768, 390, 360]) {
     await page.goto("/");
     await expect(page.locator(".rf-route-marker")).toHaveClass(/rf-route-home/);
     const hero = page.getByRole("region", {
-      name: "Chiến dịch nổi bật",
+      name: "Cấu hình của bạn. Dấu ấn của bạn.",
       exact: true,
     });
-    await hero.getByRole("button", { name: "Tạm dừng chuyển banner" }).click();
     await page.evaluate(() => window.scrollTo(0, 0));
     const frame = (await hero.boundingBox())!;
     const limit = await hero.evaluate((el) =>
-      Number.parseFloat(getComputedStyle(el).maxWidth),
+      Number.parseFloat(
+        getComputedStyle(el).getPropertyValue("--rf-home-width"),
+      ),
     );
     expect(frame.width).toBe(
       Math.min(width - (width >= 1024 ? 128 : 32), limit),
     );
     expect(frame.x).toBe((width - frame.width) / 2);
-    const sections = await page.locator("#main-content > section").all();
-    expect(sections.length).toBeGreaterThanOrEqual(17);
+    const sections = await page.locator(".rf-forge-home > section").all();
+    expect(sections.length).toBe(9);
     for (const section of sections) {
       const box = (await section.boundingBox())!;
       expect(
@@ -59,12 +57,7 @@ for (const width of [1920, 1340, 1024, 768, 390, 360]) {
       ).toBeCloseTo(frame.x, 0);
       expect(box.width).toBeCloseTo(frame.width, 0);
     }
-    for (const selector of [
-      ".rf-common-showrooms",
-      ".rf-service-strip > .rf-container",
-      ".rf-footer-grid",
-      ".rf-footer-bottom",
-    ]) {
+    for (const selector of [".rf-footer-grid", ".rf-footer-bottom"]) {
       const bounds = await page.locator(selector).evaluate((el) => {
         const box = el.getBoundingClientRect();
         const css = getComputedStyle(el);
@@ -79,6 +72,7 @@ for (const width of [1920, 1340, 1024, 768, 390, 360]) {
       expect(bounds.x, selector).toBeCloseTo(frame.x, 0);
       expect(bounds.width, selector).toBeCloseTo(frame.width, 0);
     }
+    await expect(page.locator(".rf-showroom-shell")).toBeHidden();
     expect(
       await page.evaluate(
         () =>
@@ -92,10 +86,10 @@ for (const width of [1920, 1340, 1024, 768, 390, 360]) {
         caret: "initial",
       });
       await page
-        .locator(".rf-reference-shelf")
+        .locator(".rf-reference-flash")
         .first()
         .screenshot({
-          path: testInfo.outputPath("landing-wide-shelf-" + width + ".png"),
+          path: testInfo.outputPath("landing-wide-products-" + width + ".png"),
           caret: "initial",
         });
     }
@@ -109,7 +103,9 @@ test("chiều rộng dùng chung khi chuyển sang catalog và quay lại", asyn
   await page.setViewportSize({ width: 1920, height: 1000 });
   await page.goto("/");
   await expect(page.locator(".rf-route-marker")).toHaveClass(/rf-route-home/);
-  await page.locator(".rf-reference-pills a").first().click();
+  await page
+    .locator('.rf-directory-grid a[href="/products?category=pc"]')
+    .click();
   await expect(page).toHaveURL(/\/products\?category=pc$/);
   await expect(page.locator(".rf-route-marker")).not.toHaveClass(
     /rf-route-home/,
@@ -130,8 +126,12 @@ test("chiều rộng dùng chung khi chuyển sang catalog và quay lại", asyn
   await page.goBack();
   await expect(page.locator(".rf-route-marker")).toHaveClass(/rf-route-home/);
   const maxWidth = await page
-    .getByRole("region", { name: "Chiến dịch nổi bật", exact: true })
-    .evaluate((el) => Number.parseFloat(getComputedStyle(el).maxWidth));
+    .locator("#main-content")
+    .evaluate((el) =>
+      Number.parseFloat(
+        getComputedStyle(el).getPropertyValue("--rf-home-width"),
+      ),
+    );
   await expect
     .poll(
       async () => (await page.locator("#main-content").boundingBox())!.width,

@@ -1,0 +1,95 @@
+name: rigforce-${DEPLOY_ENVIRONMENT:?Set staging or demo}
+
+x-logging: &logging
+  driver: json-file
+  options: { max-size: "10m", max-file: "3" }
+
+services:
+  migrate:
+    image: ${TOOLS_IMAGE:?Use an immutable tools image digest}
+    env_file:
+      - path: ${SHARED_DIR:?Set shared directory}/migration.env
+        format: raw
+    environment:
+      NODE_ENV: production
+      DATABASE_TLS_REQUIRED: "true"
+    volumes:
+      - ${SHARED_DIR}/certs/rds-global-bundle.pem:/run/certs/rds-global-bundle.pem:ro
+    networks: [app]
+    restart: "no"
+    logging: *logging
+
+  api:
+    image: ${API_IMAGE:?Use an immutable API image digest}
+    env_file:
+      - path: ${SHARED_DIR}/runtime.env
+        format: raw
+    environment:
+      NODE_ENV: production
+      PORT: "3001"
+      PREVIEW_READ_ONLY: "true"
+      DATABASE_TLS_REQUIRED: "true"
+      TRUST_PROXY_HOPS: "1"
+      STRIPE_SECRET_KEY: ""
+      STRIPE_WEBHOOK_SECRET: ""
+      MEDIA_ROOT: /app/api/.local-media
+    volumes:
+      - media_data:/app/api/.local-media
+      - ${SHARED_DIR}/certs/rds-global-bundle.pem:/run/certs/rds-global-bundle.pem:ro
+    networks: [app]
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3001/api/v1/health/ready',{signal:AbortSignal.timeout(4000)}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    init: true
+    restart: unless-stopped
+    logging: *logging
+
+  front:
+    image: ${FRONT_IMAGE:?Use an immutable frontend image digest}
+    environment:
+      API_INTERNAL_URL: http://api:3001
+      PREVIEW_READ_ONLY: "true"
+    depends_on:
+      api: { condition: service_healthy }
+    networks: [app]
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3000',{signal:AbortSignal.timeout(8000)}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 10s
+    init: true
+    restart: unless-stopped
+    logging: *logging
+
+  nginx:
+    image: nginx:1.30.6-alpine@sha256:901e593c95dc85f5a729f5765516321366ef4ac401821431d408897e95287d0a
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME:?Set the verified domain}
+      NGINX_ENVSUBST_FILTER: ^DOMAIN_NAME$
+    ports:
+      - ${BIND_ADDRESS:-0.0.0.0}:${HTTP_PORT:-80}:80
+      - ${BIND_ADDRESS:-0.0.0.0}:${HTTPS_PORT:-443}:443
+    volumes:
+      - ./infra/nginx/production.conf.template:/etc/nginx/templates/default.conf.template:ro
+      - ${SHARED_DIR}/letsencrypt:/etc/letsencrypt:ro
+      - ${SHARED_DIR}/acme:/var/www/acme:ro
+    depends_on:
+      api: { condition: service_healthy }
+      front: { condition: service_healthy }
+    networks: [app]
+    healthcheck:
+      test: [CMD, nginx, -t]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+    logging: *logging
+
+networks:
+  app:
+volumes:
+  media_data:

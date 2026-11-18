@@ -1,5 +1,5 @@
 "use client";
-import { useId } from "react";
+import { useId, useState } from "react";
 import Image from "next/image";
 import type { Product, CategoryId } from "@/src/catalog/model";
 import { CategoryIcon } from "./category-icon";
@@ -313,18 +313,34 @@ export function ProductArt({
   );
 }
 export function ProductImage({ product }: { product: Product }) {
-  // Ảnh tĩnh được tối ưu sẵn, giữ SVG khi sản phẩm chưa có ảnh public.
-  if (product.image.startsWith("/"))
+  return (
+    <ProductPhoto key={`${product.id}-${product.image}`} product={product} />
+  );
+}
+function ProductPhoto({ product }: { product: Product }) {
+  const [failed, setFailed] = useState(false);
+  if (product.image.startsWith("/") && !failed)
     return (
       <div className="rf-product-photo relative w-full h-44.5 bg-white bg-none max-[768px]:h-36.25">
         <Image
           src={product.image}
           alt={product.name}
+          draggable={false}
           fill
-          sizes="(max-width: 639px) 44vw, (max-width: 1023px) 30vw, 210px"
+          sizes="(max-width: 767px) 48vw, (max-width: 1023px) 34vw, (max-width: 1535px) 24vw, 320px"
           className="rf-product-photo-img object-contain p-2"
+          onError={() => setFailed(true)}
         />
       </div>
     );
-  return <ProductArt category={product.category} />;
+  return (
+    <div
+      className="rf-product-photo flex h-44.5 w-full flex-col items-center justify-center gap-2 rounded-lg bg-rf-bg p-4 text-center text-rf-caption text-rf-muted"
+      role="img"
+      aria-label={`Chưa có ảnh: ${product.name}`}
+    >
+      <CategoryIcon id={product.category} size={30} />
+      <span>Chưa có ảnh sản phẩm</span>
+    </div>
+  );
 }

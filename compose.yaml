@@ -1,0 +1,171 @@
+name: rigforce-local
+
+x-database-environment: &database-environment
+  DATABASE_URL: postgresql://${POSTGRES_USER:-rigforce}:${POSTGRES_PASSWORD:?Run node infra/scripts/init-docker-env.mjs}@db:5432/${POSTGRES_DB:-rigforce_local}
+  DATABASE_SCHEMA: public
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  db:
+    image: postgres:17-bookworm@sha256:40865bc877a289da75963d97d72b59633f639fc5af7a4e856bfa3714cae5b536
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-rigforce_local}
+      POSTGRES_USER: ${POSTGRES_USER:-rigforce}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Generate .env.docker first}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks: [database]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+    logging: *logging
+
+  migrate:
+    build:
+      context: ./api
+      target: tools
+    image: rigforce-api-tools:local
+    environment: *database-environment
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [database]
+    restart: "no"
+    logging: *logging
+
+  seed:
+    profiles: [tools]
+    build:
+      context: ./api
+      target: tools
+    image: rigforce-api-tools:local
+    environment:
+      <<: *database-environment
+      NODE_ENV: development
+      MEDIA_ROOT: /app/api/.local-media
+    command:
+      [
+        "sh",
+        "-c",
+        "node scripts/run-built.cjs access && node prisma/seed-storefront.cjs --apply",
+      ]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    volumes:
+      - media_data:/app/api/.local-media
+      - ./front/public/images:/app/front/public/images:ro
+    networks: [database]
+    restart: "no"
+    logging: *logging
+
+  api:
+    build:
+      context: ./api
+      target: runtime
+    image: rigforce-api:local
+    environment:
+      <<: *database-environment
+      # Lab HTTP local: compiled code, cookie non-Secure. Không dùng cấu hình này cho AWS.
+      NODE_ENV: development
+      PORT: "3001"
+      TRUST_PROXY_HOPS: "1"
+      ALLOWED_ORIGINS: http://localhost:${APP_PORT:-8080},http://127.0.0.1:${APP_PORT:-8080}
+      STOREFRONT_URL: http://localhost:${APP_PORT:-8080}
+      JWT_SECRET: ${JWT_SECRET:?Generate .env.docker first}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:?Generate .env.docker first}
+      MEDIA_ROOT: /app/api/.local-media
+      STRIPE_SECRET_KEY: ""
+      STRIPE_WEBHOOK_SECRET: ""
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    volumes:
+      - media_data:/app/api/.local-media
+    networks: [app, database]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3001/api/v1/health/ready',{signal:AbortSignal.timeout(4000)}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    init: true
+    restart: unless-stopped
+    logging: *logging
+
+  front:
+    build:
+      context: ./front
+    image: rigforce-front:local
+    environment:
+      API_INTERNAL_URL: http://api:3001
+    depends_on:
+      api:
+        condition: service_healthy
+    networks: [app]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000',{signal:AbortSignal.timeout(10000)}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 12s
+      retries: 5
+      start_period: 20s
+    init: true
+    restart: unless-stopped
+    logging: *logging
+
+  nginx:
+    image: nginx:1.30.6-alpine@sha256:901e593c95dc85f5a729f5765516321366ef4ac401821431d408897e95287d0a
+    ports:
+      - "127.0.0.1:${APP_PORT:-8080}:80"
+    volumes:
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      front:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    networks: [app]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "-q",
+          "-O",
+          "/dev/null",
+          "http://127.0.0.1/nginx-health",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+    logging: *logging
+
+networks:
+  app:
+  database:
+    internal: true
+
+volumes:
+  postgres_data:
+  media_data:

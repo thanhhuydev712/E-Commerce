@@ -1,4 +1,24 @@
 /* Marker route nằm ngoài các trang Next cache; selector này giữ layout đúng sau Link/Back. */
+.rf-app:has(> .rf-route-auth)
+  :is(
+    .rf-header-skeleton,
+    .rf-reference-utility,
+    .rf-header,
+    .rf-reference-pills,
+    .rf-showroom-shell,
+    .rf-footer,
+    .rf-mobile-nav,
+    .rf-compare-float
+  ) {
+  display: none;
+}
+.rf-app:has(> .rf-route-auth) .rf-main {
+  max-width: none;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+}
+
 .rf-app:has(> .rf-route-minisite) .rf-minisite-header {
   display: block;
 }
@@ -14,6 +34,10 @@
   border-radius: 0;
 }
 .rf-app:has(> .rf-route-showrooms) .rf-common-showrooms {
+  display: none;
+}
+/* Landing gọn: showroom có route riêng, không lặp toàn bộ grid trước footer. */
+.rf-app:has(> .rf-route-home) .rf-showroom-shell {
   display: none;
 }
 .rf-app:has(> .rf-route-checkout) .rf-reference-utility,

@@ -20,6 +20,8 @@ const windowsCacheOwner =
     : null;
 
 const nextConfig: NextConfig = {
+  // Chỉ Docker bật standalone; giữ cách build/dev hiện tại trên Windows.
+  output: process.env.NEXT_OUTPUT === "standalone" ? "standalone" : undefined,
   // Linux build/start giữ cùng đường dẫn, kể cả khi đổi UID trong container.
   distDir:
     process.env.NEXT_DIST_DIR ??

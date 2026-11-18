@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-18T01:34:25.854Z",
+  "scope": "Isolated Docker production configuration; not AWS",
+  "checks": [
+    "AWS Compose override validates and replaces local logging options",
+    "dedicated TLS PostgreSQL ready",
+    "separate migration owner and SELECT-only runtime role",
+    "fresh migrations verify PostgreSQL TLS",
+    "seed sample catalog using assets from the frontend image",
+    "repeat migration verifies existing SQL checksums without changing schema",
+    "production API/frontend/Nginx healthy",
+    "HTTPS validates the expected CA and rejects a wrong CA",
+    "preview blocks mutations/private data, Swagger and external readiness",
+    "Chromium preview across four routes and two viewport widths",
+    "runtime database rejects INSERT (42501)",
+    "PostgreSQL driver rejects a wrong database CA",
+    "Prisma migration driver rejects a wrong database CA",
+    "restore into a second database and volume preserves catalog/media",
+    "recreating application containers preserves database and media volumes"
+  ],
+  "result": "passed",
+  "restore": {
+    "products": 183,
+    "mediaFilesDigest": "1ee590f22b1157f7f9f34a249922554fecaa6af0c6fd62f5d49088de41948590",
+    "seconds": 7.543,
+    "databaseDumpSha256": "cb17c3d7b4199a3966c20a71426e886e58d229e2014f43583735bb09b63fe459"
+  },
+  "seconds": 98.281
+}

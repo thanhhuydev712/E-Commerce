@@ -1,0 +1,74 @@
+name: Release AWS
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options: [staging, demo]
+        required: true
+      migration_policy:
+        type: choice
+        options: [none, backward-compatible]
+        default: none
+        required: true
+      deploy:
+        description: Deploy after publication (first release requires host/DB/TLS preparation)
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ inputs.environment }}
+  cancel-in-progress: false
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+  publish:
+    needs: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    environment: ${{ inputs.environment }}
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      key: ${{ steps.publish.outputs.key }}
+      version: ${{ steps.publish.outputs.version }}
+      sha256: ${{ steps.publish.outputs.sha256 }}
+    steps:
+      - name: Require the repository default branch
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: test "$GITHUB_REF" = "refs/heads/$DEFAULT_BRANCH"
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_RELEASE_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: release-${{ github.run_id }}
+          unset-current-credentials: true
+      - id: publish
+        env:
+          DEPLOY_ENVIRONMENT: ${{ inputs.environment }}
+          MIGRATION_POLICY: ${{ inputs.migration_policy }}
+          API_REPOSITORY_URI: ${{ vars.API_REPOSITORY_URI }}
+          FRONT_REPOSITORY_URI: ${{ vars.FRONT_REPOSITORY_URI }}
+          RELEASE_BUCKET: ${{ vars.RELEASE_BUCKET }}
+        run: bash infra/scripts/publish-release.sh
+  deploy:
+    if: inputs.deploy
+    needs: publish
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/deploy-aws.yml
+    with:
+      environment: ${{ inputs.environment }}
+      release_key: ${{ needs.publish.outputs.key }}
+      release_version: ${{ needs.publish.outputs.version }}
+      release_sha256: ${{ needs.publish.outputs.sha256 }}

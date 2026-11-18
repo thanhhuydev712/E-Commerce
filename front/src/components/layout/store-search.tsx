@@ -12,29 +12,29 @@ import { ProductImage } from "@/src/components/storefront";
 // Utility Tailwind v4; marker rf-* chỉ phục vụ trạng thái, selector và kiểm thử.
 const tw = {
   search: [
-    "rf-search flex items-center bg-[#f7f9f7] bg-none min-w-0 flex-1 h-11 pl-3.75 text-[#7c8981] border-[#e0e7e2]",
+    "rf-search flex items-center bg-rf-surface bg-none min-w-0 flex-1 h-11 pl-3.75 text-rf-muted border-rf-border",
     "border-solid border rounded-[7px] [&_input]:bg-transparent [&_input]:bg-none [&_input]:text-rf-text [&_input]:w-full",
-    "[&_input]:[outline:0] [&_input]:text-[12px] [&_input]:px-3 [&_input]:py-2.5 [&_input]:border-current",
+    "[&_input]:[outline:0] [&_input]:min-w-0 [&_input]:text-[16px] [&_input]:px-3 [&_input]:py-2.5 [&_input]:border-current",
     "[&_input]:border-none [&_input]:[border-width:0] [&_button]:self-stretch [&_button]:bg-transparent",
-    "[&_button]:bg-none [&_button]:text-rf-green [&_button]:text-[11px] [&_button]:font-bold [&_button]:whitespace-nowrap",
+    "[&_button]:bg-none [&_button]:text-rf-green [&_button]:text-rf-small [&_button]:font-bold [&_button]:whitespace-nowrap",
     "[&_button]:px-4.5 [&_button]:py-0 [&_button]:border-current [&_button]:border-none [&_button]:[border-width:0]",
     "max-[1024px]:order-5 max-[1024px]:basis-full max-[1024px]:h-9.75 focus-within:border-rf-green",
   ].join(" "),
   search_suggestions: [
     "rf-search-suggestions absolute top-[calc(100%_+_8px)] right-0 bottom-auto left-0 z-55 bg-white bg-none",
     "shadow-[0_12px_35px_#072a3026] border-rf-border border-solid border rounded-[10px] overflow-hidden [&_ul]:list-none",
-    "[&_ul]:p-0 [&_ul]:m-0 [&_li_a]:flex [&_li_a]:items-center [&_li_a]:text-[12px] [&_li_a]:border-b",
+    "[&_ul]:p-0 [&_ul]:m-0 [&_li_a]:flex [&_li_a]:items-center [&_li_a]:text-rf-small [&_li_a]:border-b",
     "[&_li_a]:[border-bottom-style:solid] [&_li_a]:border-b-rf-border [&_li_a]:px-3.5 [&_li_a]:py-2.5 [&_li_a]:gap-3",
-    '[&_li[aria-selected="true"]]:bg-[#ecf7f2] [&_li[aria-selected="true"]]:bg-none [&_strong]:block [&_strong]:mt-1.25',
-    "[&_strong]:text-rf-sale [&_p]:block [&_p]:text-[12px] [&_p]:px-3.75 [&_p]:py-3.25 [&_li_.rf-product-photo]:w-13.75",
+    '[&_li[aria-selected="true"]]:bg-rf-accent-soft [&_li[aria-selected="true"]]:bg-none [&_strong]:block [&_strong]:mt-1.25',
+    "[&_strong]:text-rf-sale [&_p]:block [&_p]:text-rf-caption [&_p]:px-3.75 [&_p]:py-3.25 [&_li_.rf-product-photo]:w-13.75",
     "[&_li_.rf-product-photo]:h-13.75 [&_li_.rf-product-photo]:min-h-13.75 [&_li_.rf-product-photo]:flex-[0_0_55px]",
     "[&_li_.rf-product-art]:w-13.75 [&_li_.rf-product-art]:h-13.75 [&_li_.rf-product-art]:min-h-13.75",
     "[&_li_.rf-product-art]:flex-[0_0_55px] [&_li_.rf-component-art]:w-13.75 [&_li_.rf-component-art]:h-13.75",
     "[&_li_.rf-component-art]:min-h-13.75 [&_li_.rf-component-art]:flex-[0_0_55px]",
   ].join(" "),
   search_suggestions_head: [
-    "rf-search-suggestions-head flex justify-between text-[13px] font-bold bg-[#f5f8f8] bg-none px-3.75 py-3",
-    "[&_small]:text-[10px] [&_small]:text-rf-muted [&_small]:font-normal",
+    "rf-search-suggestions-head flex justify-between text-rf-small font-bold bg-rf-bg bg-none px-3.75 py-3",
+    "[&_small]:text-rf-caption [&_small]:text-rf-muted [&_small]:font-normal",
   ].join(" "),
 };
 
@@ -154,7 +154,7 @@ export function StoreSearch() {
             <p role="status">Không tìm thấy sản phẩm phù hợp.</p>
           )}
           <Link
-            className="rf-search-all block text-[12px] text-rf-green text-center font-semibold px-3.75 py-3.25"
+            className="rf-search-all block text-rf-small text-rf-green text-center font-semibold px-3.75 py-3.25"
             href={`/search?q=${encodeURIComponent(value)}`}
             onClick={() => setOpen(false)}
           >

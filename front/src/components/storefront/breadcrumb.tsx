@@ -10,7 +10,7 @@ export function Breadcrumb({
 }) {
   return (
     <nav
-      className="rf-breadcrumb flex flex-wrap items-center text-[11px] text-rf-muted mx-0 my-5.5 gap-2.25 [&_span]:text-ellipsis [&_span]:overflow-hidden"
+      className="rf-breadcrumb flex flex-wrap items-center text-rf-caption text-rf-muted mx-0 my-5.5 gap-2.25 [&_span]:text-ellipsis [&_span]:overflow-hidden"
       aria-label="Đường dẫn"
     >
       <Link href="/">Trang chủ</Link>

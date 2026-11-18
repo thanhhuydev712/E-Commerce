@@ -1,10 +1,14 @@
 # PC Studio: ghép ảnh linh kiện — 08/11/2026
 
-## Trải nghiệm
+## Chỉ dùng ảnh sản phẩm — 18/11/2026
 
-Tab **Ảnh ghép** là chế độ mặc định: tám lớp ảnh tách nền tạo thành một bộ máy, có góc nghiêng nhẹ, phóng to/thu nhỏ, mở kính và tách/lắp linh kiện. Chọn một lớp hoặc nút nhóm phía dưới để xem sản phẩm đang chọn, giá và mở picker thay linh kiện. Khu vực xem máy nằm trước danh sách cấu hình; inspector xuống dưới trên màn hình nhỏ. Tab **3D** giữ mô hình hình học và OrbitControls hiện có, được tải động khi mở.
+Theo yêu cầu mới nhất, đã bỏ chế độ 3D và Three/Fiber/Drei cùng types. PC Builder lấy ảnh từ `productById(build[slot]).image`, không dùng ảnh cố định theo nhóm. Bố cục là bảng ảnh từng sản phẩm có tên, giữ tỷ lệ gốc; không phải mô phỏng bộ máy đã lắp. Ảnh lỗi/thiếu dùng placeholder; lỗi của sản phẩm cũ không làm mất ảnh sản phẩm mới trong cùng slot.
 
-Ảnh ghép dùng phép chiếu CSS có chiều sâu (2.5D), không phải mô hình có thể xoay 360 độ. Các lớp chỉ xuất hiện khi slot có sản phẩm còn hợp lệ trong catalog; nguồn dữ liệu cấu hình, giá và tương thích vẫn là CatalogProvider/ShopProvider. Không lưu thêm cấu hình vào localStorage hoặc tạo catalog giả.
+Preset góc, zoom, tách/tập trung linh kiện và giảm chuyển động vẫn hoạt động với ảnh phẳng. “Làm mờ case” điều chỉnh độ rõ ô case; “Bật nền sáng” đổi nền trình diễn. Đã bỏ kính/quạt giả lập. Không còn tab/nút 3D hay renderer WebGL. Giá, kiểm tương thích, lưu cấu hình và giỏ dùng luồng hiện có.
+
+Xem [hướng dẫn dữ liệu và cách bổ sung ảnh](PHOTO_ASSEMBLY.md) và [các ảnh catalog đang gán sai model](PRODUCT_IMAGE_AUDIT.md). Chọn đúng record chưa đảm bảo ảnh nguồn đúng SKU. `pc-scene.tsx` còn module rỗng do Windows từ chối xóa file; toàn bộ implementation/import Three đã gỡ.
+
+Các mục ngày cũ bên dưới là lịch sử, không mô tả renderer hiện tại.
 
 ## Nâng cấp trình diễn — 12/11/2026
 

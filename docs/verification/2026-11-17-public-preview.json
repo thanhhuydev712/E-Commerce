@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-17",
+  "release_target": "Public introduction and experience; no real orders or payments",
+  "status": "Planning and initial dependency patch; not deployed",
+  "frontend_dependencies": {
+    "next": { "before": "16.4.2", "after": "16.4.6" },
+    "eslint-config-next": { "before": "16.4.2", "after": "16.4.6" }
+  },
+  "checks": {
+    "lint": "passed",
+    "format_check": "passed",
+    "typescript_no_emit_incremental_false": "passed",
+    "production_build": { "result": "passed", "route_shells": 30, "output": ".next-local-public-preview-review" },
+    "frontend_runtime_audit": { "before_moderate": 1, "after_total": 0 },
+    "frontend_all_dependencies_audit": { "moderate_entries": 7, "scope": "dev tooling/typescript-eslint/minimatch; unresolved" }
+  },
+  "production_smoke": {
+    "result": "10/10 passed",
+    "frontend": "Next 16.4.6 production server; isolated port 3027",
+    "backend": "Existing development API; not an isolated production backend",
+    "browser_origin": "http://localhost:3000",
+    "routing": "Playwright routes this allowed origin exclusively to the review frontend; the existing dev frontend is not reused",
+    "authentication": "Anonymous fresh browser contexts; no login, order creation, or payment submitted",
+    "motion": "reduce",
+    "routes": ["/", "/products", "/pc-builder", "/login", "/cart"],
+    "viewports": [
+      { "width": 1440, "height": 1000 },
+      { "width": 390, "height": 844 }
+    ],
+    "assertions": ["HTTP 200", "one visible h1", "no horizontal overflow", "no pageerror", "no disallowed Origin toast"],
+    "initial_attempt": "Different review-port origin triggered the existing API Origin guard; not counted as connected-flow acceptance",
+    "final_artifacts": "Temporary directory rigforce-production-origin-review-dWZhtq; results.json and screenshots",
+    "review_server_stopped": true,
+    "existing_development_servers_stopped": false
+  },
+  "limitations": [
+    "Public/demo checkout restrictions are planned, not implemented in this change",
+    "No full authenticated FE-BE or payment E2E rerun",
+    "No Linux container, Nginx, HTTPS, cloud deployment, or backup/restore validation",
+    "No Safari, Firefox, or physical-device validation",
+    "Audit zero for production dependencies is not an application security certification",
+    "Existing dev process needs restart at a suitable time to load new dependencies"
+  ]
+}

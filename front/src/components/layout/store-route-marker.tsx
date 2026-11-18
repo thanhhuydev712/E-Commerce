@@ -5,6 +5,13 @@ import { useSyncExternalStore } from "react";
 const subscribe = () => () => {};
 const clientReady = () => true;
 const serverReady = () => false;
+const authRoutes = new Set([
+  "/login",
+  "/register",
+  "/forgot-password",
+  "/reset-password",
+  "/verify-email",
+]);
 
 /** Marker nằm trong layout chung, ngoài các trang Next giữ ẩn khi điều hướng. */
 export function StoreRouteMarker() {
@@ -14,15 +21,17 @@ export function StoreRouteMarker() {
   const ready = useSyncExternalStore(subscribe, clientReady, serverReady);
   const kind = !ready
     ? ""
-    : pathname === "/"
-      ? "rf-route-home"
-      : pathname.startsWith("/checkout")
-        ? "rf-route-checkout"
-        : pathname === "/promotions"
-          ? "rf-route-minisite rf-route-campaign"
-          : pathname === "/showrooms"
-            ? "rf-route-minisite rf-route-showrooms"
-            : "";
+    : authRoutes.has(pathname)
+      ? "rf-route-auth"
+      : pathname === "/"
+        ? "rf-route-home"
+        : pathname.startsWith("/checkout")
+          ? "rf-route-checkout"
+          : pathname === "/promotions"
+            ? "rf-route-minisite rf-route-campaign"
+            : pathname === "/showrooms"
+              ? "rf-route-minisite rf-route-showrooms"
+              : "";
   return (
     <span hidden aria-hidden="true" className={`rf-route-marker ${kind}`} />
   );

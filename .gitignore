@@ -1,0 +1,12 @@
+# Cấu hình Docker local có credential riêng; không dùng api/.env.
+.env
+.env.*
+*.env
+!.env.example
+!*.env.example
+/.env.docker
+/.env.docker.*
+!/.env.docker.example
+/infra/.local/
+/release-output/
+*.tfstate*

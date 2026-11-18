@@ -15,21 +15,21 @@ const tw = {
     "rf-result rf-panel bg-rf-surface bg-none w-full text-center px-10 py-15 mx-auto my-13.75 border-rf-border",
     "border-solid border rounded-[var(--rf-radius)] [&_h2]:text-[19px] [&_h1]:text-[30px] [&_h1]:tracking-[-0.7px]",
     "[&_h1]:mt-4.5 max-[768px]:px-5.5 max-[768px]:py-8.75 max-[768px]:my-7.5 [&>svg]:mb-5 [&_p]:text-rf-muted",
-    "[&_p]:text-[12px] max-[768px]:[&_h1]:text-[25px] [&>.rf-eyebrow]:flex [&>.rf-eyebrow]:justify-center",
+    "[&_p]:text-rf-body max-[768px]:[&_h1]:text-[25px] [&>.rf-eyebrow]:flex [&>.rf-eyebrow]:justify-center",
     "[&_.rf-form-actions]:justify-center",
   ].join(" "),
   result_paid_result_pending_result_failed_result_count: [
     "[&.rf-result-paid]:text-rf-green [&.rf-result-pending]:text-[#a07f3a] [&.rf-result-failed]:text-rf-red",
-    "[&.rf-result-count]:text-[12px] [&.rf-result-count]:text-rf-muted [&.rf-result-count]:mx-0 [&.rf-result-count]:my-3",
+    "[&.rf-result-count]:text-rf-small [&.rf-result-count]:text-rf-muted [&.rf-result-count]:mx-0 [&.rf-result-count]:my-3",
   ].join(" "),
   btn: [
-    "rf-btn inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-[12px] font-bold",
+    "rf-btn inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-rf-small font-bold",
     "leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-transparent border-solid border",
     "rounded-[6px] gap-2.5 print:hidden hover:bg-rf-green-hover hover:bg-none",
   ].join(" "),
   btn_btn_outline: [
     "rf-btn rf-btn-outline inline-flex items-center justify-center min-h-11 bg-transparent bg-none text-rf-text",
-    "text-[12px] font-bold leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-rf-border",
+    "text-rf-small font-bold leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-rf-border",
     "border-solid border rounded-[6px] gap-2.5 print:hidden hover:bg-[#edf4ef] hover:bg-none hover:border-[#9ccab5]",
   ].join(" "),
 };
@@ -80,7 +80,7 @@ export function PaymentResult({ id }: { id: string }) {
             tw.result_paid_result_pending_result_failed_result_count
           }
         />
-        <span className="rf-eyebrow inline-flex items-center text-[10px] font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-[9px] max-[768px]:tracking-[1px]">
+        <span className="rf-eyebrow inline-flex items-center text-rf-caption font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-rf-caption max-[768px]:tracking-[1px]">
           ĐƠN HÀNG CỦA BẠN
         </span>
         <h1>

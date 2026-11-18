@@ -11,22 +11,22 @@ const tw = {
     "[&>header]:pb-8.75 [&>header]:px-3.75 [&_h1]:text-rf-green [&_h1]:text-[46px] [&_h1]:font-extrabold",
     "[&_h1]:leading-[1.15] [&_h1]:mx-0 [&_h1]:my-3.75 [&_header_p]:max-w-162.5 [&_header_p]:mt-0 [&_header_p]:mb-2.5",
     "[&_header_p]:text-[16px] [&_header_p]:leading-[1.7] [&_header_p]:text-rf-muted [&_header_p]:mx-auto",
-    "[&_header_small]:text-rf-muted [&_header_small]:text-[12px] max-[768px]:px-2.5 max-[768px]:py-3.75",
-    "max-[768px]:[&_h1]:text-[32px] max-[768px]:[&_header_p]:text-[14px]",
+    "[&_header_small]:text-rf-muted [&_header_small]:text-rf-small max-[768px]:px-2.5 max-[768px]:py-3.75",
+    "max-[768px]:[&_h1]:text-[32px] max-[768px]:[&_header_p]:text-rf-body",
   ].join(" "),
   showroom_filters: [
     "rf-showroom-filters grid grid-cols-[repeat(3,_minmax(0,_1fr))] bg-white bg-none shadow-[0_9px_25px_#102e370a] p-5.5",
-    "border-rf-border border-solid border rounded-[16px] gap-4 [&_label]:grid [&_label]:text-[13px] [&_label]:gap-2",
-    "[&_select]:w-full [&_select]:bg-white [&_select]:bg-none [&_select]:text-[13px] [&_select]:text-rf-text",
+    "border-rf-border border-solid border rounded-[16px] gap-4 [&_label]:grid [&_label]:text-rf-small [&_label]:gap-2",
+    "[&_select]:w-full [&_select]:bg-white [&_select]:bg-none [&_select]:text-rf-control [&_select]:text-rf-text",
     "[&_select]:px-2.5 [&_select]:py-3.25 [&_select]:border-[#d2d9d9] [&_select]:border-solid [&_select]:border",
     "[&_select]:rounded-[9px] max-[768px]:grid-cols-[1fr] max-[768px]:p-4",
   ].join(" "),
   showroom_list_heading: [
-    "rf-showroom-list-heading flex justify-between items-center mt-6 mb-3.75 mx-0 gap-5 [&_h2]:text-[22px]",
-    "[&_h2]:text-rf-green [&_p]:text-[13px] [&_p]:text-rf-muted [&_p]:mt-1.25 max-[768px]:[&_h2]:text-[19px]",
+    "rf-showroom-list-heading flex flex-wrap justify-between items-center mt-6 mb-3.75 mx-0 gap-5 [&_h2]:text-[22px]",
+    "[&_h2]:text-rf-green [&_p]:text-rf-body [&_p]:text-rf-muted [&_p]:mt-1.25 max-[768px]:[&_h2]:text-[19px]",
   ].join(" "),
   text_link: [
-    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-[12px] font-semibold p-0",
+    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-rf-small font-semibold p-0",
     "border-current border-none [border-width:0] gap-1.75 hover:underline hover:[text-underline-offset:4px]",
   ].join(" "),
   showroom_list: [
@@ -37,15 +37,15 @@ const tw = {
     "[&>button]:border-b-current [&>button]:border-l-6 [&>button]:[border-left-style:solid] [&>button]:border-l-[#67cb9f]",
     "[&>button]:p-5 [&>button]:rounded-[12px] [&_strong]:flex [&_strong]:justify-between [&_strong]:items-center",
     "[&_strong]:text-[16px] [&_strong]:mb-3.75 [&_strong]:gap-3 [&_strong_small]:bg-white [&_strong_small]:bg-none",
-    "[&_strong_small]:text-rf-green [&_strong_small]:text-[10px] [&_strong_small]:whitespace-nowrap [&_strong_small]:px-2",
+    "[&_strong_small]:text-rf-green [&_strong_small]:text-rf-caption [&_strong_small]:whitespace-nowrap [&_strong_small]:px-2",
     "[&_strong_small]:py-1.25 [&_strong_small]:rounded-[18px] [&>button>span]:flex [&>button>span]:mt-2.5",
-    "[&>button>span]:text-[12px] [&>button>span]:leading-[1.6] [&>button>span]:gap-2 [&_svg]:shrink-0 [&_svg]:mt-0.5",
+    "[&>button>span]:text-rf-body [&>button>span]:leading-[1.6] [&>button>span]:gap-2 [&_svg]:shrink-0 [&_svg]:mt-0.5",
     "max-[1024px]:[&_strong]:flex-wrap max-[768px]:max-h-102.5 [&>button.active]:bg-rf-green [&>button.active]:bg-none",
     "[&>button.active]:border-l-[#f2d37c]",
   ].join(" "),
   showroom_location: [
     "rf-showroom-location bg-white bg-none p-5 border-rf-border border-solid border rounded-[14px] [&_h2]:text-rf-green",
-    "[&_h2]:text-[20px] [&_h2]:mb-2 [&>p]:text-[13px] [&>p]:text-rf-muted",
+    "[&_h2]:text-[20px] [&_h2]:mb-2 [&>p]:text-rf-body [&>p]:text-rf-muted",
   ].join(" "),
   map_placeholder: [
     "rf-map-placeholder flex flex-col items-center justify-center text-center h-102.5 bg-[#edf4f0]",
@@ -78,7 +78,7 @@ export function ShowroomsPage() {
       <Breadcrumb current="Hệ thống showroom" />
       <section className={tw.showrooms_page}>
         <header>
-          <span className="rf-eyebrow inline-flex items-center text-[10px] font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-[9px] max-[768px]:tracking-[1px]">
+          <span className="rf-eyebrow inline-flex items-center text-rf-caption font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-rf-caption max-[768px]:tracking-[1px]">
             ĐIỂM ĐẾN CÔNG NGHỆ
           </span>
           <h1>
@@ -216,7 +216,7 @@ export function ShowroomsPage() {
                 <span>{current.location}</span>
                 <small>Bản đồ sẽ được cập nhật khi có địa điểm thực tế.</small>
               </div>
-              <p className="rf-form-hint text-[12px] text-rf-muted">
+              <p className="rf-form-hint text-rf-small text-rf-muted">
                 Không có địa chỉ, số điện thoại hoặc chỉ đường kinh doanh thật
                 trong bản demo.
               </p>

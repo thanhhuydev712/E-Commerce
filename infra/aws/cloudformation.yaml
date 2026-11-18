@@ -1,0 +1,740 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  Rigforge staging/demo foundation. Creates billable infrastructure only when an
+  operator explicitly deploys this template. No application release or seeding.
+
+Parameters:
+  ProjectName:
+    Type: String
+    Default: rigforce
+    AllowedPattern: '[a-z][a-z0-9-]{2,19}'
+  EnvironmentName:
+    Type: String
+    AllowedValues: [staging, demo]
+  Owner:
+    Type: String
+    MinLength: 1
+    MaxLength: 64
+  DomainName:
+    Type: String
+    Description: Owned DNS hostname; no scheme/path. This stack does not create DNS/certificates.
+    AllowedPattern: '[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+'
+    ConstraintDescription: Replace with a real owned lowercase hostname.
+  GitHubRepository:
+    Type: String
+    Description: Exact owner/repository; case must match the GitHub OIDC subject.
+    AllowedPattern: '[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+'
+  GitHubOidcProviderArn:
+    Type: String
+    Description: Existing IAM GitHub OIDC provider in this AWS account; never recreated here.
+    AllowedPattern: 'arn:aws:iam::[0-9]{12}:oidc-provider/token.actions.githubusercontent.com'
+  GitHubReleaseEnvironment:
+    Type: String
+    Description: Dedicated protected GitHub Environment for building/publishing releases.
+    AllowedPattern: '[A-Za-z0-9_-]+'
+  GitHubDeployEnvironment:
+    Type: String
+    Description: Dedicated protected GitHub Environment for deploying this staging/demo stack.
+    AllowedPattern: '[A-Za-z0-9_-]+'
+  AmiId:
+    Type: AWS::EC2::Image::Id
+    Description: Pinned Amazon Linux 2023 standard x86_64 AMI in the selected region (not minimal/ARM).
+  InstanceType:
+    Type: String
+    Default: t3.medium
+    AllowedValues: [t3.small, t3.medium, t3.large]
+  RootVolumeGiB:
+    Type: Number
+    Default: 30
+    MinValue: 20
+    MaxValue: 200
+  VpcCidr:
+    Type: String
+    Default: 10.42.0.0/16
+  PublicSubnetCidr:
+    Type: String
+    Default: 10.42.0.0/24
+  PrivateSubnetACidr:
+    Type: String
+    Default: 10.42.10.0/24
+  PrivateSubnetBCidr:
+    Type: String
+    Default: 10.42.11.0/24
+  PublicAvailabilityZone:
+    Type: AWS::EC2::AvailabilityZone::Name
+  DatabaseAvailabilityZoneB:
+    Type: AWS::EC2::AvailabilityZone::Name
+    Description: Must differ from PublicAvailabilityZone; verify RDS class availability in both.
+  DbInstanceClass:
+    Type: String
+    Default: db.t4g.micro
+    AllowedValues: [db.t4g.micro, db.t4g.small, db.t4g.medium]
+  DbEngineVersion:
+    Type: String
+    Description: Exact supported RDS PostgreSQL 17 minor version, checked in the target region.
+    AllowedPattern: '17\.[0-9]+(\.[0-9]+)?'
+  DbName:
+    Type: String
+    Default: rigforce
+    AllowedPattern: '[a-z][a-z0-9]{0,30}'
+  DbMasterUsername:
+    Type: String
+    Default: rigforce_owner
+    AllowedPattern: '[a-z][a-z0-9_]{0,30}'
+  DbStorageGiB:
+    Type: Number
+    Default: 20
+    MinValue: 20
+    MaxValue: 100
+  DbMaximumStorageGiB:
+    Type: Number
+    Default: 100
+    MinValue: 20
+    MaxValue: 1000
+  BootstrapBucket:
+    Type: String
+    Description: Pre-created private/versioned foundation bucket in this region; not the stack release bucket.
+    AllowedPattern: '[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]'
+  BootstrapKey:
+    Type: String
+    Description: Exact foundation bundle object key; bundle has three top-level shell scripts.
+    AllowedPattern: 'foundation/[A-Za-z0-9/_-]+\.tar\.gz'
+  BootstrapVersionId:
+    Type: String
+    MinLength: 1
+    AllowedPattern: '(?!null$)[A-Za-z0-9._~+/=-]{1,1024}'
+  BootstrapSha256:
+    Type: String
+    AllowedPattern: '[a-f0-9]{64}'
+  ComposeVersion:
+    Type: String
+    Default: v5.8.0
+    AllowedPattern: 'v[0-9]+\.[0-9]+\.[0-9]+'
+  ComposeSha256:
+    Type: String
+    Default: b8840f5008c447f41fce0a57ae3adeab42c89b1eb6e6012524bcabbfb4ffbaf6
+    AllowedPattern: '[a-f0-9]{64}'
+  RdsCaSha256:
+    Type: String
+    Default: 90a6f1a7978a1b1b096dca6c57511ca48d3b8cf052f8e704baf358f34ea2f21b
+    Description: SHA256 of AWS global RDS trust bundle; deliberately recheck when CA bundle rotates.
+    AllowedPattern: '[a-f0-9]{64}'
+  LogRetentionDays:
+    Type: Number
+    Default: 14
+    AllowedValues: [7, 14, 30, 60, 90]
+  MonthlyBudgetUsd:
+    Type: Number
+    MinValue: 1
+    Description: Approved account-wide monthly warning threshold in USD; not a spending cap.
+  AlertEmail:
+    Type: String
+    Description: Operator address for Budget warnings and confirmed SNS alarm subscription.
+    AllowedPattern: '[^\s@]+@[^\s@]+\.[^\s@]+'
+
+Rules:
+  DistinctDatabaseZones:
+    Assertions:
+      - Assert: !Not [!Equals [!Ref PublicAvailabilityZone, !Ref DatabaseAvailabilityZoneB]]
+        AssertDescription: RDS DB subnet group requires two different AZs.
+
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCidr
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - {Key: Name, Value: !Sub '${ProjectName}-${EnvironmentName}'}
+        - {Key: Project, Value: !Ref ProjectName}
+        - {Key: Environment, Value: !Ref EnvironmentName}
+        - {Key: Owner, Value: !Ref Owner}
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+  GatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties: {VpcId: !Ref Vpc, InternetGatewayId: !Ref InternetGateway}
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: !Ref PublicSubnetCidr
+      AvailabilityZone: !Ref PublicAvailabilityZone
+      MapPublicIpOnLaunch: true
+  PrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: !Ref PrivateSubnetACidr
+      AvailabilityZone: !Ref PublicAvailabilityZone
+      MapPublicIpOnLaunch: false
+  PrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: !Ref PrivateSubnetBCidr
+      AvailabilityZone: !Ref DatabaseAvailabilityZoneB
+      MapPublicIpOnLaunch: false
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties: {VpcId: !Ref Vpc}
+  PublicDefaultRoute:
+    Type: AWS::EC2::Route
+    DependsOn: GatewayAttachment
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+  PublicRouteAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties: {SubnetId: !Ref PublicSubnet, RouteTableId: !Ref PublicRouteTable}
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties: {VpcId: !Ref Vpc}
+  PrivateRouteAssociationA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties: {SubnetId: !Ref PrivateSubnetA, RouteTableId: !Ref PrivateRouteTable}
+  PrivateRouteAssociationB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties: {SubnetId: !Ref PrivateSubnetB, RouteTableId: !Ref PrivateRouteTable}
+  AppSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Public HTTP ACME/redirect and HTTPS only; management uses SSM.
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - {IpProtocol: tcp, FromPort: 80, ToPort: 80, CidrIp: 0.0.0.0/0}
+        - {IpProtocol: tcp, FromPort: 443, ToPort: 443, CidrIp: 0.0.0.0/0}
+      SecurityGroupEgress:
+        - {IpProtocol: tcp, FromPort: 443, ToPort: 443, CidrIp: 0.0.0.0/0}
+        - {IpProtocol: udp, FromPort: 53, ToPort: 53, CidrIp: !Ref VpcCidr}
+        - {IpProtocol: tcp, FromPort: 53, ToPort: 53, CidrIp: !Ref VpcCidr}
+  DatabaseSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Only the application EC2 security group may connect to PostgreSQL.
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - {IpProtocol: tcp, FromPort: 5432, ToPort: 5432, SourceSecurityGroupId: !Ref AppSecurityGroup}
+      # A nonempty harmless egress rule suppresses AWS's default allow-all rule.
+      SecurityGroupEgress:
+        - {IpProtocol: tcp, FromPort: 443, ToPort: 443, CidrIp: 127.0.0.1/32}
+  AppDatabaseEgress:
+    Type: AWS::EC2::SecurityGroupEgress
+    Properties:
+      GroupId: !Ref AppSecurityGroup
+      IpProtocol: tcp
+      FromPort: 5432
+      ToPort: 5432
+      DestinationSecurityGroupId: !Ref DatabaseSecurityGroup
+  DbSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Private DB subnets in two AZs, without an Internet/NAT route.
+      SubnetIds: [!Ref PrivateSubnetA, !Ref PrivateSubnetB]
+  DbParameterGroup:
+    Type: AWS::RDS::DBParameterGroup
+    Properties:
+      Description: Enforce TLS for PostgreSQL 17.
+      Family: postgres17
+      Parameters: {rds.force_ssl: '1'}
+  Database:
+    Type: AWS::RDS::DBInstance
+    DependsOn: [DatabasePostgresLogGroup, DatabaseUpgradeLogGroup]
+    DeletionPolicy: Snapshot
+    UpdateReplacePolicy: Snapshot
+    Properties:
+      Engine: postgres
+      DBInstanceIdentifier: !Sub '${ProjectName}-${EnvironmentName}'
+      EngineVersion: !Ref DbEngineVersion
+      DBInstanceClass: !Ref DbInstanceClass
+      DBName: !Ref DbName
+      MasterUsername: !Ref DbMasterUsername
+      ManageMasterUserPassword: true
+      AllocatedStorage: !Ref DbStorageGiB
+      MaxAllocatedStorage: !Ref DbMaximumStorageGiB
+      StorageType: gp3
+      StorageEncrypted: true
+      PubliclyAccessible: false
+      MultiAZ: false
+      AutoMinorVersionUpgrade: true
+      AllowMajorVersionUpgrade: false
+      BackupRetentionPeriod: 7
+      PreferredBackupWindow: 18:00-19:00
+      PreferredMaintenanceWindow: sun:19:30-sun:20:30
+      DeletionProtection: true
+      CopyTagsToSnapshot: true
+      DBSubnetGroupName: !Ref DbSubnetGroup
+      DBParameterGroupName: !Ref DbParameterGroup
+      VPCSecurityGroups: [!Ref DatabaseSecurityGroup]
+      EnableCloudwatchLogsExports: [postgresql, upgrade]
+      Tags:
+        - {Key: Project, Value: !Ref ProjectName}
+        - {Key: Environment, Value: !Ref EnvironmentName}
+        - {Key: Owner, Value: !Ref Owner}
+  ApiRepository:
+    Type: AWS::ECR::Repository
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      RepositoryName: !Sub '${ProjectName}/${EnvironmentName}/api'
+      ImageTagMutability: IMMUTABLE
+      ImageScanningConfiguration: {ScanOnPush: true}
+      EncryptionConfiguration: {EncryptionType: AES256}
+      LifecyclePolicy:
+        LifecyclePolicyText: '{"rules":[{"rulePriority":1,"description":"Expire only untagged images after 30 days","selection":{"tagStatus":"untagged","countType":"sinceImagePushed","countUnit":"days","countNumber":30},"action":{"type":"expire"}}]}'
+  FrontRepository:
+    Type: AWS::ECR::Repository
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      RepositoryName: !Sub '${ProjectName}/${EnvironmentName}/front'
+      ImageTagMutability: IMMUTABLE
+      ImageScanningConfiguration: {ScanOnPush: true}
+      EncryptionConfiguration: {EncryptionType: AES256}
+      LifecyclePolicy:
+        LifecyclePolicyText: '{"rules":[{"rulePriority":1,"description":"Expire only untagged images after 30 days","selection":{"tagStatus":"untagged","countType":"sinceImagePushed","countUnit":"days","countNumber":30},"action":{"type":"expire"}}]}'
+  ReleaseBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+      OwnershipControls: {Rules: [{ObjectOwnership: BucketOwnerEnforced}]}
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      VersioningConfiguration: {Status: Enabled}
+      LifecycleConfiguration:
+        Rules:
+          - Id: AbortIncompleteUploads
+            Status: Enabled
+            AbortIncompleteMultipartUpload: {DaysAfterInitiation: 7}
+      Tags:
+        - {Key: Project, Value: !Ref ProjectName}
+        - {Key: Environment, Value: !Ref EnvironmentName}
+        - {Key: Owner, Value: !Ref Owner}
+  ReleaseBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref ReleaseBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Deny
+            Principal: '*'
+            Action: s3:*
+            Resource: [!GetAtt ReleaseBucket.Arn, !Sub '${ReleaseBucket.Arn}/*']
+            Condition: {Bool: {'aws:SecureTransport': 'false'}}
+  RuntimeSecretsKey:
+    Type: AWS::KMS::Key
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      Description: !Sub '${ProjectName}/${EnvironmentName} runtime and migration SecureString parameters only'
+      EnableKeyRotation: true
+      PendingWindowInDays: 30
+      KeyPolicy:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DelegateToAccountIAM
+            Effect: Allow
+            Principal: {AWS: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:root'}
+            Action: kms:*
+            Resource: '*'
+  RuntimeSecretsKeyAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: !Sub 'alias/${ProjectName}/${EnvironmentName}/runtime'
+      TargetKeyId: !Ref RuntimeSecretsKey
+  HostLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      LogGroupName: !Sub '/${ProjectName}/${EnvironmentName}/host'
+      RetentionInDays: !Ref LogRetentionDays
+  ContainerLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      LogGroupName: !Sub '/${ProjectName}/${EnvironmentName}/containers'
+      RetentionInDays: !Ref LogRetentionDays
+  DatabasePostgresLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      LogGroupName: !Sub '/aws/rds/instance/${ProjectName}-${EnvironmentName}/postgresql'
+      RetentionInDays: !Ref LogRetentionDays
+  DatabaseUpgradeLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      LogGroupName: !Sub '/aws/rds/instance/${ProjectName}-${EnvironmentName}/upgrade'
+      RetentionInDays: !Ref LogRetentionDays
+  AppInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Service: ec2.amazonaws.com}
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: ScopedHostAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: SsmAgentControlChannel
+                Effect: Allow
+                Action:
+                  - ssm:UpdateInstanceInformation
+                  - ssmmessages:CreateControlChannel
+                  - ssmmessages:CreateDataChannel
+                  - ssmmessages:OpenControlChannel
+                  - ssmmessages:OpenDataChannel
+                Resource: '*'
+              - Sid: EcrAuthentication
+                Effect: Allow
+                Action: ecr:GetAuthorizationToken
+                Resource: '*'
+              - Sid: PullOnlyApplicationImages
+                Effect: Allow
+                Action: [ecr:BatchGetImage, ecr:GetDownloadUrlForLayer, ecr:BatchCheckLayerAvailability]
+                Resource: [!GetAtt ApiRepository.Arn, !GetAtt FrontRepository.Arn]
+              - Sid: ReadVersionedReleaseBundles
+                Effect: Allow
+                Action: [s3:GetObject, s3:GetObjectVersion]
+                Resource: !Sub '${ReleaseBucket.Arn}/releases/${EnvironmentName}/*'
+              - Sid: ReadOneVersionedFoundationObject
+                Effect: Allow
+                Action: s3:GetObjectVersion
+                Resource: !Sub 'arn:${AWS::Partition}:s3:::${BootstrapBucket}/${BootstrapKey}'
+                Condition: {StringEquals: {'s3:VersionId': !Ref BootstrapVersionId}}
+              - Sid: ReadExactlyTwoEnvironmentParameters
+                Effect: Allow
+                Action: ssm:GetParameter
+                Resource:
+                  - !Sub 'arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${ProjectName}/${EnvironmentName}/runtime-env'
+                  - !Sub 'arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${ProjectName}/${EnvironmentName}/migration-env'
+              - Sid: DecryptOnlyThoseSecureStringsThroughSsm
+                Effect: Allow
+                Action: kms:Decrypt
+                Resource: !GetAtt RuntimeSecretsKey.Arn
+                Condition:
+                  StringEquals:
+                    kms:ViaService: !Sub 'ssm.${AWS::Region}.${AWS::URLSuffix}'
+                    kms:EncryptionContext:PARAMETER_ARN:
+                      - !Sub 'arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${ProjectName}/${EnvironmentName}/runtime-env'
+                      - !Sub 'arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${ProjectName}/${EnvironmentName}/migration-env'
+              - Sid: WriteExistingLogGroups
+                Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents, logs:DescribeLogStreams]
+                Resource: [!GetAtt HostLogGroup.Arn, !GetAtt ContainerLogGroup.Arn]
+              - Sid: DiscoverCloudWatchLogGroups
+                Effect: Allow
+                Action: logs:DescribeLogGroups
+                Resource: '*'
+              - Sid: HostMetrics
+                Effect: Allow
+                Action: cloudwatch:PutMetricData
+                Resource: '*'
+                Condition: {StringEquals: {'cloudwatch:namespace': !Sub '${ProjectName}/${EnvironmentName}/Host'}}
+              - Sid: CloudFormationBootstrapSignal
+                Effect: Allow
+                Action: cloudformation:SignalResource
+                Resource: !Ref AWS::StackId
+  AppInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties: {Roles: [!Ref AppInstanceRole]}
+  AppInstance:
+    Type: AWS::EC2::Instance
+    DependsOn: [PublicDefaultRoute, PublicRouteAssociation, HostLogGroup, ContainerLogGroup]
+    CreationPolicy: {ResourceSignal: {Count: 1, Timeout: PT20M}}
+    Properties:
+      ImageId: !Ref AmiId
+      InstanceType: !Ref InstanceType
+      IamInstanceProfile: !Ref AppInstanceProfile
+      Monitoring: true
+      MetadataOptions:
+        HttpTokens: required
+        HttpEndpoint: enabled
+        HttpPutResponseHopLimit: 1
+        InstanceMetadataTags: disabled
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: !Ref RootVolumeGiB
+            VolumeType: gp3
+            Encrypted: true
+            DeleteOnTermination: true
+      NetworkInterfaces:
+        - DeviceIndex: '0'
+          AssociatePublicIpAddress: true
+          GroupSet: [!Ref AppSecurityGroup]
+          SubnetId: !Ref PublicSubnet
+      Tags:
+        - {Key: Name, Value: !Sub '${ProjectName}-${EnvironmentName}'}
+        - {Key: Project, Value: !Ref ProjectName}
+        - {Key: Environment, Value: !Ref EnvironmentName}
+        - {Key: Owner, Value: !Ref Owner}
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          set -Eeuo pipefail
+          umask 077
+          exec > >(tee -a /var/log/rigforce-bootstrap.log) 2>&1
+          export AWS_REGION='${AWS::Region}' AWS_DEFAULT_REGION='${AWS::Region}'
+          export AWS_PAGER=''
+          dnf install -y awscli2 tar gzip
+          signal() {
+            status=FAILURE
+            if [ "$1" -eq 0 ]; then status=SUCCESS; fi
+            aws cloudformation signal-resource --stack-name '${AWS::StackName}' --logical-resource-id AppInstance --unique-id bootstrap --status "$status" || true
+          }
+          trap 'signal $?' EXIT
+          task_tmp=$(mktemp -d)
+          aws s3api get-object --bucket '${BootstrapBucket}' --key '${BootstrapKey}' --version-id '${BootstrapVersionId}' "$task_tmp/foundation.tar.gz" >/dev/null
+          printf '%s  %s\n' '${BootstrapSha256}' "$task_tmp/foundation.tar.gz" | sha256sum --check --status
+          for file in bootstrap.sh apply-release.sh fetch-env.sh; do
+            tar -xOf "$task_tmp/foundation.tar.gz" "$file" > "$task_tmp/$file"
+            bash -n "$task_tmp/$file"
+          done
+          export BOOTSTRAP_BUNDLE_DIR="$task_tmp"
+          export PROJECT_NAME='${ProjectName}' ENVIRONMENT='${EnvironmentName}'
+          export DOMAIN_NAME='${DomainName}' RELEASE_BUCKET='${ReleaseBucket}'
+          export RUNTIME_PARAMETER_NAME='/${ProjectName}/${EnvironmentName}/runtime-env'
+          export MIGRATION_PARAMETER_NAME='/${ProjectName}/${EnvironmentName}/migration-env'
+          export LOG_GROUP_PREFIX='/${ProjectName}/${EnvironmentName}'
+          export COMPOSE_VERSION='${ComposeVersion}' COMPOSE_SHA256='${ComposeSha256}'
+          export RDS_CA_SHA256='${RdsCaSha256}'
+          bash "$task_tmp/bootstrap.sh"
+          rm -rf -- "$task_tmp"
+  PublicIp:
+    Type: AWS::EC2::EIP
+    DependsOn: GatewayAttachment
+    Properties:
+      Domain: vpc
+      InstanceId: !Ref AppInstance
+      Tags:
+        - {Key: Project, Value: !Ref ProjectName}
+        - {Key: Environment, Value: !Ref EnvironmentName}
+  ReleaseDocument:
+    Type: AWS::SSM::Document
+    Properties:
+      DocumentType: Command
+      DocumentFormat: YAML
+      TargetType: /AWS::EC2::Instance
+      UpdateMethod: NewVersion
+      Content:
+        schemaVersion: '2.2'
+        description: Apply one immutable release bundle; no arbitrary command parameter.
+        parameters:
+          ReleaseKey:
+            type: String
+            allowedPattern: !Sub '^releases/${EnvironmentName}/[a-f0-9]{40}/release\.tar\.gz$'
+            interpolationType: ENV_VAR
+          ReleaseVersion:
+            type: String
+            allowedPattern: '^(?!null$)[A-Za-z0-9._~+/=-]{1,1024}$'
+            interpolationType: ENV_VAR
+          ReleaseSha256:
+            type: String
+            allowedPattern: '^[a-f0-9]{64}$'
+            interpolationType: ENV_VAR
+        mainSteps:
+          - action: aws:runShellScript
+            name: ApplyPinnedRelease
+            inputs:
+              timeoutSeconds: '1800'
+              runCommand:
+                - 'set -eu'
+                - 'test -x /opt/rigforce/bin/apply-release.sh'
+                - '/opt/rigforce/bin/apply-release.sh "$SSM_ReleaseKey" "$SSM_ReleaseVersion" "$SSM_ReleaseSha256"'
+  GitHubReleaseRole:
+    Type: AWS::IAM::Role
+    Properties:
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Federated: !Ref GitHubOidcProviderArn}
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+                token.actions.githubusercontent.com:sub: !Sub 'repo:${GitHubRepository}:environment:${GitHubReleaseEnvironment}'
+      Policies:
+        - PolicyName: PublishOnlyReleaseArtifacts
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: ecr:GetAuthorizationToken
+                Resource: '*'
+              - Effect: Allow
+                Action: [ecr:BatchCheckLayerAvailability, ecr:InitiateLayerUpload, ecr:UploadLayerPart, ecr:CompleteLayerUpload, ecr:PutImage, ecr:BatchGetImage, ecr:GetDownloadUrlForLayer, ecr:DescribeImages, ecr:ListImages]
+                Resource: [!GetAtt ApiRepository.Arn, !GetAtt FrontRepository.Arn]
+              - Effect: Allow
+                Action: [s3:PutObject, s3:GetObject, s3:GetObjectVersion]
+                Resource: !Sub '${ReleaseBucket.Arn}/releases/${EnvironmentName}/*'
+              - Effect: Allow
+                Action: s3:ListBucket
+                Resource: !GetAtt ReleaseBucket.Arn
+                Condition: {StringLike: {'s3:prefix': !Sub 'releases/${EnvironmentName}/*'}}
+  GitHubDeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Federated: !Ref GitHubOidcProviderArn}
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+                token.actions.githubusercontent.com:sub: !Sub 'repo:${GitHubRepository}:environment:${GitHubDeployEnvironment}'
+      Policies:
+        - PolicyName: InvokeOnlyApprovedReleaseDocument
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: ApprovedDocument
+                Effect: Allow
+                Action: ssm:SendCommand
+                Resource: !Sub 'arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:document/${ReleaseDocument}'
+              - Sid: OnlyTaggedApplicationInstance
+                Effect: Allow
+                Action: ssm:SendCommand
+                Resource: !Sub 'arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/${AppInstance}'
+                Condition:
+                  StringEquals:
+                    ssm:resourceTag/Project: !Ref ProjectName
+                    ssm:resourceTag/Environment: !Ref EnvironmentName
+              - Sid: ObserveOwnCommandStatus
+                Effect: Allow
+                Action: [ssm:GetCommandInvocation, ssm:ListCommandInvocations]
+                Resource: '*'
+  AlarmTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription: [{Protocol: email, Endpoint: !Ref AlertEmail}]
+  CpuAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: EC2 CPU exceeds 80 percent for 15 minutes.
+      Namespace: AWS/EC2
+      MetricName: CPUUtilization
+      Dimensions: [{Name: InstanceId, Value: !Ref AppInstance}]
+      Statistic: Average
+      Period: 300
+      EvaluationPeriods: 3
+      Threshold: 80
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: missing
+      AlarmActions: [!Ref AlarmTopic]
+  InstanceStatusAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      Namespace: AWS/EC2
+      MetricName: StatusCheckFailed
+      Dimensions: [{Name: InstanceId, Value: !Ref AppInstance}]
+      Statistic: Maximum
+      Period: 60
+      EvaluationPeriods: 2
+      Threshold: 0
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: missing
+      AlarmActions: [!Ref AlarmTopic]
+  MemoryAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      Namespace: !Sub '${ProjectName}/${EnvironmentName}/Host'
+      MetricName: mem_used_percent
+      Dimensions: [{Name: InstanceId, Value: !Ref AppInstance}]
+      Statistic: Average
+      Period: 300
+      EvaluationPeriods: 3
+      Threshold: 85
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: missing
+      AlarmActions: [!Ref AlarmTopic]
+  DiskAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      Namespace: !Sub '${ProjectName}/${EnvironmentName}/Host'
+      MetricName: disk_used_percent
+      Dimensions:
+        - {Name: InstanceId, Value: !Ref AppInstance}
+        - {Name: path, Value: /}
+      Statistic: Average
+      Period: 300
+      EvaluationPeriods: 3
+      Threshold: 80
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: missing
+      AlarmActions: [!Ref AlarmTopic]
+  DbStorageAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      Namespace: AWS/RDS
+      MetricName: FreeStorageSpace
+      Dimensions: [{Name: DBInstanceIdentifier, Value: !Ref Database}]
+      Statistic: Average
+      Period: 300
+      EvaluationPeriods: 3
+      Threshold: 5368709120
+      ComparisonOperator: LessThanThreshold
+      TreatMissingData: missing
+      AlarmActions: [!Ref AlarmTopic]
+  AccountBudget:
+    Type: AWS::Budgets::Budget
+    Properties:
+      Budget:
+        BudgetName: !Sub '${ProjectName}-${EnvironmentName}-account-warning'
+        BudgetType: COST
+        TimeUnit: MONTHLY
+        BudgetLimit: {Amount: !Ref MonthlyBudgetUsd, Unit: USD}
+      NotificationsWithSubscribers:
+        - Notification: {NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 50, ThresholdType: PERCENTAGE}
+          Subscribers: [{SubscriptionType: EMAIL, Address: !Ref AlertEmail}]
+        - Notification: {NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 80, ThresholdType: PERCENTAGE}
+          Subscribers: [{SubscriptionType: EMAIL, Address: !Ref AlertEmail}]
+        - Notification: {NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 100, ThresholdType: PERCENTAGE}
+          Subscribers: [{SubscriptionType: EMAIL, Address: !Ref AlertEmail}]
+        - Notification: {NotificationType: FORECASTED, ComparisonOperator: GREATER_THAN, Threshold: 100, ThresholdType: PERCENTAGE}
+          Subscribers: [{SubscriptionType: EMAIL, Address: !Ref AlertEmail}]
+
+Outputs:
+  InstanceId: {Value: !Ref AppInstance}
+  ElasticIp: {Value: !Ref PublicIp}
+  ApplicationUrl: {Value: !Sub 'https://${DomainName}'}
+  DbEndpoint: {Value: !GetAtt Database.Endpoint.Address}
+  DbPort: {Value: !GetAtt Database.Endpoint.Port}
+  DbMasterSecretArn:
+    Description: Operator only; instance/release/deploy roles cannot read this master secret.
+    Value: !GetAtt Database.MasterUserSecret.SecretArn
+  ApiRepositoryUri: {Value: !GetAtt ApiRepository.RepositoryUri}
+  FrontRepositoryUri: {Value: !GetAtt FrontRepository.RepositoryUri}
+  ReleaseBucketName: {Value: !Ref ReleaseBucket}
+  ReleasePrefix: {Value: !Sub 'releases/${EnvironmentName}/'}
+  RuntimeParameterName: {Value: !Sub '/${ProjectName}/${EnvironmentName}/runtime-env'}
+  MigrationParameterName: {Value: !Sub '/${ProjectName}/${EnvironmentName}/migration-env'}
+  RuntimeSecretsKmsKeyArn: {Value: !GetAtt RuntimeSecretsKey.Arn}
+  GitHubReleaseRoleArn: {Value: !GetAtt GitHubReleaseRole.Arn}
+  GitHubDeployRoleArn: {Value: !GetAtt GitHubDeployRole.Arn}
+  ReleaseDocumentName: {Value: !Ref ReleaseDocument}
+  ContainerLogGroupName: {Value: !Ref ContainerLogGroup}
+  AlarmTopicArn: {Value: !Ref AlarmTopic}

@@ -1,5 +1,7 @@
 # Kiến trúc hệ thống
 
+**Hạ tầng local — 18/11/2026:** đã thêm [lab Docker/Nginx](DOCKER_GUIDE.md): browser → Nginx 8080 → Next standalone hoặc Nest API → PostgreSQL riêng, có volume DB/media, migration one-shot và seed gọi riêng. CI đã có định nghĩa; GitHub Actions/CD/AWS chưa được nghiệm thu. Lab DB mới dùng baseline history riêng để tránh lỗi bootstrap của legacy history, không thay lịch sử database hiện hữu. Xem PROJECT_STATUS để phân biệt kết quả chạy thực tế với kế hoạch cloud.
+
 **Mốc cập nhật 06/11/2026:** AppModule dùng Prisma v2 và nạp Platform/Auth/Accounts/Access cùng Catalog/Pricing/Media/Inventory cơ bản. Mã v1 giữ trong `api/legacy/`, ngoài runtime. Contract: [danh tính](API_IDENTITY_V2.md), [catalog/giá/ảnh/kho](API_CATALOG_V2.md); bằng chứng kiểm tra tại [PROJECT_STATUS.md](PROJECT_STATUS.md). Sơ đồ v1 bên dưới chỉ dùng đối chiếu.
 
 Catalog tách đọc public có điều kiện visibility khỏi các mutation admin. Pricing ghi tiền VND BigInt, serialize thành chuỗi; Inventory ghi balance/movement/audit/idempotency trong cùng transaction, khóa sản phẩm rồi balance. Media dùng local filesystem với UUID key và kiểm visibility khi đọc, chưa có object storage/worker dọn file. Storefront/Commerce v2 đã nạp: frontend đọc snapshot public và API riêng tư, đặt/huỷ COD với reservation + ledger. Payment COD là UNPAID. Cập nhật 08/11: [Stripe Checkout v2 sandbox](STRIPE_V2.md) dùng adapter riêng gọi mạng ngoài transaction; webhook/raw body hoặc retrieve xác minh từ provider trước ghi ledger. Worker định kỳ phục hồi/expiry, refund còn ở mức tạo yêu cầu xử lý ngoại lệ. [Contract](API_STOREFRONT_COMMERCE_V2.md), [hướng dẫn tích hợp](STOREFRONT_INTEGRATION.md).
@@ -96,3 +98,7 @@ Thiết kế dữ liệu mở rộng ngày **05/11/2026** nằm trong [database 
 - Hủy/hoàn tiền có điều kiện trạng thái và idempotency; chốt chính sách giữ tồn trước khi triển khai.
 
 Các nội dung trên là yêu cầu thiết kế nội bộ, chưa phải tính năng đã triển khai. Với quyết định lớn, tạo ADR trong `docs/decisions/` theo cấu trúc: bối cảnh → phương án → quyết định → lý do/trade-off → hệ quả → cách kiểm chứng; ghi rõ trạng thái đề xuất hay đã chấp nhận.
+
+## Hạ tầng production preview — 18/11/2026
+
+Bộ cài đặt đã có `compose.deploy.yaml` (API/FE/Nginx/migration; DB bên ngoài), `compose.aws.yaml` (CloudWatch logging), HTTPS template và CloudFormation EC2/RDS private/ECR/SSM/OIDC. Chưa provision. [INFRASTRUCTURE_GUIDE](INFRASTRUCTURE_GUIDE.md) mô tả luồng request, file và trách nhiệm từng lớp. Production cố định preview chỉ đọc ở HTTP + FE + quyền runtime DB; credential migration không gắn vào API. Release manifest/pinned S3 version/image digests/schema fingerprint là contract giữa CI và host. Bằng chứng production Docker/TLS/restore tách với AWS thật trong PROJECT_STATUS.

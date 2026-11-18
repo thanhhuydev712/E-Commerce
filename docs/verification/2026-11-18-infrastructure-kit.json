@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-18",
+  "scope": "Local and static checks only; no GitHub/AWS execution",
+  "backend": {
+    "lint": "passed",
+    "unit": {
+      "passed": 31,
+      "failed": 0
+    }
+  },
+  "frontend": {
+    "lint": "passed",
+    "format": "passed",
+    "linuxDockerBuild": "passed"
+  },
+  "productionDocker": {
+    "report": "2026-11-18-production-local.json",
+    "checksPassed": 15,
+    "chromiumRouteViewportCases": 8,
+    "restoreProducts": 183
+  },
+  "releaseManifestTestsPassed": 3,
+  "deploymentOfflineFixtures": {
+    "parserPassed": 19,
+    "mockIntegrationRunsPassed": 14,
+    "runtimeNetwork": "none",
+    "realAwsCalls": 0
+  },
+  "staticValidation": {
+    "cloudFormation": "cfn-lint 1.60.1 passed",
+    "shell": "Bash syntax and ShellCheck 0.11.0 passed",
+    "workflows": "actionlint 1.7.12 passed",
+    "docs": {
+      "files": 14,
+      "internalLinksChecked": 263,
+      "missing": 0
+    },
+    "gitDiffCheck": "passed"
+  },
+  "cloudExecuted": false,
+  "githubActionsExecuted": false,
+  "commitPushPerformed": false,
+  "limits": [
+    "No AWS account/domain supplied; resources were not provisioned",
+    "OIDC IAM SSM ECR S3 ACME are not verified in AWS",
+    "Host reboot RDS/EBS restore alarms need a real staging drill",
+    "Media automatic S3 backup is not implemented",
+    "Preview disables accounts orders Stripe; no live commerce acceptance"
+  ]
+}

@@ -10,7 +10,7 @@ const tw = {
     "max-[768px]:[&_h2]:text-[21px]",
   ].join(" "),
   text_link: [
-    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-[12px] font-semibold p-0",
+    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-rf-caption font-semibold p-0",
     "border-current border-none [border-width:0] gap-1.75 hover:underline hover:[text-underline-offset:4px]",
   ].join(" "),
 };
@@ -31,13 +31,13 @@ export function SectionTitle({
     <div className={tw.section_head}>
       <div>
         {eyebrow && (
-          <span className="rf-eyebrow inline-flex items-center text-[10px] font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-[9px] max-[768px]:tracking-[1px]">
+          <span className="rf-eyebrow inline-flex items-center text-rf-caption font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-rf-caption max-[768px]:tracking-[1px]">
             {eyebrow}
           </span>
         )}
         <h2>{title}</h2>
       </div>
-      <div className="rf-section-actions flex items-center shrink-0 gap-4 max-[768px]:[&_.rf-text-link]:text-[10px] max-[768px]:[&_.rf-text-link]:whitespace-nowrap">
+      <div className="rf-section-actions flex items-center shrink-0 gap-4 max-[768px]:[&_.rf-text-link]:text-rf-caption max-[768px]:[&_.rf-text-link]:whitespace-nowrap">
         {children}
         {href && (
           <Link className={tw.text_link} href={href}>

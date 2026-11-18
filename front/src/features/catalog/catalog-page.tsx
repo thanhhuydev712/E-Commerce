@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
+import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
 import { money } from "@/src/catalog/model";
 import { Breadcrumb, Empty, ProductCard } from "@/src/components/storefront";
 import { normalizeSearch, priceParam } from "./catalog-query";
@@ -15,7 +15,7 @@ const tw = {
   catalog_reference: [
     "rf-catalog-reference [&>h1]:mt-5.5 [&>h1]:mb-4 [&>h1]:text-[24px] [&>h1]:font-[750] [&>h1]:mx-0",
     "[&>h1_small]:text-[19px] [&>h1_small]:font-semibold max-[768px]:[&>h1]:text-[20px] max-[768px]:[&>h1]:mt-4.5",
-    "max-[768px]:[&>h1]:mb-3 max-[768px]:[&>h1_small]:text-[13px]",
+    "max-[768px]:[&>h1]:mb-3 max-[768px]:[&>h1_small]:text-rf-caption",
   ].join(" "),
   catalog_banner: [
     motion.media,
@@ -23,22 +23,22 @@ const tw = {
     "[&>img]:[object-position:72%_center] [&>span]:relative [&>span]:flex [&>span]:flex-col [&>span]:justify-center",
     "[&>span]:items-start [&>span]:h-full [&>span]:w-[63%] [&>span]:text-white",
     "[&>span]:bg-[linear-gradient(90deg,_#071e29_65%,_#071e29c9_85%,_transparent)] [&>span]:bg-transparent [&>span]:px-10",
-    "[&>span]:py-8 [&_small]:text-[#91dfbf] [&_small]:text-[10px] [&_small]:tracking-[2px]",
+    "[&>span]:py-8 [&_small]:text-[#91dfbf] [&_small]:text-rf-caption [&_small]:tracking-[2px]",
     "[&_strong]:text-[clamp(24px,_3.4vw,_44px)] [&_strong]:leading-[1.2] [&_strong]:mt-3.5 [&_strong]:mb-5",
-    "[&_span>span]:text-[#c9f8df] [&_span>span]:text-[13px] [&_span>span]:px-3.75 [&_span>span]:py-2",
+    "[&_span>span]:text-[#c9f8df] [&_span>span]:text-rf-caption [&_span>span]:px-3.75 [&_span>span]:py-2",
     "[&_span>span]:border-[#9ae4c1] [&_span>span]:border-solid [&_span>span]:border [&_span>span]:rounded-[24px]",
-    "max-[1024px]:h-55 max-[768px]:h-38.75 max-[768px]:[&>span]:w-[75%] max-[768px]:[&>span]:p-3.75",
-    "max-[768px]:[&_small]:text-[7px] max-[768px]:[&_small]:tracking-[1px] max-[768px]:[&_strong]:text-[23px]",
-    "max-[768px]:[&_strong]:mt-2.5 max-[768px]:[&_strong]:mb-3.5 max-[768px]:[&_span>span]:text-[9px]",
+    "max-[1024px]:h-55 max-[768px]:min-h-56 max-[768px]:h-auto max-[768px]:[&>span]:w-[75%] max-[768px]:[&>span]:p-3.75",
+    "max-[768px]:[&_small]:text-rf-caption max-[768px]:[&_small]:tracking-[1px] max-[768px]:[&_strong]:text-[23px]",
+    "max-[768px]:[&_strong]:mt-2.5 max-[768px]:[&_strong]:mb-3.5 max-[768px]:[&_span>span]:text-rf-caption",
     "max-[768px]:[&_span>span]:px-2.25 max-[768px]:[&_span>span]:py-1.5",
   ].join(" "),
   catalog_categories: [
     "rf-catalog-categories flex flex-wrap mx-0 my-3 gap-2.25 [&_button]:bg-white [&_button]:bg-none",
-    "[&_button]:text-[13px] [&_button]:text-rf-text [&_button]:px-4 [&_button]:py-2.25 [&_button]:border-[#dde6e9]",
+    "[&_button]:text-rf-caption [&_button]:text-rf-text [&_button]:px-4 [&_button]:py-2.25 [&_button]:border-[#dde6e9]",
     '[&_button]:border-solid [&_button]:border [&_button]:rounded-[30px] [&_button[aria-pressed="true"]]:text-rf-green',
     '[&_button[aria-pressed="true"]]:bg-[#eaf6ef] [&_button[aria-pressed="true"]]:bg-none',
     '[&_button[aria-pressed="true"]]:border-rf-green max-[768px]:flex-nowrap max-[768px]:overflow-x-auto',
-    "max-[768px]:pb-1.25 max-[768px]:[&_button]:shrink-0 max-[768px]:[&_button]:text-[12px]",
+    "max-[768px]:pb-1.25 max-[768px]:[&_button]:shrink-0 max-[768px]:[&_button]:text-rf-caption",
   ].join(" "),
   catalog_brands: [
     "rf-catalog-brands flex flex-wrap mx-0 my-3 gap-2.25 [&_button]:bg-white [&_button]:bg-none [&_button]:text-[18px]",
@@ -50,21 +50,21 @@ const tw = {
   ].join(" "),
   coupon_banner: [
     "rf-coupon-banner flex items-center justify-between bg-[#dfeddf] bg-none mb-7.5 p-7.5 rounded-[10px] gap-5",
-    "[&_h2]:my-2 [&_p]:text-[12px] [&_p]:text-[#66806b] [&_p]:m-0 [&>strong]:text-[22px] [&>strong]:tracking-[3px]",
+    "[&_h2]:my-2 [&_p]:text-rf-body [&_p]:text-[#66806b] [&_p]:m-0 [&>strong]:text-[22px] [&>strong]:tracking-[3px]",
     "[&>strong]:text-[#2d633c] [&>strong]:px-6.25 [&>strong]:py-4 [&>strong]:border-[#94b79a] [&>strong]:border-dashed",
     "[&>strong]:border max-[768px]:flex-wrap max-[768px]:p-5.5 max-[768px]:[&_h2]:text-[22px]",
     "max-[768px]:[&>strong]:text-[18px] max-[768px]:[&>strong]:px-4.5 max-[768px]:[&>strong]:py-2.5",
   ].join(" "),
   btn_btn_outline_filter_mobile: [
     "rf-btn rf-btn-outline rf-filter-mobile hidden items-center justify-center min-h-11 bg-transparent bg-none",
-    "text-rf-text text-[12px] font-bold leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75",
+    "text-rf-text text-rf-caption font-bold leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75",
     "border-rf-border border-solid border rounded-[6px] gap-2.5 max-[768px]:inline-flex print:hidden hover:bg-[#edf4ef]",
     "hover:bg-none hover:border-[#9ccab5]",
   ].join(" "),
   horizontal_filters: [
     "motion-safe:[&.open]:animate-[rf-enter_200ms_ease-out]",
     "flex flex-wrap items-center mx-0 my-5.5 gap-2 [&_details]:relative [&_summary]:flex [&_summary]:items-center",
-    "[&_summary]:bg-[#e9eded] [&_summary]:bg-none [&_summary]:cursor-pointer [&_summary]:text-[13px]",
+    "[&_summary]:bg-[#e9eded] [&_summary]:bg-none [&_summary]:cursor-pointer [&_summary]:text-rf-caption",
     "[&_summary]:list-none [&_summary]:p-2.75 [&_summary]:border-[#dce2e3] [&_summary]:border-solid [&_summary]:border",
     "[&_summary]:rounded-[7px] [&_summary]:gap-2 max-[768px]:hidden max-[768px]:my-3.75 max-[768px]:gap-2",
     "[&_summary::-webkit-details-marker]:hidden max-[768px]:[&.open]:flex",
@@ -73,38 +73,38 @@ const tw = {
     motion.enter,
     "rf-filter-popover absolute top-[calc(100%_+_6px)] left-0 z-15 w-65 max-w-[80vw] grid bg-white bg-none",
     "shadow-[0_8px_25px_#0b293524] p-4.5 border-rf-border border-solid border rounded-[9px] gap-3 [&_label]:grid",
-    "[&_label]:text-[12px] [&_label]:gap-1.25 [&_input]:w-full [&_input]:p-2.5 [&_input]:border-rf-border",
+    "[&_label]:text-rf-caption [&_label]:gap-1.25 [&_input]:w-full [&_input]:p-2.5 [&_input]:border-rf-border",
     "[&_input]:border-solid [&_input]:border [&_input]:rounded-[5px]",
   ].join(" "),
   btn: [
-    "rf-btn inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-[12px] font-bold",
+    "rf-btn inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-rf-control font-bold",
     "leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-transparent border-solid border",
     "rounded-[6px] gap-2.5 print:hidden hover:bg-rf-green-hover hover:bg-none",
   ].join(" "),
   filter_select: [
-    "rf-filter-select flex items-center bg-[#e9eded] bg-none text-[12px] px-2.25 py-2 border-[#dce2e3] border-solid",
+    "rf-filter-select flex items-center bg-[#e9eded] bg-none text-rf-caption px-2.25 py-2 border-[#dce2e3] border-solid",
     "border rounded-[7px] gap-1.25 [&_select]:max-w-31.25 [&_select]:min-w-12.5 [&_select]:bg-transparent",
-    "[&_select]:bg-none [&_select]:text-rf-text [&_select]:text-[12px] [&_select]:p-1 [&_select]:border-current",
+    "[&_select]:bg-none [&_select]:text-rf-text [&_select]:text-rf-control [&_select]:p-1 [&_select]:border-current",
     "[&_select]:border-none [&_select]:[border-width:0] max-[768px]:flex-[1_0_45%] max-[768px]:justify-between",
     "max-[768px]:[&_select]:max-w-25",
   ].join(" "),
   active_filters: [
-    "rf-active-filters flex flex-wrap items-center text-[12px] gap-2.5 [&_button]:flex [&_button]:items-center",
+    "rf-active-filters flex flex-wrap items-center text-rf-caption gap-2.5 [&_button]:flex [&_button]:items-center",
     "[&_button]:text-rf-green [&_button]:bg-[#edf7f1] [&_button]:bg-none [&_button]:px-2.5 [&_button]:py-1.5",
     "[&_button]:border-[#b6d5c6] [&_button]:border-solid [&_button]:border [&_button]:rounded-[5px] [&_button]:gap-1.75",
     "[&_a]:text-rf-green [&_a]:underline",
   ].join(" "),
   catalog_sort: [
-    "rf-catalog-sort [&_button]:bg-white [&_button]:bg-none [&_button]:text-[13px] [&_button]:text-rf-text",
+    "rf-catalog-sort [&_button]:bg-white [&_button]:bg-none [&_button]:text-rf-caption [&_button]:text-rf-text",
     "[&_button]:px-4 [&_button]:py-2.25 [&_button]:border-[#dde6e9] [&_button]:border-solid [&_button]:border",
     '[&_button]:rounded-[30px] [&_button[aria-pressed="true"]]:text-rf-green [&_button[aria-pressed="true"]]:bg-[#eaf6ef]',
     '[&_button[aria-pressed="true"]]:bg-none [&_button[aria-pressed="true"]]:border-rf-green flex items-center flex-wrap',
-    "text-[12px] mx-0 my-4.5 gap-3 max-[768px]:gap-1.75 max-[768px]:[&>span]:w-full max-[768px]:[&_button]:text-[11px]",
+    "text-rf-caption mx-0 my-4.5 gap-3 max-[768px]:gap-1.75 max-[768px]:[&>span]:w-full max-[768px]:[&_button]:text-rf-caption",
     "max-[768px]:[&_button]:px-2.5 max-[768px]:[&_button]:py-2",
   ].join(" "),
   product_grid_catalog_grid: [
     "rf-product-grid rf-catalog-grid grid grid-cols-[repeat(5,_minmax(0,_1fr))] gap-3",
-    "max-[1024px]:grid-cols-[repeat(4,_minmax(0,_1fr))] max-[768px]:grid-cols-[repeat(2,_minmax(0,_1fr))]",
+    "max-[1440px]:grid-cols-[repeat(4,_minmax(0,_1fr))] max-[1100px]:grid-cols-[repeat(3,_minmax(0,_1fr))] max-[768px]:grid-cols-[repeat(2,_minmax(0,_1fr))]",
     "max-[768px]:gap-2",
   ].join(" "),
   pagination: [
@@ -113,14 +113,14 @@ const tw = {
     "[&_button[aria-current]]:bg-rf-green [&_button[aria-current]]:bg-none [&_button[aria-current]]:text-white",
   ].join(" "),
   panel_catalog_guide: [
-    "rf-panel rf-catalog-guide bg-rf-surface bg-none mb-5 mt-7.5 text-[14px] leading-[1.8] p-6.5 border-rf-border",
+    "rf-panel rf-catalog-guide bg-rf-surface bg-none mb-5 mt-7.5 text-rf-small leading-[1.8] p-6.5 border-rf-border",
     "border-solid border rounded-[var(--rf-radius)] [&_h2]:text-[21px] [&_h2]:mb-2.5 [&_h1]:text-[26px]",
     "[&_h1]:tracking-[-0.7px] max-[768px]:p-4.5 [&_details]:mt-3.75 [&_details]:border-t",
     "[&_details]:[border-top-style:solid] [&_details]:border-t-rf-border [&_details]:pt-3.5 [&_summary]:cursor-pointer",
     "[&_summary]:font-[650]",
   ].join(" "),
   text_link: [
-    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-[12px] font-semibold p-0",
+    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-rf-caption font-semibold p-0",
     "border-current border-none [border-width:0] gap-1.75 hover:underline hover:[text-underline-offset:4px]",
   ].join(" "),
 };
@@ -129,17 +129,25 @@ const facets = [
   {
     key: "cpu",
     label: "CPU",
+    categories: ["pc", "laptop", "cpu"],
     values: ["Intel", "Ryzen", "Core i5", "Core i7"],
   },
-  { key: "ram", label: "RAM", values: ["DDR4", "DDR5", "16GB", "32GB"] },
+  {
+    key: "ram",
+    label: "RAM",
+    categories: ["pc", "laptop", "ram", "mainboard"],
+    values: ["DDR4", "DDR5", "16GB", "32GB"],
+  },
   {
     key: "storage",
     label: "Dung lượng SSD",
+    categories: ["pc", "laptop", "ssd"],
     values: ["256GB", "512GB", "1TB", "2TB"],
   },
   {
     key: "gpu",
     label: "VGA",
+    categories: ["pc", "laptop", "gpu"],
     values: ["RTX 3060", "RTX 4060", "RTX 5060", "Radeon"],
   },
 ];
@@ -164,7 +172,29 @@ export function CatalogPage({
   const sort = query.get("sort") ?? "popular";
   const min = priceParam(query.get("min"));
   const max = priceParam(query.get("max"));
+  const inStock = query.get("inStock") === "1";
   const [filters, setFilters] = useState(false);
+  const [priceError, setPriceError] = useState("");
+  const invalidPriceRange = Boolean(min && max && BigInt(min) > BigInt(max));
+  const categoryProducts = products.filter(
+    (product) => !category || product.category === category,
+  );
+  const availableFacets = facets.flatMap((facet) => {
+    const selected = query.get(facet.key);
+    const applicable = !category || facet.categories.includes(category);
+    const values = facet.values.filter(
+      (value) =>
+        value === selected ||
+        (applicable &&
+          categoryProducts.some((product) =>
+            normalizeSearch(
+              product.specs.join(" ") + " " + product.name,
+            ).includes(normalizeSearch(value)),
+          )),
+    );
+    if (selected && !values.includes(selected)) values.push(selected);
+    return values.length ? [{ ...facet, values }] : [];
+  });
   const paramsWithContext = () => {
     const params = new URLSearchParams(query.toString());
     if (routeCategory) params.set("category", routeCategory);
@@ -178,6 +208,18 @@ export function CatalogPage({
     if (key !== "page") params.delete("page");
     router.push("/products?" + params, { scroll: false });
   };
+  const clearedParams = paramsWithContext();
+  for (const key of [
+    "brand",
+    "min",
+    "max",
+    "inStock",
+    "page",
+    ...facets.map((f) => f.key),
+  ]) {
+    clearedParams.delete(key);
+  }
+  const clearFiltersHref = "/products?" + clearedParams;
   const list = products
     .filter((p) => {
       const text = normalizeSearch(
@@ -192,6 +234,7 @@ export function CatalogPage({
             .every((word) => text.includes(word))) &&
         (!min || BigInt(p.price) >= BigInt(min)) &&
         (!max || BigInt(p.price) <= BigInt(max)) &&
+        (!inStock || p.variants.some((variant) => variant.stock > 0)) &&
         facets.every(
           ({ key }) =>
             !query.get(key) || text.includes(normalizeSearch(query.get(key)!)),
@@ -224,6 +267,7 @@ export function CatalogPage({
     ...(brand ? [{ key: "brand", label: brand }] : []),
     ...(min ? [{ key: "min", label: "Từ " + money(min) }] : []),
     ...(max ? [{ key: "max", label: "Đến " + money(max) }] : []),
+    ...(inStock ? [{ key: "inStock", label: "Còn hàng" }] : []),
     ...facets
       .filter((f) => query.get(f.key))
       .map((f) => ({ key: f.key, label: f.label + ": " + query.get(f.key) })),
@@ -248,6 +292,7 @@ export function CatalogPage({
                     : 1) +
               ".webp"
             }
+            loading="eager"
             alt="Bộ máy tính và thiết bị công nghệ"
             fill
             sizes="(max-width: 1023px) calc(100vw - 32px), (max-width: 1668px) calc(100vw - 128px), 1540px"
@@ -265,6 +310,43 @@ export function CatalogPage({
       <h1>
         {title} <small>({list.length} sản phẩm)</small>
       </h1>
+      <form
+        role="search"
+        aria-label="Tìm trong danh mục"
+        className="my-5 flex flex-wrap items-center gap-2 rounded-xl border border-rf-border bg-rf-surface p-3"
+        onSubmit={(event) => {
+          event.preventDefault();
+          const data = new FormData(event.currentTarget);
+          update("q", String(data.get("catalogSearch") ?? "").trim());
+        }}
+      >
+        <div className="flex min-w-0 flex-[1_1_240px] items-center gap-2">
+          <Search
+            size={19}
+            aria-hidden="true"
+            className="ml-1 shrink-0 text-rf-muted"
+          />
+          <input
+            key={search}
+            name="catalogSearch"
+            aria-label="Từ khóa trong danh mục"
+            type="search"
+            defaultValue={search}
+            placeholder="Tên sản phẩm, thương hiệu, thông số…"
+            className="min-w-0 flex-1 bg-transparent px-2 py-2 text-rf-body outline-offset-4"
+          />
+        </div>
+        <button className={tw.btn}>Tìm sản phẩm</button>
+        {search && (
+          <button
+            type="button"
+            className={tw.text_link}
+            onClick={() => update("q", "")}
+          >
+            Xóa từ khóa
+          </button>
+        )}
+      </form>
       <nav className={tw.catalog_categories} aria-label="Nhóm sản phẩm">
         {categories.slice(0, 10).map((c) => (
           <button
@@ -332,6 +414,13 @@ export function CatalogPage({
             onSubmit={(e) => {
               e.preventDefault();
               const data = new FormData(e.currentTarget);
+              const nextMin = priceParam(String(data.get("min") ?? ""));
+              const nextMax = priceParam(String(data.get("max") ?? ""));
+              if (nextMin && nextMax && BigInt(nextMin) > BigInt(nextMax)) {
+                setPriceError("Giá từ phải nhỏ hơn hoặc bằng giá đến.");
+                return;
+              }
+              setPriceError("");
               const params = paramsWithContext();
               for (const key of ["min", "max"]) {
                 const value = priceParam(String(data.get(key) ?? ""));
@@ -342,6 +431,7 @@ export function CatalogPage({
               router.push("/products?" + params, { scroll: false });
               e.currentTarget.closest("details")?.removeAttribute("open");
             }}
+            onChange={() => setPriceError("")}
           >
             <label>
               Giá từ (₫)
@@ -353,6 +443,10 @@ export function CatalogPage({
                 step="1"
                 defaultValue={min}
                 placeholder="0"
+                aria-describedby={
+                  priceError ? "catalog-price-error" : undefined
+                }
+                aria-invalid={Boolean(priceError)}
               />
             </label>
             <label>
@@ -365,8 +459,21 @@ export function CatalogPage({
                 step="1"
                 defaultValue={max}
                 placeholder="Không giới hạn"
+                aria-describedby={
+                  priceError ? "catalog-price-error" : undefined
+                }
+                aria-invalid={Boolean(priceError)}
               />
             </label>
+            {priceError && (
+              <p
+                id="catalog-price-error"
+                role="alert"
+                className="text-sm text-red-700"
+              >
+                {priceError}
+              </p>
+            )}
             <button className={tw.btn}>Áp dụng giá</button>
           </form>
         </details>
@@ -378,12 +485,19 @@ export function CatalogPage({
             onChange={(e) => update("brand", e.target.value)}
           >
             <option value="">Tất cả</option>
-            {[...new Set(products.map((p) => p.brand))].sort().map((b) => (
-              <option key={b}>{b}</option>
-            ))}
+            {[
+              ...new Set([
+                ...categoryProducts.map((p) => p.brand),
+                ...(brand ? [brand] : []),
+              ]),
+            ]
+              .sort()
+              .map((b) => (
+                <option key={b}>{b}</option>
+              ))}
           </select>
         </label>
-        {facets.map((f) => (
+        {availableFacets.map((f) => (
           <label className={tw.filter_select} key={f.key}>
             {f.label}
             <select
@@ -406,13 +520,49 @@ export function CatalogPage({
             onChange={(e) => update("max", e.target.value)}
           >
             <option value="">Tất cả</option>
-            <option value="2000000">Dưới 2 triệu</option>
-            <option value="5000000">Dưới 5 triệu</option>
-            <option value="10000000">Dưới 10 triệu</option>
-            <option value="25000000">Dưới 25 triệu</option>
+            <option value="2000000">Đến 2 triệu</option>
+            <option value="5000000">Đến 5 triệu</option>
+            <option value="10000000">Đến 10 triệu</option>
+            <option value="25000000">Đến 25 triệu</option>
+            {max &&
+              !["2000000", "5000000", "10000000", "25000000"].includes(max) && (
+                <option value={max}>Đến {money(max)}</option>
+              )}
           </select>
         </label>
+        <label className="flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-rf-border bg-rf-surface px-3 py-2 text-rf-caption">
+          <input
+            type="checkbox"
+            checked={inStock}
+            onChange={(event) =>
+              update("inStock", event.target.checked ? "1" : "")
+            }
+            className="size-4 accent-rf-green"
+          />
+          Chỉ hiện sản phẩm còn hàng
+        </label>
       </div>
+      {invalidPriceRange && (
+        <div
+          role="alert"
+          className="my-3 flex flex-wrap items-center gap-3 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950"
+        >
+          <p>Khoảng giá chưa hợp lệ: giá từ đang lớn hơn giá đến.</p>
+          <button
+            className="min-h-11 font-semibold underline underline-offset-4"
+            onClick={() => {
+              const params = paramsWithContext();
+              params.set("min", max);
+              params.set("max", min);
+              params.delete("page");
+              setPriceError("");
+              router.push("/products?" + params, { scroll: false });
+            }}
+          >
+            Đổi hai mức giá
+          </button>
+        </div>
+      )}
       {activeFilters.length > 0 && (
         <div className={tw.active_filters} aria-label="Bộ lọc đang áp dụng">
           {activeFilters.map((f) => (
@@ -425,11 +575,7 @@ export function CatalogPage({
               <X size={13} />
             </button>
           ))}
-          <Link
-            href={category ? "/products?category=" + category : "/products"}
-          >
-            Xóa bộ lọc
-          </Link>
+          <Link href={clearFiltersHref}>Xóa bộ lọc</Link>
         </div>
       )}
       <div className={tw.catalog_sort}>
@@ -450,7 +596,7 @@ export function CatalogPage({
         ))}
       </div>
       <p
-        className="rf-result-count text-[12px] text-rf-muted mx-0 my-3"
+        className="rf-result-count text-rf-caption text-rf-muted mx-0 my-3"
         role="status"
       >
         Hiển thị {list.length ? (page - 1) * 20 + 1 : 0}–
@@ -487,7 +633,8 @@ export function CatalogPage({
         <Empty
           title="Chưa tìm thấy sản phẩm phù hợp"
           description="Thử đổi từ khóa hoặc bỏ bớt bộ lọc để tìm thêm lựa chọn."
-          label="Xóa bộ lọc"
+          label={activeFilters.length ? "Xóa bộ lọc" : "Xem tất cả sản phẩm"}
+          href={activeFilters.length ? clearFiltersHref : "/products"}
         />
       )}
       <section className={tw.panel_catalog_guide}>

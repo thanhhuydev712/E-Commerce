@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Artifact/script review cục bộ, cùng phạm vi gitignore; không loại source/tests.
+    ".visual-review/**",
+    "test-results*/**",
+    "playwright-report/**",
   ]),
 ]);
 

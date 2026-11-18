@@ -7,6 +7,46 @@ const valid = {
   JWT_REFRESH_SECRET: 'b'.repeat(48),
 };
 describe('API environment and response contract', () => {
+  it('validates preview flags and refuses payment credentials in public preview', () => {
+    expect(
+      validateEnvironment({ ...valid, PREVIEW_READ_ONLY: 'true' })
+        .PREVIEW_READ_ONLY,
+    ).toBe(true);
+    expect(() =>
+      validateEnvironment({ ...valid, PREVIEW_READ_ONLY: 'yes' }),
+    ).toThrow();
+    expect(() =>
+      validateEnvironment({
+        ...valid,
+        PREVIEW_READ_ONLY: 'true',
+        STRIPE_SECRET_KEY: 'sk_test_fixture',
+      }),
+    ).toThrow();
+  });
+  it('requires verified TLS configuration when enabled', () => {
+    expect(() =>
+      validateEnvironment({ ...valid, DATABASE_TLS_REQUIRED: 'true' }),
+    ).toThrow();
+    expect(
+      validateEnvironment({
+        ...valid,
+        DATABASE_TLS_REQUIRED: 'true',
+        DATABASE_URL:
+          valid.DATABASE_URL +
+          '?sslmode=verify-full&sslrootcert=/run/certs/ca.pem',
+      }).DATABASE_TLS_REQUIRED,
+    ).toBe(true);
+  });
+  it('only trusts a configured single proxy hop and defaults to direct access', () => {
+    expect(validateEnvironment(valid).TRUST_PROXY_HOPS).toBe(0);
+    expect(
+      validateEnvironment({ ...valid, TRUST_PROXY_HOPS: '1' }).TRUST_PROXY_HOPS,
+    ).toBe(1);
+    for (const value of ['true', '*', '1x', '-1', '2'])
+      expect(() =>
+        validateEnvironment({ ...valid, TRUST_PROXY_HOPS: value }),
+      ).toThrow();
+  });
   it('requires separate strong secrets and operational schema', () => {
     expect(() =>
       validateEnvironment({ ...valid, JWT_SECRET: 'short' }),

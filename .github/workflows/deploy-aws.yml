@@ -1,0 +1,57 @@
+name: Deploy AWS
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options: [staging, demo]
+        required: true
+      release_key:
+        type: string
+        required: true
+      release_version:
+        type: string
+        required: true
+      release_sha256:
+        type: string
+        required: true
+  workflow_call:
+    inputs:
+      environment: { type: string, required: true }
+      release_key: { type: string, required: true }
+      release_version: { type: string, required: true }
+      release_sha256: { type: string, required: true }
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: deploy-${{ inputs.environment }}
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Require the repository default branch
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: test "$GITHUB_REF" = "refs/heads/$DEFAULT_BRANCH"
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: deploy-${{ github.run_id }}
+          unset-current-credentials: true
+      - name: Deploy the exact S3 object version through the approved SSM document
+        env:
+          RELEASE_KEY: ${{ inputs.release_key }}
+          RELEASE_VERSION: ${{ inputs.release_version }}
+          RELEASE_SHA256: ${{ inputs.release_sha256 }}
+          DEPLOY_ENVIRONMENT: ${{ inputs.environment }}
+          INSTANCE_ID: ${{ vars.INSTANCE_ID }}
+          RELEASE_DOCUMENT: ${{ vars.RELEASE_DOCUMENT }}
+        run: bash infra/scripts/deploy-ssm.sh

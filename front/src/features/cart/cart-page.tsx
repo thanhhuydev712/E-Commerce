@@ -22,11 +22,11 @@ const tw = {
   page_heading: [
     "rf-page-heading flex justify-between items-center mx-0 my-7.5 gap-5 [&_h1]:text-[32px] [&_h1]:tracking-[-1px]",
     "[&_h1]:leading-[1.2] [&_h1]:mt-2 [&_h1]:mb-2.5 [&_h1]:mx-0 [&_h1_small]:text-[20px] [&_h1_small]:text-rf-muted",
-    "[&_p]:text-rf-muted [&_p]:text-[13px] [&_p]:mb-0 max-[768px]:flex-wrap max-[768px]:mx-0 max-[768px]:my-6",
+    "[&_p]:text-rf-muted [&_p]:text-rf-body [&_p]:mb-0 max-[768px]:flex-wrap max-[768px]:mx-0 max-[768px]:my-6",
     "max-[768px]:[&_h1]:text-[27px]",
   ].join(" "),
   text_link: [
-    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-[12px] font-semibold p-0",
+    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-rf-small font-semibold p-0",
     "border-current border-none [border-width:0] gap-1.75 hover:underline hover:[text-underline-offset:4px]",
   ].join(" "),
   cart_layout: [
@@ -39,8 +39,8 @@ const tw = {
   ].join(" "),
   cart_line: [
     "rf-cart-line flex items-center border-b [border-bottom-style:solid] border-b-rf-border py-5 gap-4.5 [&>a]:shrink-0",
-    "[&>a]:w-25 [&_h3]:text-[12px] [&_h3]:leading-[1.6] [&_h3]:mx-0 [&_h3]:my-1 [&_small]:text-rf-muted",
-    "[&_small]:text-[9px] [&_p]:text-[10px] [&_p]:text-rf-muted [&>strong]:text-[12px] [&>strong]:whitespace-nowrap",
+    "[&>a]:w-25 [&_h3]:text-rf-small [&_h3]:leading-[1.6] [&_h3]:mx-0 [&_h3]:my-1 [&_small]:text-rf-muted",
+    "[&_small]:text-rf-caption [&_p]:text-rf-body [&_p]:text-rf-muted [&>strong]:text-rf-small [&>strong]:whitespace-nowrap",
     "max-[1200px]:flex-wrap max-[1200px]:[&>a]:w-18.75 max-[768px]:gap-3.5 max-[768px]:[&>strong]:ml-auto",
     "[&_.rf-product-art]:h-21.25 [&_.rf-product-art]:min-h-21.25 [&_.rf-component-art]:h-21.25",
     "[&_.rf-component-art]:min-h-21.25 [&_.rf-component-art>svg]:max-w-16.25 [&_.rf-component-art>svg]:max-h-16.25",
@@ -51,7 +51,7 @@ const tw = {
     "rf-quantity inline-flex items-center h-10 shrink-0 border-[#dce4dd] border-solid border rounded-[5px]",
     "overflow-hidden [&_button]:grid [&_button]:place-items-center [&_button]:bg-[#f5f7f4] [&_button]:bg-none",
     "[&_button]:w-7.25 [&_button]:h-full [&_button]:border-current [&_button]:border-none [&_button]:[border-width:0]",
-    "[&_span]:min-w-7.75 [&_span]:text-center [&_span]:text-[12px]",
+    "[&_span]:min-w-7.75 [&_span]:text-center [&_span]:text-rf-small",
   ].join(" "),
   icon_btn: [
     "rf-icon-btn inline-flex items-center justify-center bg-transparent bg-none min-w-9 min-h-9 p-2 border-current",
@@ -62,18 +62,18 @@ const tw = {
     "[&_h2]:text-[19px] [&_h1]:text-[26px] [&_h1]:tracking-[-0.7px] max-[768px]:p-4.5",
   ].join(" "),
   coupon_form: [
-    "rf-coupon-form [&>label]:flex [&>label]:items-center [&>label]:text-[12px] [&>label]:mb-2.25 [&>label]:gap-1.75",
+    "rf-coupon-form [&>label]:flex [&>label]:items-center [&>label]:text-rf-small [&>label]:mb-2.25 [&>label]:gap-1.75",
     "[&>div]:flex [&_input]:w-full [&_input]:border-t [&_input]:[border-top-style:solid] [&_input]:border-t-rf-border",
     "[&_input]:[border-right-width:0] [&_input]:[border-right-style:none] [&_input]:border-r-current [&_input]:border-b",
     "[&_input]:[border-bottom-style:solid] [&_input]:border-b-rf-border [&_input]:border-l",
     "[&_input]:[border-left-style:solid] [&_input]:border-l-rf-border [&_input]:rounded-tl-[5px] [&_input]:rounded-tr-[0]",
-    "[&_input]:rounded-br-[0] [&_input]:rounded-bl-[5px] [&_input]:text-[11px] [&_input]:p-2.5 [&_button]:bg-[#f1f8f2]",
-    "[&_button]:bg-none [&_button]:text-rf-green [&_button]:text-[10px] [&_button]:whitespace-nowrap",
+    "[&_input]:rounded-br-[0] [&_input]:rounded-bl-[5px] [&_input]:text-rf-control [&_input]:p-2.5 [&_button]:bg-[#f1f8f2]",
+    "[&_button]:bg-none [&_button]:text-rf-green [&_button]:text-rf-small [&_button]:whitespace-nowrap",
     "[&_button]:rounded-tl-[0] [&_button]:rounded-tr-[5px] [&_button]:rounded-br-[5px] [&_button]:rounded-bl-[0]",
     "[&_button]:px-3 [&_button]:py-2.5 [&_button]:border-[#b2d0bc] [&_button]:border-solid [&_button]:border",
   ].join(" "),
   btn_full: [
-    "rf-btn rf-full inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-[12px] font-bold",
+    "rf-btn rf-full inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-rf-small font-bold",
     "leading-[1.5] [transition:background_0.2s,_transform_0.2s] w-full px-5.25 py-2.75 border-transparent border-solid",
     "border rounded-[6px] gap-2.5 print:hidden hover:bg-rf-green-hover hover:bg-none",
   ].join(" "),
@@ -93,7 +93,7 @@ export function CartPage() {
       <Breadcrumb current="Giỏ hàng" />
       <div className={tw.page_heading}>
         <div>
-          <span className="rf-eyebrow inline-flex items-center text-[10px] font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-[9px] max-[768px]:tracking-[1px]">
+          <span className="rf-eyebrow inline-flex items-center text-rf-caption font-bold tracking-[1.6px] text-rf-green gap-2 max-[768px]:text-rf-caption max-[768px]:tracking-[1px]">
             SẮP THÀNH CẤU HÌNH CỦA BẠN
           </span>
           <h1>
@@ -184,7 +184,7 @@ export function CartPage() {
                 </article>
               );
             })}
-            <div className="rf-cart-note flex items-start text-[11px] text-[#748178] pt-4.5 gap-2.25">
+            <div className="rf-cart-note flex items-start text-rf-caption text-[#748178] pt-4.5 gap-2.25">
               <ShieldCheck size={17} />
               Giá được đọc từ cửa hàng. Giỏ chưa giữ tồn; giá và tồn được kiểm
               tra lại khi bạn xác nhận đặt hàng.
@@ -235,7 +235,7 @@ export function CartPage() {
                 Tiến hành đặt hàng <ArrowRight size={17} />
               </Link>
             )}
-            <p className="rf-secure-note flex items-center justify-center text-rf-muted text-[9px] mt-3.75 mb-0 mx-0 gap-1.5">
+            <p className="rf-secure-note flex items-center justify-center text-rf-muted text-rf-caption mt-3.75 mb-0 mx-0 gap-1.5">
               <LockKeyhole size={13} />
               Giá và ưu đãi được xác nhận tại checkout
             </p>

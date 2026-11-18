@@ -1,6 +1,17 @@
 export function validateEnvironment(input: Record<string, unknown>) {
   const result = { ...input };
   result.NODE_ENV = input.NODE_ENV ?? 'development';
+  for (const name of ['PREVIEW_READ_ONLY', 'DATABASE_TLS_REQUIRED']) {
+    const value = input[name] ?? 'false';
+    if (!['true', 'false', true, false].includes(value as string | boolean))
+      throw new Error(`${name} must be true or false`);
+    result[name] = value === true || value === 'true';
+  }
+  // Chỉ hỗ trợ trực tiếp hoặc đúng một reverse proxy đã biết; không trust tùy ý.
+  const proxyHops = Number(input.TRUST_PROXY_HOPS ?? 0);
+  if (![0, 1].includes(proxyHops))
+    throw new Error('TRUST_PROXY_HOPS must be 0 or 1');
+  result.TRUST_PROXY_HOPS = proxyHops;
   if (!['development', 'test', 'production'].includes(String(result.NODE_ENV)))
     throw new Error('Invalid NODE_ENV');
   for (const name of ['DATABASE_URL', 'JWT_SECRET', 'JWT_REFRESH_SECRET'])
@@ -14,6 +25,17 @@ export function validateEnvironment(input: Record<string, unknown>) {
   const db = new URL(String(result.DATABASE_URL));
   if (!['postgres:', 'postgresql:'].includes(db.protocol))
     throw new Error('DATABASE_URL must use PostgreSQL');
+  if (
+    result.DATABASE_TLS_REQUIRED &&
+    (db.searchParams.get('sslmode') !== 'verify-full' ||
+      !db.searchParams.get('sslrootcert'))
+  )
+    throw new Error('Verified database TLS and a root CA are required');
+  if (
+    result.PREVIEW_READ_ONLY &&
+    (input.STRIPE_SECRET_KEY || input.STRIPE_WEBHOOK_SECRET)
+  )
+    throw new Error('Stripe credentials must be absent in read-only preview');
   result.DATABASE_SCHEMA =
     input.DATABASE_SCHEMA ?? db.searchParams.get('schema') ?? 'public';
   if (

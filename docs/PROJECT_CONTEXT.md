@@ -2,6 +2,8 @@
 
 ## Mục tiêu
 
+**17/11/2026 — định hướng mới do chủ dự án xác nhận:** chuyển tới sản phẩm kinh doanh production với tên **RIGFORCE STORE**, ngành đồ công nghệ/gear cho người dùng laptop/PC. Phương thức thanh toán, giao vận, chính sách, pháp nhân/liên hệ, domain, ngân sách AWS và phạm vi địa lý chưa chốt. Đây là mục tiêu mới, không phải trạng thái đã production. [Rà soát và tiêu chí mở bán](PRODUCTION_READINESS.md).
+
 Xây dựng hệ thống bán hàng gồm storefront, API nghiệp vụ, dữ liệu và công cụ quản trị. Chủ dự án cần hiểu cách thiết kế và vận hành từng phần để có thể tự phát triển, giải thích quyết định kỹ thuật và trình bày sản phẩm trong phỏng vấn.
 
 Thành công được đánh giá bằng luồng mua hàng hoạt động đúng, bảo vệ tài khoản và tiền, có bằng chứng kiểm thử, cài đặt được trên máy mới và có tài liệu đủ để bàn giao. Số lượng thư viện không phải thước đo chất lượng.
@@ -18,6 +20,8 @@ Thành công được đánh giá bằng luồng mua hàng hoạt động đúng
 Từ **06/11/2026**, runtime Auth/Accounts/Access dùng Role/Permission/UserRole v2; CUSTOMER/ADMIN và bốn permission giai đoạn đầu đã seed, không tự nâng quyền tài khoản. Enum USER/ADMIN v1 chỉ còn trong mã legacy. [Contract danh tính](API_IDENTITY_V2.md) mô tả roleCodes/permissions, session và ownership. Khách chưa đăng nhập là tác nhân công khai, không phải role lưu trong DB.
 
 ## Phạm vi hướng tới
+
+**Mốc phát hành được người dùng chọn ngày 17/11/2026:** website công khai để giới thiệu và trải nghiệm, **chưa nhận đơn thật**. [RELEASE_PLAN.md](RELEASE_PLAN.md) xác định từng đợt từ bản hiện tại: ổn định/bản vá → phạm vi public/demo → nội dung/SEO → nghiệm thu production → Docker/Nginx/CI → staging/AWS. Giữ nhãn dữ liệu minh họa; payment/COD nếu mở chỉ là trải nghiệm có giới hạn, không tự chuyển sang kinh doanh. Các mục MVP dài hạn bên dưới không phải yêu cầu hoàn thiện hết trước mốc giới thiệu.
 
 - MVP: auth và phân quyền; danh mục/sản phẩm; giỏ hàng; đơn hàng; thanh toán Stripe ở test mode với webhook tin cậy; storefront kết nối API; quản trị cơ bản.
 - Nền tảng chất lượng: validation, ownership, xử lý lỗi, tài liệu API, test nghiệp vụ quan trọng, CI và hướng dẫn local.
@@ -36,3 +40,7 @@ Từ **06/11/2026**, runtime Auth/Accounts/Access dùng Role/Permission/UserRole
 5. AWS là nền tảng triển khai đã được yêu cầu. Baseline đề xuất EC2 + Compose/Nginx, ECR, RDS private, SSM/OIDC và CloudWatch; ngân sách, domain/region, kích cỡ tài nguyên, lưu ảnh và provider email còn cần chốt khi cài đặt. Không tự thêm ECS/Kubernetes hoặc dịch vụ mới chỉ để tăng stack.
 
 Chỉ cần chốt từng quyết định khi công việc liên quan đến nó. Tài liệu bàn giao có nhắc ý tưởng kinh doanh ngách nhưng không lưu tên sản phẩm; chưa có cơ sở gộp ý tưởng đó vào sản phẩm này.
+
+## Phạm vi hạ tầng hiện tại — 18/11/2026
+
+Chủ dự án chưa có AWS account/domain và yêu cầu hoàn thiện local/CI/bộ triển khai trước. Đã bổ sung Docker lab, production Compose/HTTPS preview chỉ đọc, CI/Release/Deploy workflow definitions, CloudFormation và operational helpers. Xem [hướng dẫn thành phần/trách nhiệm](INFRASTRUCTURE_GUIDE.md) và [hiện trạng có bằng chứng](PROJECT_STATUS.md). Cloud chưa provision/deploy, pipeline chưa chạy trên GitHub; không mô tả bộ file này là hạ tầng đã vận hành. Bản công khai đầu chỉ đọc catalog/trải nghiệm, không tài khoản/đơn/thanh toán thật.

@@ -19,11 +19,17 @@ một agent cho từng module. Agent chính sở hữu tài liệu trạng thái
 
 ## Chọn cách thực hiện để hạn chế token
 
-- Mặc định agent chính tự làm tác vụ nhỏ, sửa một file hoặc trả lời giải thích.
-- Giao một agent khi cần khảo sát tập trung hoặc công việc đủ lớn để tách rõ đầu ra.
+- Theo yêu cầu ngày **17/11/2026**, mỗi prompt/yêu cầu mới mặc định dùng một sub-agent
+  đúng chức năng, kể cả tác vụ nhỏ, sửa một file hoặc trả lời giải thích; không cần nhắc lại.
+- Giao phần việc thực chất với đầu ra hẹp; agent chính điều phối, tích hợp và chịu trách
+  nhiệm kết quả. Yêu cầu tiếp nối cùng nhiệm vụ ưu tiên tái sử dụng agent phù hợp.
+- Nếu người dùng yêu cầu tự làm/không dùng sub-agent hoặc phiên không có công cụ spawn,
+  agent chính tự xử lý và nói rõ giới hạn khi liên quan.
 - Cấu hình `.codex/config.toml` giới hạn **một agent con đồng thời**, ngoài agent chính.
   Có thể giao nhiều nhiệm vụ tuần tự; đây không phải trần token hoặc trần số lần gọi.
-- Không gọi đủ năm vai trò cho mọi yêu cầu; không mở agent chỉ để xác nhận kết luận.
+- Không gọi đủ năm vai trò cho mọi yêu cầu; không mở agent chỉ để đủ số lượng.
+  Tránh cha và con cùng khảo sát hoặc thực hiện một phần việc; cha review kết quả
+  và chỉ xác minh thêm khi có thiếu sót hoặc rủi ro cụ thể.
 - Nếu công cụ hỗ trợ, dùng ngữ cảnh mới (`fork_turns="none"`) và giao bản tóm tắt
   tự đủ thông tin. Đây là lựa chọn lúc gọi công cụ, không phải khóa TOML.
 - Agent chính đọc tài liệu nền theo AGENTS.md. Agent con dùng bản bàn giao đã có
@@ -101,5 +107,7 @@ bằng chứng cấu hình custom đã được nạp. Nếu không có spawn, x
 - Nếu client không cung cấp tổng usage, ghi chưa đo được; không suy ra tiết kiệm
   chỉ từ câu trả lời ngắn hoặc ít log ở thread chính.
 
-Chưa chạy thử các vai trò hoặc đo token trong lượt tạo thiết kế này. Không thay đổi
-runtime ứng dụng, database hay hạ tầng từ việc thêm bộ cấu hình.
+Lượt tạo thiết kế ngày 12/11/2026 chưa chạy thử các vai trò hoặc đo token.
+Ngày 17/11/2026, đã gọi một sub-agent `qa` với ngữ cảnh mới để rà quy tắc trong
+phiên hiện tại; chưa xác minh việc tự nạp cấu hình ở phiên mới hoặc đo tổng token.
+Không thay đổi runtime ứng dụng, database hay hạ tầng từ việc cập nhật quy tắc.

@@ -28,6 +28,9 @@ test("real API: catalog, register, persistent cart, address, saved PC, COD order
     .fill("Live Buyer");
   await registration.getByLabel("Email", { exact: true }).fill(email);
   await registration.getByLabel("Mật khẩu", { exact: true }).fill(password);
+  await registration
+    .getByLabel("Nhập lại mật khẩu", { exact: true })
+    .fill(password);
   const registerResponse = page.waitForResponse(
     (r) =>
       r.url().endsWith("/api/v1/auth/register") &&

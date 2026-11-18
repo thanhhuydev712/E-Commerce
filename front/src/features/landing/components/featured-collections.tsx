@@ -6,13 +6,13 @@ import { ProductCard, SectionTitle } from "@/src/components/storefront";
 // Utility Tailwind v4; marker rf-* chỉ phục vụ trạng thái, selector và kiểm thử.
 const tw = {
   tabs: [
-    "rf-tabs flex mb-5.5 overflow-x-auto pb-0.5 gap-2.25 [&>button]:whitespace-nowrap [&>button]:text-[11px]",
+    "rf-tabs flex mb-5.5 overflow-x-auto pb-0.5 gap-2.25 [&>button]:whitespace-nowrap [&>button]:text-rf-caption",
     "[&>button]:font-semibold [&>button]:bg-white [&>button]:bg-none [&>button]:text-[#5c6b61] [&>button]:px-4.5",
     "[&>button]:py-2.25 [&>button]:border-[#dde4df] [&>button]:border-solid [&>button]:border [&>button]:rounded-[5px]",
-    "[&>a]:whitespace-nowrap [&>a]:text-[11px] [&>a]:font-semibold [&>a]:bg-white [&>a]:bg-none [&>a]:text-[#5c6b61]",
+    "[&>a]:whitespace-nowrap [&>a]:text-rf-caption [&>a]:font-semibold [&>a]:bg-white [&>a]:bg-none [&>a]:text-[#5c6b61]",
     "[&>a]:px-4.5 [&>a]:py-2.25 [&>a]:border-[#dde4df] [&>a]:border-solid [&>a]:border [&>a]:rounded-[5px]",
-    "max-[768px]:mb-4.25 max-[768px]:gap-1.75 max-[768px]:[&>button]:text-[10px] max-[768px]:[&>button]:px-3.25",
-    "max-[768px]:[&>button]:py-2 max-[768px]:[&>a]:text-[10px] max-[768px]:[&>a]:px-3.25 max-[768px]:[&>a]:py-2",
+    "max-[768px]:mb-4.25 max-[768px]:gap-1.75 max-[768px]:[&>button]:text-rf-caption max-[768px]:[&>button]:px-3.25",
+    "max-[768px]:[&>button]:py-2 max-[768px]:[&>a]:text-rf-caption max-[768px]:[&>a]:px-3.25 max-[768px]:[&>a]:py-2",
     "[&>.active]:bg-[#1e5b3c] [&>.active]:bg-none [&>.active]:text-white [&>.active]:border-[#1e5b3c]",
   ].join(" "),
   product_grid_grid_five: [

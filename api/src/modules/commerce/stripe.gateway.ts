@@ -14,6 +14,7 @@ export class StripeGateway {
   constructor(@Inject(ConfigService) private readonly config: ConfigService) {}
   get enabled() {
     return (
+      !this.config.get<boolean>('PREVIEW_READ_ONLY') &&
       !!this.config.get<string>('STRIPE_SECRET_KEY')?.startsWith('sk_test_') &&
       !!this.config.get<string>('STRIPE_WEBHOOK_SECRET')?.startsWith('whsec_')
     );

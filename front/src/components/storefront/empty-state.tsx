@@ -9,7 +9,7 @@ const tw = {
     "[&_p]:max-w-112.5 [&_p]:mb-6.25",
   ].join(" "),
   btn: [
-    "rf-btn inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-[12px] font-bold",
+    "rf-btn inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-rf-caption font-bold",
     "leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-transparent border-solid border",
     "rounded-[6px] gap-2.5 print:hidden hover:bg-rf-green-hover hover:bg-none",
   ].join(" "),

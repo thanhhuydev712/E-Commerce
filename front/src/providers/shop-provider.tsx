@@ -81,6 +81,7 @@ const userView = (user: Account): User => ({
 function createStore(
   initialCatalog: ReturnType<typeof useCatalog>,
   navigate: (destination: string) => void,
+  readOnlyPreview = false,
 ) {
   let currentCatalog = initialCatalog;
   const catalog = () => currentCatalog;
@@ -144,7 +145,7 @@ function createStore(
         /* Preference hỏng không thay thế dữ liệu nghiệp vụ từ server. */
       }
       try {
-        if (await refreshSession()) await loadPrivate();
+        if (!readOnlyPreview && (await refreshSession())) await loadPrivate();
       } catch (cause) {
         error(cause);
       } finally {
@@ -154,6 +155,10 @@ function createStore(
     return initialization;
   };
   const signedIn = async () => {
+    if (readOnlyPreview) {
+      notify("Bản giới thiệu chỉ đọc; tài khoản và đặt hàng đang tắt.");
+      return false;
+    }
     if (!state.ready) await initialize();
     if (state.user) return true;
     notify("Vui lòng đăng nhập để tiếp tục.");
@@ -203,6 +208,7 @@ function createStore(
     return cartQueue;
   };
   return {
+    readOnlyPreview,
     setCatalog: (value: ReturnType<typeof useCatalog>) => {
       currentCatalog = value;
     },
@@ -423,11 +429,21 @@ function createStore(
   };
 }
 const Context = createContext<ReturnType<typeof createStore> | null>(null);
-export function ShopProvider({ children }: { children: ReactNode }) {
+export function ShopProvider({
+  children,
+  readOnlyPreview = false,
+}: {
+  children: ReactNode;
+  readOnlyPreview?: boolean;
+}) {
   const catalog = useCatalog(),
     router = useRouter();
   const [store] = useState(() =>
-    createStore(catalog, (destination) => router.push(destination)),
+    createStore(
+      catalog,
+      (destination) => router.push(destination),
+      readOnlyPreview,
+    ),
   );
   useEffect(() => {
     store.setCatalog(catalog);

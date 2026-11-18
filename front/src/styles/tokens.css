@@ -1,16 +1,32 @@
 /* Token là nguồn giá trị chung; đổi nhận diện tại đây thay vì sửa từng section. */
+@keyframes rf-marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 :root {
-  --rf-bg: #f3f7f9;
-  --rf-surface: #fff;
-  --rf-text: #152830;
-  --rf-muted: #687579;
-  --rf-border: #e5e9e9;
-  --rf-green: #007d60;
-  --rf-green-hover: #005c49;
-  --rf-mint: #bff5d6;
+  --rf-bg: #f5f5fc;
+  --rf-surface: #ffffff;
+  --rf-text: #20203b;
+  --rf-muted: #64657a;
+  --rf-border: #dedff0;
+  --rf-accent: #6334e3;
+  --rf-accent-hover: #4c24b7;
+  --rf-accent-soft: #eee8ff;
+  --rf-ink: #13132b;
+  --rf-ember: #ff795f;
+  --rf-cyan: #45e2ef;
+  /* Alias tương thích cho consumer cũ; nhận diện mới dùng accent/ink/ember. */
+  --rf-green: var(--rf-accent);
+  --rf-green-hover: var(--rf-accent-hover);
+  --rf-mint: var(--rf-accent-soft);
   --rf-red: #b62e36;
-  --rf-dark: #071e29;
-  --rf-sale: #00785b;
+  --rf-dark: var(--rf-ink);
+  --rf-sale: var(--rf-accent);
   --rf-radius: 12px;
   --rf-content-gutter: 16px;
   --rf-content: calc(var(--rf-home-width) + var(--rf-content-gutter) * 2);
@@ -18,7 +34,24 @@
 }
 
 @theme inline {
-  --font-sans: Arial, Helvetica, sans-serif;
+  --font-sans: "Segoe UI", Arial, Helvetica, sans-serif;
+  --color-rf-accent: var(--rf-accent);
+  --color-rf-accent-hover: var(--rf-accent-hover);
+  --color-rf-accent-soft: var(--rf-accent-soft);
+  --color-rf-ember: var(--rf-ember);
+  --color-rf-ink: var(--rf-ink);
+  --color-rf-cyan: var(--rf-cyan);
+  /* Chữ nội dung không co theo vw; rem tôn trọng cỡ chữ người dùng. */
+  --text-rf-caption: 0.875rem;
+  --text-rf-small: 0.9375rem;
+  --text-rf-body: 1rem;
+  --text-rf-control: 1rem;
+  --text-rf-product: 1.0625rem;
+  --text-rf-product-compact: 0.9375rem;
+  --text-rf-detail: 0.9375rem;
+  --text-rf-detail-compact: 0.875rem;
+  --text-rf-price: 1.375rem;
+  --text-rf-price-compact: 1.25rem;
   --color-rf-bg: var(--rf-bg);
   --color-rf-surface: var(--rf-surface);
   --color-rf-text: var(--rf-text);

@@ -17,6 +17,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import type { Request, Response, NextFunction } from 'express';
 import { randomUUID } from 'node:crypto';
 import { map } from 'rxjs';
+import { previewBoundary } from './preview.js';
 export function serialize(value: unknown): unknown {
   if (typeof value === 'bigint') return value.toString();
   if (value instanceof Date) return value.toISOString();
@@ -104,6 +105,10 @@ export class ApiExceptionFilter implements ExceptionFilter {
 }
 export function configureHttp(app: INestApplication) {
   const config = app.get(ConfigService);
+  app
+    .getHttpAdapter()
+    .getInstance()
+    .set('trust proxy', config.get<number>('TRUST_PROXY_HOPS', 0) || false);
   app.setGlobalPrefix('api/v1');
   app.use(
     (
@@ -117,6 +122,7 @@ export function configureHttp(app: INestApplication) {
       next();
     },
   );
+  app.use(previewBoundary(config.get<boolean>('PREVIEW_READ_ONLY', false)));
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

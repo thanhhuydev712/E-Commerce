@@ -8,8 +8,8 @@ const tw = {
     "[&_li]:border-l [&_li]:[border-left-style:solid] [&_li]:border-l-[#d6e2d8] [&_li]:ml-3 [&_li>span]:absolute",
     "[&_li>span]:left-[-12px] [&_li>span]:top-0 [&_li>span]:w-6 [&_li>span]:h-6 [&_li>span]:grid",
     "[&_li>span]:place-items-center [&_li>span]:text-[#467b55] [&_li>span]:bg-[#dcece0] [&_li>span]:bg-none",
-    "[&_li>span]:text-[10px] [&_li>span]:rounded-full [&_strong]:text-[12px] [&_small]:block [&_small]:mt-1.25",
-    "[&_small]:text-rf-muted [&_small]:text-[10px] [&_li:last-child]:[border-left-width:0]",
+    "[&_li>span]:text-rf-caption [&_li>span]:rounded-full [&_strong]:text-rf-small [&_small]:block [&_small]:mt-1.25",
+    "[&_small]:text-rf-muted [&_small]:text-rf-caption [&_li:last-child]:[border-left-width:0]",
     "[&_li:last-child]:[border-left-style:none] [&_li:last-child]:border-l-current [&_li:last-child]:pb-0",
   ].join(" "),
 };

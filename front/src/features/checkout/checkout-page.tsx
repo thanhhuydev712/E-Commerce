@@ -20,41 +20,41 @@ const tw = {
   checkout_reference: [
     "rf-checkout-reference [&_h2]:text-[17px] [&_h2]:mb-4.5 [&_.rf-panel]:shadow-[0_2px_3px_#092a3008]",
     "[&_.rf-panel]:p-5.5 [&_.rf-panel]:rounded-[18px] [&_.rf-checkout-login]:flex [&_.rf-checkout-login]:items-center",
-    "[&_.rf-checkout-login]:justify-between [&_.rf-checkout-login]:text-[13px] [&_.rf-checkout-login]:gap-3.75",
-    "[&_.rf-form]:gap-3 [&_.rf-form_h2]:mb-0 [&_.rf-form>label]:font-normal [&_.rf-form>label]:text-[11px]",
-    "[&_.rf-form>label]:text-rf-muted [&_.rf-form_input]:min-h-11.5 [&_.rf-form_input]:text-[13px]",
-    "[&_.rf-form_input]:rounded-[9px] [&_.rf-form_select]:min-h-11.5 [&_.rf-form_select]:text-[13px]",
+    "[&_.rf-checkout-login]:flex-wrap [&_.rf-checkout-login]:justify-between [&_.rf-checkout-login]:text-rf-small [&_.rf-checkout-login]:gap-3.75",
+    "[&_.rf-form]:gap-3 [&_.rf-form_h2]:mb-0 [&_.rf-form>label]:font-normal [&_.rf-form>label]:text-rf-caption",
+    "[&_.rf-form>label]:text-rf-muted [&_.rf-form_input]:min-h-11.5 [&_.rf-form_input]:text-rf-control",
+    "[&_.rf-form_input]:rounded-[9px] [&_.rf-form_select]:min-h-11.5 [&_.rf-form_select]:text-rf-control",
     "[&_.rf-form_select]:rounded-[9px] [&_.rf-radio-cards]:m-0 [&_.rf-radio-cards_label]:px-3",
-    "[&_.rf-radio-cards_label]:py-3.5 [&_.rf-radio-cards_strong]:text-[13px] [&_.rf-form-hint]:mt-3.75",
+    "[&_.rf-radio-cards_label]:py-3.5 [&_.rf-radio-cards_strong]:text-rf-small [&_.rf-form-hint]:mt-3.75",
     "[&_.rf-form-hint]:mb-0 [&_.rf-form-hint]:mx-0 [&_.rf-summary]:static max-[768px]:[&_.rf-panel]:p-4.25",
     "max-[768px]:[&_.rf-panel]:rounded-[12px] max-[768px]:[&_.rf-checkout-login]:flex-wrap [&_.rf-form_.rf-form-hint]:m-0",
   ].join(" "),
   panel_checkout_login: [
     "rf-panel rf-checkout-login bg-rf-surface bg-none mb-5 p-6.5 border-rf-border border-solid border",
     "rounded-[var(--rf-radius)] [&_h2]:text-[19px] [&_h1]:text-[26px] [&_h1]:tracking-[-0.7px] max-[768px]:p-4.5",
-    "[&_.rf-btn]:whitespace-nowrap [&_.rf-btn]:text-[12px] [&_.rf-btn]:p-2.5",
+    "[&_.rf-btn]:whitespace-normal [&_.rf-btn]:text-rf-control [&_.rf-btn]:p-2.5",
   ].join(" "),
   btn_btn_outline: [
     "rf-btn rf-btn-outline inline-flex items-center justify-center min-h-11 bg-transparent bg-none text-rf-text",
-    "text-[12px] font-bold leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-rf-border",
+    "text-rf-small font-bold leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-rf-border",
     "border-solid border rounded-[6px] gap-2.5 print:hidden hover:bg-[#edf4ef] hover:bg-none hover:border-[#9ccab5]",
   ].join(" "),
   panel_form: [
     "rf-panel rf-form rf-checkout-delivery bg-rf-surface bg-none mb-5 grid p-6.5 border-rf-border border-solid border",
     "rounded-[var(--rf-radius)] gap-4.5 [&_h2]:text-[19px] [&_h1]:text-[26px] [&_h1]:tracking-[-0.7px] max-[768px]:p-4.5",
-    "[&>label]:grid [&>label]:text-[12px] [&>label]:font-semibold [&>label]:gap-1.75 [&_select]:w-full",
-    "[&_select]:bg-white [&_select]:bg-none [&_select]:min-h-10.75 [&_select]:text-[12px] [&_select]:px-3",
+    "[&>label]:grid [&>label]:text-rf-small [&>label]:font-semibold [&>label]:gap-1.75 [&_select]:w-full",
+    "[&_select]:bg-white [&_select]:bg-none [&_select]:min-h-10.75 [&_select]:text-rf-control [&_select]:px-3",
     "[&_select]:py-2.75 [&_select]:border-[#dce4dd] [&_select]:border-solid [&_select]:border [&_select]:rounded-[5px]",
-    "[&_textarea]:w-full [&_textarea]:bg-white [&_textarea]:bg-none [&_textarea]:min-h-27.5 [&_textarea]:text-[12px]",
+    "[&_textarea]:w-full [&_textarea]:bg-white [&_textarea]:bg-none [&_textarea]:min-h-27.5 [&_textarea]:text-rf-control",
     "[&_textarea]:resize-y [&_textarea]:px-3 [&_textarea]:py-2.75 [&_textarea]:border-[#dce4dd] [&_textarea]:border-solid",
-    "[&_textarea]:border [&_textarea]:rounded-[5px] [&_p]:text-[12px] [&_p]:text-rf-muted [&_.rf-btn]:justify-self-start",
+    "[&_textarea]:border [&_textarea]:rounded-[5px] [&_p]:text-rf-body [&_p]:text-rf-muted [&_.rf-btn]:justify-self-start",
     "[&_.rf-full]:justify-self-stretch [&_.rf-check-label]:flex [&_.rf-check-label]:items-center",
-    "[&_.rf-check-label]:text-[12px] [&_.rf-check-label]:font-normal [&_.rf-check-label]:gap-2.25",
+    "[&_.rf-check-label]:text-rf-small [&_.rf-check-label]:font-normal [&_.rf-check-label]:gap-2.25",
     '[&_input:not([type="radio"]):not([type="checkbox"])]:w-full',
     '[&_input:not([type="radio"]):not([type="checkbox"])]:bg-white',
     '[&_input:not([type="radio"]):not([type="checkbox"])]:bg-none',
     '[&_input:not([type="radio"]):not([type="checkbox"])]:min-h-10.75',
-    '[&_input:not([type="radio"]):not([type="checkbox"])]:text-[12px]',
+    '[&_input:not([type="radio"]):not([type="checkbox"])]:text-rf-control',
     '[&_input:not([type="radio"]):not([type="checkbox"])]:px-3',
     '[&_input:not([type="radio"]):not([type="checkbox"])]:py-2.75',
     '[&_input:not([type="radio"]):not([type="checkbox"])]:border-[#dce4dd]',
@@ -70,18 +70,18 @@ const tw = {
     "[&>label:has(input:checked)]:bg-[#f2f8f2] [&>label:has(input:checked)]:border-[#82b294]",
     "rf-radio-cards grid p-0 border-current border-none [border-width:0] gap-2.5 [&_legend]:font-semibold [&_legend]:mb-3",
     "[&>label]:flex [&>label]:items-start [&>label]:p-4.25 [&>label]:border-rf-border [&>label]:border-solid",
-    "[&>label]:border [&>label]:rounded-[7px] [&>label]:gap-3 [&_strong]:block [&_strong]:text-[12px] [&_small]:block",
-    "[&_small]:text-[10px] [&_small]:text-rf-muted [&_small]:mt-1",
+    "[&>label]:border [&>label]:rounded-[7px] [&>label]:gap-3 [&_strong]:block [&_strong]:text-rf-small [&_small]:block",
+    "[&_small]:text-rf-caption [&_small]:text-rf-muted [&_small]:mt-1",
   ].join(" "),
   text_link: [
-    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-[12px] font-semibold p-0",
+    "rf-text-link inline-flex items-center bg-transparent bg-none text-rf-green text-rf-small font-semibold p-0",
     "border-current border-none [border-width:0] gap-1.75 hover:underline hover:[text-underline-offset:4px]",
   ].join(" "),
   checkout_cart_line: [
     "rf-checkout-cart-line grid grid-cols-[60px_minmax(0,_1fr)_25px] items-start pt-2 pb-4 px-0 gap-2.5 [&_small]:block",
-    "[&_small]:text-rf-muted [&_small]:mt-1.5 [&_strong]:block [&_strong]:text-[15px] [&_strong]:mt-2.5",
+    "[&_small]:text-rf-muted [&_small]:mt-1.5 [&_strong]:block [&_strong]:text-rf-small [&_strong]:mt-2.5",
     "[&>a_.rf-product-photo]:w-15 [&>a_.rf-product-photo]:h-15 [&>a_.rf-product-art]:w-15 [&>a_.rf-product-art]:h-15",
-    "[&>div:nth-child(2)]:text-[13px] [&_.rf-quantity]:[grid-column:2/4] [&_.rf-quantity]:justify-self-end",
+    "[&>div:nth-child(2)]:text-rf-small [&_.rf-quantity]:[grid-column:2/4] [&_.rf-quantity]:justify-self-end",
     "[&_.rf-quantity]:mt-[-6px]",
   ].join(" "),
   icon_btn: [
@@ -92,17 +92,17 @@ const tw = {
     "rf-quantity inline-flex items-center h-10 shrink-0 border-[#dce4dd] border-solid border rounded-[5px]",
     "overflow-hidden [&_button]:grid [&_button]:place-items-center [&_button]:bg-[#f5f7f4] [&_button]:bg-none",
     "[&_button]:w-7.25 [&_button]:h-full [&_button]:border-current [&_button]:border-none [&_button]:[border-width:0]",
-    "[&_span]:min-w-7.75 [&_span]:text-center [&_span]:text-[12px]",
+    "[&_span]:min-w-7.75 [&_span]:text-center [&_span]:text-rf-small",
   ].join(" "),
   panel_checkout_coupon: [
     "rf-panel rf-checkout-coupon bg-rf-surface bg-none mb-5 p-6.5 border-rf-border border-solid border",
     "rounded-[var(--rf-radius)] [&_h2]:text-[19px] [&_h1]:text-[26px] [&_h1]:tracking-[-0.7px] max-[768px]:p-4.5",
-    "[&>div]:flex [&>div]:gap-2.5 [&_input]:w-full [&_input]:min-w-0 [&_input]:text-[13px] [&_input]:px-3",
+    "[&>div]:flex [&>div]:gap-2.5 [&_input]:w-full [&_input]:min-w-0 [&_input]:text-rf-control [&_input]:px-3",
     "[&_input]:py-2.5 [&_input]:border-rf-border [&_input]:border-solid [&_input]:border [&_input]:rounded-[7px]",
-    "[&_p]:text-[12px] [&_p]:text-rf-green [&_p]:mt-3 [&_p]:mb-0 [&_p]:mx-0 [&_.rf-btn]:shrink-0 [&_.rf-btn]:px-3.75",
+    "[&_p]:text-rf-body [&_p]:text-rf-green [&_p]:mt-3 [&_p]:mb-0 [&_p]:mx-0 [&_.rf-btn]:shrink-0 [&_.rf-btn]:px-3.75",
   ].join(" "),
   btn_btn_dark: [
-    "rf-btn rf-btn-dark inline-flex items-center justify-center min-h-11 bg-rf-dark bg-none text-white text-[12px]",
+    "rf-btn rf-btn-dark inline-flex items-center justify-center min-h-11 bg-rf-dark bg-none text-white text-rf-small",
     "font-bold leading-[1.5] [transition:background_0.2s,_transform_0.2s] px-5.25 py-2.75 border-transparent border-solid",
     "border rounded-[6px] gap-2.5 print:hidden hover:bg-rf-green-hover hover:bg-none",
   ].join(" "),
@@ -111,7 +111,7 @@ const tw = {
     "[&_h2]:text-[19px] [&_h1]:text-[26px] [&_h1]:tracking-[-0.7px] max-[768px]:p-4.5",
   ].join(" "),
   btn_full: [
-    "rf-btn rf-full inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-[12px] font-bold",
+    "rf-btn rf-full inline-flex items-center justify-center min-h-11 bg-rf-green bg-none text-white text-rf-small font-bold",
     "leading-[1.5] [transition:background_0.2s,_transform_0.2s] w-full px-5.25 py-2.75 border-transparent border-solid",
     "border rounded-[6px] gap-2.5 print:hidden hover:bg-rf-green-hover hover:bg-none",
   ].join(" "),
@@ -380,7 +380,7 @@ function CheckoutForm() {
                 autoComplete="off"
               />
             </label>
-            <p className="rf-form-hint text-[12px] text-rf-muted">
+            <p className="rf-form-hint text-rf-small text-rf-muted">
               Môi trường development: chỉ dùng thông tin giả. Thông tin giao
               hàng được gửi đến server và lưu cùng đơn hàng.
             </p>
@@ -466,7 +466,7 @@ function CheckoutForm() {
                 </label>
               ))}
             </fieldset>
-            <p className="rf-form-hint text-[12px] text-rf-muted">
+            <p className="rf-form-hint text-rf-small text-rf-muted">
               Chỉ dùng thẻ thử nghiệm khi thanh toán Stripe. Phương thức khả
               dụng được xác nhận trong báo giá.
             </p>
@@ -586,7 +586,7 @@ function CheckoutForm() {
                 Đăng nhập để đặt hàng
               </Link>
             )}
-            <div className="rf-cart-note flex items-start text-[11px] text-[#748178] pt-4.5 gap-2.25">
+            <div className="rf-cart-note flex items-start text-rf-caption text-[#748178] pt-4.5 gap-2.25">
               <ShieldCheck size={18} />
               <span>
                 {confirmed

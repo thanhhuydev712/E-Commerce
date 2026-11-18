@@ -15,16 +15,16 @@ const tw = {
   ].join(" "),
   showroom_grid: [
     "rf-showroom-grid grid grid-cols-[repeat(4,_minmax(0,_1fr))] gap-y-5 gap-x-7 [&_h3]:flex [&_h3]:items-stretch",
-    "[&_h3]:bg-rf-green [&_h3]:bg-none [&_h3]:text-white [&_h3]:mt-0 [&_h3]:mb-4.25 [&_h3]:text-[13px]",
+    "[&_h3]:bg-rf-green [&_h3]:bg-none [&_h3]:text-white [&_h3]:mt-0 [&_h3]:mb-4.25 [&_h3]:text-rf-caption",
     "[&_h3]:leading-[1.5] [&_h3]:mx-0 [&_h3]:rounded-[4px] [&_h3]:overflow-hidden [&_h3>span]:grid",
     "[&_h3>span]:place-items-center [&_h3>span]:bg-[#163340] [&_h3>span]:bg-none [&_h3>span]:px-3 [&_h3>span]:py-1.75",
     "[&_h3>a]:whitespace-nowrap [&_h3>a]:text-ellipsis [&_h3>a]:px-2.25 [&_h3>a]:py-1.75 [&_h3>a]:overflow-hidden",
-    "[&_p]:flex [&_p]:items-start [&_p]:text-[#314b58] [&_p]:text-[13px] [&_p]:leading-[1.5] [&_p]:mx-0 [&_p]:my-1.75",
+    "[&_p]:flex [&_p]:items-start [&_p]:text-[#314b58] [&_p]:text-rf-body [&_p]:leading-[1.5] [&_p]:mx-0 [&_p]:my-1.75",
     "[&_p]:gap-1.25 [&_p>svg]:mt-0.75 [&_p>svg]:shrink-0 max-[1024px]:grid-cols-[repeat(2,_minmax(0,_1fr))]",
-    "max-[768px]:gap-y-5.5 max-[768px]:gap-x-3.25 max-[768px]:[&_h3]:text-[10px] max-[768px]:[&_h3]:mb-3",
+    "max-[768px]:gap-y-5.5 max-[768px]:gap-x-3.25 max-[768px]:[&_h3]:text-rf-caption max-[768px]:[&_h3]:mb-3",
     "max-[768px]:[&_h3>span]:p-1.75 max-[768px]:[&_h3>a]:px-1.25 max-[768px]:[&_h3>a]:py-1.75",
-    "max-[768px]:[&_p]:text-[10px] max-[768px]:[&_p]:gap-0.75 max-[768px]:[&_p>svg]:w-2.75",
-    "max-[768px]:[&_p>svg]:min-w-2.75 min-[1024px]:gap-y-7 min-[1024px]:[&_p]:text-[14px]",
+    "max-[768px]:[&_p]:text-rf-body max-[768px]:[&_p]:gap-0.75 max-[768px]:[&_p>svg]:w-2.75",
+    "max-[768px]:[&_p>svg]:min-w-2.75 min-[1024px]:gap-y-7 min-[1024px]:[&_p]:text-rf-body",
   ].join(" "),
 };
 
@@ -34,7 +34,7 @@ export function ShowroomSection() {
   return (
     <section className={tw.reference_showrooms}>
       <h2>HỆ THỐNG SHOWROOM RIGFORGE</h2>
-      <p className="rf-showroom-note text-[11px] text-[#6a7d84] text-center mt-0 mb-6.5 mx-0 max-[768px]:text-[10px] max-[768px]:leading-[1.6] max-[768px]:mb-5.5">
+      <p className="rf-showroom-note text-rf-caption text-[#6a7d84] text-center mt-0 mb-6.5 mx-0 max-[768px]:text-rf-caption max-[768px]:leading-[1.6] max-[768px]:mb-5.5">
         Các điểm dưới đây minh họa bố cục · Chưa phải địa điểm đang hoạt động
       </p>
       <div className={tw.showroom_grid}>

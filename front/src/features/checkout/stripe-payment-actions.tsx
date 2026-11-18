@@ -50,7 +50,7 @@ export function StripePaymentActions({
       >
         {pending ? "Đang mở Stripe…" : "Tiếp tục thanh toán Stripe test"}
       </button>
-      <p className="text-sm">
+      <p className="text-rf-small">
         Bạn sẽ nhập thẻ thử nghiệm trên trang Stripe. Đơn được xác nhận khi
         backend kiểm tra thanh toán.
       </p>

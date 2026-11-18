@@ -1,5 +1,7 @@
 # Chuyển từ schema hiện tại sang v2 và nghiệm thu
 
+**Bổ sung 18/11/2026 cho DB Docker mới:** thử clean bootstrap phát hiện migration lịch sử `20261028024109_rename_payment_amout_to_amount` lỗi cột `amout`. Không sửa migration/checksum đã áp. Lab Docker dùng [config riêng](../../api/prisma.docker.config.ts): build sao chép nguyên SQL baseline v2 canonical và các migration sau cutover sang history generated, hiện có 2 migration/104 bảng nghiệp vụ. [Preflight](../../api/scripts/migrate-docker.cjs) từ chối history legacy/trộn hoặc baseline chưa hoàn tất/đã rollback. Đây là đường tạo **DB mới riêng**, không chuyển đổi history DB hiện hữu; hướng dẫn tại [DOCKER_GUIDE](../DOCKER_GUIDE.md). Việc chuẩn hóa legacy history còn là công việc riêng. Các mốc 05/11 bên dưới giữ làm lịch sử.
+
 Ngày **05/11/2026** — kế hoạch tham chiếu và kết quả triển khai. **Đã áp dụng `20261105010000_upgrade_v2_vnd`**, backfill dữ liệu còn lại vào public v2, lưu tám bảng v1 ở `legacy_v1`; theo yêu cầu mới, không chuyển đơn/payment cũ sang dữ liệu active. Currency v2 là VND, không FX. [PRISMA_V2.md](PRISMA_V2.md) ghi kết quả và giới hạn; các phương án giữ lịch sử đầy đủ dưới đây là tham chiếu cho tình huống khác. Chưa chuyển service/DTO hoặc gọi Stripe.
 
 ## 1. Chọn cách chuyển phù hợp dữ liệu

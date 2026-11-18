@@ -9,6 +9,7 @@ import { motion } from "@/src/components/ui/motion";
 const tw = {
   reference_rail_rail_columns_6: [
     "relative min-w-0",
+    "max-[1440px]:[&.rf-rail-columns-6_.rf-reference-rail-viewport>.rf-reference-card]:basis-[calc((100%_-_36px)_/_4)]",
     "[&.rf-rail-columns-6_.rf-reference-rail-viewport>.rf-reference-card]:basis-[calc((100%_-_60px)_/_6)]",
     "max-[1024px]:[&.rf-rail-columns-6_.rf-reference-rail-viewport>.rf-reference-card]:basis-[calc((100%_-_24px)_/_3)]",
     "max-[768px]:[&.rf-rail-columns-6_.rf-reference-rail-viewport>.rf-reference-card]:basis-[calc((100%_-_9px)_/_2)]",
@@ -16,7 +17,7 @@ const tw = {
   reference_rail_viewport: [
     "rf-reference-rail-viewport flex overflow-x-auto [scrollbar-width:none] [scroll-snap-type:x_proximity] gap-3",
     "max-[768px]:gap-2.25 [&::-webkit-scrollbar]:hidden [&>.rf-reference-card]:flex-[0_0_calc((100%_-_48px)_/_5)]",
-    "[&>.rf-reference-card]:[scroll-snap-align:start] max-[1024px]:[&>.rf-reference-card]:basis-[calc((100%_-_24px)_/_3)]",
+    "max-[1440px]:[&>.rf-reference-card]:basis-[calc((100%_-_36px)_/_4)] [&>.rf-reference-card]:[scroll-snap-align:start] max-[1024px]:[&>.rf-reference-card]:basis-[calc((100%_-_24px)_/_3)]",
     "max-[768px]:[&>.rf-reference-card]:basis-[calc((100%_-_9px)_/_2)]",
   ].join(" "),
   rail_arrow: [

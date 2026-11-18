@@ -1,0 +1,17 @@
+node_modules
+.next*
+.env*
+.npmrc
+.git
+.agents
+.codex
+.windsurf
+.visual-review
+test-results*
+playwright-report
+tests
+docs
+coverage
+*.log
+*.tsbuildinfo
+*.pem

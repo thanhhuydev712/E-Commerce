@@ -4,9 +4,9 @@ import { money } from "@/src/catalog/model";
 // Utility Tailwind v4; marker rf-* chỉ phục vụ trạng thái, selector và kiểm thử.
 const tw = {
   summary_list: [
-    "rf-summary-list mx-0 my-5 [&>div]:flex [&>div]:items-center [&>div]:justify-between [&>div]:text-[12px] [&>div]:mx-0",
+    "rf-summary-list mx-0 my-5 [&>div]:flex [&>div]:items-center [&>div]:justify-between [&>div]:text-rf-small [&>div]:mx-0",
     "[&>div]:my-3.5 [&>div]:gap-3.75 [&_dt]:text-rf-muted [&_dd]:font-semibold [&_dd]:text-right [&_dd]:m-0",
-    "[&>small]:text-[#8d988f] [&>small]:text-[10px] [&>.rf-summary-total]:border-t",
+    "[&>small]:text-[#8d988f] [&>small]:text-rf-caption [&>.rf-summary-total]:border-t",
     "[&>.rf-summary-total]:[border-top-style:solid] [&>.rf-summary-total]:border-t-rf-border [&>.rf-summary-total]:pt-4.5",
     "[&>.rf-summary-total]:mt-4.5",
   ].join(" "),

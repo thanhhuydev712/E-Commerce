@@ -1,0 +1,92 @@
+{
+  "started": "2026-11-17",
+  "verified": "2026-11-18",
+  "scope": "Local Docker learning stack; no public deployment or real orders",
+  "versions_observed": {
+    "docker_engine": "29.5.2",
+    "compose": "5.1.3",
+    "node": "24.19.0",
+    "next": "16.4.6",
+    "postgresql": "17.12",
+    "nginx": "1.30.6"
+  },
+  "checks": {
+    "linux_api_runtime_and_tools_image_builds": "passed",
+    "linux_frontend_standalone_build": "passed; 30 route shells",
+    "backend_lint": "passed",
+    "backend_unit_tests": { "passed": 22, "files": 5 },
+    "frontend_lint": "passed after excluding generated review/report artifacts",
+    "frontend_format_check": "passed",
+    "compose_config_validation": "passed",
+    "nginx_config_validation": "passed",
+    "workflow_yaml_and_action_sha_validation": "passed; not a GitHub Actions execution",
+    "ci_change_detection": "5 behavior cases passed, including docs-only, .nvmrc and mixed docs/source; newline output checked",
+    "documentation_validation": { "files": 9, "internal_links": 187, "missing_targets": 0 },
+    "api_runtime_uid": 1000,
+    "frontend_runtime_uid": 1000,
+    "docker_env_ignored_by_git": true
+  },
+  "database": {
+    "target": "Dedicated rigforce-local Compose PostgreSQL and named volume",
+    "legacy_history_bootstrap": "failed at rename_payment_amout_to_amount: column amout missing; historical SQL was not changed",
+    "fresh_history": [
+      "20261105000000_commerce_v2_baseline",
+      "20261106010000_storefront_saved_builds"
+    ],
+    "completed_fresh_migrations": 2,
+    "public_business_tables": 104,
+    "sql_source": "Existing canonical baseline plus post-cutover migrations, copied unchanged during image build",
+    "legacy_preflight_cli": "expected refusal: FRESH_DOCKER_HISTORY_REQUIRED",
+    "history_guard_unit_cases": "empty, completed, nonempty untracked, legacy/mixed, unfinished and rolled-back baseline",
+    "host_database_migrations_or_seed": "not run"
+  },
+  "seed": {
+    "products": 183,
+    "categories": 26,
+    "articles": 8,
+    "automatic_on_api_boot": false,
+    "payment_provider_calls": 0,
+    "admin_user_assignments_changed": false
+  },
+  "nginx_smoke": {
+    "result": "passed",
+    "checks": ["API readiness", "seeded catalog", "HTML routes", "API media image", "invalid Origin rejected with 403", "valid Origin without session returns 401"],
+    "order_creation": false,
+    "payment_provider_calls": false
+  },
+  "browser_smoke": {
+    "result": "8/8 passed",
+    "stack": "Linux Docker frontend/API/PostgreSQL through Nginx at localhost:8080",
+    "routes": ["/", "/products", "/pc-builder", "/login"],
+    "viewports": ["1440x1000", "390x844"],
+    "mode": "Chromium, anonymous fresh contexts, reduced motion",
+    "assertions": ["HTTP 200", "one visible h1", "no horizontal overflow", "no pageerror", "no disallowed-Origin toast"],
+    "artifacts": "Temporary directory rigforce-docker-final-c3Khkw/results.json and screenshots"
+  },
+  "persistence": {
+    "result": "passed",
+    "operation": "Force recreate API and frontend; retain database/media volumes",
+    "before_products": 183,
+    "after_products": 183,
+    "sampled_media_sha256_before": "287b45865ec42fc83757d904e6ad89e0fb1014d2b4cfd71d032bee8972f9b13b",
+    "sampled_media_sha256_after": "287b45865ec42fc83757d904e6ad89e0fb1014d2b4cfd71d032bee8972f9b13b",
+    "artifacts": "Temporary directory rigforce-docker-persistence-aOIsbf/results.json"
+  },
+  "handoff": {
+    "url": "http://localhost:8080",
+    "bound_host_interface": "127.0.0.1",
+    "long_running_services": "db/api/front/nginx healthy",
+    "migration_service": "Exited (0)",
+    "host_dev_servers_stopped_by_this_task": false,
+    "commit_push_or_cloud_deployment": false
+  },
+  "limitations": [
+    "Local HTTP lab: API development configuration, frontend production standalone",
+    "No TLS, public checkout/demo restrictions or production email acceptance",
+    "No authenticated order/payment E2E, real provider calls or business fulfillment acceptance",
+    "No GitHub Actions run, ECR push, CD workflow or AWS provisioning",
+    "No whole-host reboot, disaster recovery or backup/restore test",
+    "Persistence check compares catalog count and one media sample, not every database row/file",
+    "Historical legacy migration bootstrap issue remains for a separate migration task"
+  ]
+}

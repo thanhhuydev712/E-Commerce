@@ -26,79 +26,79 @@ const tw = {
     "[&.rf-reference-card-flash]:rounded-[13px] max-[768px]:[&.rf-reference-card-flash]:pt-2.5",
     "max-[768px]:[&.rf-reference-card-flash]:pb-4.5 max-[768px]:[&.rf-reference-card-flash]:min-h-73.75",
     "max-[768px]:[&.rf-reference-card-flash]:px-2.5 [&.rf-reference-card-flash_.rf-product-photo]:h-58.75",
-    "[&.rf-reference-card-flash_.rf-reference-card-name]:h-10.5",
-    "[&.rf-reference-card-flash_.rf-reference-card-name]:min-h-10.5",
-    "[&.rf-reference-card-flash_.rf-reference-card-name]:text-[15px]",
+    "[&.rf-reference-card-flash_.rf-reference-card-name]:h-[3em]",
+    "[&.rf-reference-card-flash_.rf-reference-card-name]:min-h-[3em]",
+    "[&.rf-reference-card-flash_.rf-reference-card-name]:text-rf-product",
     "[&.rf-reference-card-flash_.rf-reference-card-name]:mt-2.25",
-    "[&.rf-reference-card-flash_.rf-reference-card-price_strong]:text-[18px]",
+    "[&.rf-reference-card-flash_.rf-reference-card-price_strong]:text-rf-price",
     "[&.rf-reference-card-flash_.rf-reference-card-price_del]:mt-2",
     "max-[768px]:[&.rf-reference-card-flash_.rf-product-photo]:h-41.25",
-    "max-[768px]:[&.rf-reference-card-flash_.rf-reference-card-name]:text-[12px]",
-    "max-[768px]:[&.rf-reference-card-flash_.rf-reference-card-name]:h-9",
-    "max-[768px]:[&.rf-reference-card-flash_.rf-reference-card-name]:min-h-9",
-    "max-[768px]:[&.rf-reference-card-flash_.rf-reference-card-name]:leading-[18px]",
-    "max-[768px]:[&.rf-reference-card-flash_.rf-reference-card-price_strong]:text-[15px]",
+    "max-[768px]:[&.rf-reference-card-flash_.rf-reference-card-name]:text-rf-product-compact",
+    "max-[768px]:[&.rf-reference-card-flash_.rf-reference-card-name]:h-[3em]",
+    "max-[768px]:[&.rf-reference-card-flash_.rf-reference-card-name]:min-h-[3em]",
+    "max-[768px]:[&.rf-reference-card-flash_.rf-reference-card-name]:leading-normal",
+    "max-[768px]:[&.rf-reference-card-flash_.rf-reference-card-price_strong]:text-rf-price-compact",
     "[&.rf-reference-card-catalog]:w-auto [&.rf-reference-card-catalog]:p-3 [&.rf-reference-card-catalog]:rounded-[5px]",
     "max-[768px]:[&.rf-reference-card-catalog]:pt-2.5 max-[768px]:[&.rf-reference-card-catalog]:pb-3.25",
     "max-[768px]:[&.rf-reference-card-catalog]:px-2.25 max-[1024px]:[&.rf-reference-card-catalog]:p-2.5",
-    "[&.rf-reference-card-catalog_.rf-reference-card-name]:text-[13px]",
-    "[&.rf-reference-card-catalog_.rf-reference-card-name]:min-h-14.75",
+    "[&.rf-reference-card-catalog_.rf-reference-card-name]:text-rf-product",
+    "[&.rf-reference-card-catalog_.rf-reference-card-name]:h-auto [&.rf-reference-card-catalog_.rf-reference-card-name]:min-h-[4.5em]",
     "[&.rf-reference-card-catalog_.rf-reference-card-name]:[-webkit-line-clamp:3]",
-    "[&.rf-reference-card-catalog_.rf-reference-card-price_strong]:text-[18px]",
+    "[&.rf-reference-card-catalog_.rf-reference-card-price_strong]:text-rf-price",
     "[&.rf-reference-card-catalog_.rf-reference-card-image]:h-45",
     "[&.rf-reference-card-catalog_.rf-reference-card-specs]:min-h-28.75",
-    "[&.rf-reference-card-catalog_.rf-card-buy_br]:hidden [&.rf-reference-card-catalog_.rf-card-buy_span]:text-[11px]",
+    "[&.rf-reference-card-catalog_.rf-card-buy_span]:text-rf-detail",
     "max-[768px]:[&.rf-reference-card-catalog_.rf-reference-card-image]:h-36.25",
-    "max-[768px]:[&.rf-reference-card-catalog_.rf-reference-card-name]:text-[12px]",
-    "max-[768px]:[&.rf-reference-card-catalog_.rf-reference-card-name]:min-h-13.75",
-    "max-[768px]:[&.rf-reference-card-catalog_.rf-reference-card-price_strong]:text-[16px]",
+    "max-[768px]:[&.rf-reference-card-catalog_.rf-reference-card-name]:text-rf-product-compact",
+    "max-[768px]:[&.rf-reference-card-catalog_.rf-reference-card-name]:min-h-[4.5em]",
+    "max-[768px]:[&.rf-reference-card-catalog_.rf-reference-card-price_strong]:text-rf-price-compact",
     "max-[768px]:[&.rf-reference-card-catalog_.rf-card-add]:w-8.75",
     "max-[768px]:[&.rf-reference-card-catalog_.rf-card-buy]:gap-0.75",
     "max-[768px]:[&.rf-reference-card-catalog_.rf-card-buy_svg]:w-3.5",
-    "max-[768px]:[&.rf-reference-card-catalog_.rf-card-buy_span]:text-[10px]",
+    "max-[768px]:[&.rf-reference-card-catalog_.rf-card-buy_span]:text-rf-small",
     "max-[768px]:[&.rf-reference-card-catalog_.rf-reference-card-specs]:p-1.75",
-    "max-[768px]:[&.rf-reference-card-catalog_.rf-reference-card-specs>span]:text-[10px]",
-    "[&.rf-product-card]:[transition:border-color_0.2s,_box-shadow_0.2s] [&.rf-product-card]:border-rf-border",
+    "max-[768px]:[&.rf-reference-card-catalog_.rf-reference-card-specs>span]:text-rf-detail-compact",
+    "[&.rf-product-card]:border-rf-border",
     "[&.rf-product-card]:border-solid [&.rf-product-card]:border [&.rf-product-card]:rounded-[9px]",
-    "[&.rf-product-card:hover]:shadow-[0_7px_20px_#17362309] [&.rf-product-card:hover]:border-[#a8c9b5]",
+    "[&.rf-product-card:hover]:shadow-[0_7px_20px_#17362309] [&.rf-product-card:hover]:border-[#c5a590]",
     "[&.rf-product-card:hover_.rf-card-art>.rf-product-art]:[transform:translateY(-3px)]",
     "[&.rf-product-card:hover_.rf-card-art>.rf-component-art]:[transform:translateY(-3px)]",
   ].join(" "),
   ribbon: [
     "rf-ribbon absolute top-3.25 left-2 z-1 pr-3.25 pl-4.5",
-    "bg-[linear-gradient(_120deg,_#172f38_0_8%,_#c8d4d4_8%_12%,_#008468_12%_)] bg-transparent text-white text-[11px]",
+    "bg-rf-accent bg-transparent text-white text-rf-detail",
     "font-semibold [clip-path:polygon(10%_0,_100%_0,_100%_100%,_0_100%)] py-1.25 max-[768px]:top-2.25",
-    "max-[768px]:left-0.75 max-[768px]:pr-2.25 max-[768px]:pl-3.75 max-[768px]:text-[9px] max-[768px]:py-1",
+    "max-[768px]:left-0.75 max-[768px]:pr-2.25 max-[768px]:pl-3.75 max-[768px]:text-rf-caption max-[768px]:py-1",
   ].join(" "),
   reference_card_name: [
-    "rf-reference-card-name [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] min-h-10.5",
-    "text-[14px] font-bold leading-[21px] mt-0.75 h-10.5 overflow-hidden max-[768px]:text-[12px] max-[768px]:min-h-9.5",
+    "rf-reference-card-name [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] min-h-[3em]",
+    "text-rf-product font-bold leading-normal mt-0.75 h-[3em] overflow-hidden max-[768px]:text-rf-product-compact",
   ].join(" "),
   reference_card_price: [
-    "rf-reference-card-price mt-2.5 [&_strong]:block [&_strong]:text-[17px] [&_strong]:text-rf-sale",
-    "[&_strong]:font-extrabold [&_strong]:whitespace-nowrap [&_del]:block [&_del]:text-[11px] [&_del]:text-[#a0a5a7]",
-    "[&_del]:italic [&_del]:mt-1 max-[768px]:[&_strong]:text-[15px] max-[768px]:[&_del]:text-[9px]",
+    "rf-reference-card-price mt-2.5 [&_strong]:block [&_strong]:text-rf-price [&_strong]:text-rf-sale",
+    "[&_strong]:font-extrabold [&_strong]:whitespace-nowrap [&_del]:block [&_del]:text-rf-detail [&_del]:text-rf-muted",
+    "[&_del]:italic [&_del]:mt-1 max-[768px]:[&_strong]:text-rf-price-compact max-[768px]:[&_del]:text-rf-caption",
   ].join(" "),
   reference_card_specs: [
     "rf-reference-card-specs grid bg-[#f3f4f5] bg-none mt-2.25 mb-4.5 min-h-28.75 content-start px-1.75 py-2.25",
-    "rounded-[6px] gap-1.25 [&>span]:flex [&>span]:items-center [&>span]:text-[11px] [&>span]:text-[#5b6266]",
+    "rounded-[6px] gap-1.25 [&>span]:flex [&>span]:items-center [&>span]:text-rf-detail [&>span]:text-[#5b6266]",
     "[&>span]:leading-[1.5] [&>span]:[overflow-wrap:anywhere] [&>span]:gap-1.25 [&>span]:overflow-hidden",
     "[&_svg]:text-[#7c8488] max-[768px]:min-h-26.25 max-[768px]:px-1.25 max-[768px]:py-1.75",
-    "max-[768px]:[&>span]:text-[9px] max-[768px]:[&>span]:gap-1",
+    "max-[768px]:[&>span]:text-rf-caption max-[768px]:[&>span]:gap-1",
   ].join(" "),
   reference_card_actions: [
     "rf-reference-card-actions flex items-stretch mt-auto gap-2 [&>button]:min-h-10.75 [&>button]:border-rf-green",
     "[&>button]:border-solid [&>button]:border [&>button]:rounded-[4px]",
   ].join(" "),
   card_buy: [
-    "rf-card-buy flex items-center justify-center flex-1 bg-rf-green bg-none text-white p-1 gap-1.5 [&_span]:text-[12px]",
-    "[&_span]:font-black [&_span]:leading-[1.2] max-[768px]:gap-0.75 max-[768px]:[&_span]:text-[10px]",
-    "max-[768px]:[&_svg]:w-3.5",
+    "rf-card-buy flex items-center justify-center flex-1 bg-rf-green bg-none text-white p-1 gap-1.5 [&_span]:text-rf-product-compact",
+    "[&_span]:font-black [&_span]:leading-[1.2] [&_span]:whitespace-nowrap max-[768px]:gap-0.75 max-[768px]:[&_span]:text-rf-caption",
+    "max-[768px]:[&_svg]:hidden",
   ].join(" "),
   product_card: [
     motion.card,
-    "rf-product-card relative min-w-0 bg-white bg-none [transition:border-color_0.2s,_box-shadow_0.2s] border-rf-border",
-    "border-solid border rounded-[9px] overflow-hidden hover:shadow-[0_7px_20px_#17362309] hover:border-[#a8c9b5]",
+    "rf-product-card relative min-w-0 bg-white bg-none border-rf-border",
+    "border-solid border rounded-[9px] overflow-hidden hover:shadow-[0_7px_20px_#17362309] hover:border-[#c5a590]",
     "[&:hover_.rf-card-art>.rf-product-art]:[transform:translateY(-3px)]",
     "[&:hover_.rf-card-art>.rf-component-art]:[transform:translateY(-3px)]",
   ].join(" "),
@@ -110,7 +110,7 @@ const tw = {
   ].join(" "),
   icon_btn: [
     "inline-flex items-center justify-center bg-transparent bg-none min-w-9 min-h-9 p-2 border-current border-none",
-    "[border-width:medium] rounded-[6px] print:hidden! hover:bg-[#edf4f0] hover:bg-none",
+    "[border-width:medium] rounded-[6px] print:hidden! hover:bg-rf-accent-soft hover:bg-none aria-pressed:bg-rose-100 aria-pressed:hover:bg-rose-200",
   ].join(" "),
   card_art: [
     "rf-card-art block pt-6 pb-0 px-2.5 overflow-hidden max-[768px]:pt-6.5 max-[768px]:px-0.75 [&>.rf-product-art]:h-43.5",
@@ -124,32 +124,32 @@ const tw = {
     "max-[768px]:[&>.rf-component-art]:h-30",
   ].join(" "),
   card_brand: [
-    "rf-card-brand flex items-center justify-between text-[8px] font-bold text-[#8e9991] uppercase tracking-[0.7px]",
-    "[&>span]:inline-flex [&>span]:items-center [&>span]:text-[8px] [&>span]:text-[#a88b45] [&>span]:font-medium",
-    "[&>span]:tracking-[0] [&>span]:gap-0.75 max-[768px]:text-[7px]",
+    "rf-card-brand flex items-center justify-between text-rf-caption font-bold text-[#8e9991] uppercase tracking-[0.7px]",
+    "[&>span]:inline-flex [&>span]:items-center [&>span]:text-rf-caption [&>span]:text-[#a88b45] [&>span]:font-medium",
+    "[&>span]:tracking-[0] [&>span]:gap-0.75 max-[768px]:text-rf-caption",
   ].join(" "),
   card_name: [
-    "rf-card-name [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] min-h-9.5 text-[12px]",
-    "font-semibold leading-[1.6] mt-1.25 overflow-hidden max-[768px]:text-[11px] max-[768px]:min-h-9 max-[768px]:mt-1.25",
+    "rf-card-name [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] min-h-9.5 text-rf-product-compact",
+    "font-semibold leading-[1.6] mt-1.25 overflow-hidden max-[768px]:text-rf-detail max-[768px]:min-h-9 max-[768px]:mt-1.25",
     "hover:text-rf-green",
   ].join(" "),
   card_specs: [
-    "rf-card-specs grid grid-cols-[1fr_1fr] gap-y-1.25 gap-x-1.5 mt-2.5 mb-3.25 bg-[#f5f7f5] bg-none px-1.75 py-2.25 mx-0",
-    "rounded-[4px] [&>span]:text-[8px] [&>span]:text-[#6b7a70] [&>span]:whitespace-nowrap [&>span]:text-ellipsis",
-    "[&>span]:overflow-hidden max-[1200px]:[&>span]:text-[7px] max-[1024px]:[&>span]:text-[8px] max-[768px]:mt-2",
-    "max-[768px]:mb-2.25 max-[768px]:px-1.25 max-[768px]:py-1.75 max-[768px]:gap-1 max-[768px]:[&>span]:text-[7px]",
+    "rf-card-specs grid grid-cols-1 gap-y-1.25 gap-x-1.5 mt-2.5 mb-3.25 bg-[#f5f7f5] bg-none px-1.75 py-2.25 mx-0",
+    "rounded-[4px] [&>span]:text-rf-caption [&>span]:text-[#6b7a70] [&>span]:[overflow-wrap:anywhere]",
+    "[&>span]:overflow-hidden max-[1200px]:[&>span]:text-rf-caption max-[1024px]:[&>span]:text-rf-caption max-[768px]:mt-2",
+    "max-[768px]:mb-2.25 max-[768px]:px-1.25 max-[768px]:py-1.75 max-[768px]:gap-1 max-[768px]:[&>span]:text-rf-caption",
   ].join(" "),
   price: [
-    "rf-price flex flex-wrap items-baseline gap-x-1.75 [&_strong]:text-[18px] [&_strong]:leading-[1.6]",
-    "[&_strong]:tracking-[-0.6px] [&_strong]:text-rf-sale [&_del]:text-[9px] [&_del]:text-[#a0a8a2]",
-    "max-[1200px]:[&_strong]:text-[16px] max-[768px]:[&_strong]:text-[15px] max-[768px]:[&_del]:text-[8px]",
+    "rf-price flex flex-wrap items-baseline gap-x-1.75 [&_strong]:text-rf-price [&_strong]:leading-[1.6]",
+    "[&_strong]:tracking-[-0.6px] [&_strong]:text-rf-sale [&_del]:text-rf-caption [&_del]:text-[#a0a8a2]",
+    "max-[1200px]:[&_strong]:text-rf-price-compact max-[768px]:[&_strong]:text-rf-price-compact max-[768px]:[&_del]:text-rf-caption",
   ].join(" "),
   card_bottom: [
     "rf-card-bottom flex items-center justify-between mt-2.25 [&>span]:inline-flex [&>span]:items-center",
-    "[&>span]:text-[9px] [&>span]:text-[#568365] [&>span]:gap-0.75 max-[768px]:mt-1.25 max-[768px]:[&>span]:text-[8px]",
+    "[&>span]:text-rf-caption [&>span]:text-[#568365] [&>span]:gap-0.75 max-[768px]:mt-1.25 max-[768px]:[&>span]:text-rf-caption",
   ].join(" "),
   add_btn: [
-    "rf-add-btn grid place-items-center text-rf-green bg-[#f1f7f2] bg-none w-7.75 h-7.5 border-[#d6e6db] border-solid",
+    "rf-add-btn grid place-items-center text-rf-green bg-rf-accent-soft bg-none w-7.75 h-7.5 border-rf-border border-solid",
     "border rounded-[6px] max-[768px]:w-7.75 max-[768px]:h-7.75 hover:bg-rf-green hover:bg-none hover:text-white",
   ].join(" "),
 };
@@ -167,13 +167,13 @@ export function ProductCard({
   const purchase = product.variants[0];
   const canBuy = !!purchase?.stock && !shop.cartPending;
   // Tính từ tiền nguyên: không dùng float cho tiền. % chỉ phục vụ badge hiển thị.
-  const discount =
-    BigInt(product.oldPrice) === BigInt(0)
-      ? 0
-      : Number(
-          ((BigInt(product.oldPrice) - BigInt(product.price)) * BigInt(100)) /
-            BigInt(product.oldPrice),
-        );
+  const hasDiscount = BigInt(product.oldPrice) > BigInt(product.price);
+  const discount = !hasDiscount
+    ? 0
+    : Number(
+        ((BigInt(product.oldPrice) - BigInt(product.price)) * BigInt(100)) /
+          BigInt(product.oldPrice),
+      );
   // Biến thể compact dùng chung dữ liệu và action; chỉ thay bố cục theo ảnh tham khảo.
   if (variant !== "default")
     return (
@@ -184,7 +184,7 @@ export function ProductCard({
           tw.reference_card_reference_card_flash_reference_card_catalog_product_card
         }
       >
-        <span className={tw.ribbon}>Giảm {discount}%</span>
+        {discount > 0 && <span className={tw.ribbon}>Giảm {discount}%</span>}
         <Link
           className="rf-reference-card-image block mb-2.25"
           href={`/products/${product.slug}`}
@@ -199,7 +199,7 @@ export function ProductCard({
         </Link>
         <div className={tw.reference_card_price}>
           <strong>{money(product.price)}</strong>
-          <del>{money(product.oldPrice)}</del>
+          {hasDiscount && <del>{money(product.oldPrice)}</del>}
         </div>
         {variant !== "flash" && (
           <>
@@ -242,11 +242,7 @@ export function ProductCard({
                 }}
               >
                 <Rocket size={17} />
-                <span>
-                  MUA
-                  <br />
-                  NGAY
-                </span>
+                <span>MUA NGAY</span>
               </button>
             </div>
           </>
@@ -256,9 +252,11 @@ export function ProductCard({
   return (
     <article className={tw.product_card}>
       <div className={tw.card_top}>
-        <span className="rf-discount text-[9px] font-bold text-[#aa3439] bg-[#fceef0] bg-none px-1.5 py-0.75 rounded-[3px] max-[768px]:text-[8px]">
-          -{discount}%
-        </span>
+        {discount > 0 && (
+          <span className="rf-discount text-rf-caption font-bold text-[#aa3439] bg-[#fceef0] bg-none px-1.5 py-0.75 rounded-[3px] max-[768px]:text-rf-caption">
+            -{discount}%
+          </span>
+        )}
         <button
           onClick={() => shop.toggle("wishlist", product.id)}
           className={
@@ -295,7 +293,7 @@ export function ProductCard({
         </div>
         <div className={tw.price}>
           <strong>{money(product.price)}</strong>
-          <del>{money(product.oldPrice)}</del>
+          {hasDiscount && <del>{money(product.oldPrice)}</del>}
         </div>
         <div className={tw.card_bottom}>
           <span>

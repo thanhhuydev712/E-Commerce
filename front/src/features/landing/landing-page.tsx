@@ -1,29 +1,29 @@
-import { HeroSection } from "./components/hero-section";
-import { ServiceHighlights } from "./components/service-highlights";
 import { FlashSaleSection } from "./components/flash-sale-section";
-import { CampaignSection } from "./components/campaign-section";
-import { CategoryShelves } from "./components/category-shelves";
-
 import { CatalogDirectory } from "./components/catalog-directory";
-import { PartnerBrands } from "./components/partner-brands";
-import { PromotionsOverview } from "./components/promotions-overview";
-import { ReferenceJournal } from "./components/reference-journal";
 import { FloatingSupport } from "./components/floating-support";
+import { ForgeIntro } from "./components/forge-intro";
+import { ForgeStudio } from "./components/forge-studio";
+import { ForgeJournal } from "./components/forge-journal";
+import { PartnerBrands } from "./components/partner-brands";
+import { LandingMotion } from "./components/landing-motion";
+import { motion } from "@/src/components/ui/motion";
+import { ProductCollections } from "./components/product-collections";
 
-/** Ghép đúng thứ tự các vùng của ảnh; nội dung và sản phẩm lấy từ CatalogProvider/API. */
+/** Showroom thương hiệu; giá, tồn và chiến dịch vẫn đọc từ CatalogProvider/API. */
 export default function LandingPage() {
   return (
-    <>
-      <HeroSection />
-      <ServiceHighlights />
+    <div
+      className={`rf-forge-home space-y-10 pt-4 md:space-y-14 md:pt-5 ${motion.landing}`}
+    >
+      <ForgeIntro />
       <FlashSaleSection />
-      <CampaignSection />
-      <CategoryShelves />
+      <ProductCollections />
+      <ForgeStudio />
       <CatalogDirectory />
+      <ForgeJournal />
       <PartnerBrands />
-      <PromotionsOverview />
-      <ReferenceJournal />
       <FloatingSupport />
-    </>
+      <LandingMotion />
+    </div>
   );
 }

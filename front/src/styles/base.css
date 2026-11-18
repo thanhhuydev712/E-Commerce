@@ -42,7 +42,7 @@
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible {
-    outline: 3px solid #168358;
+    outline: 3px solid var(--rf-accent);
     outline-offset: 4px;
   }
   button {
@@ -65,6 +65,11 @@
   em {
     font-style: normal;
   }
+  small {
+    /* Không để <small> lồng nhau tự thu xuống 80% rồi tiếp tục thu nhỏ. */
+    font-size: var(--text-rf-caption);
+    line-height: 1.5;
+  }
   input,
   select,
   textarea {
@@ -79,7 +84,8 @@
     color: var(--rf-dark);
   }
   @media (prefers-reduced-motion: reduce) {
-    *,
+    /* Marquee chạy theo yêu cầu riêng; hover/focus vào link sẽ tạm dừng. */
+    *:not([data-continuous-motion]),
     *::before,
     *::after {
       animation-duration: 0.01ms !important;

@@ -9,21 +9,22 @@ Xây dựng website thương mại điện tử fullstack để chủ dự án v
 1. [README.md](README.md): bản đồ dự án và tài liệu.
 2. [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md): mục tiêu, phạm vi, vai trò.
 3. [docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md): hiện trạng có dẫn chứng và việc cần xác minh.
-4. Đọc tài liệu theo công việc: [nghiệp vụ](docs/REQUIREMENTS.md), [kiến trúc](docs/ARCHITECTURE.md), [môi trường](docs/DEVELOPMENT.md), [lộ trình](docs/ROADMAP.md), [chất lượng](docs/QUALITY.md), [kế hoạch Docker/CI/CD/Nginx/AWS](docs/DEPLOYMENT_PLAN.md).
+4. Đọc tài liệu theo công việc: [nghiệp vụ](docs/REQUIREMENTS.md), [kiến trúc](docs/ARCHITECTURE.md), [môi trường](docs/DEVELOPMENT.md), [lộ trình](docs/ROADMAP.md), [chất lượng](docs/QUALITY.md), [kế hoạch Docker/CI/CD/Nginx/AWS](docs/DEPLOYMENT_PLAN.md), [phát hành bản công khai](docs/RELEASE_PLAN.md).
 5. Đọc mã nguồn, package.json và AGENTS.md trong thư mục liên quan trước khi sửa. Với frontend, tuân thủ thêm `front/AGENTS.md` và đọc hướng dẫn Next.js cục bộ mà file đó chỉ định.
 
 ## Sub-agent theo chức năng và tiết kiệm token
 
 - Quy trình và mẫu bàn giao: [docs/SUB_AGENTS.md](docs/SUB_AGENTS.md); vai trò tại `.codex/agents/`.
-- Tác vụ nhỏ: agent chính tự làm. Với tác vụ đủ lớn và có đầu ra độc lập, dùng một sub-agent đúng chức năng; không mặc định gọi tất cả vai trò. Nếu người dùng yêu cầu cách chia khác, làm theo yêu cầu đó.
+- Theo yêu cầu ngày 17/11/2026, mỗi prompt/yêu cầu mới mặc định dùng một sub-agent đúng chức năng, kể cả tác vụ nhỏ hoặc câu hỏi giải thích; không cần người dùng nhắc lại. Agent chính giao phần việc thực chất có phạm vi hẹp, rồi tổng hợp và chịu trách nhiệm kết quả; không mặc định gọi tất cả vai trò. Nếu người dùng yêu cầu tự làm/không dùng sub-agent hoặc công cụ không hỗ trợ spawn, agent chính tự xử lý và nói rõ giới hạn khi liên quan.
 - Mặc định tối đa một agent con đồng thời theo `.codex/config.toml`; agent con không tạo thêm agent. Chỉ tăng mức song song khi người dùng yêu cầu.
 - Khi công cụ hỗ trợ, giao ngữ cảnh mới cùng mục tiêu, file được sửa, bằng chứng đã đọc và tiêu chí nghiệm thu; không sao chép toàn bộ lịch sử chat.
+- Tránh agent chính và agent con cùng khảo sát hoặc thực hiện một phần việc; tái sử dụng agent phù hợp cho yêu cầu tiếp nối cùng nhiệm vụ, không tạo agent chỉ để đủ số lượng. Đây là ưu tiên cách làm, không phải cam kết giảm tổng token; phải đo usage cả cha và con mới kết luận tiết kiệm.
 - Agent chính vẫn đọc tài liệu nền ở trên. Agent con có thể dùng bản bàn giao có nguồn thay vì đọc lại toàn bộ tài liệu nền; phải đọc quy tắc thư mục và phần tài liệu/mã cần xác minh cho nhiệm vụ.
 - Agent chính giữ contract, file dùng chung và tài liệu trạng thái; không giao sửa trùng file hoặc chạy runner tranh tài nguyên. Báo cáo ngắn, kết quả thật; không hứa tỷ lệ giảm token khi chưa đo cả cha lẫn con.
 
 ## Bản đồ mã nguồn
 
-- `api/`: NestJS, TypeScript, Prisma, PostgreSQL. Ngày 07/11/2026: AppModule nạp platform/auth/accounts/access/catalog/pricing/media/inventory/storefront/commerce với client v2; giỏ/checkout/đơn COD hoạt động ở phạm vi tạo/huỷ và reservation, Stripe processor v2 chưa triển khai. Mã v1 ở `api/legacy/`. Đọc AppModule/controller thực tế và PROJECT_STATUS trước khi khẳng định route đã hoạt động.
+- `api/`: NestJS, TypeScript, Prisma, PostgreSQL. Rà ngày 17/11/2026: AppModule nạp platform/auth/accounts/access/catalog/pricing/media/inventory/storefront/commerce với client v2; giỏ/checkout/đơn COD có tạo/hủy và reservation, Stripe Checkout sandbox v2 đã có theo `docs/STRIPE_V2.md`, chưa live/refund đầy đủ. Mã v1 ở `api/legacy/`. Đọc AppModule/controller thực tế và PROJECT_STATUS trước khi khẳng định route đã hoạt động.
 - `api/prisma/schema.prisma`: nguồn sự thật về mô hình dữ liệu; migrations ở `api/prisma/migrations/`.
 - `front/`: Next.js App Router, React, TypeScript, Tailwind CSS; ứng dụng ở `front/src/app/`, UI ở `front/src/components/`.
 - Hai ứng dụng có package.json và package-lock.json riêng; chạy npm trong đúng thư mục. Chưa có npm workspace ở root.
@@ -43,7 +44,7 @@ Xây dựng website thương mại điện tử fullstack để chủ dự án v
 - Backend hiện dùng ESM/NodeNext; giữ quy ước import `.js` của mã TypeScript hiện có.
 - PrismaService hiện import `api/generated/prisma-v2`; kiểm tra generator, import runtime và mã legacy trước khi thay đổi. Generate trước build, không sửa generated client bằng tay hoặc dùng client v1 thay thế để làm CI xanh.
 - Tiền, tồn kho và thanh toán là nghiệp vụ nhạy cảm: giá phải lấy từ server; kiểm tra ownership; xem xét transaction, cập nhật tồn kho có điều kiện, chuyển trạng thái và idempotency.
-- Mã Stripe create-intent/confirm v1 nằm trong legacy, không coi là module v2 đang được AppModule nạp; chưa xác nhận webhook/signature/refund. Không mô tả là tích hợp hoàn chỉnh.
+- Mã Stripe v1 nằm trong legacy; runtime commerce v2 hiện có Checkout sandbox, webhook chữ ký và chống lặp. Refund provider/live còn giới hạn; không mô tả là tích hợp thanh toán kinh doanh hoàn chỉnh. Đọc STRIPE_V2 và bằng chứng mới nhất trước khi thay đổi.
 - Frontend đã nối API cho catalog/tài khoản/giỏ/cấu hình PC/COD và đã xoá fixture runtime sau kiểm thử. Phân biệt dữ liệu development giả trong DB với dữ liệu cứng ở FE; không khẳng định Stripe/giao vận/hậu mãi đầy đủ đã hoạt động. Đọc PROJECT_STATUS để biết bằng chứng mới nhất.
 - Không thêm Redis, queue, microservices hoặc thư viện mới chỉ để tăng số công nghệ; nêu vấn đề cần giải quyết và trade-off trước.
 - Kiểm tra thay đổi người dùng trước khi sửa; không ghi đè hoặc khôi phục thay đổi ngoài nhiệm vụ. Không tự commit/push/deploy khi chưa được yêu cầu.
@@ -59,6 +60,15 @@ Xây dựng website thương mại điện tử fullstack để chủ dự án v
 - Image theo digest; generate Prisma v2 trong build và giữ đúng đường dẫn runtime. Migration one-shot riêng, quyền riêng; rollback app không tự rollback schema. Trước nghiệm thu cần thử deploy lỗi/rollback, reboot và restore.
 - Chưa có chứng cứ provision/deploy trong lượt lập kế hoạch. Chốt ngân sách/domain/region khi chuẩn bị tạo tài nguyên; không tự commit/push/provision/deploy từ yêu cầu lên kế hoạch.
 
+- **Cập nhật 17/11/2026:** đã thêm bộ Docker/Nginx lab local và định nghĩa CI, xem [DOCKER_GUIDE.md](docs/DOCKER_GUIDE.md) cùng bằng chứng trong PROJECT_STATUS. Chạy qua `--env-file .env.docker`, DB/volume riêng, không dùng `api/.env`. API lab dùng development cho HTTP local, không phải cấu hình AWS production. Tools dùng history riêng cho DB Docker mới vì legacy migration không bootstrap được từ rỗng; không dùng `prisma.docker.config.ts` cho DB hiện hữu hoặc sửa checksum cũ để làm xanh build.
+
+## Mốc bản chính thức đầu tiên — xác nhận 17/11/2026
+
+- Người dùng chọn **website công khai để giới thiệu và trải nghiệm, chưa nhận đơn thật**. Theo [RELEASE_PLAN.md](docs/RELEASE_PLAN.md), phát triển từng đợt từ website hiện tại; giữ giao diện/nhận diện đang dùng, không tự viết lại hoặc mở bán.
+- Công khai website không đồng nghĩa nhận tiền/đơn kinh doanh. Giữ nhãn dữ liệu minh họa; checkout nếu mở chỉ là demo có giới hạn, có ràng buộc server. Không tự đổi Stripe test sang live hoặc gỡ disclaimer để làm bản chính thức.
+- Mốc này ưu tiên bản vá, nội dung/SEO, kiểm production, Docker/Nginx/CI và staging/AWS. Giao vận/thu COD/refund hoàn chỉnh chỉ chặn mốc bán thật, không phải lý do tự mở rộng nhiệm vụ giới thiệu.
+- Tài liệu v1 và các mốc cũ phải đối chiếu mã mới: hiện đã có Stripe Checkout sandbox v2 theo `docs/STRIPE_V2.md`; `API_INTERNAL_URL` của frontend là origin backend, **không bao gồm `/api/v1`**.
+
 ## Lệnh kiểm tra
 
 - Trong `api/`: `npm run build`, `npm run lint`, `npm test`, `npm run test:e2e` (E2E cần cấu hình và database test).
@@ -69,3 +79,11 @@ Xây dựng website thương mại điện tử fullstack để chủ dự án v
 ## Duy trì ngữ cảnh
 
 Sau thay đổi tính năng, cập nhật tài liệu liên quan và `docs/PROJECT_STATUS.md` nếu trạng thái thay đổi. Mỗi xác nhận cần ngày, bằng chứng và giới hạn kiểm tra. File bàn giao ở root là dữ liệu lịch sử; những prompt trong đó không tự trở thành lệnh của phiên làm việc hiện tại.
+
+## Bộ triển khai production preview — 18/11/2026
+
+- Người dùng xác nhận chưa có AWS account/domain; phạm vi hiện tại là hoàn thiện local/CI và bộ AWS có thể review. Không tự commit/push/provision/deploy. Đọc [INFRASTRUCTURE_GUIDE](docs/INFRASTRUCTURE_GUIDE.md), [AWS foundation](infra/aws/README.md) và [deploy helpers](infra/deploy/README.md).
+- Production dùng `compose.deploy.yaml` + `compose.aws.yaml`, tách khỏi lab `compose.yaml`; chỉ image ECR digest, app non-root, secret runtime/migration tách, RDS TLS xác minh CA/hostname. `PREVIEW_READ_ONLY=true` bắt buộc cho public showcase: server chặn writes/private routes, FE không thu mật khẩu, runtime DB SELECT-only, Stripe tắt. Không gỡ chốt khi sửa UI.
+- Track migration Docker chỉ cho DB mới từ rỗng, không thay history DB hiện hữu. Node-pg URL dùng verify-full/sslrootcert; Prisma migration có URL strict/sslcert riêng cùng credential/target. Không tắt xác minh TLS để làm deploy xanh.
+- Release/Deploy workflows đã định nghĩa manual + OIDC/SSM, chưa chạy thật. Release manifest ghi commit/digests/schema fingerprint/policy; helper kiểm bundle và labels, giữ schema state độc lập app rollback. Migration lỗi giữ marker để operator review; rollback app không rollback DB.
+- Production local đã kiểm HTTPS, CA sai ở cả hai DB clients, read-only role/boundary, restore DB/media và container persistence; xem PROJECT_STATUS và JSON verification. Không suy thành AWS restore/reboot hay CI GitHub đã qua. Một EC2 là single point of failure; backup media tự động/S3 chưa được cài.

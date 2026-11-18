@@ -1,10 +1,14 @@
 import { expect, test } from "@playwright/test";
+import type { StorefrontSnapshot } from "../../src/catalog/model";
 
 test("bản ghép khởi đầu rỗng và không cần WebGL", async ({ page }) => {
   await page.goto("/pc-builder");
   await expect(
-    page.getByRole("button", { name: "Ảnh ghép", exact: true }),
-  ).toHaveAttribute("aria-pressed", "true");
+    page.getByText("Ảnh ghép sản phẩm", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "3D", exact: true }),
+  ).toHaveCount(0);
   await expect(page.locator(".rf-photo-stage [data-slot]")).toHaveCount(0);
   await expect(page.locator(".rf-viewport canvas")).toHaveCount(0);
   await page.getByRole("button", { name: "Chọn vỏ case", exact: true }).click();
@@ -24,6 +28,7 @@ test("chọn, bỏ và hoàn tác cập nhật lớp ảnh cùng bảng chi ti�
   expect(
     (await page.locator(".rf-photo-stack").boundingBox())!.width,
   ).toBeGreaterThan(100);
+  await expect(page.locator(".rf-photo-stage img")).toHaveCount(8);
   await expect
     .poll(() =>
       page
@@ -63,7 +68,7 @@ test("chọn, bỏ và hoàn tác cập nhật lớp ảnh cùng bảng chi ti�
   );
 });
 
-test("bản ghép hỗ trợ lắp tách, kính, nguồn, zoom và giảm chuyển động", async ({
+test("bản ghép hỗ trợ tách ảnh, làm mờ case, nền sáng, zoom và giảm chuyển động", async ({
   page,
 }) => {
   await page.goto("/pc-builder");
@@ -76,10 +81,13 @@ test("bản ghép hỗ trợ lắp tách, kính, nguồn, zoom và giảm chuy�
     "true",
   );
   await page.getByRole("button", { name: "Thu gọn", exact: true }).click();
-  await page.getByRole("button", { name: "Mở kính", exact: true }).click();
+  await page.getByRole("button", { name: "Làm mờ case", exact: true }).click();
   await expect(
-    page.getByRole("button", { name: "Đóng kính", exact: true }),
+    page.getByRole("button", { name: "Hiện rõ case", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
+  await expect(
+    page.locator('.rf-photo-stage [data-slot="case"]'),
+  ).toHaveAttribute("data-muted", "true");
   await page
     .getByRole("button", { name: "Phóng to bản ghép", exact: true })
     .click();
@@ -88,7 +96,7 @@ test("bản ghép hỗ trợ lắp tách, kính, nguồn, zoom và giảm chuy�
     .getByRole("button", { name: "Xem chính diện", exact: true })
     .press("Enter");
   await expect(page.locator(".rf-photo-stage")).toContainText("100%");
-  await page.getByRole("button", { name: "Bật thử", exact: true }).click();
+  await page.getByRole("button", { name: "Bật nền sáng", exact: true }).click();
   await page.getByRole("checkbox", { name: "Giảm chuyển động" }).check();
   await expect(page.locator(".rf-photo-assembly")).toHaveAttribute(
     "data-powered",
@@ -110,21 +118,46 @@ test("bản ghép hỗ trợ lắp tách, kính, nguồn, zoom và giảm chuy�
 test("ảnh lớp bị lỗi có fallback và vẫn giữ linh kiện đã chọn", async ({
   page,
 }) => {
+  const response = await page.request.get("/api/v1/storefront");
+  expect(response.ok()).toBe(true);
+  const snapshot = (await response.json()).data as StorefrontSnapshot;
+  const selectedGpu = snapshot.products.find(
+    (product) => product.id === snapshot.presentation.starterBuild.gpu,
+  );
+  expect(selectedGpu).toBeDefined();
+  const gpuProduct = selectedGpu!;
+  expect(gpuProduct.image.startsWith("/")).toBe(true);
+  let blockedImages = 0;
   await page.route("**/_next/image?*", (route) => {
     const image = new URL(route.request().url()).searchParams.get("url");
-    return image === "/images/pc-studio/gpu.webp"
-      ? route.fulfill({ status: 404, body: "" })
-      : route.continue();
+    if (image === gpuProduct.image) {
+      blockedImages += 1;
+      return route.fulfill({ status: 404, body: "" });
+    }
+    return route.continue();
   });
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   const gpu = page.locator('.rf-photo-stage [data-slot="gpu"]');
+  await expect.poll(() => blockedImages).toBeGreaterThan(0);
+  await expect(gpu).toHaveAttribute("data-product-id", gpuProduct.id);
+  await expect(gpu).toHaveAttribute("data-product-image", gpuProduct.image);
   await expect(gpu).toContainText("Card đồ họa");
+  await expect(gpu).toContainText("Chưa có ảnh sản phẩm");
+  await expect(gpu.locator("img")).toHaveCount(0);
   await expect(page.locator(".rf-build-slot.selected")).toHaveCount(8);
   await page
     .getByRole("button", { name: "Chi tiết Card đồ họa", exact: true })
     .click();
-  await expect(page.locator(".rf-photo-inspector img")).toBeVisible();
+  await expect(page.locator(".rf-photo-inspector")).toContainText(
+    gpuProduct.name,
+  );
+  await expect(
+    page.locator(".rf-photo-inspector").getByRole("img", {
+      name: `Chưa có ảnh: ${gpuProduct.name}`,
+      exact: true,
+    }),
+  ).toBeVisible();
 });
 
 test("studio ảnh ghép không tràn ngang trên mobile, tablet và desktop", async ({
@@ -189,7 +222,7 @@ test("tách ảnh để lộ CPU và chế độ tập trung giữ linh kiện �
     .toBe("0.1");
 });
 
-test("preset và màu ánh sáng ảnh ghép giữ cấu hình và chi tiết đã chọn", async ({
+test("preset và màu nền ảnh ghép giữ cấu hình và chi tiết đã chọn", async ({
   page,
 }) => {
   await page.goto("/pc-builder");
@@ -201,18 +234,21 @@ test("preset và màu ánh sáng ảnh ghép giữ cấu hình và chi tiết đ
     "front",
   );
   await page.getByRole("button", { name: "Ánh sáng Tím", exact: true }).click();
-  await page.getByRole("button", { name: "Bật thử", exact: true }).click();
+  await page.getByRole("button", { name: "Bật nền sáng", exact: true }).click();
   await expect(
     page.getByRole("button", { name: "Ánh sáng Tím", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
   await expect
     .poll(() =>
       page
-        .locator(".rf-photo-lighting span")
-        .first()
-        .evaluate((node) => getComputedStyle(node).borderColor),
+        .locator(".rf-photo-stage")
+        .evaluate((node) => getComputedStyle(node).backgroundImage),
     )
-    .toBe("rgb(196, 181, 253)");
+    .toContain("196, 181, 253");
+  await expect(page.locator(".rf-photo-assembly")).toHaveAttribute(
+    "data-powered",
+    "true",
+  );
   await expect(page.locator(".rf-photo-inspector h4")).toHaveText("RAM");
   await expect(page.locator(".rf-build-slot.selected")).toHaveCount(8);
 });
