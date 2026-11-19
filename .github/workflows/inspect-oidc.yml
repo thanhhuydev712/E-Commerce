@@ -1,0 +1,54 @@
+name: Inspect GitHub OIDC
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options: [staging, demo]
+        default: staging
+        required: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: ${{ inputs.environment }}
+    steps:
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24.19.0
+      - name: Display identity claims only; never display the token
+        env:
+          EXPECTED_REPOSITORY: ${{ github.repository }}
+          EXPECTED_ENVIRONMENT: ${{ inputs.environment }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const url = new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          url.searchParams.set('audience', 'sts.amazonaws.com');
+          const response = await fetch(url, {
+            headers: { Authorization: `Bearer ${process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN}` },
+            signal: AbortSignal.timeout(15000),
+          });
+          if (!response.ok) throw new Error(`OIDC request failed: HTTP ${response.status}`);
+          const { value } = await response.json();
+          if (typeof value !== 'string' || value.split('.').length !== 3) throw new Error('Invalid OIDC response');
+          // Decode only for diagnostics. AWS will verify the signed token when assuming a role.
+          const claims = JSON.parse(Buffer.from(value.split('.')[1], 'base64url').toString('utf8'));
+          if (claims.iss !== 'https://token.actions.githubusercontent.com' ||
+              claims.aud !== 'sts.amazonaws.com' ||
+              claims.repository !== process.env.EXPECTED_REPOSITORY ||
+              claims.environment !== process.env.EXPECTED_ENVIRONMENT ||
+              typeof claims.sub !== 'string') throw new Error('Unexpected OIDC identity context');
+          const identity = Object.fromEntries(['iss', 'aud', 'sub', 'repository', 'repository_id',
+            'repository_owner_id', 'environment', 'ref'].map(key => [key, claims[key]]));
+          const output = JSON.stringify(identity, null, 2);
+          console.log(output);
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+            'OIDC identity only; no AWS call or role assumption performed.\n\n```json\n' + output + '\n```\n');
+          JS
