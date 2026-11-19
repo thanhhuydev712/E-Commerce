@@ -29,6 +29,7 @@ services:
       PORT: "3001"
       PREVIEW_READ_ONLY: "true"
       DATABASE_TLS_REQUIRED: "true"
+      NODE_EXTRA_CA_CERTS: /run/certs/rds-global-bundle.pem
       TRUST_PROXY_HOPS: "1"
       STRIPE_SECRET_KEY: ""
       STRIPE_WEBHOOK_SECRET: ""
