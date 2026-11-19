@@ -1,5 +1,32 @@
 import { expect, test, type Locator } from "@playwright/test";
 
+test("email reset link fills token privately and submits the new password", async ({
+  page,
+}) => {
+  const token = "a".repeat(64);
+  let submitted: unknown;
+  await page.route("**/api/v1/auth/reset-password", async (route) => {
+    submitted = route.request().postDataJSON();
+    await route.fulfill({ status: 200, json: { data: { message: "OK" } } });
+  });
+  await page.goto(`/reset-password#token=${token}`);
+  await expect(page.getByLabel("Mã xác minh", { exact: true })).toHaveValue(
+    token,
+  );
+  await expect(page).toHaveURL(/\/reset-password$/);
+  await page
+    .getByLabel("Mật khẩu mới", { exact: true })
+    .fill("NewPassword-2026!");
+  await page
+    .getByLabel("Nhập lại mật khẩu", { exact: true })
+    .fill("NewPassword-2026!");
+  await page.getByRole("button", { name: "Gửi yêu cầu", exact: true }).click();
+  await expect(page.locator(".rf-auth-form").getByRole("status")).toContainText(
+    "Đã đổi mật khẩu",
+  );
+  expect(submitted).toEqual({ token, newPassword: "NewPassword-2026!" });
+});
+
 async function invalid(field: Locator) {
   await expect(field).toHaveAttribute("aria-invalid", "true");
   await expect

@@ -1,0 +1,2467 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "case-air-concept-v1",
+      "productSlug": "case-air",
+      "variantSku": "DEMO-case-air-standard",
+      "src": "/images/pc-assembly/case-air-v1.png",
+      "aperture": {
+        "x": 9,
+        "y": 8,
+        "width": 79,
+        "height": 87
+      },
+      "dimensionsMm": {
+        "width": 220,
+        "height": 450,
+        "depth": 400
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json"
+    },
+    {
+      "id": "case-mini-concept-v1",
+      "productSlug": "case-mini",
+      "variantSku": "DEMO-case-mini-standard",
+      "src": "/images/pc-assembly/case-mini-v1.png",
+      "aperture": {
+        "x": 9,
+        "y": 8,
+        "width": 79,
+        "height": 87
+      },
+      "dimensionsMm": {
+        "width": 205,
+        "height": 380,
+        "depth": 350
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json"
+    }
+  ],
+  "parts": [
+    {
+      "productSlug": "rtx-4070",
+      "variantSku": "DEMO-rtx-4070-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/rtx-4070-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 62,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 308,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 0.73732719,
+        "y": 10.89655172,
+        "width": 98.75576037,
+        "height": 80.68965517
+      },
+      "aspectRatio": 3.66324786
+    },
+    {
+      "productSlug": "rtx-4070",
+      "variantSku": "DEMO-rtx-4070-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/rtx-4070-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 62,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 308,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 0.73732719,
+        "y": 10.89655172,
+        "width": 98.75576037,
+        "height": 80.68965517
+      },
+      "aspectRatio": 3.66324786
+    },
+    {
+      "productSlug": "rtx-4070",
+      "variantSku": "DEMO-rtx-4070-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/rtx-4070-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 62,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 308,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 0.73732719,
+        "y": 10.89655172,
+        "width": 98.75576037,
+        "height": 80.68965517
+      },
+      "aspectRatio": 3.66324786
+    },
+    {
+      "productSlug": "ssd-kingston",
+      "variantSku": "DEMO-ssd-kingston-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ssd-kingston-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 0.64456722,
+        "y": 15.05524862,
+        "width": 98.80294659,
+        "height": 70.02762431
+      },
+      "aspectRatio": 4.23274162
+    },
+    {
+      "productSlug": "ssd-kingston",
+      "variantSku": "DEMO-ssd-kingston-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ssd-kingston-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 0.64456722,
+        "y": 15.05524862,
+        "width": 98.80294659,
+        "height": 70.02762431
+      },
+      "aspectRatio": 4.23274162
+    },
+    {
+      "productSlug": "ssd-kingston",
+      "variantSku": "DEMO-ssd-kingston-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ssd-kingston-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 0.64456722,
+        "y": 15.05524862,
+        "width": 98.80294659,
+        "height": 70.02762431
+      },
+      "aspectRatio": 4.23274162
+    },
+    {
+      "productSlug": "psu-650",
+      "variantSku": "DEMO-psu-650-standard",
+      "slot": "psu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/psu-650-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 79,
+        "width": 25,
+        "height": 12
+      },
+      "zIndex": 7,
+      "dimensionsMm": {
+        "width": 150,
+        "height": 86,
+        "depth": 140
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "crop": {
+        "x": 1.54355017,
+        "y": 0.80738178,
+        "width": 98.45644983,
+        "height": 97.0011534
+      },
+      "aspectRatio": 2.12366231
+    },
+    {
+      "productSlug": "msi-b650",
+      "variantSku": "DEMO-msi-b650-standard",
+      "slot": "mainboard",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/msi-b650-v1.png",
+      "placement": {
+        "x": 17,
+        "y": 16,
+        "width": 49,
+        "height": 51
+      },
+      "zIndex": 1,
+      "dimensionsMm": {
+        "width": 244,
+        "height": 244,
+        "depth": 35
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "crop": {
+        "x": 1.79153094,
+        "y": 0.93676815,
+        "width": 96.00977199,
+        "height": 97.58001561
+      },
+      "aspectRatio": 0.9432
+    },
+    {
+      "productSlug": "rtx-4060",
+      "variantSku": "DEMO-rtx-4060-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/rtx-4060-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 45.69,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 227,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 0.98445596,
+        "y": 9.57055215,
+        "width": 97.25388601,
+        "height": 83.55828221
+      },
+      "aspectRatio": 2.75624082
+    },
+    {
+      "productSlug": "rtx-4060",
+      "variantSku": "DEMO-rtx-4060-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/rtx-4060-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 45.69,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 227,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 0.98445596,
+        "y": 9.57055215,
+        "width": 97.25388601,
+        "height": 83.55828221
+      },
+      "aspectRatio": 2.75624082
+    },
+    {
+      "productSlug": "rtx-4060",
+      "variantSku": "DEMO-rtx-4060-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/rtx-4060-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 45.69,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 227,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 0.98445596,
+        "y": 9.57055215,
+        "width": 97.25388601,
+        "height": 83.55828221
+      },
+      "aspectRatio": 2.75624082
+    },
+    {
+      "productSlug": "cooler-assassin",
+      "variantSku": "DEMO-cooler-assassin-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/cooler-assassin-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 148,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 3.06306306,
+        "y": 0.42342978,
+        "width": 96.57657658,
+        "height": 99.2942837
+      },
+      "aspectRatio": 0.76190476
+    },
+    {
+      "productSlug": "cooler-assassin",
+      "variantSku": "DEMO-cooler-assassin-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/cooler-assassin-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 148,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 3.06306306,
+        "y": 0.42342978,
+        "width": 96.57657658,
+        "height": 99.2942837
+      },
+      "aspectRatio": 0.76190476
+    },
+    {
+      "productSlug": "cooler-assassin",
+      "variantSku": "DEMO-cooler-assassin-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/cooler-assassin-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 148,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 3.06306306,
+        "y": 0.42342978,
+        "width": 96.57657658,
+        "height": 99.2942837
+      },
+      "aspectRatio": 0.76190476
+    },
+    {
+      "productSlug": "cooler-ak400",
+      "variantSku": "DEMO-cooler-ak400-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/cooler-ak400-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 156,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 5.14138817,
+        "y": 0.81662955,
+        "width": 91.94515853,
+        "height": 98.8121752
+      },
+      "aspectRatio": 0.80616078
+    },
+    {
+      "productSlug": "cooler-ak400",
+      "variantSku": "DEMO-cooler-ak400-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/cooler-ak400-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 156,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 5.14138817,
+        "y": 0.81662955,
+        "width": 91.94515853,
+        "height": 98.8121752
+      },
+      "aspectRatio": 0.80616078
+    },
+    {
+      "productSlug": "cooler-ak400",
+      "variantSku": "DEMO-cooler-ak400-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/cooler-ak400-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 156,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 5.14138817,
+        "y": 0.81662955,
+        "width": 91.94515853,
+        "height": 98.8121752
+      },
+      "aspectRatio": 0.80616078
+    },
+    {
+      "productSlug": "ram-ddr4",
+      "variantSku": "DEMO-ram-ddr4-standard",
+      "slot": "ram",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr4-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 4.96551724,
+        "y": 0.82949309,
+        "width": 90.06896552,
+        "height": 98.06451613
+      },
+      "aspectRatio": 0.3068609
+    },
+    {
+      "productSlug": "ram-ddr4",
+      "variantSku": "DEMO-ram-ddr4-standard",
+      "slot": "ram",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr4-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 4.96551724,
+        "y": 0.82949309,
+        "width": 90.06896552,
+        "height": 98.06451613
+      },
+      "aspectRatio": 0.3068609
+    },
+    {
+      "productSlug": "ram-ddr4",
+      "variantSku": "DEMO-ram-ddr4-standard",
+      "slot": "ram",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr4-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 4.96551724,
+        "y": 0.82949309,
+        "width": 90.06896552,
+        "height": 98.06451613
+      },
+      "aspectRatio": 0.3068609
+    },
+    {
+      "productSlug": "ryzen-7700",
+      "variantSku": "DEMO-ryzen-7700-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7700-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.35566188,
+        "y": 1.4354067,
+        "width": 97.28867624,
+        "height": 97.04944179
+      },
+      "aspectRatio": 1.00246508
+    },
+    {
+      "productSlug": "ryzen-7700",
+      "variantSku": "DEMO-ryzen-7700-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7700-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.35566188,
+        "y": 1.4354067,
+        "width": 97.28867624,
+        "height": 97.04944179
+      },
+      "aspectRatio": 1.00246508
+    },
+    {
+      "productSlug": "ryzen-7700",
+      "variantSku": "DEMO-ryzen-7700-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7700-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.35566188,
+        "y": 1.4354067,
+        "width": 97.28867624,
+        "height": 97.04944179
+      },
+      "aspectRatio": 1.00246508
+    },
+    {
+      "productSlug": "psu-750",
+      "variantSku": "DEMO-psu-750-standard",
+      "slot": "psu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/psu-750-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 79,
+        "width": 25,
+        "height": 12
+      },
+      "zIndex": 7,
+      "dimensionsMm": {
+        "width": 150,
+        "height": 86,
+        "depth": 140
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "crop": {
+        "x": 0.16538037,
+        "y": 0,
+        "width": 98.56670342,
+        "height": 99.30795848
+      },
+      "aspectRatio": 2.07665505
+    },
+    {
+      "productSlug": "ssd-samsung",
+      "variantSku": "DEMO-ssd-samsung-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ssd-samsung-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 1.24423963,
+        "y": 15.17241379,
+        "width": 97.51152074,
+        "height": 69.24137931
+      },
+      "aspectRatio": 4.21513944
+    },
+    {
+      "productSlug": "ssd-samsung",
+      "variantSku": "DEMO-ssd-samsung-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ssd-samsung-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 1.24423963,
+        "y": 15.17241379,
+        "width": 97.51152074,
+        "height": 69.24137931
+      },
+      "aspectRatio": 4.21513944
+    },
+    {
+      "productSlug": "ssd-samsung",
+      "variantSku": "DEMO-ssd-samsung-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ssd-samsung-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 1.24423963,
+        "y": 15.17241379,
+        "width": 97.51152074,
+        "height": 69.24137931
+      },
+      "aspectRatio": 4.21513944
+    },
+    {
+      "productSlug": "asus-b760",
+      "variantSku": "DEMO-asus-b760-standard",
+      "slot": "mainboard",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/asus-b760-v1.png",
+      "placement": {
+        "x": 17,
+        "y": 16,
+        "width": 49,
+        "height": 51
+      },
+      "zIndex": 1,
+      "dimensionsMm": {
+        "width": 244,
+        "height": 244,
+        "depth": 35
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "crop": {
+        "x": 1.88989318,
+        "y": 0.92807425,
+        "width": 96.38455218,
+        "height": 96.67440062
+      },
+      "aspectRatio": 0.9384
+    },
+    {
+      "productSlug": "ryzen-7600",
+      "variantSku": "DEMO-ryzen-7600-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7600-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.27591707,
+        "y": 1.35566188,
+        "width": 97.52791069,
+        "height": 97.28867624
+      },
+      "aspectRatio": 1.00245902
+    },
+    {
+      "productSlug": "ryzen-7600",
+      "variantSku": "DEMO-ryzen-7600-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7600-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.27591707,
+        "y": 1.35566188,
+        "width": 97.52791069,
+        "height": 97.28867624
+      },
+      "aspectRatio": 1.00245902
+    },
+    {
+      "productSlug": "ryzen-7600",
+      "variantSku": "DEMO-ryzen-7600-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7600-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.27591707,
+        "y": 1.35566188,
+        "width": 97.52791069,
+        "height": 97.28867624
+      },
+      "aspectRatio": 1.00245902
+    },
+    {
+      "productSlug": "ram-ddr5",
+      "variantSku": "DEMO-ram-ddr5-standard",
+      "slot": "ram",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr5-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 4.68965517,
+        "y": 0.27675277,
+        "width": 90.34482759,
+        "height": 98.5701107
+      },
+      "aspectRatio": 0.30650445
+    },
+    {
+      "productSlug": "ram-ddr5",
+      "variantSku": "DEMO-ram-ddr5-standard",
+      "slot": "ram",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr5-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 4.68965517,
+        "y": 0.27675277,
+        "width": 90.34482759,
+        "height": 98.5701107
+      },
+      "aspectRatio": 0.30650445
+    },
+    {
+      "productSlug": "ram-ddr5",
+      "variantSku": "DEMO-ram-ddr5-standard",
+      "slot": "ram",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr5-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 4.68965517,
+        "y": 0.27675277,
+        "width": 90.34482759,
+        "height": 98.5701107
+      },
+      "aspectRatio": 0.30650445
+    },
+    {
+      "productSlug": "intel-14400f",
+      "variantSku": "DEMO-intel-14400f-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/intel-14400f-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 7.3664825,
+        "y": 1.38121547,
+        "width": 85.35911602,
+        "height": 97.09944751
+      },
+      "aspectRatio": 0.65931721
+    },
+    {
+      "productSlug": "intel-14400f",
+      "variantSku": "DEMO-intel-14400f-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/intel-14400f-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 7.3664825,
+        "y": 1.38121547,
+        "width": 85.35911602,
+        "height": 97.09944751
+      },
+      "aspectRatio": 0.65931721
+    },
+    {
+      "productSlug": "intel-14400f",
+      "variantSku": "DEMO-intel-14400f-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/intel-14400f-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 7.3664825,
+        "y": 1.38121547,
+        "width": 85.35911602,
+        "height": 97.09944751
+      },
+      "aspectRatio": 0.65931721
+    },
+    {
+      "productSlug": "gigabyte-b650",
+      "variantSku": "DEMO-gigabyte-b650-standard",
+      "slot": "mainboard",
+      "caseProfileId": "case-air-concept-v1",
+      "src": "/images/pc-assembly/gigabyte-b650-v1.png",
+      "placement": {
+        "x": 17,
+        "y": 16,
+        "width": 49,
+        "height": 57
+      },
+      "zIndex": 1,
+      "dimensionsMm": {
+        "width": 244,
+        "height": 305,
+        "depth": 35
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "crop": {
+        "x": 0.73461892,
+        "y": 0.48442907,
+        "width": 98.80624426,
+        "height": 98.68512111
+      },
+      "aspectRatio": 0.7545582
+    },
+    {
+      "productSlug": "rtx-4070",
+      "variantSku": "DEMO-rtx-4070-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/rtx-4070-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 62,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 308,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 0.73732719,
+        "y": 10.89655172,
+        "width": 98.75576037,
+        "height": 80.68965517
+      },
+      "aspectRatio": 3.66324786
+    },
+    {
+      "productSlug": "rtx-4070",
+      "variantSku": "DEMO-rtx-4070-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/rtx-4070-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 62,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 308,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 0.73732719,
+        "y": 10.89655172,
+        "width": 98.75576037,
+        "height": 80.68965517
+      },
+      "aspectRatio": 3.66324786
+    },
+    {
+      "productSlug": "rtx-4070",
+      "variantSku": "DEMO-rtx-4070-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/rtx-4070-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 62,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 308,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 0.73732719,
+        "y": 10.89655172,
+        "width": 98.75576037,
+        "height": 80.68965517
+      },
+      "aspectRatio": 3.66324786
+    },
+    {
+      "productSlug": "ssd-kingston",
+      "variantSku": "DEMO-ssd-kingston-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ssd-kingston-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 0.64456722,
+        "y": 15.05524862,
+        "width": 98.80294659,
+        "height": 70.02762431
+      },
+      "aspectRatio": 4.23274162
+    },
+    {
+      "productSlug": "ssd-kingston",
+      "variantSku": "DEMO-ssd-kingston-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ssd-kingston-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 0.64456722,
+        "y": 15.05524862,
+        "width": 98.80294659,
+        "height": 70.02762431
+      },
+      "aspectRatio": 4.23274162
+    },
+    {
+      "productSlug": "ssd-kingston",
+      "variantSku": "DEMO-ssd-kingston-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ssd-kingston-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 0.64456722,
+        "y": 15.05524862,
+        "width": 98.80294659,
+        "height": 70.02762431
+      },
+      "aspectRatio": 4.23274162
+    },
+    {
+      "productSlug": "psu-650",
+      "variantSku": "DEMO-psu-650-standard",
+      "slot": "psu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/psu-650-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 79,
+        "width": 25,
+        "height": 12
+      },
+      "zIndex": 7,
+      "dimensionsMm": {
+        "width": 150,
+        "height": 86,
+        "depth": 140
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "crop": {
+        "x": 1.54355017,
+        "y": 0.80738178,
+        "width": 98.45644983,
+        "height": 97.0011534
+      },
+      "aspectRatio": 2.12366231
+    },
+    {
+      "productSlug": "msi-b650",
+      "variantSku": "DEMO-msi-b650-standard",
+      "slot": "mainboard",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/msi-b650-v1.png",
+      "placement": {
+        "x": 17,
+        "y": 16,
+        "width": 49,
+        "height": 51
+      },
+      "zIndex": 1,
+      "dimensionsMm": {
+        "width": 244,
+        "height": 244,
+        "depth": 35
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "crop": {
+        "x": 1.79153094,
+        "y": 0.93676815,
+        "width": 96.00977199,
+        "height": 97.58001561
+      },
+      "aspectRatio": 0.9432
+    },
+    {
+      "productSlug": "rtx-4060",
+      "variantSku": "DEMO-rtx-4060-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/rtx-4060-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 45.69,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 227,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 0.98445596,
+        "y": 9.57055215,
+        "width": 97.25388601,
+        "height": 83.55828221
+      },
+      "aspectRatio": 2.75624082
+    },
+    {
+      "productSlug": "rtx-4060",
+      "variantSku": "DEMO-rtx-4060-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/rtx-4060-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 45.69,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 227,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 0.98445596,
+        "y": 9.57055215,
+        "width": 97.25388601,
+        "height": 83.55828221
+      },
+      "aspectRatio": 2.75624082
+    },
+    {
+      "productSlug": "rtx-4060",
+      "variantSku": "DEMO-rtx-4060-standard",
+      "slot": "gpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/rtx-4060-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 57,
+        "width": 45.69,
+        "height": 12
+      },
+      "zIndex": 5,
+      "dimensionsMm": {
+        "width": 227,
+        "height": 120,
+        "depth": 45
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 0.98445596,
+        "y": 9.57055215,
+        "width": 97.25388601,
+        "height": 83.55828221
+      },
+      "aspectRatio": 2.75624082
+    },
+    {
+      "productSlug": "cooler-assassin",
+      "variantSku": "DEMO-cooler-assassin-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/cooler-assassin-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 148,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 3.06306306,
+        "y": 0.42342978,
+        "width": 96.57657658,
+        "height": 99.2942837
+      },
+      "aspectRatio": 0.76190476
+    },
+    {
+      "productSlug": "cooler-assassin",
+      "variantSku": "DEMO-cooler-assassin-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/cooler-assassin-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 148,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 3.06306306,
+        "y": 0.42342978,
+        "width": 96.57657658,
+        "height": 99.2942837
+      },
+      "aspectRatio": 0.76190476
+    },
+    {
+      "productSlug": "cooler-assassin",
+      "variantSku": "DEMO-cooler-assassin-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/cooler-assassin-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 148,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 3.06306306,
+        "y": 0.42342978,
+        "width": 96.57657658,
+        "height": 99.2942837
+      },
+      "aspectRatio": 0.76190476
+    },
+    {
+      "productSlug": "cooler-ak400",
+      "variantSku": "DEMO-cooler-ak400-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/cooler-ak400-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 156,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 5.14138817,
+        "y": 0.81662955,
+        "width": 91.94515853,
+        "height": 98.8121752
+      },
+      "aspectRatio": 0.80616078
+    },
+    {
+      "productSlug": "cooler-ak400",
+      "variantSku": "DEMO-cooler-ak400-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/cooler-ak400-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 156,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 5.14138817,
+        "y": 0.81662955,
+        "width": 91.94515853,
+        "height": 98.8121752
+      },
+      "aspectRatio": 0.80616078
+    },
+    {
+      "productSlug": "cooler-ak400",
+      "variantSku": "DEMO-cooler-ak400-standard",
+      "slot": "cooler",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/cooler-ak400-v1.png",
+      "placement": {
+        "x": 26,
+        "y": 24,
+        "width": 30,
+        "height": 31
+      },
+      "zIndex": 6,
+      "dimensionsMm": {
+        "width": 120,
+        "height": 156,
+        "depth": 97
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 5.14138817,
+        "y": 0.81662955,
+        "width": 91.94515853,
+        "height": 98.8121752
+      },
+      "aspectRatio": 0.80616078
+    },
+    {
+      "productSlug": "ram-ddr4",
+      "variantSku": "DEMO-ram-ddr4-standard",
+      "slot": "ram",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr4-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 4.96551724,
+        "y": 0.82949309,
+        "width": 90.06896552,
+        "height": 98.06451613
+      },
+      "aspectRatio": 0.3068609
+    },
+    {
+      "productSlug": "ram-ddr4",
+      "variantSku": "DEMO-ram-ddr4-standard",
+      "slot": "ram",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr4-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 4.96551724,
+        "y": 0.82949309,
+        "width": 90.06896552,
+        "height": 98.06451613
+      },
+      "aspectRatio": 0.3068609
+    },
+    {
+      "productSlug": "ram-ddr4",
+      "variantSku": "DEMO-ram-ddr4-standard",
+      "slot": "ram",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr4-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 4.96551724,
+        "y": 0.82949309,
+        "width": 90.06896552,
+        "height": 98.06451613
+      },
+      "aspectRatio": 0.3068609
+    },
+    {
+      "productSlug": "ryzen-7700",
+      "variantSku": "DEMO-ryzen-7700-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7700-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.35566188,
+        "y": 1.4354067,
+        "width": 97.28867624,
+        "height": 97.04944179
+      },
+      "aspectRatio": 1.00246508
+    },
+    {
+      "productSlug": "ryzen-7700",
+      "variantSku": "DEMO-ryzen-7700-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7700-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.35566188,
+        "y": 1.4354067,
+        "width": 97.28867624,
+        "height": 97.04944179
+      },
+      "aspectRatio": 1.00246508
+    },
+    {
+      "productSlug": "ryzen-7700",
+      "variantSku": "DEMO-ryzen-7700-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7700-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.35566188,
+        "y": 1.4354067,
+        "width": 97.28867624,
+        "height": 97.04944179
+      },
+      "aspectRatio": 1.00246508
+    },
+    {
+      "productSlug": "psu-750",
+      "variantSku": "DEMO-psu-750-standard",
+      "slot": "psu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/psu-750-v1.png",
+      "placement": {
+        "x": 13,
+        "y": 79,
+        "width": 25,
+        "height": 12
+      },
+      "zIndex": 7,
+      "dimensionsMm": {
+        "width": 150,
+        "height": 86,
+        "depth": 140
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "crop": {
+        "x": 0.16538037,
+        "y": 0,
+        "width": 98.56670342,
+        "height": 99.30795848
+      },
+      "aspectRatio": 2.07665505
+    },
+    {
+      "productSlug": "ssd-samsung",
+      "variantSku": "DEMO-ssd-samsung-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ssd-samsung-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 1.24423963,
+        "y": 15.17241379,
+        "width": 97.51152074,
+        "height": 69.24137931
+      },
+      "aspectRatio": 4.21513944
+    },
+    {
+      "productSlug": "ssd-samsung",
+      "variantSku": "DEMO-ssd-samsung-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ssd-samsung-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 1.24423963,
+        "y": 15.17241379,
+        "width": 97.51152074,
+        "height": 69.24137931
+      },
+      "aspectRatio": 4.21513944
+    },
+    {
+      "productSlug": "ssd-samsung",
+      "variantSku": "DEMO-ssd-samsung-standard",
+      "slot": "ssd",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ssd-samsung-v1.png",
+      "placement": {
+        "x": 36,
+        "y": 51,
+        "width": 20,
+        "height": 7
+      },
+      "zIndex": 2,
+      "dimensionsMm": {
+        "width": 80,
+        "height": 22,
+        "depth": 3
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 1.24423963,
+        "y": 15.17241379,
+        "width": 97.51152074,
+        "height": 69.24137931
+      },
+      "aspectRatio": 4.21513944
+    },
+    {
+      "productSlug": "asus-b760",
+      "variantSku": "DEMO-asus-b760-standard",
+      "slot": "mainboard",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/asus-b760-v1.png",
+      "placement": {
+        "x": 17,
+        "y": 16,
+        "width": 49,
+        "height": 51
+      },
+      "zIndex": 1,
+      "dimensionsMm": {
+        "width": 244,
+        "height": 244,
+        "depth": 35
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "crop": {
+        "x": 1.88989318,
+        "y": 0.92807425,
+        "width": 96.38455218,
+        "height": 96.67440062
+      },
+      "aspectRatio": 0.9384
+    },
+    {
+      "productSlug": "ryzen-7600",
+      "variantSku": "DEMO-ryzen-7600-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7600-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.27591707,
+        "y": 1.35566188,
+        "width": 97.52791069,
+        "height": 97.28867624
+      },
+      "aspectRatio": 1.00245902
+    },
+    {
+      "productSlug": "ryzen-7600",
+      "variantSku": "DEMO-ryzen-7600-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7600-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.27591707,
+        "y": 1.35566188,
+        "width": 97.52791069,
+        "height": 97.28867624
+      },
+      "aspectRatio": 1.00245902
+    },
+    {
+      "productSlug": "ryzen-7600",
+      "variantSku": "DEMO-ryzen-7600-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ryzen-7600-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 1.27591707,
+        "y": 1.35566188,
+        "width": 97.52791069,
+        "height": 97.28867624
+      },
+      "aspectRatio": 1.00245902
+    },
+    {
+      "productSlug": "ram-ddr5",
+      "variantSku": "DEMO-ram-ddr5-standard",
+      "slot": "ram",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr5-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "crop": {
+        "x": 4.68965517,
+        "y": 0.27675277,
+        "width": 90.34482759,
+        "height": 98.5701107
+      },
+      "aspectRatio": 0.30650445
+    },
+    {
+      "productSlug": "ram-ddr5",
+      "variantSku": "DEMO-ram-ddr5-standard",
+      "slot": "ram",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr5-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "crop": {
+        "x": 4.68965517,
+        "y": 0.27675277,
+        "width": 90.34482759,
+        "height": 98.5701107
+      },
+      "aspectRatio": 0.30650445
+    },
+    {
+      "productSlug": "ram-ddr5",
+      "variantSku": "DEMO-ram-ddr5-standard",
+      "slot": "ram",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/ram-ddr5-v1.png",
+      "placement": {
+        "x": 57,
+        "y": 25,
+        "width": 9,
+        "height": 30
+      },
+      "zIndex": 4,
+      "dimensionsMm": {
+        "width": 135,
+        "height": 42,
+        "depth": 8
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "crop": {
+        "x": 4.68965517,
+        "y": 0.27675277,
+        "width": 90.34482759,
+        "height": 98.5701107
+      },
+      "aspectRatio": 0.30650445
+    },
+    {
+      "productSlug": "intel-14400f",
+      "variantSku": "DEMO-intel-14400f-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/intel-14400f-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-msi-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 7.3664825,
+        "y": 1.38121547,
+        "width": 85.35911602,
+        "height": 97.09944751
+      },
+      "aspectRatio": 0.65931721
+    },
+    {
+      "productSlug": "intel-14400f",
+      "variantSku": "DEMO-intel-14400f-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/intel-14400f-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-asus-b760-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 7.3664825,
+        "y": 1.38121547,
+        "width": 85.35911602,
+        "height": 97.09944751
+      },
+      "aspectRatio": 0.65931721
+    },
+    {
+      "productSlug": "intel-14400f",
+      "variantSku": "DEMO-intel-14400f-standard",
+      "slot": "cpu",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/intel-14400f-v1.png",
+      "placement": {
+        "x": 30,
+        "y": 29,
+        "width": 13,
+        "height": 13
+      },
+      "zIndex": 3,
+      "dimensionsMm": {
+        "width": 40,
+        "height": 40,
+        "depth": 5
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "requires": {
+        "mainboard": "DEMO-gigabyte-b650-standard"
+      },
+      "hiddenBy": ["cooler"],
+      "crop": {
+        "x": 7.3664825,
+        "y": 1.38121547,
+        "width": 85.35911602,
+        "height": 97.09944751
+      },
+      "aspectRatio": 0.65931721
+    },
+    {
+      "productSlug": "gigabyte-b650",
+      "variantSku": "DEMO-gigabyte-b650-standard",
+      "slot": "mainboard",
+      "caseProfileId": "case-mini-concept-v1",
+      "src": "/images/pc-assembly/gigabyte-b650-v1.png",
+      "placement": {
+        "x": 17,
+        "y": 16,
+        "width": 49,
+        "height": 57
+      },
+      "zIndex": 1,
+      "dimensionsMm": {
+        "width": 244,
+        "height": 305,
+        "depth": 35
+      },
+      "verified": false,
+      "illustrative": true,
+      "sourceUrl": "/images/pc-assembly/SOURCES.json",
+      "crop": {
+        "x": 0.73461892,
+        "y": 0.48442907,
+        "width": 98.80624426,
+        "height": 98.68512111
+      },
+      "aspectRatio": 0.7545582
+    }
+  ]
+}

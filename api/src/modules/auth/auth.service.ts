@@ -4,6 +4,7 @@ import {
   UnauthorizedException,
   ServiceUnavailableException,
   BadRequestException,
+  Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
@@ -40,6 +41,7 @@ interface RefreshPayload {
 const ISSUER = 'ecommerce-api';
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
   private readonly dummyPassword = bcrypt.hash(
     randomBytes(32).toString('hex'),
     12,
@@ -344,6 +346,16 @@ export class AuthService {
         (purpose === 'VERIFY_EMAIL' && current.emailVerifiedAt)
       )
         return null;
+      // The user lock also serializes requests from different IPs/processes.
+      const recent = await tx.authChallenge.findFirst({
+        where: {
+          userId: user.id,
+          purpose,
+          createdAt: { gt: new Date(Date.now() - 60_000) },
+        },
+        select: { id: true },
+      });
+      if (recent) return null;
       await tx.authChallenge.updateMany({
         where: { userId: user.id, purpose, consumedAt: null },
         data: { consumedAt: new Date() },
@@ -358,7 +370,15 @@ export class AuthService {
       });
       return { email: current.email, token, purpose, expiresAt };
     });
-    if (message) await this.delivery.send(message);
+    if (message) {
+      try {
+        await this.delivery.send(message);
+      } catch {
+        // Never log SMTP errors: providers may include recipients or message bodies.
+        // A transport failure must not distinguish eligible from unknown accounts.
+        this.logger.warn('Challenge delivery failed; check SMTP configuration');
+      }
+    }
     return {
       message: 'If the account is eligible, instructions will be delivered',
     };

@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
+import { installAssemblyPack } from "../support/assembly-fixtures";
 
-test("PC Studio chỉ dùng ảnh sản phẩm và giữ cấu hình khi đổi góc ảnh ghép", async ({
+test("PC Studio dùng ảnh lắp theo SKU và giữ cấu hình khi đổi góc ảnh ghép", async ({
   page,
 }) => {
   test.setTimeout(60000);
@@ -11,15 +12,16 @@ test("PC Studio chỉ dùng ảnh sản phẩm và giữ cấu hình khi đổi 
     if (/pc[-_]scene|\.glb(?:[?#]|$)/i.test(request.url()))
       modelRequests.push(request.url());
   });
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await expect(
     page.getByRole("button", { name: "3D", exact: true }),
   ).toHaveCount(0);
   await expect(page.locator("#pc-studio-photo-status")).toContainText(
-    "Ảnh ghép lấy từ từng sản phẩm đang chọn trong catalog",
+    "Ảnh bộ máy dùng bộ ảnh lắp riêng theo sản phẩm và SKU",
   );
   await expect(page.locator("#pc-studio-photo-status")).toContainText(
-    "chưa phải ảnh bộ máy đã lắp",
+    "ảnh catalog không được dùng thay ảnh lắp",
   );
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   await expect(page.locator(".rf-build-slot.selected")).toHaveCount(8);
@@ -59,6 +61,7 @@ test("ảnh ghép giữ điều khiển màu nền, độ rõ case và linh ki�
   page.on("pageerror", (error) => errors.push(error.message));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 1000 });
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   const assembly = page.locator(".rf-photo-assembly");

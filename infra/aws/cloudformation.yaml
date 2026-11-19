@@ -24,6 +24,14 @@ Parameters:
     Type: String
     Description: Exact owner/repository; case must match the GitHub OIDC subject.
     AllowedPattern: '[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+'
+  GitHubOwnerId:
+    Type: String
+    Description: Immutable numeric owner ID from the inspected GitHub OIDC subject.
+    AllowedPattern: '[0-9]+'
+  GitHubRepositoryId:
+    Type: String
+    Description: Immutable numeric repository ID from the inspected GitHub OIDC subject.
+    AllowedPattern: '[0-9]+'
   GitHubOidcProviderArn:
     Type: String
     Description: Existing IAM GitHub OIDC provider in this AWS account; never recreated here.
@@ -91,6 +99,12 @@ Parameters:
     Default: 100
     MinValue: 20
     MaxValue: 1000
+  DbBackupRetentionDays:
+    Type: Number
+    Default: 7
+    MinValue: 1
+    MaxValue: 35
+    Description: Automated backup retention in days; use 1 for AWS Free Plan showcase, otherwise the default is 7.
   BootstrapBucket:
     Type: String
     Description: Pre-created private/versioned foundation bucket in this region; not the stack release bucket.
@@ -260,7 +274,7 @@ Resources:
       MultiAZ: false
       AutoMinorVersionUpgrade: true
       AllowMajorVersionUpgrade: false
-      BackupRetentionPeriod: 7
+      BackupRetentionPeriod: !Ref DbBackupRetentionDays
       PreferredBackupWindow: 18:00-19:00
       PreferredMaintenanceWindow: sun:19:30-sun:20:30
       DeletionProtection: true
@@ -463,6 +477,8 @@ Resources:
     Properties:
       ImageId: !Ref AmiId
       InstanceType: !Ref InstanceType
+      # Cap burstable CPU at earned credits instead of charging surplus credits.
+      CreditSpecification: {CPUCredits: standard}
       IamInstanceProfile: !Ref AppInstanceProfile
       Monitoring: true
       MetadataOptions:
@@ -495,7 +511,7 @@ Resources:
           exec > >(tee -a /var/log/rigforce-bootstrap.log) 2>&1
           export AWS_REGION='${AWS::Region}' AWS_DEFAULT_REGION='${AWS::Region}'
           export AWS_PAGER=''
-          dnf install -y awscli2 tar gzip
+          dnf install -y awscli-2 tar gzip
           signal() {
             status=FAILURE
             if [ "$1" -eq 0 ]; then status=SUCCESS; fi
@@ -545,7 +561,7 @@ Resources:
             interpolationType: ENV_VAR
           ReleaseVersion:
             type: String
-            allowedPattern: '^(?!null$)[A-Za-z0-9._~+/=-]{1,1024}$'
+            allowedPattern: '^[A-Za-z0-9._~+/=-]+$'
             interpolationType: ENV_VAR
           ReleaseSha256:
             type: String
@@ -573,7 +589,10 @@ Resources:
             Condition:
               StringEquals:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
-                token.actions.githubusercontent.com:sub: !Sub 'repo:${GitHubRepository}:environment:${GitHubReleaseEnvironment}'
+                token.actions.githubusercontent.com:sub: !Sub
+                  - 'repo:${OwnerName}@${GitHubOwnerId}/${RepoName}@${GitHubRepositoryId}:environment:${GitHubReleaseEnvironment}'
+                  - OwnerName: !Select [0, !Split ['/', !Ref GitHubRepository]]
+                    RepoName: !Select [1, !Split ['/', !Ref GitHubRepository]]
       Policies:
         - PolicyName: PublishOnlyReleaseArtifacts
           PolicyDocument:
@@ -605,7 +624,10 @@ Resources:
             Condition:
               StringEquals:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
-                token.actions.githubusercontent.com:sub: !Sub 'repo:${GitHubRepository}:environment:${GitHubDeployEnvironment}'
+                token.actions.githubusercontent.com:sub: !Sub
+                  - 'repo:${OwnerName}@${GitHubOwnerId}/${RepoName}@${GitHubRepositoryId}:environment:${GitHubDeployEnvironment}'
+                  - OwnerName: !Select [0, !Split ['/', !Ref GitHubRepository]]
+                    RepoName: !Select [1, !Split ['/', !Ref GitHubRepository]]
       Policies:
         - PolicyName: InvokeOnlyApprovedReleaseDocument
           PolicyDocument:
@@ -707,6 +729,8 @@ Resources:
         BudgetType: COST
         TimeUnit: MONTHLY
         BudgetLimit: {Amount: !Ref MonthlyBudgetUsd, Unit: USD}
+        # Track consumption before promotional credits hide the net billed cost.
+        CostTypes: {IncludeCredit: false}
       NotificationsWithSubscribers:
         - Notification: {NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 50, ThresholdType: PERCENTAGE}
           Subscribers: [{SubscriptionType: EMAIL, Address: !Ref AlertEmail}]

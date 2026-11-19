@@ -1,6 +1,8 @@
 # Cấu trúc frontend Rigforge
 
-Chi tiết sản phẩm và PC Builder cập nhật **18/11/2026**: chỉ dùng ảnh phẳng, đã gỡ viewer/registry model GLB và dependency Three/Fiber/Drei/types. `ProductGallery` dùng `PhotoTilt` để nghiêng nhẹ theo chuột/touch/bàn phím, hỗ trợ reduced motion và Dialog phóng to. Builder resolve từng product ID sang `Product.image`, giữ tỷ lệ ảnh và hiện tên; không dùng ảnh slot cố định hoặc kính/quạt giả lập. Ảnh lỗi/thiếu có placeholder trung tính; lỗi cũ không ảnh hưởng sản phẩm mới. Nguồn ảnh hiện thuộc cấp sản phẩm, chưa có media từng biến thể và còn dữ liệu mẫu gán sai model. [Hướng dẫn ảnh](PHOTO_ASSEMBLY.md), [đối chiếu ảnh](PRODUCT_IMAGE_AUDIT.md). Giá/tồn/thông số/checkout không đổi.
+Chi tiết và PC Builder cập nhật **19/11/2026**: chỉ dùng ảnh phẳng, đã gỡ GLB và Three/Fiber/Drei/types. `ProductGallery` dùng `PhotoTilt` và Dialog phóng to. Builder dùng `assembled-layers.tsx` + `assembly-visuals.ts`, binding slug/SKU/profile case và dependency mainboard. Manifest thật đã có 2 case + 16 sản phẩm linh kiện, 76 entry và 18 tên PNG dựng bằng imagegen tích hợp; không lấy fixture SVG chạy production. Bộ hiện tại khai báo `verified: false`, `illustrative: true`, nguồn/prompt trong `public/images/pc-assembly/SOURCES.json`, nhãn chưa xác minh tỷ lệ hiển thị ở viewport. Tầng `verified: true` vẫn cần nguồn HTTPS và tư liệu/số đo thật. `Product.image` chỉ phục vụ inspector/picker. [Contract và bộ ảnh](ASSEMBLY_ASSET_PACK.md), [audit catalog](PRODUCT_IMAGE_AUDIT.md). Giá/tồn/thông số/checkout không đổi.
+
+Crop part ghi vùng alpha PNG theo phần trăm canvas gốc; `aspectRatio` giữ tỷ lệ vùng alpha trong placement, không sửa bitmap/crop case. Có script đo lại alpha. Bộ PNG thực đã qua test case Mini + mainboard, cấu hình đề xuất, thay tám nhóm/case và mobile không cắt case; tổng 53 kiểm tra có mục tiêu qua, report `front/.visual-review/assembly-assets/core-results.json` + `readiness-results.json`. Build production qua; không coi ảnh AI là dữ liệu cơ khí đã xác minh. Manifest rỗng/45 test thuộc lượt trước.
 
 Marquee cập nhật **18/11/2026**: nhóm dùng chiều rộng nội dung `w-max` thay `min-width:100vw` để không có khoảng rỗng sau pill cuối. Header đo một chuỗi 5 ưu đãi bằng ResizeObserver, lặp ít nhất hai lần và tăng nếu cần để mỗi nhóm phủ đủ viewport. Track gồm hai nhóm giống nhau, padding cuối bằng gap trong nhóm để điểm nối liền mạch với keyframe -50%. Chỉ 5 link gốc tham gia keyboard/screen reader. Điều chỉnh mật độ tại `reference_pills_group` trong `store-header.tsx`: đổi `gap` và `padding-right` cùng một giá trị; không dùng min-width/justify-between để trải giãn nhãn.
 
@@ -49,7 +51,9 @@ front/
       orders/                    # Chi tiết, trạng thái, timeline đơn
       pc-builder/
         lib/compatibility.ts     # Quy tắc thuần, độc lập renderer
-        components/photo-assembly.tsx # Ghép ảnh sản phẩm đang chọn
+        lib/assembly-visuals.ts   # Binding/tầng verified hoặc illustrative, crop metadata
+        components/assembled-layers.tsx # Ghép ảnh lắp theo case/SKU, clipping/che khuất
+        components/photo-assembly.tsx # Điều khiển ảnh, zoom và inspector catalog
       content/                   # Bài viết, FAQ, thông tin chính sách minh họa
       admin/                     # Tổng quan DB có phân quyền
     components/
@@ -117,7 +121,7 @@ Context chỉ truyền instance store ổn định. Action đọc snapshot mới
 
 Rà soát ngày 07/11/2026: action giỏ trả kết quả thành công và cung cấp `cartPending` để khóa thao tác trong lúc gửi; “Mua ngay” chỉ chuyển trang sau khi thêm giỏ thành công. API client xử lý proxy không trả JSON/HTTP 204 và phát `SESSION_EXPIRED` khi không khôi phục được phiên. Store xóa dữ liệu riêng, đánh số phiên để bỏ response giỏ/cấu hình/đơn đến trễ. `useApiResource` gắn kết quả với path/phiên reload, tránh hiển thị tài nguyên cũ dưới URL mới. Checkout kiểm SKU không còn trong catalog và thể hiện trạng thái tạo đơn; save dialog chỉ đóng khi API xác nhận lưu.
 
-PC Studio dùng [bảng ghép ảnh sản phẩm](PC_STUDIO.md) từ catalog của từng ID được chọn; bố cục Tailwind và phép chiếu/chuyển tiếp CSS không cần WebGL. Inspector/picker dùng cùng nguồn ảnh catalog. Không còn chế độ 3D, kính hay quạt giả lập. Giảm chuyển động tắt chuyển tiếp nhưng giữ điều khiển đổi nền. Quy tắc thiếu thông số tạo warning, không kết luận socket/DDR/kích thước/công suất phù hợp từ giá trị mặc định 0/undefined.
+PC Studio dùng [bộ ảnh lắp theo SKU/case](PC_STUDIO.md) riêng với catalog. Renderer có cửa nhìn, thứ tự lớp, mặt nạ/foreground và phần bị che; inspector/picker dùng ảnh catalog. Pack chưa có thì báo thiếu, không dựng sản phẩm chung. Giảm chuyển động tắt chuyển tiếp nhưng giữ điều khiển đổi nền. Quy tắc tương thích vẫn độc lập với hình ảnh: thiếu thông số tạo warning, không kết luận socket/DDR/kích thước/công suất phù hợp từ giá trị mặc định 0/undefined.
 
 Error boundary của App Router dùng `retry()` (Next 16.4) để tải lại server data; `reset()` chỉ xóa trạng thái lỗi. Global error tự import stylesheet vì thay thế root layout. [Báo cáo rà soát](../../docs/FRONTEND_READINESS_AUDIT.md) ghi bằng chứng và phần chưa được nghiệm thu.
 
@@ -147,7 +151,7 @@ Font hệ thống hỗ trợ tiếng Việt thay dependency runtime/build vào G
 
 Landing đã có header/mega menu/search, hero 6 chiến dịch, 4 banner dịch vụ, flash sale, campaign, 9 dải danh mục có tab và rail, directory, thương hiệu, 3 bài khuyến mãi, blog có lọc/tìm kiếm, 8 showroom mẫu và footer. CTA gọi các route dùng API; giỏ, yêu thích và cấu hình lưu trên server. Showroom không phải địa chỉ đang hoạt động; không gắn chứng nhận doanh nghiệp chưa xác minh.
 
-Các trang phụ là bản minh họa hỗ trợ luồng, chưa hoàn tất toàn bộ kế hoạch 102 model. Admin đọc aggregate thật có permission guard. Hậu mãi mới ghi nhận yêu cầu cấp đơn; tra serial chỉ trong đơn sở hữu, chưa có chọn dòng trả/số lượng, inspection, refund allocation hoặc workflow vận hành đầy đủ. PC Studio dùng hình học và quy tắc mock, chưa phải mô phỏng lắp ráp chính xác từng SKU, chưa có vật lý/kiểm định BIOS/đầu nguồn/lane/khe hở thực tế.
+Các trang phụ là bản minh họa hỗ trợ luồng, chưa hoàn tất toàn bộ kế hoạch 102 model. Admin đọc aggregate thật có permission guard. Hậu mãi mới ghi nhận yêu cầu cấp đơn; tra serial chỉ trong đơn sở hữu, chưa có chọn dòng trả/số lượng, inspection, refund allocation hoặc workflow vận hành đầy đủ. PC Studio dùng ảnh dựng AI có binding SKU riêng; hình học và tỷ lệ vẫn minh họa, chưa có vật lý/kiểm định BIOS/đầu nguồn/lane/khe hở thực tế.
 
 Suite UI không thay thế test API/transaction. Runner fullstack hiện kiểm COD thật qua PostgreSQL riêng; Stripe, giao vận, production/Nginx và AWS chưa nghiệm thu. Xem [contract và giới hạn](../../docs/API_STOREFRONT_COMMERCE_V2.md).
 

@@ -140,18 +140,17 @@ test("chiều rộng dùng chung khi chuyển sang catalog và quay lại", asyn
 });
 
 for (const width of [1920, 1024, 768, 390, 360]) {
-  test(`các trang dùng chung giới hạn nội dung ở ${width}px`, async ({
+  test(`các trang cửa hàng dùng chung giới hạn nội dung ở ${width}px`, async ({
     page,
   }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setViewportSize({ width, height: 1000 });
+    // Auth có shell toàn màn hình riêng; auth-viewport.spec.ts kiểm layout đó.
     for (const [route, panel] of [
       ["/products", ".rf-catalog-banner"],
       ["/products/ssd-kingston", ".rf-reference-detail"],
       ["/cart", null],
       ["/checkout", null],
-      ["/login", ".rf-auth-reference"],
-      ["/forgot-password", ".rf-auth-layout"],
       ["/account", null],
       ["/pc-builder", null],
       ["/promotions", ".rf-promotions-page"],

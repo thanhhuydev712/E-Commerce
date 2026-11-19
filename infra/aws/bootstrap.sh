@@ -31,7 +31,7 @@ done
 export AWS_DEFAULT_REGION="$AWS_REGION" AWS_PAGER=''
 # AL2023 pins repository snapshots through the chosen AMI/release version. Do not
 # update --releasever=latest here: AMI/package upgrades need separate review.
-dnf install -y docker awscli2 amazon-ssm-agent amazon-cloudwatch-agent openssl \
+dnf install -y docker awscli-2 amazon-ssm-agent amazon-cloudwatch-agent openssl \
   jq python3 tar gzip util-linux logrotate ca-certificates
 command -v curl >/dev/null || die 'AL2023 standard AMI must include curl'
 install -d -o root -g root -m 0750 /opt/rigforce /opt/rigforce/bin \

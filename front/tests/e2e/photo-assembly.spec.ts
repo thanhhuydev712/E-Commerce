@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
-import type { StorefrontSnapshot } from "../../src/catalog/model";
+import { installAssemblyPack } from "../support/assembly-fixtures";
 
 test("bản ghép khởi đầu rỗng và không cần WebGL", async ({ page }) => {
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await expect(
     page.getByText("Ảnh ghép sản phẩm", { exact: true }),
@@ -19,6 +20,7 @@ test("bản ghép khởi đầu rỗng và không cần WebGL", async ({ page })
 test("chọn, bỏ và hoàn tác cập nhật lớp ảnh cùng bảng chi tiết", async ({
   page,
 }) => {
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   await expect(page.locator(".rf-photo-stage [data-slot]")).toHaveCount(8);
@@ -28,11 +30,13 @@ test("chọn, bỏ và hoàn tác cập nhật lớp ảnh cùng bảng chi ti�
   expect(
     (await page.locator(".rf-photo-stack").boundingBox())!.width,
   ).toBeGreaterThan(100);
-  await expect(page.locator(".rf-photo-stage img")).toHaveCount(8);
+  await expect(
+    page.locator('.rf-photo-stage [data-slot] img:not([alt=""])'),
+  ).toHaveCount(8);
   await expect
     .poll(() =>
       page
-        .locator(".rf-photo-stage img")
+        .locator('.rf-photo-stage [data-slot] img:not([alt=""])')
         .evaluateAll((images) =>
           images.every(
             (node) =>
@@ -51,7 +55,8 @@ test("chọn, bỏ và hoàn tác cập nhật lớp ảnh cùng bảng chi ti�
   await expect(page.getByRole("dialog")).toBeVisible();
   await page
     .getByRole("dialog")
-    .getByRole("button", { name: "Chọn", exact: true })
+    .locator("button:not(:disabled)")
+    .filter({ hasText: /^Chọn/ })
     .first()
     .click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
@@ -71,6 +76,7 @@ test("chọn, bỏ và hoàn tác cập nhật lớp ảnh cùng bảng chi ti�
 test("bản ghép hỗ trợ tách ảnh, làm mờ case, nền sáng, zoom và giảm chuyển động", async ({
   page,
 }) => {
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   await page
@@ -115,36 +121,22 @@ test("bản ghép hỗ trợ tách ảnh, làm mờ case, nền sáng, zoom và 
     .toBe("none");
 });
 
-test("ảnh lớp bị lỗi có fallback và vẫn giữ linh kiện đã chọn", async ({
+test("ảnh lắp bị lỗi báo thiếu và vẫn giữ linh kiện cùng ảnh catalog", async ({
   page,
 }) => {
-  const response = await page.request.get("/api/v1/storefront");
-  expect(response.ok()).toBe(true);
-  const snapshot = (await response.json()).data as StorefrontSnapshot;
-  const selectedGpu = snapshot.products.find(
-    (product) => product.id === snapshot.presentation.starterBuild.gpu,
+  const { data } = await installAssemblyPack(page, { failSlot: "gpu" });
+  const selectedGpu = data.products.find(
+    (product) => product.id === data.presentation.starterBuild.gpu,
   );
   expect(selectedGpu).toBeDefined();
   const gpuProduct = selectedGpu!;
-  expect(gpuProduct.image.startsWith("/")).toBe(true);
-  let blockedImages = 0;
-  await page.route("**/_next/image?*", (route) => {
-    const image = new URL(route.request().url()).searchParams.get("url");
-    if (image === gpuProduct.image) {
-      blockedImages += 1;
-      return route.fulfill({ status: 404, body: "" });
-    }
-    return route.continue();
-  });
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   const gpu = page.locator('.rf-photo-stage [data-slot="gpu"]');
-  await expect.poll(() => blockedImages).toBeGreaterThan(0);
-  await expect(gpu).toHaveAttribute("data-product-id", gpuProduct.id);
-  await expect(gpu).toHaveAttribute("data-product-image", gpuProduct.image);
-  await expect(gpu).toContainText("Card đồ họa");
-  await expect(gpu).toContainText("Chưa có ảnh sản phẩm");
-  await expect(gpu.locator("img")).toHaveCount(0);
+  await expect(gpu).toHaveCount(0);
+  await expect(page.locator(".rf-assembly-missing")).toHaveText(
+    "1 linh kiện cần ảnh lắp đã xác minh",
+  );
   await expect(page.locator(".rf-build-slot.selected")).toHaveCount(8);
   await page
     .getByRole("button", { name: "Chi tiết Card đồ họa", exact: true })
@@ -154,7 +146,7 @@ test("ảnh lớp bị lỗi có fallback và vẫn giữ linh kiện đã chọ
   );
   await expect(
     page.locator(".rf-photo-inspector").getByRole("img", {
-      name: `Chưa có ảnh: ${gpuProduct.name}`,
+      name: gpuProduct.name,
       exact: true,
     }),
   ).toBeVisible();
@@ -165,6 +157,7 @@ test("studio ảnh ghép không tràn ngang trên mobile, tablet và desktop", a
 }, testInfo) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   for (const width of [360, 390, 768, 1024, 1440]) {
@@ -193,6 +186,7 @@ test("tách ảnh để lộ CPU và chế độ tập trung giữ linh kiện �
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   await page
@@ -202,7 +196,13 @@ test("tách ảnh để lộ CPU và chế độ tập trung giữ linh kiện �
   const cooler = page.locator('.rf-photo-stage [data-slot="cooler"]');
   const cpuBox = (await cpu.boundingBox())!,
     coolerBox = (await cooler.boundingBox())!;
-  expect(cpuBox.x + cpuBox.width).toBeLessThan(coolerBox.x);
+  const overlapWidth =
+    Math.min(cpuBox.x + cpuBox.width, coolerBox.x + coolerBox.width) -
+    Math.max(cpuBox.x, coolerBox.x);
+  const overlapHeight =
+    Math.min(cpuBox.y + cpuBox.height, coolerBox.y + coolerBox.height) -
+    Math.max(cpuBox.y, coolerBox.y);
+  expect(overlapWidth <= 0 || overlapHeight <= 0).toBe(true);
   await expect(cpu).toContainText("CPU");
   await page.getByRole("button", { name: "Chi tiết CPU", exact: true }).click();
   await page
@@ -225,6 +225,7 @@ test("tách ảnh để lộ CPU và chế độ tập trung giữ linh kiện �
 test("preset và màu nền ảnh ghép giữ cấu hình và chi tiết đã chọn", async ({
   page,
 }) => {
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   await page.getByRole("button", { name: "Chi tiết RAM", exact: true }).click();

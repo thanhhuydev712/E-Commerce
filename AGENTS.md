@@ -1,5 +1,17 @@
 # Hướng dẫn Codex — E-Commerce Fullstack
 
+## Trạng thái AWS tiếp nối — 19/11/2026
+
+- Người dùng đã chọn **bản local hiện tại, rà soát/kiểm tra trước commit/push** cho lần phát hành đầu; không còn là lựa chọn source đang mở. Xem `docs/LOCAL_RELEASE_REVIEW.md`; giữ preview chỉ đọc/SMTP disabled. Timing SMTP reset còn có thể lộ tài khoản nếu mở auth production, cần xử lý trước mốc đó. Không suy CI commit3896a813 thành CI của candidate local.
+
+- Kiểm tiếp nối: DNS đã khớp EIP; GitHub `develop` commit3896a813 có CI thành công run44479335531, ECR còn trống. Đọc `docs/FIRST_AWS_RELEASE.md` trước Release đầu: publish `staging/backward-compatible/deploy=false`, chuẩn bị DB/env/ACME rồi mới Deploy. Cần chọn source GitHub hay local chưa commit; chưa tự commit/push. Plugin GitHub phiên này không hỗ trợ settings variables/dispatch; bảng8 variable có sẵn ở `infra/.local/github-staging-setup.md`.
+
+- **Kết quả mới nhất:** foundation42 tài nguyên đã `UPDATE_COMPLETE`; EC2/EIP giữ nguyên sau stop/start, SSM Online, Docker/Compose/CloudWatch hoạt động, RDS private/encrypted available với backup1 ngày. Đã phục hồi lỗi package cloud-init qua SSM và đồng bộ template/bundle sửa. **Không CREATE lại hoặc cleanup stack đang chạy** theo nhật ký rollback cũ. Chưa app release/schema/secrets/DNS/ACME; SNS email chờ xác nhận. Audit `docs/verification/2026-11-19-aws-staging-foundation.json`, state/outputs/variables dưới `infra/.local/`.
+
+- Người dùng đã có account Free plan, MFA, region Sydney và hostname `rigforce.duckdns.org`; đã duyệt Execute foundation staging 42 tài nguyên. Giới hạn “chưa có account/chưa được provision” trong ghi chú 18/11 là lịch sử. Không suy quyền foundation thành quyền tự commit/push hoặc chuyển Paid/mở bán.
+- Đọc trạng thái mới nhất tại `docs/PROJECT_STATUS.md` trước mọi hành động AWS. Hai lần create đã rollback (SSM regex và giới hạn backup RDS Free plan); lần thử tiếp theo dùng `DbBackupRetentionDays=1`, mặc định template vẫn 7. Không bỏ TLS/encryption/preview read-only để vượt lỗi.
+- ARN, email, params, outputs và audit cleanup giữ ở `infra/.local/` được Git ignore. Tài nguyên có Retain không tự mất sau rollback: kiểm creator/thời điểm, dữ liệu và phụ thuộc trước cleanup; không xóa theo tên chung hoặc tác động foundation bucket đã pin.
+
 ## Dự án này dùng để làm gì?
 
 Xây dựng website thương mại điện tử fullstack để chủ dự án vừa học sâu kiến thức nền, vừa có sản phẩm thực tế trình bày trên GitHub, CV và trong phỏng vấn. Giao diện hiện hướng đến cửa hàng máy tính, linh kiện và gaming gear, có dấu hiệu nhận diện Rigforge. Chưa chốt ngành hàng kinh doanh cuối cùng; không tự suy đoán ý tưởng kinh doanh ngách từ lịch sử chat.

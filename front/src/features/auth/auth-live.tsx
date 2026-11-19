@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
+  useEffect,
   useId,
   useRef,
   useState,
@@ -278,6 +279,7 @@ function useAuthFields(mode: string, token = "") {
   const errors = validateAuth(values, mode);
   return {
     values,
+    setValues,
     field: (name: AuthField) => ({
       name,
       value: values[name],
@@ -466,7 +468,25 @@ function RecoveryForm({
   destination: string;
 }) {
   const query = useSearchParams();
-  const form = useAuthFields(mode, query.get("token") ?? "");
+  const form = useAuthFields(
+    mode,
+    mode === "reset-password" ? "" : (query.get("token") ?? ""),
+  );
+  const { setValues } = form;
+  useEffect(() => {
+    if (!["reset-password", "verify-email"].includes(mode)) return;
+    const token = new URLSearchParams(window.location.hash.slice(1)).get(
+      "token",
+    );
+    if (!token) return;
+    setValues((current) => ({ ...current, token }));
+    // Keep the token out of server requests and remove it from browser history.
+    window.history.replaceState(
+      null,
+      "",
+      window.location.pathname + window.location.search,
+    );
+  }, [mode, setValues]);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -518,7 +538,9 @@ function RecoveryForm({
                 method: "POST",
                 body: { email: form.values.email.trim().toLowerCase() },
               });
-              setMessage("Yêu cầu khôi phục đã được tiếp nhận.");
+              setMessage(
+                "Nếu email thuộc tài khoản đang hoạt động, bạn sẽ nhận được liên kết đặt lại mật khẩu. Hãy kiểm tra cả thư mục spam. Liên kết có hiệu lực 30 phút.",
+              );
             } else if (reset) {
               await api("/auth/reset-password", {
                 method: "POST",

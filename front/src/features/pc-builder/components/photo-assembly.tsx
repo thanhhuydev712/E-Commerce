@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useRef, useState, type CSSProperties } from "react";
 import {
   ArrowUpRight,
@@ -16,27 +15,9 @@ import { useCatalog } from "@/src/catalog/catalog-provider";
 import { money } from "@/src/catalog/model";
 import { CategoryIcon, ProductImage } from "@/src/components/storefront";
 import { slots, type Build, type Slot } from "../lib/compatibility";
+import { AssembledLayers } from "./assembled-layers";
 
-// Phối ảnh catalog của từng sản phẩm, không mô phỏng một bộ máy đã lắp thực tế.
-const layers: Record<
-  Slot,
-  {
-    x: number;
-    y: number;
-    w: number;
-    h: number;
-    z: number;
-  }
-> = {
-  case: { x: 34, y: 0, w: 32, h: 65, z: 0 },
-  mainboard: { x: 0, y: 0, w: 31, h: 31, z: 1 },
-  cpu: { x: 0, y: 68, w: 31, h: 31, z: 1 },
-  ram: { x: 34, y: 68, w: 32, h: 31, z: 1 },
-  ssd: { x: 69, y: 68, w: 31, h: 31, z: 1 },
-  psu: { x: 69, y: 34, w: 31, h: 31, z: 1 },
-  gpu: { x: 69, y: 0, w: 31, h: 31, z: 1 },
-  cooler: { x: 0, y: 34, w: 31, h: 31, z: 1 },
-};
+// Nhãn điều khiển; ảnh lắp theo SKU và case nằm trong AssembledLayers.
 const names: Record<Slot, string> = {
   case: "Vỏ case",
   mainboard: "Mainboard",
@@ -59,19 +40,6 @@ const order: Slot[] = [
 ];
 const control =
   "inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-300 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-30 motion-reduce:transition-none";
-
-// Vị trí tách được bố trí trên cả artboard, để CPU/SSD không bị lớp khác che.
-const separated: Record<Slot, { x: number; y: number; w: number; h: number }> =
-  {
-    case: { x: 35, y: 32, w: 30, h: 37 },
-    mainboard: { x: 2, y: 5, w: 28, h: 28 },
-    cpu: { x: 36, y: 0, w: 27, h: 27 },
-    cooler: { x: 0, y: 38, w: 28, h: 28 },
-    ram: { x: 4, y: 72, w: 28, h: 28 },
-    ssd: { x: 37, y: 73, w: 27, h: 27 },
-    gpu: { x: 70, y: 5, w: 28, h: 28 },
-    psu: { x: 72, y: 38, w: 28, h: 28 },
-  };
 
 export function PhotoAssembly({
   build,
@@ -124,7 +92,6 @@ export function PhotoAssembly({
         ? { x: 2, y: 24 }
         : { x: 3, y: -12 };
   const [dragging, setDragging] = useState(false);
-  const [failed, setFailed] = useState<Record<string, boolean>>({});
   const drag = useRef<{ x: number; y: number; rx: number; ry: number } | null>(
     null,
   );
@@ -146,7 +113,7 @@ export function PhotoAssembly({
               ASSEMBLY STUDIO / 01
             </p>
             <h3 className="m-0 text-lg font-medium tracking-tight text-white">
-              Ảnh ghép linh kiện đang chọn.
+              Bộ máy của bạn.
             </h3>
           </div>
           <span className="shrink-0 rounded-full border border-emerald-300/20 bg-emerald-300/5 px-3 py-1.5 text-rf-caption tabular-nums text-emerald-200">
@@ -154,7 +121,7 @@ export function PhotoAssembly({
           </span>
         </div>
         <div
-          className={`rf-photo-stage relative isolate flex h-[440px] min-w-0 items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_50%_45%,#23443f55,transparent_65%)] max-[480px]:h-[370px] rf-photo-stage-projection`}
+          className={`rf-photo-stage relative isolate flex h-[520px] min-w-0 flex-col items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_50%_45%,#23443f55,transparent_65%)] pt-3 pb-14 max-[480px]:h-[370px] rf-photo-stage-projection`}
           data-dragging={dragging}
           data-reduced-motion={reduceMotion}
           style={{
@@ -163,7 +130,7 @@ export function PhotoAssembly({
           onPointerDown={(event) => {
             if (
               event.button !== 0 ||
-              (event.target as HTMLElement).closest("button")
+              (event.target as HTMLElement).closest("button, dialog")
             )
               return;
             drag.current = {
@@ -217,104 +184,22 @@ export function PhotoAssembly({
             aria-hidden="true"
             className="pointer-events-none absolute bottom-6 left-1/2 h-9 w-3/5 -translate-x-1/2 rounded-[50%] bg-black/70 blur-xl"
           />
-          <div
-            className="rf-photo-stack"
-            data-isolated={isolate && !!product}
-            style={
+          <AssembledLayers
+            poseStyle={
               {
                 "--rx": `${Math.max(-16, Math.min(16, baseline.x + angle.x))}deg`,
                 "--ry": `${Math.max(-32, Math.min(32, baseline.y + angle.y))}deg`,
                 "--zoom": zoom * (exploded ? 0.92 : 1),
               } as CSSProperties
             }
-          >
-            {!build.case && (
-              <button
-                type="button"
-                onClick={() => onChoose("case")}
-                className="absolute inset-[4%] grid place-content-center gap-2 rounded-2xl border border-dashed border-emerald-200/20 bg-emerald-200/2 text-center text-rf-small text-emerald-100/60"
-              >
-                <CategoryIcon id="case" size={44} />
-                <span>Chọn vỏ case</span>
-              </button>
-            )}
-            {order.map((slot) => {
-              const selectedProduct = productById(build[slot] ?? "");
-              if (!selectedProduct) return null;
-              const photoKey = `${selectedProduct.id}:${selectedProduct.image}`;
-              const layer = layers[slot];
-              const position = exploded ? separated[slot] : layer;
-              return (
-                <div
-                  key={`${slot}-${build[slot]}`}
-                  className="rf-photo-layer"
-                  data-slot={slot}
-                  data-product-id={selectedProduct.id}
-                  data-product-image={selectedProduct.image}
-                  data-muted={slot === "case" && panelOpen}
-                  data-focused={focus === slot}
-                  style={
-                    {
-                      left: `${position.x}%`,
-                      top: `${position.y}%`,
-                      width: `${position.w}%`,
-                      height: `${position.h}%`,
-                      zIndex: isolate && focus === slot ? 80 : layer.z + 1,
-                      "--dx": "0%",
-                      "--dy": "0%",
-                      "--lift": `${exploded ? 0 : layer.z}px`,
-                    } as CSSProperties
-                  }
-                >
-                  <button
-                    type="button"
-                    aria-label={`Xem ${names[slot]}`}
-                    aria-pressed={focus === slot}
-                    title={selectedProduct.name}
-                    onClick={() => setFocus(slot)}
-                    className="group relative block size-full rounded-lg border-0 bg-transparent p-0 text-left outline-offset-4 aria-pressed:bg-emerald-300/10"
-                  >
-                    {!selectedProduct.image.startsWith("/") ||
-                    failed[photoKey] ? (
-                      <span className="grid size-full place-content-center rounded-lg border border-emerald-300/30 bg-[#162a30] text-rf-caption text-emerald-200">
-                        <CategoryIcon id={slot} size={24} />
-                        {names[slot]}
-                        <span>Chưa có ảnh sản phẩm</span>
-                      </span>
-                    ) : (
-                      <Image
-                        src={selectedProduct.image}
-                        alt={selectedProduct.name}
-                        fill
-                        sizes="(max-width: 767px) 80vw, 480px"
-                        draggable={false}
-                        className="pointer-events-none rounded-lg bg-white object-contain p-2 pb-6 rf-photo-cutout"
-                        onError={() =>
-                          setFailed((state) => ({ ...state, [photoKey]: true }))
-                        }
-                      />
-                    )}
-                    <span className="pointer-events-none absolute inset-x-1 bottom-1 truncate rounded bg-white/95 px-1 text-center text-[10px] leading-4 text-rf-ink">
-                      {selectedProduct.name}
-                    </span>
-                    {slot !== "case" && (
-                      <span
-                        className={`absolute -top-1 -left-1 flex min-h-5 items-center justify-center rounded-full border border-emerald-200/40 bg-[#102922] px-1.5 text-rf-caption text-emerald-100 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 ${exploded ? "opacity-100" : "opacity-0"}`}
-                        aria-hidden="true"
-                      >
-                        {exploded ? names[slot] : order.indexOf(slot) + 1}
-                      </span>
-                    )}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-          {!selected.length && (
-            <p className="pointer-events-none absolute bottom-10 left-5 right-5 m-0 text-center text-rf-caption text-slate-400">
-              Chọn linh kiện để bắt đầu, hoặc thử cấu hình đề xuất.
-            </p>
-          )}
+            build={build}
+            focus={focus}
+            isolate={isolate}
+            exploded={exploded}
+            panelOpen={panelOpen}
+            onFocus={setFocus}
+            onChoose={onChoose}
+          />
           <div className="absolute right-3 bottom-3 flex items-center gap-1 rounded-xl border border-white/10 bg-[#0b161ee6] p-1">
             <button
               type="button"
@@ -362,7 +247,7 @@ export function PhotoAssembly({
           </span>
           <span className="hidden items-center gap-1.5 text-emerald-200/70 min-[640px]:inline-flex">
             <ScanLine size={13} />
-            Ảnh ghép có chiều sâu
+            Nghiêng ảnh 2D · Không xoay 360°
           </span>
         </div>
         <div
@@ -457,8 +342,8 @@ export function PhotoAssembly({
             {finished ? "Đã chọn đủ 8 nhóm" : "Bộ máy đang thành hình"}
           </p>
           <p className="m-0 text-rf-caption leading-relaxed text-slate-400">
-            Mỗi ô dùng ảnh catalog của sản phẩm đang chọn. Đây là bảng ghép ảnh,
-            không mô phỏng vị trí hay tỷ lệ lắp ráp thực tế.
+            Bộ ảnh dựng đi theo sản phẩm đang chọn; hình học và tỷ lệ lắp thực
+            tế cần đối chiếu.
           </p>
         </div>
       </aside>

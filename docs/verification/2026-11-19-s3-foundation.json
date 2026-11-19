@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-19",
+  "scope": "One authorized private foundation bucket and one bootstrap artifact; no application deployment",
+  "status": "uploaded-and-verified",
+  "region": "ap-southeast-2",
+  "verifiedSettings": {
+    "publicAccessBlock": {
+      "BlockPublicAcls": true,
+      "IgnorePublicAcls": true,
+      "BlockPublicPolicy": true,
+      "RestrictPublicBuckets": true
+    },
+    "ownership": "BucketOwnerEnforced",
+    "encryption": "AES256",
+    "versioning": "Enabled",
+    "denyHTTP": true,
+    "region": "ap-southeast-2"
+  },
+  "objectUploaded": true,
+  "archiveBytes": 11396,
+  "sha256": "4272615a1a23dbe6cd53b05106746d5c0d530f9a35983f1cbbf2fefca249065c",
+  "s3ChecksumMatches": true,
+  "exactVersionDownloadMatches": true,
+  "nonNullVersionIdSavedLocally": true,
+  "anonymousHeadStatus": 403,
+  "versioningPropagationWaitSeconds": 908,
+  "archiveFiles": [
+    "bootstrap.sh",
+    "apply-release.sh",
+    "fetch-env.sh"
+  ],
+  "currentSourcesMatchArchive": true,
+  "bashSyntax": "passed",
+  "secretFilesIncluded": false,
+  "localParametersHavePlaceholders": false,
+  "freePlanVerifiedAfterUpload": {
+    "type": "FREE",
+    "status": "ACTIVE",
+    "expiration": "2027-05-18T12:07:34.273000+00:00"
+  },
+  "computeCreated": false,
+  "databaseCreated": false,
+  "cloudFormationExecuted": false,
+  "dnsChanged": false,
+  "accountSpecificIdentifiers": "infra/.local/foundation-state.json and staging.parameters.json (git ignored)",
+  "limits": [
+    "No running public website or HTTPS certificate yet",
+    "S3 has usage charges; invoice/credit consumption can lag API observations",
+    "EC2/RDS and full stack execution still require separate authorization"
+  ]
+}

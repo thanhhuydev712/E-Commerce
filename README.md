@@ -203,7 +203,7 @@ front/src/app/(store)/page.tsx              # URL /, mở màn hình
 | Đăng nhập/đăng ký nối API | [auth-live.tsx](front/src/features/auth/auth-live.tsx) |
 | Tài khoản, chi tiết đơn | [account-live.tsx](front/src/features/account/account-live.tsx), [order-live.tsx](front/src/features/orders/order-live.tsx) |
 | Bố cục PC Studio | [pc-builder-page.tsx](front/src/features/pc-builder/pc-builder-page.tsx) |
-| PC ghép ảnh và chuyển động nhiều lớp | [photo-assembly.tsx](front/src/features/pc-builder/components/photo-assembly.tsx), [photo-assembly.css](front/src/features/pc-builder/components/photo-assembly.css), [ảnh PC](front/public/images/pc-studio/) |
+| PC ghép ảnh theo SKU/case | [assembled-layers.tsx](front/src/features/pc-builder/components/assembled-layers.tsx), [resolver](front/src/features/pc-builder/lib/assembly-visuals.ts), [bộ ảnh cần bổ sung](front/docs/ASSEMBLY_ASSET_PACK.md) |
 | Ảnh sản phẩm và ghép linh kiện | [photo-assembly.tsx](front/src/features/pc-builder/components/photo-assembly.tsx), [hướng dẫn](front/docs/PHOTO_ASSEMBLY.md) |
 | Quy tắc tương thích PC | [compatibility.ts](front/src/features/pc-builder/lib/compatibility.ts) |
 | Phiên/state mua sắm và hook tải API | [shop-provider.tsx](front/src/providers/shop-provider.tsx), [use-api-resource.ts](front/src/hooks/use-api-resource.ts) |

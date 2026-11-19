@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { installAssemblyPack } from "../support/assembly-fixtures";
 import { registerRealAccount } from "../helpers/real-account";
 
 test("phiên hết hạn xóa dữ liệu riêng và yêu cầu đăng nhập lại", async ({
@@ -115,6 +116,7 @@ test("lưu cấu hình thất bại giữ dialog và linh kiện để thử l�
   page,
 }) => {
   await registerRealAccount(page);
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   await page.route("**/api/v1/me/builds", async (route) =>
@@ -259,6 +261,7 @@ test("bỏ và hoàn tác linh kiện cập nhật ảnh ghép cùng cấu hình
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   await expect(
@@ -268,7 +271,7 @@ test("bỏ và hoàn tác linh kiện cập nhật ảnh ghép cùng cấu hình
     page.getByRole("button", { name: "3D", exact: true }),
   ).toHaveCount(0);
   await expect(page.locator("#pc-studio-photo-status")).toContainText(
-    "Ảnh ghép lấy từ từng sản phẩm đang chọn trong catalog",
+    "Ảnh bộ máy dùng bộ ảnh lắp riêng theo sản phẩm và SKU",
   );
   await expect(page.locator(".rf-photo-assembly")).toBeVisible();
   await expect(page.locator(".rf-build-slot.selected")).toHaveCount(8);
@@ -308,6 +311,7 @@ test("ảnh ghép không khởi tạo WebGL và vẫn bật nền sáng khi gi�
       return Reflect.apply(getContext, this, [contextId, ...args]);
     } as typeof getContext;
   });
+  await installAssemblyPack(page);
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   const assembly = page.locator(".rf-photo-assembly");

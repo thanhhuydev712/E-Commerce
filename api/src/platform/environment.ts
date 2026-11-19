@@ -97,5 +97,41 @@ export function validateEnvironment(input: Record<string, unknown>) {
   if (!origins.includes(storefront))
     throw new Error('STOREFRONT_URL must be an allowed origin');
   result.STOREFRONT_URL = storefront;
+  const delivery =
+    input.CHALLENGE_DELIVERY ||
+    (result.NODE_ENV === 'production' ? 'disabled' : 'memory');
+  if (
+    typeof delivery !== 'string' ||
+    !['disabled', 'memory', 'smtp'].includes(delivery)
+  )
+    throw new Error('Invalid CHALLENGE_DELIVERY');
+  if (delivery === 'memory' && result.NODE_ENV === 'production')
+    throw new Error('Memory email delivery is not allowed in production');
+  if (delivery === 'smtp' && result.PREVIEW_READ_ONLY)
+    throw new Error('SMTP must be disabled in read-only preview');
+  result.CHALLENGE_DELIVERY = delivery;
+  if (delivery === 'smtp') {
+    for (const name of [
+      'SMTP_HOST',
+      'SMTP_USER',
+      'SMTP_PASSWORD',
+      'SMTP_FROM',
+    ]) {
+      if (typeof input[name] !== 'string' || !String(input[name]).trim())
+        throw new Error(`Missing environment variable: ${name}`);
+    }
+    if (!/^[a-z0-9.-]+$/i.test(String(input.SMTP_HOST)))
+      throw new Error('SMTP_HOST must be a hostname');
+    if (!/^[^\s<>@,;]+@[^\s<>@,;]+\.[^\s<>@,;]+$/.test(String(input.SMTP_FROM)))
+      throw new Error('SMTP_FROM must be a single email address');
+    const port = Number(input.SMTP_PORT || 587);
+    if (!Number.isInteger(port) || port < 1 || port > 65535)
+      throw new Error('Invalid SMTP_PORT');
+    result.SMTP_PORT = port;
+    const secure = input.SMTP_SECURE ?? port === 465;
+    if (!['true', 'false', true, false].includes(secure as string | boolean))
+      throw new Error('SMTP_SECURE must be true or false');
+    result.SMTP_SECURE = secure === true || secure === 'true';
+  }
   return result;
 }

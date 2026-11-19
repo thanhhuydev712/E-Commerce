@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import type { Product, StorefrontSnapshot } from "../../src/catalog/model";
+import { installAssemblyPack } from "../support/assembly-fixtures";
 
 async function catalog(page: Page) {
   const response = await page.request.get("/api/v1/storefront");
@@ -25,7 +26,8 @@ async function replacePart(page: Page, slot: "gpu" | "case", product: Product) {
 async function imageSource(page: Page, selector: string) {
   return page.locator(selector).evaluate((element) => {
     const src = element.getAttribute("src")!;
-    return new URL(src, location.origin).searchParams.get("url") ?? src;
+    const url = new URL(src, location.origin);
+    return url.searchParams.get("url") ?? url.pathname;
   });
 }
 
@@ -109,39 +111,69 @@ test("giảm chuyển động giữ ảnh đứng yên trên mobile", async ({ p
   ).toBe(true);
 });
 
-test("đổi GPU và case đổi đúng ảnh record catalog, không dùng ảnh slot cố định", async ({
+test("đổi GPU và case dùng đúng ảnh lắp theo sản phẩm, SKU và profile case", async ({
   page,
 }, info) => {
-  const data = await catalog(page);
+  const { data, registry } = await installAssemblyPack(page);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
+  await expect(page.locator(".rf-photo-stage [data-slot]")).toHaveCount(8);
   for (const slot of ["gpu", "case"] as const) {
+    if (slot === "case") {
+      await page.getByRole("button", { name: "Bỏ gpu", exact: true }).click();
+      await page
+        .getByRole("button", { name: "Bỏ cooler", exact: true })
+        .click();
+    }
     const layer = page.locator(`.rf-photo-stage [data-slot="${slot}"]`);
     const originalId = await layer.getAttribute("data-product-id");
-    const originalImage = await layer.getAttribute("data-product-image");
     const alternative = data.products.find(
       (item) =>
         item.builderEligible &&
         item.category === slot &&
         item.id !== originalId &&
-        item.image !== originalImage &&
         item.variants.some((variant) => variant.stock > 0),
     )!;
     expect(alternative).toBeTruthy();
     await replacePart(page, slot, alternative);
     await expect(layer).toHaveAttribute("data-product-id", alternative.id);
+    const selectedCaseId = await page
+      .locator('.rf-photo-stage [data-slot="case"]')
+      .getAttribute("data-product-id");
+    const selectedCase = data.products.find(
+      (item) => item.id === selectedCaseId,
+    )!;
+    const profile = registry.cases.find(
+      (item) =>
+        item.productSlug === selectedCase.slug &&
+        item.variantSku === selectedCase.variants[0].sku,
+    )!;
+    expect(profile).toBeTruthy();
+    const asset =
+      slot === "case"
+        ? profile
+        : registry.parts.find(
+            (item) =>
+              item.slot === slot &&
+              item.productSlug === alternative.slug &&
+              item.variantSku === alternative.variants[0].sku &&
+              item.caseProfileId === profile.id,
+          )!;
+    expect(asset).toBeTruthy();
     await expect(layer).toHaveAttribute(
-      "data-product-image",
-      alternative.image,
+      "data-variant-sku",
+      alternative.variants[0].sku,
     );
+    await expect(layer).toHaveAttribute("data-assembly-src", asset.src);
     await expect(
       layer.getByRole("img", { name: alternative.name }),
     ).toBeVisible();
     expect(
       await imageSource(page, `.rf-photo-stage [data-slot="${slot}"] img`),
-    ).toBe(alternative.image);
+    ).toBe(asset.src);
+    expect(asset.src).not.toBe(alternative.image);
     await expect(layer.locator("img")).toHaveCSS("object-fit", "contain");
   }
   await expect(
@@ -150,14 +182,14 @@ test("đổi GPU và case đổi đúng ảnh record catalog, không dùng ảnh
   await expect(page.locator("canvas")).toHaveCount(0);
   await page
     .locator(".rf-studio")
-    .screenshot({ path: info.outputPath("selected-product-collage.png") });
+    .screenshot({ path: info.outputPath("selected-assembled-pc.png") });
   expect(errors).toEqual([]);
 });
 
 test("lỗi ảnh GPU cũ không làm mất ảnh sản phẩm thay thế trong cùng slot", async ({
   page,
 }) => {
-  const data = await catalog(page);
+  const { data, registry } = await installAssemblyPack(page);
   const starterId = data.presentation.starterBuild.gpu;
   const original = data.products.find((item) => item.id === starterId)!;
   const alternative = data.products.find(
@@ -165,29 +197,53 @@ test("lỗi ảnh GPU cũ không làm mất ảnh sản phẩm thay thế trong 
       item.builderEligible &&
       item.category === "gpu" &&
       item.id !== starterId &&
-      item.image !== original.image &&
       item.variants.some((variant) => variant.stock > 0),
   )!;
   expect(alternative).toBeTruthy();
-  await page.route("**/_next/image?*", (route) =>
-    new URL(route.request().url()).searchParams.get("url") === original.image
+  const caseProduct = data.products.find(
+    (item) => item.id === data.presentation.starterBuild.case,
+  )!;
+  const profile = registry.cases.find(
+    (item) =>
+      item.productSlug === caseProduct.slug &&
+      item.variantSku === caseProduct.variants[0].sku,
+  )!;
+  const originalAsset = registry.parts.find(
+    (item) =>
+      item.productSlug === original.slug &&
+      item.variantSku === original.variants[0].sku &&
+      item.caseProfileId === profile.id,
+  )!;
+  const alternativeAsset = registry.parts.find(
+    (item) =>
+      item.productSlug === alternative.slug &&
+      item.variantSku === alternative.variants[0].sku &&
+      item.caseProfileId === profile.id,
+  )!;
+  expect(originalAsset).toBeTruthy();
+  expect(alternativeAsset).toBeTruthy();
+  await page.route("**/images/pc-assembly/test-gpu-*", (route) =>
+    new URL(route.request().url()).pathname === originalAsset.src
       ? route.fulfill({ status: 404, body: "" })
-      : route.continue(),
+      : route.fallback(),
   );
   await page.goto("/pc-builder");
   await page.getByRole("button", { name: "Dùng cấu hình đề xuất" }).click();
   const layer = page.locator('.rf-photo-stage [data-slot="gpu"]');
-  await expect(
-    layer.getByText("Chưa có ảnh sản phẩm", { exact: true }),
-  ).toBeVisible();
+  await expect(layer).toHaveCount(0);
+  await expect(page.locator(".rf-assembly-missing")).toHaveText(
+    "1 linh kiện cần ảnh lắp đã xác minh",
+  );
   await replacePart(page, "gpu", alternative);
   await expect(
     layer.getByRole("img", { name: alternative.name }),
   ).toBeVisible();
   expect(await imageSource(page, '.rf-photo-stage [data-slot="gpu"] img')).toBe(
-    alternative.image,
+    alternativeAsset.src,
   );
-  await expect(
-    layer.getByText("Chưa có ảnh sản phẩm", { exact: true }),
-  ).toHaveCount(0);
+  await expect(layer).toHaveAttribute(
+    "data-assembly-src",
+    alternativeAsset.src,
+  );
+  await expect(page.locator(".rf-assembly-missing")).toHaveCount(0);
 });

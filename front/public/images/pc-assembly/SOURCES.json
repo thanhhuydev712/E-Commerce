@@ -1,0 +1,183 @@
+{
+  "date": "2026-11-19",
+  "tool": "Built-in image_gen.imagegen",
+  "status": "illustrative-not-verified",
+  "notes": [
+    "18 distinct generated PNG cutouts: 2 chassis and 16 component products.",
+    "Reference inputs provide appearance/camera/style guidance; these are not official manufacturer photographs or certified dimensional models.",
+    "Physical fit and color/geometry accuracy remain unverified. No runtime fixture images are used."
+  ],
+  "commonPromptSpecification": "Photoreal model-specific standalone component; true transparent alpha; neutral studio light; no packaging, UI, white background or unrelated hardware; full outline in frame. Near side-panel camera, rear left/front right; motherboards face viewer, GPUs horizontal with fans downward, DIMMs vertical, M.2 horizontal. Case assets are empty open-side chassis. Images are labeled concepts rather than verified photography.",
+  "assets": [
+    {
+      "productSlug": "case-air",
+      "file": "/images/pc-assembly/case-air-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/catalog/case-1.webp",
+      "referenceRole": "catalog exterior concept reference",
+      "promptSummary": "Black mesh Airflow M concept, side panel removed, empty tray, three front RGB fans; inspired by the catalog exterior, not a verified chassis model."
+    },
+    {
+      "productSlug": "case-mini",
+      "file": "/images/pc-assembly/case-mini-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/catalog/case-2.webp",
+      "referenceRole": "catalog exterior concept reference",
+      "promptSummary": "Compact office tower concept, black front grille and red accent, left panel removed, empty tray; no RGB."
+    },
+    {
+      "productSlug": "msi-b650",
+      "file": "/images/pc-assembly/msi-b650-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/mainboard.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "MSI PRO B650M-A WIFI concept, compact black/gray micro-ATX board, empty AM5 socket, four DIMM slots."
+    },
+    {
+      "productSlug": "asus-b760",
+      "file": "/images/pc-assembly/asus-b760-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/mainboard.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "ASUS PRIME B760M-A D4 concept, silver/white PRIME accents on black micro-ATX PCB, open Intel socket."
+    },
+    {
+      "productSlug": "gigabyte-b650",
+      "file": "/images/pc-assembly/gigabyte-b650-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/mainboard.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "GIGABYTE B650 AORUS ELITE AX concept, taller ATX black/silver board and angular AORUS heatsinks."
+    },
+    {
+      "productSlug": "ryzen-7600",
+      "file": "/images/pc-assembly/ryzen-7600-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/cpu.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "AMD Ryzen 5 7600 AM5 concept, square scalloped silver IHS, green substrate, model laser engraving."
+    },
+    {
+      "productSlug": "ryzen-7700",
+      "file": "/images/pc-assembly/ryzen-7700-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/cpu.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "AMD Ryzen 7 7700 AM5 concept, same AM5 physical form as 7600, different model engraving."
+    },
+    {
+      "productSlug": "intel-14400f",
+      "file": "/images/pc-assembly/intel-14400f-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/cpu.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "Intel Core i5-14400F LGA1700 concept, rectangular silver heat spreader on green substrate."
+    },
+    {
+      "productSlug": "rtx-4060",
+      "file": "/images/pc-assembly/rtx-4060-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/gpu.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "ASUS Dual RTX4060 concept, compact black two-fan GPU, horizontal PCIe orientation, rear bracket left and fans downward."
+    },
+    {
+      "productSlug": "rtx-4070",
+      "file": "/images/pc-assembly/rtx-4070-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/gpu.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "MSI RTX4070 SUPER VENTUS concept, longer black/silver triple-fan GPU in horizontal installed orientation."
+    },
+    {
+      "productSlug": "ram-ddr5",
+      "file": "/images/pc-assembly/ram-ddr5-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/ram.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "Kingston FURY Beast RGB DDR5 concept, paired vertical black DIMMs, pastel RGB diffuser strips, contacts at bottom."
+    },
+    {
+      "productSlug": "ram-ddr4",
+      "file": "/images/pc-assembly/ram-ddr4-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/ram.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "Corsair Vengeance LPX DDR4 concept, paired vertical low-profile black DIMMs, no RGB."
+    },
+    {
+      "productSlug": "ssd-kingston",
+      "file": "/images/pc-assembly/ssd-kingston-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/ssd.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "Kingston NV2 M.2 concept, horizontal blue PCB and white label, contacts right, no bulky heatsink.",
+      "generationPrompt": "Use case: distinct model-specific illustrative component cutout for photo-composited PC builder. Supporting reference is camera/lighting STYLE only, not the correct model. Photoreal crisp metal/plastic and printed labels, controlled neutral studio illumination matching black PC chassis. Single complete requested component, tightly framed with small 2% transparent margin; TRUE transparent alpha background, no white backdrop, checkerboard, baked floor/shadow, no box/packaging, no UI or large captions, no other computer parts. PSU points rearLEFT/frontRIGHT for horizontal bottom case bay; SSD lies horizontal as attached on motherboard. This is a concept illustration, not a verified official photo.\nKingston NV2 1TB M.2 2280 SSD concept: a single HORIZONTAL slim blue PCB NVMe stick, WHITE Kingston NV2 label across most of its face, small dark memory/controller chips, gold M-key contacts RIGHT, mounting half-circle hole LEFT. BARE NVMe drive, NO giant heatsink, no retail box. Preserve long thin 80x22 form."
+    },
+    {
+      "productSlug": "ssd-samsung",
+      "file": "/images/pc-assembly/ssd-samsung-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/ssd.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "Samsung 990 PRO M.2 concept, horizontal black PCB, black/red label, bare-drive version.",
+      "generationPrompt": "Use case: distinct model-specific illustrative component cutout for photo-composited PC builder. Supporting reference is camera/lighting STYLE only, not the correct model. Photoreal crisp metal/plastic and printed labels, controlled neutral studio illumination matching black PC chassis. Single complete requested component, tightly framed with small 2% transparent margin; TRUE transparent alpha background, no white backdrop, checkerboard, baked floor/shadow, no box/packaging, no UI or large captions, no other computer parts. PSU points rearLEFT/frontRIGHT for horizontal bottom case bay; SSD lies horizontal as attached on motherboard. This is a concept illustration, not a verified official photo.\nSamsung 990 PRO 1TB M.2 2280 SSD concept: single HORIZONTAL slim BLACK PCB NVMe stick, BLACK product label with small white SAMSUNG 990 PRO letters and a restrained RED accent, gold M-key contacts RIGHT, screw half-circle notch LEFT. Bare drive version, no bulky heatsink, no packaging. Visually distinct from the blue/white Kingston NV2."
+    },
+    {
+      "productSlug": "psu-650",
+      "file": "/images/pc-assembly/psu-650-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/psu.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "Corsair CX650 concept, black PSU with gray side label and nonmodular cable outlet, rear left.",
+      "generationPrompt": "Use case: distinct model-specific illustrative component cutout for photo-composited PC builder. Supporting reference is camera/lighting STYLE only, not the correct model. Photoreal crisp metal/plastic and printed labels, controlled neutral studio illumination matching black PC chassis. Single complete requested component, tightly framed with small 2% transparent margin; TRUE transparent alpha background, no white backdrop, checkerboard, baked floor/shadow, no box/packaging, no UI or large captions, no other computer parts. PSU points rearLEFT/frontRIGHT for horizontal bottom case bay; SSD lies horizontal as attached on motherboard. This is a concept illustration, not a verified official photo.\nCorsair CX650 ATX power supply concept: compact black rectangular metal box, neutral gray CX650/CORSAIR side label, circular fan grille just visible on top, rear honeycomb AC/switch face at LEFT edge and a short dark non-modular cable outlet at RIGHT. Side label faces viewer, very slight top/left perspective, complete box, no loose cable pile. No RGB or fancy white armor."
+    },
+    {
+      "productSlug": "psu-750",
+      "file": "/images/pc-assembly/psu-750-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/psu.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "MSI MAG A750GL concept, black modular PSU, distinctive vent layout and muted yellow label.",
+      "generationPrompt": "Use case: distinct model-specific illustrative component cutout for photo-composited PC builder. Supporting reference is camera/lighting STYLE only, not the correct model. Photoreal crisp metal/plastic and printed labels, controlled neutral studio illumination matching black PC chassis. Single complete requested component, tightly framed with small 2% transparent margin; TRUE transparent alpha background, no white backdrop, checkerboard, baked floor/shadow, no box/packaging, no UI or large captions, no other computer parts. PSU points rearLEFT/frontRIGHT for horizontal bottom case bay; SSD lies horizontal as attached on motherboard. This is a concept illustration, not a verified official photo.\nMSI MAG A750GL ATX power supply concept: black compact rectangular metal unit, angular fine vent grilles and small MSI dragon/MAG A750GL marking with a muted yellow accent label, fully MODULAR connector panel partly visible at RIGHT edge, rear AC face LEFT. Side face toward viewer with slight top view showing fan grille. Different labels/vent design from Corsair CX650, no RGB or unrelated cables."
+    },
+    {
+      "productSlug": "cooler-ak400",
+      "file": "/images/pc-assembly/cooler-ak400-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/cooler.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "DeepCool AK400 DIGITAL concept, black tower and fan, temperature display cap with cyan/purple accent."
+    },
+    {
+      "productSlug": "cooler-assassin",
+      "file": "/images/pc-assembly/cooler-assassin-v1.png",
+      "verified": false,
+      "illustrative": true,
+      "referenceImage": "/images/pc-studio/cooler.webp",
+      "referenceRole": "camera and lighting style reference",
+      "promptSummary": "Thermalright Assassin X120 concept, exposed silver fin tower and black fan, no digital display."
+    }
+  ],
+  "referenceConcept": {
+    "file": "/images/pc-assembly/reference-concept-v1.png",
+    "role": "Earlier comparison poster only; not part of the assembly layers."
+  }
+}

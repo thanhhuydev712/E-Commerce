@@ -163,7 +163,7 @@ for (const width of [360, 390, 768, 1024, 1340, 1920]) {
   });
 }
 
-test("CTA studio mở builder và quy tắc DDR bắt được xung đột", async ({
+test("builder chặn RAM khác thế hệ DDR và giữ cấu hình hợp lệ", async ({
   page,
 }) => {
   await page.goto("/pc-builder");
@@ -178,21 +178,31 @@ test("CTA studio mở builder và quy tắc DDR bắt được xung đột", asy
     .click();
   const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();
-  await dialog
-    .locator(".rf-picker-list>div")
-    .filter({
-      has: page.getByText("RAM Corsair Vengeance LPX 16GB DDR4", {
-        exact: true,
-      }),
-    })
-    .getByRole("button", { name: "Chọn" })
-    .click();
+  const wrongRam = dialog.locator(".rf-picker-list>div").filter({
+    has: page.getByText("RAM Corsair Vengeance LPX 16GB DDR4", {
+      exact: true,
+    }),
+  });
+  const choose = wrongRam.getByRole("button", { name: "Chọn", exact: true });
+  await expect(choose).toBeDisabled();
+  await expect(choose).toHaveAttribute("aria-describedby", /^pc-picker-ram-/);
+  const reason = wrongRam.locator(".rf-picker-blocked");
+  await expect(reason).toBeVisible();
+  await expect(reason).toContainText("RAM và mainboard khác thế hệ DDR.");
+  await expect(reason).toHaveAttribute(
+    "id",
+    (await choose.getAttribute("aria-describedby"))!,
+  );
+  await dialog.getByRole("button", { name: "Đóng", exact: true }).click();
+  await expect(dialog).toHaveCount(0);
   await expect(
-    page.getByText("RAM và mainboard khác thế hệ DDR.", { exact: true }),
-  ).toBeVisible();
+    page
+      .locator(".rf-build-slot.selected")
+      .filter({ hasText: "Kingston FURY" }),
+  ).toHaveCount(1);
   await expect(
     page.getByRole("button", { name: "Thêm cấu hình vào giỏ" }),
-  ).toBeDisabled();
+  ).toBeEnabled();
 });
 
 test("mọi liên kết trên landing có trang đích, URL lạ trả 404", async ({

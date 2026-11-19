@@ -23,6 +23,7 @@ import {
   Build,
   checkBuild,
   estimateWatts,
+  getCandidateCompatibility,
   missingSlots,
   Slot,
   slots,
@@ -448,8 +449,9 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
             id="pc-studio-photo-status"
             className="m-0 border-b border-white/8 bg-[#101c24] px-5 py-3 text-rf-caption leading-relaxed text-slate-300"
           >
-            Ảnh ghép lấy từ từng sản phẩm đang chọn trong catalog, chưa phải ảnh
-            bộ máy đã lắp. Một số ảnh dữ liệu mẫu cần được xác minh đúng SKU.
+            Ảnh bộ máy dùng bộ ảnh lắp riêng theo sản phẩm và SKU. Bộ ảnh dựng
+            minh họa cho 18 sản phẩm demo chưa được xác minh hình học và tỷ lệ
+            lắp thực tế; ảnh catalog không được dùng thay ảnh lắp.
           </p>
           <div className="rf-studio-appearance flex flex-wrap items-center justify-between gap-3 border-b border-white/8 bg-[#101c24] px-4 py-3">
             <div
@@ -689,15 +691,25 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
                   p.name.toLowerCase().includes(search.toLowerCase()),
               )
               .map((p) => {
-                const candidate = checkBuild(
-                  {
-                    ...build,
-                    [picker]: p.id,
-                  },
+                const candidate = getCandidateCompatibility(
+                  build,
+                  picker,
+                  p,
                   productById,
-                ).filter((c) => c.level === "error");
+                );
+                const reasonId = `pc-picker-${picker}-${p.id}`;
                 return (
-                  <div key={p.id}>
+                  <div
+                    key={p.id}
+                    data-compatibility={
+                      candidate.disabled
+                        ? "blocked"
+                        : candidate.warnings.length
+                          ? "unknown"
+                          : "compatible"
+                    }
+                    className={candidate.disabled ? "bg-slate-50" : undefined}
+                  >
                     <div className="h-20 w-20 shrink-0 overflow-hidden rounded-lg [&_.rf-product-photo]:h-full [&_.rf-product-photo]:min-h-0 [&_.rf-product-photo]:w-full">
                       <ProductImage product={p} />
                     </div>
@@ -705,18 +717,45 @@ function BuilderEditor({ savedId }: { savedId?: string }) {
                       <strong>{p.name}</strong>
                       <small>{p.specs.join(" · ")}</small>
                       <b>{money(p.price)}</b>
-                      {candidate.length > 0 && (
-                        <span className="rf-picker-warning block text-[#ab6b39] text-rf-caption mt-1.5">
-                          {candidate.map((c) => c.message).join(" ")}
+                      {candidate.disabled && (
+                        <span
+                          id={reasonId}
+                          className="rf-picker-blocked mt-2 block text-rf-caption leading-relaxed text-red-700"
+                        >
+                          <span className="font-semibold">
+                            Không thể chọn:{" "}
+                          </span>
+                          {candidate.errors.map((c) => c.message).join(" ")}
+                        </span>
+                      )}
+                      {!candidate.disabled && candidate.warnings.length > 0 && (
+                        <span
+                          id={reasonId}
+                          className="rf-picker-warning mt-2 block text-rf-caption leading-relaxed text-amber-800"
+                        >
+                          <span className="font-semibold">Cần đối chiếu: </span>
+                          {candidate.warnings.map((c) => c.message).join(" ")}
                         </span>
                       )}
                     </div>
                     <button
-                      className={tw.btn}
-                      disabled={
-                        !p.variants.some((variant) => variant.stock > 0)
+                      className={`${tw.btn} disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none disabled:hover:bg-slate-200`}
+                      disabled={candidate.disabled}
+                      aria-describedby={
+                        candidate.disabled || candidate.warnings.length
+                          ? reasonId
+                          : undefined
                       }
                       onClick={() => {
+                        if (
+                          getCandidateCompatibility(
+                            build,
+                            picker,
+                            p,
+                            productById,
+                          ).disabled
+                        )
+                          return;
                         change({ ...build, [picker]: p.id });
                         setPicker(null);
                       }}

@@ -13,7 +13,16 @@ for (const reducedMotion of ["no-preference", "reduce"] as const) {
     const photo = card.locator(".rf-product-photo-img");
     await expect
       .poll(() => photo.evaluate((el) => getComputedStyle(el).scale))
-      .toBe(reducedMotion === "reduce" ? "none" : "1.04");
+      .toBe("1.12");
+    if (reducedMotion === "reduce") {
+      // The current design keeps the hover state but removes its animation.
+      const duration = await photo.evaluate(
+        (el) => getComputedStyle(el).transitionDuration,
+      );
+      expect(
+        duration.split(",").every((value) => parseFloat(value) <= 0.001),
+      ).toBe(true);
+    }
     const after = (await card.boundingBox())!;
     // Chromium có thể làm tròn khác nhau ~0.00005 px giữa hai frame GPU.
     expect(after.width).toBeCloseTo(before.width, 2);

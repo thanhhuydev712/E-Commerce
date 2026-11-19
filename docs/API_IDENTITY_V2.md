@@ -58,11 +58,30 @@ Refresh được serialize dưới khóa user. Token đã rotate nhưng được
 
 Password mới tối thiểu 12 ký tự và tối đa 72 byte UTF-8, tránh bcrypt cắt ngầm mật khẩu dài. Login/đổi password vẫn chấp nhận mật khẩu cũ ngắn hơn để người dùng đã migrate đăng nhập và nâng cấp. Username/email được normalize ở server; lỗi đăng nhập không phân biệt sai password với tài khoản khóa/không tồn tại.
 
-## 5. Email challenge hiện là adapter local
+## 5. Gửi email khôi phục — cập nhật 19/11/2026
 
-`ChallengeDelivery` lưu tối đa 100 thông điệp trong bộ nhớ để kiểm thử local, không gửi email thật, không log token và không có HTTP endpoint đọc token. E2E lấy token trực tiếp từ provider trong tiến trình test để kiểm tra round trip reset/verify.
+Người dùng chọn **Gmail SMTP** ngày 19/11/2026. Bật xác minh hai bước và tạo [App Password](https://support.google.com/accounts/answer/185833?hl=en) cho ứng dụng; dùng App Password ở `SMTP_PASSWORD`, không dùng mật khẩu đăng nhập Google. Một số tài khoản tổ chức/Advanced Protection không cho tạo App Password. Cấu hình local trong `api/.env` (thay các giá trị minh họa, không commit):
 
-Ở production, request challenge trả 503 `CHALLENGE_DELIVERY_UNAVAILABLE` cho tới khi có adapter email thực. Không đổi NODE_ENV thành development để bỏ qua. Không mô tả chức năng này như email giao dịch đã tích hợp. Giới hạn hiện tại: thông điệp local mất khi restart; chưa có gửi lại đáng tin cậy qua provider/outbox và chưa có UI dev inbox. Đây là điểm tích hợp cần làm trước khi mở reset/verify cho khách thật.
+```dotenv
+CHALLENGE_DELIVERY=smtp
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-account@gmail.com
+SMTP_FROM=your-account@gmail.com
+SMTP_PASSWORD=your-app-password
+STOREFRONT_URL=http://localhost:3000
+```
+
+Đối chiếu [SMTP của Gmail](https://developers.google.com/workspace/gmail/imap/imap-smtp?hl=en). Giữ origin local khớp `ALLOWED_ORIGINS`; khởi động lại API sau khi sửa env. Truy cập `/forgot-password`, dùng email của tài khoản thử nghiệm ACTIVE trong DB, kiểm tra inbox/spam, mở liên kết và đặt mật khẩu mới. Xác minh đăng nhập bằng mật khẩu mới, mật khẩu cũ/phiên cũ và token dùng lại bị từ chối. Chưa thực hiện gửi thư thật trong lượt xây dựng vì chưa có credential; không thay `.env` đang dùng bằng placeholder.
+
+Đã bổ sung SMTP cho `ChallengeDelivery`. Trong `api/.env`, đặt `CHALLENGE_DELIVERY=smtp`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM` theo nhà cung cấp. Xem `api/.env.example`; không đưa credential vào Git. `SMTP_FROM` là địa chỉ gửi đã được provider cho phép. Cổng 587 dùng STARTTLS (`SMTP_SECURE=false`), cổng 465 dùng TLS ngay khi kết nối (`SMTP_SECURE=true`); chứng chỉ phải hợp lệ.
+
+`STOREFRONT_URL` phải là origin frontend đúng môi trường và thuộc `ALLOWED_ORIGINS`; dùng HTTPS khi public. Email chứa liên kết `/reset-password#token=...`, frontend nạp token rồi xóa fragment khỏi lịch sử. Người dùng nhập mật khẩu mới hai lần, server kiểm token còn hạn/dùng một lần, đổi password và thu hồi phiên. Không gửi mật khẩu cũ hoặc mật khẩu mới qua email.
+
+Local/test mặc định vẫn dùng `memory`, không gửi thư thật; production mặc định `disabled` và trả 503 khi chưa cấu hình. `PREVIEW_READ_ONLY=true` tiếp tục chặn tài khoản/reset, không bật SMTP hoặc bỏ boundary chỉ để mở chức năng trên bản showcase. Có SMTP adapter không đồng nghĩa đã xác minh gửi/nhận email thật; cần credential/provider và kiểm tra inbox/spam ở môi trường được cho phép.
+
+Chế độ `memory` lưu tối đa 100 thông điệp trong bộ nhớ để kiểm thử local, không gửi email thật, không log token và không có HTTP endpoint đọc token. E2E lấy token trực tiếp từ provider trong tiến trình test. Thông điệp local mất khi restart; chưa có outbox (bảng lưu việc gửi thư chờ xử lý)/retry tự động hoặc UI dev inbox. SMTP lỗi được ghi cảnh báo tổng quát, response vẫn chung để không tiết lộ tài khoản; người dùng có thể yêu cầu lại sau khoảng nghỉ 60 giây. SMTP nhận thư chưa đảm bảo email đã tới inbox.
 
 ## 6. Hồ sơ, phiên và địa chỉ
 

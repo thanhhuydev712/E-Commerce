@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-19T13:55:07.014575+00:00",
+  "scope": "User selected local source and authorized commit/push/first showcase; focused checks requested",
+  "api": {
+    "lint": "passed",
+    "build": "passed",
+    "unitTests": 45
+  },
+  "frontend": {
+    "lint": "passed",
+    "format": "passed",
+    "productionBuild": "passed",
+    "shellRoutes": 30
+  },
+  "docker": {
+    "threeImagesBuilt": true,
+    "productionChecks": 15,
+    "result": "passed"
+  },
+  "infra": {
+    "manifestTests": 3,
+    "parserFixtures": 19,
+    "stateMachineRuns": 14,
+    "cfnLint": "passed",
+    "bashSyntax": "passed"
+  },
+  "browser": {
+    "fullRun": {
+      "total": 179,
+      "passed": 170,
+      "failed": 9
+    },
+    "staleExpectationsFixed": [
+      "auth shell width",
+      "DDR selection blocking",
+      "motion scale/transition",
+      "compare accessible label"
+    ],
+    "focusedRerunPassed": 9,
+    "focusedRerunReport": "front/.visual-review/codex_live_test_449a57672c9a409e81c5a42a91b01ce8/results.json",
+    "compareSelectorRerunDeferredPerUserPriority": true
+  },
+  "limitations": [
+    "SMTP timing enumeration before enabling real auth; preview disables SMTP/auth",
+    "No real SMTP delivery verified",
+    "AWS application release not yet deployed"
+  ],
+  "noRealProviderOrAwsDatabaseCalledInTests": true
+}

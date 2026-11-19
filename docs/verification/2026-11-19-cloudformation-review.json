@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-19",
+  "scope": "CloudFormation change-set creation and review only; execution not authorized",
+  "region": "ap-southeast-2",
+  "stackName": "rigforce-staging",
+  "changeSetName": "foundation-review-20261119T081323Z",
+  "changeSetStatus": "CREATE_COMPLETE",
+  "executionStatus": "AVAILABLE",
+  "stackStatus": "REVIEW_IN_PROGRESS",
+  "plannedAdditions": 42,
+  "plannedActions": {
+    "Add": 42
+  },
+  "resourceTypes": {
+    "AWS::Budgets::Budget": 1,
+    "AWS::SNS::Topic": 1,
+    "AWS::ECR::Repository": 2,
+    "AWS::EC2::SecurityGroupEgress": 1,
+    "AWS::IAM::InstanceProfile": 1,
+    "AWS::IAM::Role": 3,
+    "AWS::EC2::Instance": 1,
+    "AWS::EC2::SecurityGroup": 2,
+    "AWS::Logs::LogGroup": 4,
+    "AWS::CloudWatch::Alarm": 5,
+    "AWS::RDS::DBInstance": 1,
+    "AWS::RDS::DBParameterGroup": 1,
+    "AWS::RDS::DBSubnetGroup": 1,
+    "AWS::EC2::VPCGatewayAttachment": 1,
+    "AWS::EC2::InternetGateway": 1,
+    "AWS::EC2::SubnetRouteTableAssociation": 3,
+    "AWS::EC2::RouteTable": 2,
+    "AWS::EC2::Subnet": 3,
+    "AWS::EC2::Route": 1,
+    "AWS::EC2::EIP": 1,
+    "AWS::S3::BucketPolicy": 1,
+    "AWS::S3::Bucket": 1,
+    "AWS::SSM::Document": 1,
+    "AWS::KMS::Alias": 1,
+    "AWS::KMS::Key": 1,
+    "AWS::EC2::VPC": 1
+  },
+  "reviewChecks": {
+    "exactParametersMatchSnapshot": true,
+    "all42ResourcesAddOnly": true,
+    "templateMatchesAwsOriginal": true,
+    "compute": "t3.small, CPU standard, EBS20 GiB",
+    "database": "PostgreSQL17.11 db.t4g.micro private encrypted 20/20 GiB",
+    "publicIngressPorts": [
+      80,
+      443
+    ],
+    "exactOidcTrust": [
+      {
+        "role": "GitHubReleaseRole",
+        "exactStagingSubject": true
+      },
+      {
+        "role": "GitHubDeployRole",
+        "exactStagingSubject": true
+      }
+    ],
+    "noNatAlbOrganizations": true,
+    "budgetExcludesCredits": true,
+    "existingStackResourceCount": 0
+  },
+  "templateSha256": "cf045f96f370ff0b98885e7a10cd59404d5b4f03a199ae9352a997650300efe0",
+  "executed": false,
+  "existingFoundationBucketUnchanged": true,
+  "publicWebsiteDeployed": false,
+  "accountSpecificDetails": "infra/.local/change-set-review.json and frozen snapshots (git ignored)",
+  "costReview": {
+    "baseMonthlyUSDApprox": 46,
+    "baseHours": 730,
+    "excludes": [
+      "logs",
+      "monitoring",
+      "ECR/S3 usage",
+      "KMS/Secrets Manager",
+      "extra backup/data transfer/tax"
+    ],
+    "monthlyWarningUSD": 20,
+    "warningIsHardCap": false
+  },
+  "limitations": [
+    "Change-set creation is not execution and does not prove bootstrap/runtime/IAM works",
+    "Before execution, review fixed storage, 2GB memory, IAM permissions and cleanup retention",
+    "RDS deletion protection/Snapshot and Retain resources can outlive stack deletion",
+    "No EC2/RDS/DNS changes performed in this turn"
+  ]
+}

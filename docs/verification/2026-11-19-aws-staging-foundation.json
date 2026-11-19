@@ -1,0 +1,111 @@
+{
+  "verifiedAt": "2026-11-19T13:16:32.305182+00:00",
+  "region": "ap-southeast-2",
+  "stackStatus": "UPDATE_COMPLETE",
+  "resourceCount": 42,
+  "createAttempts": 3,
+  "compatibilityRepairs": [
+    {
+      "issue": "SSM ReleaseVersion regex unsupported lookahead",
+      "fix": "RE2 compatible character pattern; host helper preserves length/null checks",
+      "actualCreateDocumentValidation": true,
+      "temporaryDocumentDeleted": true
+    },
+    {
+      "issue": "RDS Free plan rejected 7-day backup retention",
+      "fix": "Candidate backup retention1; template default7, range1..35",
+      "backupsDisabled": false
+    },
+    {
+      "issue": "AL2023 RPM awscli2 unavailable before signal trap",
+      "fix": "awscli-2 in UserData/bootstrap; existing EC2 repaired via operator SSM with exact source patch and preserved checksums",
+      "repairCommandStatus": "Success",
+      "inPlaceRepair": true,
+      "cloudInitInitiallyFailed": true
+    }
+  ],
+  "reconciliation": {
+    "status": "UPDATE_COMPLETE",
+    "sameInstanceId": true,
+    "sameElasticIp": true,
+    "databaseUnchanged": true,
+    "hostUserDataUpdateWithEbsRoot": true,
+    "conditionalReplacementReviewedWithAwsDocumentation": true,
+    "correctedBundleNewVersionVerified": true,
+    "oldBundleVersionPreserved": true
+  },
+  "controls": {
+    "appInboundPorts": [
+      [
+        80,
+        80
+      ],
+      [
+        443,
+        443
+      ]
+    ],
+    "databaseInboundOnlyAppSecurityGroup": true,
+    "databaseSslRequired": true,
+    "cpuCreditsStandard": true,
+    "databaseAvailablePrivateEncryptedDeletionProtected": true,
+    "backupRetentionDays": 1,
+    "alarmStates": {
+      "CPUUtilization": "OK",
+      "FreeStorageSpace": "OK",
+      "disk_used_percent": "OK",
+      "StatusCheckFailed": "OK",
+      "mem_used_percent": "OK"
+    },
+    "snsEmailConfirmationPending": true,
+    "budgetAmount": {
+      "Amount": "20.0",
+      "Unit": "USD"
+    },
+    "budgetExcludesCredits": true,
+    "hostMetricNames": [
+      "disk_used_percent",
+      "mem_used_percent"
+    ],
+    "hostLogStreams": 2
+  },
+  "host": {
+    "ssmOnline": true,
+    "dockerSsmCloudWatchActive": true,
+    "composeVersion": "v5.8.0",
+    "composeAndCaChecksumsMatch": true,
+    "filePermissionsVerified": true,
+    "bootstrapMarkerPersistedAfterStopStart": true,
+    "hostInspectionStatus": "Success",
+    "applicationContainersStarted": false,
+    "ec2SystemAndInstanceStatusChecks": "ok",
+    "statusChecksVerifiedAt": "2026-11-19T13:18:33.703281+00:00"
+  },
+  "iam": {
+    "releaseAndDeployExactAudienceImmutableSubject": true,
+    "realGitHubAssumeRoleTested": false
+  },
+  "plan": {
+    "type": "FREE",
+    "status": "ACTIVE",
+    "upgradedToPaid": false,
+    "creditsNotPermanentFreeHosting": true
+  },
+  "rollbackCleanup": {
+    "verifiedNewEmptyRetainedResourcesOnly": true,
+    "foundationBucketUntouched": true,
+    "unusedNewKmsKeysPendingDeletion": 2,
+    "pendingDeletionDate": "2026-11-26",
+    "waitingWindowDays": 7
+  },
+  "notYetVerified": [
+    "Application release and ECR image publication",
+    "New RDS schema and scoped application roles",
+    "Runtime/migration SecureString provisioning",
+    "DNS cutover and public ACME HTTPS",
+    "Application rollback, AWS restore and application persistence across reboot"
+  ],
+  "githubVariablesPreparedLocallyOnly": true,
+  "noCommitOrPush": true,
+  "accountSpecificIdentifiersKeptInIgnoredLocalFiles": true
+}

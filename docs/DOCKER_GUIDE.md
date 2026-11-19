@@ -163,6 +163,20 @@ docker compose --env-file .env.docker up -d --wait --wait-timeout 180
 
 Đừng dùng `down -v` hoặc prune volume khi muốn giữ dữ liệu. `restart` chỉ khởi động lại tiến trình, không build code hoặc áp env mới. Khi sửa env/Compose cần `up -d` để recreate phù hợp. Volume sống qua recreate nhưng vẫn mất nếu ổ đĩa/host hỏng; trước AWS phải có backup/restore.
 
+### Khi 3000 đã mới nhưng 8080 vẫn cũ
+
+`3000` là server development trên host; `8080` đi qua Nginx tới frontend đã đóng gói trong image Docker. Frontend Docker không mount source nên không tự cập nhật khi sửa file. Ngay cả khi tag image đã mới, container đang chạy vẫn giữ image cũ đến khi được recreate; chỉ `restart` chưa đủ.
+
+Nếu chỉ sửa frontend, chạy tại root để cập nhật riêng frontend local:
+
+```powershell
+docker compose --env-file .env.docker -f compose.yaml build front
+docker compose --env-file .env.docker -f compose.yaml up -d --no-deps --no-build --wait --wait-timeout 180 front
+node infra/scripts/smoke-docker.mjs
+```
+
+Lệnh này không recreate API/DB hoặc chạy migration/seed. Nginx tự phân giải lại địa chỉ frontend qua Docker DNS (cache tối đa khoảng 10 giây). Sau khi frontend healthy, tải lại trang; tab đang mở từ trước có thể cần `Ctrl+Shift+R` để lấy bundle mới. Quy trình này dành cho lab local, không dùng thay quy trình phát hành AWS.
+
 Nếu 502: xem API/front healthy chưa và `nginx -t`; nếu UI báo Origin: URL browser phải khớp allowed origins/port; nếu catalog rỗng: kiểm seed đã chạy thành công; nếu ảnh 404: kiểm media volume và seed mount; nếu login/reset bị giới hạn: đọc chính sách email hiện tại, không coi container chạy là auth production đã nghiệm thu.
 
 ## 10. CI trước, CD sau

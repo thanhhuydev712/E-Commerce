@@ -1,0 +1,22 @@
+{
+  "observedAt": "2026-11-19T13:32:18.581559+00:00",
+  "dnsMatchesEc2ElasticIp": true,
+  "stackStatus": "UPDATE_COMPLETE",
+  "snsEmailConfirmed": false,
+  "ecrImageCounts": {
+    "api": 0,
+    "front": 0
+  },
+  "githubCommit": "3896a8130f4a9df3eb683672de0ef3eb7caa0b34",
+  "githubCi": {
+    "runId": 44479335531,
+    "conclusion": "success",
+    "url": "https://github.com/thanhhuydev712/E-Commerce/actions/runs/44479335531"
+  },
+  "localChangesCommitted": false,
+  "githubVariablesContractValidated": true,
+  "githubVariablesStoredRemotelyVerified": false,
+  "githubPluginSupportsVariablesOrWorkflowDispatch": false,
+  "workflowDispatched": false,
+  "applicationDeployed": false
+}

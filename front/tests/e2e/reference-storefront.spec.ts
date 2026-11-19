@@ -277,8 +277,8 @@ test("so sánh giữ hai sản phẩm và có thể bỏ từng sản phẩm", a
   await page.reload();
   await expect(page.locator(".rf-compare-table thead th")).toHaveCount(3);
   await page
-    .getByRole("button", { name: "Bỏ khỏi so sánh", exact: true })
-    .first()
+    .locator(".rf-compare-table")
+    .getByRole("button", { name: /^Bỏ SSD Kingston .+ khỏi so sánh$/ })
     .click();
   await expect(page.locator(".rf-compare-table thead th")).toHaveCount(2);
 });

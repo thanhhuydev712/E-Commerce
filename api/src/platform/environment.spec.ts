@@ -7,6 +7,47 @@ const valid = {
   JWT_REFRESH_SECRET: 'b'.repeat(48),
 };
 describe('API environment and response contract', () => {
+  it('validates SMTP credentials, TLS settings and preview/production delivery modes', () => {
+    const smtp = {
+      ...valid,
+      CHALLENGE_DELIVERY: 'smtp',
+      SMTP_HOST: 'smtp.example.test',
+      SMTP_USER: 'fixture',
+      SMTP_PASSWORD: 'fixture-only',
+      SMTP_FROM: 'noreply@example.test',
+    };
+    expect(validateEnvironment(smtp)).toMatchObject({
+      SMTP_PORT: 587,
+      SMTP_SECURE: false,
+    });
+    expect(validateEnvironment({ ...smtp, SMTP_PORT: 465 })).toMatchObject({
+      SMTP_SECURE: true,
+    });
+    for (const invalid of [
+      { SMTP_PASSWORD: '' },
+      { SMTP_FROM: 'sender@example.test\r\nBcc: victim@example.test' },
+      { SMTP_HOST: 'smtp://example.test' },
+      { SMTP_PORT: 'bad' },
+      { SMTP_SECURE: 'yes' },
+      { PREVIEW_READ_ONLY: true },
+    ])
+      expect(() => validateEnvironment({ ...smtp, ...invalid })).toThrow();
+    expect(
+      validateEnvironment({
+        ...valid,
+        NODE_ENV: 'production',
+        ALLOWED_ORIGINS: 'https://shop.example.test',
+      }).CHALLENGE_DELIVERY,
+    ).toBe('disabled');
+    expect(() =>
+      validateEnvironment({
+        ...valid,
+        NODE_ENV: 'production',
+        ALLOWED_ORIGINS: 'https://shop.example.test',
+        CHALLENGE_DELIVERY: 'memory',
+      }),
+    ).toThrow();
+  });
   it('validates preview flags and refuses payment credentials in public preview', () => {
     expect(
       validateEnvironment({ ...valid, PREVIEW_READ_ONLY: 'true' })

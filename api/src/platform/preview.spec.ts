@@ -40,6 +40,8 @@ describe('Public preview HTTP boundary', () => {
       expect(response.body.error.code).toBe('PREVIEW_READ_ONLY');
     }
     await request(target.app).post('/api/v1/webhooks/stripe').expect(503);
+    await request(target.app).post('/api/v1/auth/forgot-password').expect(503);
+    await request(target.app).post('/api/v1/auth/reset-password').expect(503);
     expect(target.calls()).toBe(0);
   });
   it('does not restore sessions or expose private/admin reads', async () => {
