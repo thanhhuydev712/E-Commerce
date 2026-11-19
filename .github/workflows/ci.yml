@@ -91,6 +91,8 @@ jobs:
         run: docker compose --env-file .env.docker --profile tools run --rm seed
       - name: Smoke through Nginx
         run: node infra/scripts/smoke-docker.mjs
+      - name: Linux non-root private-key ownership regression
+        run: node infra/scripts/test-certificate-permissions.mjs
       - name: Production TLS, read-only preview and isolated restore drill
         run: node infra/scripts/check-production.mjs
       - name: Diagnostics on failure

@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-18",
+  "github": {
+    "runUrl": "https://github.com/thanhhuydev712/E-Commerce/actions/runs/44285717596",
+    "headSha": "39c5d24a57cbabb0c870f3ea8541fd5e6c01e4b3",
+    "branch": "develop",
+    "application": "success",
+    "infrastructure": "success",
+    "docker": "failure",
+    "required": "failure",
+    "failedStep": "Production TLS, read-only preview and isolated restore drill",
+    "error": "EACCES copying root-owned certs/web.key from Linux bind mount"
+  },
+  "fix": {
+    "generationUser": "Host UID:GID on POSIX; 1000:1000 on Windows",
+    "privateKeyMode": "0600",
+    "requestAgent": "fresh connections across Nginx recreation"
+  },
+  "linuxRegression": {
+    "result": "passed",
+    "rootOwnedKeyReproducesEacces": true,
+    "runnerOwnedKeyCopies": true,
+    "uid": 1001,
+    "network": "none",
+    "privateKeyMode": "0600"
+  },
+  "productionLocal": {
+    "date": "2026-11-18T12:13:13.270Z",
+    "scope": "Isolated Docker production configuration; not AWS",
+    "checks": [
+      "AWS Compose override validates and replaces local logging options",
+      "dedicated TLS PostgreSQL ready",
+      "separate migration owner and SELECT-only runtime role",
+      "fresh migrations verify PostgreSQL TLS",
+      "seed sample catalog using assets from the frontend image",
+      "repeat migration verifies existing SQL checksums without changing schema",
+      "production API/frontend/Nginx healthy",
+      "HTTPS validates the expected CA and rejects a wrong CA",
+      "preview blocks mutations/private data, Swagger and external readiness",
+      "runtime database rejects INSERT (42501)",
+      "PostgreSQL driver rejects a wrong database CA",
+      "Prisma migration driver rejects a wrong database CA",
+      "restore into a second database and volume preserves catalog/media",
+      "recreating application containers preserves database and media volumes"
+    ],
+    "result": "passed",
+    "restore": {
+      "products": 183,
+      "mediaFilesDigest": "1ee590f22b1157f7f9f34a249922554fecaa6af0c6fd62f5d49088de41948590",
+      "seconds": 7.267,
+      "databaseDumpSha256": "f47671831a579d8ac17d6533e50585af0ff53ec67803fb6a7d8027df59561499"
+    },
+    "seconds": 85.587
+  },
+  "firstLocalAttemptAfterOwnershipFix": {
+    "result": "failed",
+    "lastError": "read ECONNRESET after container recreation",
+    "followup": "Disabled socket reuse in the test HTTP client; full rerun passed"
+  },
+  "staticChecks": {
+    "nodeSyntax": "passed",
+    "prettier": "passed",
+    "actionlint": "passed"
+  },
+  "limits": [
+    "Full production orchestration ran from Windows; POSIX regression ran inside Linux containers",
+    "Chromium was not rerun for this infrastructure-script-only fix",
+    "Patched GitHub workflow has not run; no commit or push performed"
+  ]
+}

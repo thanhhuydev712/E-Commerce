@@ -76,6 +76,8 @@ const check = (
         method,
         ca,
         rejectUnauthorized: true,
+        // The persistence drill replaces Nginx; do not reuse its old socket.
+        agent: false,
         timeout: 15000,
       },
       (response) => {
@@ -129,7 +131,11 @@ try {
     "run",
     "--rm",
     "--user",
-    "0",
+    // Linux bind mounts retain ownership: the host runner must own generated
+    // private keys (0600) so it can copy them without weakening permissions.
+    typeof process.getuid === "function"
+      ? `${process.getuid()}:${process.getgid()}`
+      : "1000:1000",
     "--entrypoint",
     "sh",
     "-v",
@@ -145,6 +151,19 @@ try {
       ]),
     ].join(" && "),
   ]);
+  if (typeof process.getuid === "function") {
+    const key = fs.statSync(path.join(work, "certs/web.key"));
+    assert.equal(
+      key.uid,
+      process.getuid(),
+      "Test private key must belong to the host runner",
+    );
+    assert.equal(
+      key.mode & 0o777,
+      0o600,
+      "Test private key must remain private",
+    );
+  }
   fs.copyFileSync(
     path.join(work, "certs/ca.crt"),
     path.join(work, "certs/rds-global-bundle.pem"),
@@ -153,6 +172,12 @@ try {
     path.join(work, "certs/web.key"),
     path.join(work, "letsencrypt/live/localhost/privkey.pem"),
   );
+  if (typeof process.getuid === "function")
+    assert.equal(
+      fs.statSync(path.join(work, "letsencrypt/live/localhost/privkey.pem"))
+        .mode & 0o777,
+      0o600,
+    );
   write(
     "letsencrypt/live/localhost/fullchain.pem",
     fs.readFileSync(path.join(work, "certs/web.crt"), "utf8") +
