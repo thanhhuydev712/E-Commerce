@@ -110,11 +110,6 @@ async function main() {
       'prisma.docker.config.ts',
     ],
     {
-      env: {
-        ...process.env,
-        DATABASE_URL:
-          process.env.PRISMA_MIGRATION_DATABASE_URL || process.env.DATABASE_URL,
-      },
       stdio: 'inherit',
     },
   );
