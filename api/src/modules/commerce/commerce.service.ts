@@ -6,6 +6,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { randomUUID } from 'node:crypto';
 import { PrismaService } from '../../prisma/prisma.service.js';
 import { lockUser, type DbTransaction } from '../../common/database.js';
@@ -19,7 +20,15 @@ import type {
 } from './commerce.dto.js';
 @Injectable()
 export class CommerceService {
-  constructor(@Inject(PrismaService) readonly prisma: PrismaService) {}
+  private readonly interactiveDemo: boolean;
+  constructor(
+    @Inject(PrismaService) readonly prisma: PrismaService,
+    @Inject(ConfigService) config: ConfigService,
+  ) {
+    this.interactiveDemo =
+      config.get<boolean>('PREVIEW_READ_ONLY') === true &&
+      config.get<boolean>('INTERACTIVE_DEMO') === true;
+  }
   async userLock(tx: DbTransaction, userId: string) {
     await lockUser(tx, this.prisma.schema, userId);
     const user = await tx.user.findUniqueOrThrow({ where: { id: userId } });
@@ -82,7 +91,12 @@ export class CommerceService {
         for (const productId of [
           ...new Set(selected.map((v) => v.productId)),
         ].sort())
-          await productLock(tx, this.prisma.schema, productId);
+          await productLock(
+            tx,
+            this.prisma.schema,
+            productId,
+            this.interactiveDemo,
+          );
         const scope = await publicCatalogScope(tx);
         for (const line of requested.sort((a, b) =>
           a.variantId.localeCompare(b.variantId),

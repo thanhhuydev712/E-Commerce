@@ -1,5 +1,17 @@
 # Hiện trạng dự án
 
+## Demo tài khoản/giỏ/lưu PC — chuẩn bị triển khai 20/11/2026
+
+- Người dùng chốt tài khoản thử có kiểm soát, giỏ và lưu PC, chưa nhận đơn thật. Đã thêm INTERACTIVE_DEMO opt-in trong khi PREVIEW_READ_ONLY giữtrue; không mở đăng ký/reset/đơn/payment/admin. Xem [contract và hướng dẫn](FEATURE_UNLOCK_PLAN.md).
+- API lint/build53 unit, FE lint/TypeScript/build2 UI,22 parser fixtures14 deployment mocks và6 nhóm DB TLS thật qua;11 ghi catalog/đơn/tồn/credential/quyền bị42501. Account helper lần đầu thiếu updated_at đã rollback; sửa timestamp rồi tạo CUSTOMER thành công, không reset tài khoản cũ. Secret giữ local/SSM, không ghi Git/chat.
+- Đã đọc host thực tế: đang chạy commit99b356a healthy, runtime rigforce_app, có schema-state. CLI được người dùng tái xác thực. Đã áp dụng grant tối thiểu/tạo tài khoản thử, cập nhật helper có hash/backup và đặt flag SecureString; app đang chạy cũ vẫn showcase cho tới Release/Deploy. Không reset/seed lại DB hoặc tạo lại hạ tầng. Chưa xác nhận tính năng mới trên link public.
+
+## Website truy cập được, chuẩn bị mở tính năng — 20/11/2026
+
+- Người dùng báo đã tự deploy AWS và truy cập được link. Kiểm chỉ đọc xác nhận HTTPS `rigforce.duckdns.org` trả200 cho home/login/cart/PC Builder/storefront API; login không có input password, các trang có thông báo preview. Chưa kiểm lại release/image/env/DB role thực tế trên host; không khẳng định automation trước đó đã Deploy thành công.
+- Automation19/11 trong `infra/.local/first-deployment-state.json` dừng ở seed; marker này là lịch sử, **không tự chạy lại seed/deploy** trên bản người dùng đã dựng.
+- Đã xác định source có khóa FE/API/Compose/env validator và runtime SELECT-only theo bộ setup. Chưa có capability tách auth/cart/build khỏi orders; tắt preview toàn cục có thể mở COD. [Kế hoạch mở tính năng](FEATURE_UNLOCK_PLAN.md) đề xuất tương tác demo, giữ orders/payment/admin đóng. Đang chốt nhóm cần mở; chưa đổi mã runtime, secret, quyền DB hoặc cấu hình AWS.
+
 ## Chuẩn bị Release đầu tiên — kiểm tra tiếp nối 19/11/2026
 
 - DNS A của `rigforce.duckdns.org` đã trỏ đúng Elastic IP EC2; CloudFormation vẫn UPDATE_COMPLETE. Hai ECR repo vẫn trống; SNS email còn PendingConfirmation. DNS đúng chưa phải website/HTTPS đã hoạt động.

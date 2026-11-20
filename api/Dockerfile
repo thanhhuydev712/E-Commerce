@@ -42,4 +42,6 @@ COPY --from=build --chown=node:node /app/api/prisma.docker.config.ts ./prisma.do
 COPY --from=build --chown=node:node /app/api/prisma ./prisma
 COPY --chown=node:node scripts/migrate-docker.cjs ./scripts/migrate-docker.cjs
 COPY --chown=node:node scripts/setup-db-roles.cjs ./scripts/setup-db-roles.cjs
+COPY --chown=node:node scripts/setup-interactive-demo.cjs ./scripts/setup-interactive-demo.cjs
+COPY --chown=node:node scripts/create-demo-account.cjs ./scripts/create-demo-account.cjs
 CMD ["node", "scripts/migrate-docker.cjs"]

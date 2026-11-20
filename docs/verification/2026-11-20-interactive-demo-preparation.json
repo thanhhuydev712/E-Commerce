@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-20T06:56:46.608266+00:00",
+  "apiUnitPassed": 53,
+  "apiLintBuild": "passed",
+  "frontendLintTypeBuild": "passed",
+  "uiPassed": 2,
+  "parserFixtures": 22,
+  "deploymentMockRuns": 14,
+  "databaseChecks": {
+    "date": "2026-11-20T06:52:57.643Z",
+    "scope": "Disposable TLS PostgreSQL; grants only, not API/AWS",
+    "checks": [
+      "fresh schema migrated using verified PostgreSQL TLS and separate roles",
+      "runtime starts SELECT-only and its connection uses TLS",
+      "grant helper is idempotent and Prisma executeRaw handles the advisory lock",
+      "runtime auth/session/audit and cart operations succeed; all fixture data rolled back",
+      "saved-PC parent delete cascades to components without child DELETE grant",
+      "11 catalog/order/stock/payment/identity/role writes fail with SQLSTATE 42501"
+    ],
+    "result": "passed",
+    "cleanup": "passed"
+  },
+  "awsPrepared": true,
+  "liveApplicationVerified": false,
+  "noOrdersPaymentsOrPublicSignup": true
+}

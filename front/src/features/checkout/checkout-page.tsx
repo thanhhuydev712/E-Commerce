@@ -119,6 +119,20 @@ const tw = {
 
 /** Chờ khôi phục phiên để dùng giỏ và thông tin tài khoản từ server. */
 export function CheckoutPage() {
+  const { interactiveDemo } = useShop();
+  if (interactiveDemo)
+    return (
+      <section className="rf-panel p-8">
+        <h1>Demo giỏ hàng và cấu hình PC</h1>
+        <p>
+          Đặt đơn và thanh toán chưa được mở. Giỏ hàng của bạn vẫn được giữ lại.
+        </p>
+      </section>
+    );
+  return <ReadyCheckout />;
+}
+
+function ReadyCheckout() {
   const shop = useShop();
   if (!shop.ready)
     return (

@@ -1,5 +1,12 @@
 # Hướng dẫn Codex — E-Commerce Fullstack
 
+## Cập nhật hiện tại — 20/11/2026
+
+- Đã chốt và cài contract `PREVIEW_READ_ONLY=true` + `INTERACTIVE_DEMO=true` cho tài khoản thử/cart/saved PC; không mở signup/reset/order/payment/admin. Xem mục mới PROJECT_STATUS và FEATURE_UNLOCK_PLAN. Grant tối thiểu + CUSTOMER + helper/SSM flag đã chuẩn bị AWS; chờ Release/Deploy/smoke mới kết luận mở thành công. Không quay về tắt PREVIEW_READ_ONLY toàn cục. Password/email thử chỉ giữ trong infra/.local/ được ignore. Bootstrap CFN pin cũ cần đồng bộ helper trước thay host.
+
+- Người dùng đã tự deploy AWS; HTTPS website trả200 khi kiểm. Yêu cầu mới: hướng dẫn/cùng mở thành phần bị khóa; chưa chốt nhóm, vẫn chưa nhận đơn thật. Đọc `docs/FEATURE_UNLOCK_PLAN.md` và mục mới nhất PROJECT_STATUS. Source chưa tách mở auth/cart/build khỏi COD; không tắt preview toàn cục hoặc cấp DML toàn schema theo suy đoán.
+- Marker automation19/11 báo seed thất bại là lịch sử trước deployment người dùng tự làm. Không tự rerun seed/finish script hoặc tạo lại stack; kiểm release/role/env thực tế trước thay đổi. Chưa thay quyền DB/secret/runtime trong lượt kiểm20/11.
+
 ## Trạng thái AWS tiếp nối — 19/11/2026
 
 - Người dùng đã chọn **bản local hiện tại, rà soát/kiểm tra trước commit/push** cho lần phát hành đầu; không còn là lựa chọn source đang mở. Xem `docs/LOCAL_RELEASE_REVIEW.md`; giữ preview chỉ đọc/SMTP disabled. Timing SMTP reset còn có thể lộ tài khoản nếu mở auth production, cần xử lý trước mốc đó. Không suy CI commit3896a813 thành CI của candidate local.

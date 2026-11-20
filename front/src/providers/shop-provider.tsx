@@ -82,6 +82,7 @@ function createStore(
   initialCatalog: ReturnType<typeof useCatalog>,
   navigate: (destination: string) => void,
   readOnlyPreview = false,
+  interactiveDemo = false,
 ) {
   let currentCatalog = initialCatalog;
   const catalog = () => currentCatalog;
@@ -145,7 +146,8 @@ function createStore(
         /* Preference hỏng không thay thế dữ liệu nghiệp vụ từ server. */
       }
       try {
-        if (!readOnlyPreview && (await refreshSession())) await loadPrivate();
+        if ((!readOnlyPreview || interactiveDemo) && (await refreshSession()))
+          await loadPrivate();
       } catch (cause) {
         error(cause);
       } finally {
@@ -155,7 +157,7 @@ function createStore(
     return initialization;
   };
   const signedIn = async () => {
-    if (readOnlyPreview) {
+    if (readOnlyPreview && !interactiveDemo) {
       notify("Bản giới thiệu chỉ đọc; tài khoản và đặt hàng đang tắt.");
       return false;
     }
@@ -173,8 +175,12 @@ function createStore(
     const [user, cart, orders, wishlist, builds] = await Promise.all([
       api<Account>("/me"),
       api<{ lines: CartLine[] }>("/me/cart"),
-      api<Order[]>("/me/orders"),
-      api<string[]>("/me/wishlist"),
+      interactiveDemo
+        ? Promise.resolve<Order[]>([])
+        : api<Order[]>("/me/orders"),
+      interactiveDemo
+        ? Promise.resolve<string[]>([])
+        : api<string[]>("/me/wishlist"),
       api<Snapshot["builds"]>("/me/builds"),
     ]);
     if (version === sessionVersion)
@@ -209,6 +215,7 @@ function createStore(
   };
   return {
     readOnlyPreview,
+    interactiveDemo,
     setCatalog: (value: ReturnType<typeof useCatalog>) => {
       currentCatalog = value;
     },
@@ -233,6 +240,8 @@ function createStore(
       name?: string;
       register?: boolean;
     }) => {
+      if (interactiveDemo && data.register)
+        throw new Error("Bản demo dùng tài khoản thử được cấp riêng.");
       const result = await api<{ accessToken: string; user: Account }>(
         data.register ? "/auth/register" : "/auth/login",
         {
@@ -303,6 +312,10 @@ function createStore(
         } catch {}
         return;
       }
+      if (interactiveDemo) {
+        notify("Yêu thích chưa được mở trong đợt demo này.");
+        return;
+      }
       if (!(await signedIn())) return;
       const product = catalog().productById(id);
       if (!product) return;
@@ -317,6 +330,10 @@ function createStore(
       }
     },
     placeOrder: (data: CheckoutData) => {
+      if (interactiveDemo) {
+        notify("Bản demo chưa mở đặt đơn hoặc thanh toán.");
+        return Promise.resolve(null);
+      }
       if (placing) return placing;
       placing = (async () => {
         await cartQueue;
@@ -375,6 +392,7 @@ function createStore(
       return placing;
     },
     cancelOrder: async (id: string) => {
+      if (interactiveDemo) return;
       try {
         const order = await api<Order>(`/me/orders/${id}/cancel`, {
           method: "POST",
@@ -432,9 +450,11 @@ const Context = createContext<ReturnType<typeof createStore> | null>(null);
 export function ShopProvider({
   children,
   readOnlyPreview = false,
+  interactiveDemo = false,
 }: {
   children: ReactNode;
   readOnlyPreview?: boolean;
+  interactiveDemo?: boolean;
 }) {
   const catalog = useCatalog(),
     router = useRouter();
@@ -443,6 +463,7 @@ export function ShopProvider({
       catalog,
       (destination) => router.push(destination),
       readOnlyPreview,
+      interactiveDemo,
     ),
   );
   useEffect(() => {

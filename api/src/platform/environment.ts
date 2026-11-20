@@ -1,12 +1,18 @@
 export function validateEnvironment(input: Record<string, unknown>) {
   const result = { ...input };
   result.NODE_ENV = input.NODE_ENV ?? 'development';
-  for (const name of ['PREVIEW_READ_ONLY', 'DATABASE_TLS_REQUIRED']) {
+  for (const name of [
+    'PREVIEW_READ_ONLY',
+    'INTERACTIVE_DEMO',
+    'DATABASE_TLS_REQUIRED',
+  ]) {
     const value = input[name] ?? 'false';
     if (!['true', 'false', true, false].includes(value as string | boolean))
       throw new Error(`${name} must be true or false`);
     result[name] = value === true || value === 'true';
   }
+  if (result.INTERACTIVE_DEMO && !result.PREVIEW_READ_ONLY)
+    throw new Error('INTERACTIVE_DEMO requires PREVIEW_READ_ONLY');
   // Chỉ hỗ trợ trực tiếp hoặc đúng một reverse proxy đã biết; không trust tùy ý.
   const proxyHops = Number(input.TRUST_PROXY_HOPS ?? 0);
   if (![0, 1].includes(proxyHops))

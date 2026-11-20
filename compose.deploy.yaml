@@ -29,6 +29,7 @@ services:
       NODE_ENV: production
       PORT: "3001"
       PREVIEW_READ_ONLY: "true"
+      INTERACTIVE_DEMO: ${INTERACTIVE_DEMO:-false}
       DATABASE_TLS_REQUIRED: "true"
       TRUST_PROXY_HOPS: "1"
       STRIPE_SECRET_KEY: ""
@@ -53,6 +54,7 @@ services:
     environment:
       API_INTERNAL_URL: http://api:3001
       PREVIEW_READ_ONLY: "true"
+      INTERACTIVE_DEMO: ${INTERACTIVE_DEMO:-false}
     depends_on:
       api: { condition: service_healthy }
     networks: [app]

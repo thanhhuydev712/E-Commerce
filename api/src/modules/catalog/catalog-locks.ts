@@ -11,10 +11,20 @@ export async function productLock(
   tx: DbTransaction,
   schema: string,
   id: string,
+  interactiveDemo = false,
 ) {
-  await tx.$queryRaw(
-    Prisma.sql`SELECT id FROM ${Prisma.raw(`"${schema}"."products"`)} WHERE id=${id}::uuid FOR UPDATE`,
-  );
+  if (interactiveDemo) {
+    // Only the preview cart opts in: all catalog/admin writes are blocked and
+    // its DB role has SELECT-only catalog access. Callers retain sorted IDs.
+    // Serialize demo carts without granting UPDATE on immutable catalog rows.
+    await tx.$executeRaw(
+      Prisma.sql`SELECT pg_advisory_xact_lock(hashtextextended(${`${schema}:demo-product:${id}`}, 20261120))`,
+    );
+  } else {
+    await tx.$queryRaw(
+      Prisma.sql`SELECT id FROM ${Prisma.raw(`"${schema}"."products"`)} WHERE id=${id}::uuid FOR UPDATE`,
+    );
+  }
   const product = await tx.product.findUnique({ where: { id } });
   if (!product) throw new NotFoundException('Product not found');
   return product;

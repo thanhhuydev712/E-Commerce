@@ -33,20 +33,21 @@ import {
 
 export function AuthPage({ mode }: { mode: string }) {
   const query = useSearchParams();
-  const { readOnlyPreview } = useShop();
+  const { readOnlyPreview, interactiveDemo } = useShop();
   const destination = safeAuthDestination(query.get("next"));
   const recovery = [
     "forgot-password",
     "reset-password",
     "verify-email",
   ].includes(mode);
-  if (readOnlyPreview)
+  if (readOnlyPreview && (!interactiveDemo || mode !== "login"))
     return (
       <section className="mx-auto max-w-2xl px-5 py-16">
         <h1 className="text-2xl font-semibold">Trải nghiệm cửa hàng</h1>
         <p className="mt-4">
-          Bản công khai hiện giới thiệu sản phẩm và PC Studio. Tài khoản, đặt
-          hàng và thanh toán đang tắt; bạn không cần nhập thông tin cá nhân.
+          {interactiveDemo
+            ? "Đăng nhập bằng tài khoản thử được cấp riêng. Đăng ký và khôi phục mật khẩu công khai chưa mở; chưa nhận đơn hoặc thanh toán."
+            : "Bản công khai hiện giới thiệu sản phẩm và PC Studio. Tài khoản, đặt hàng và thanh toán đang tắt; bạn không cần nhập thông tin cá nhân."}
         </p>
         <Link
           href="/products"

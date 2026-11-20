@@ -43,19 +43,23 @@ export default function RootLayout({
 async function ConnectedStore({ children }: { children: React.ReactNode }) {
   const data = await getStorefront();
   const readOnlyPreview = process.env.PREVIEW_READ_ONLY === "true";
+  const interactiveDemo =
+    readOnlyPreview && process.env.INTERACTIVE_DEMO === "true";
   return (
     <CatalogProvider initialData={data}>
       <ShopProvider
-        key={String(readOnlyPreview)}
+        key={`${readOnlyPreview}:${interactiveDemo}`}
         readOnlyPreview={readOnlyPreview}
+        interactiveDemo={interactiveDemo}
       >
         {readOnlyPreview && (
           <aside
             className="bg-slate-900 px-4 py-3 text-center text-sm text-white"
             aria-label="Phạm vi trải nghiệm"
           >
-            Bản giới thiệu · Dữ liệu minh họa · Tài khoản, đặt hàng và thanh
-            toán đang tắt.
+            {interactiveDemo
+              ? "Demo tương tác · Tài khoản thử, giỏ hàng và lưu PC · Chưa nhận đơn hoặc thanh toán."
+              : "Bản giới thiệu · Dữ liệu minh họa · Tài khoản, đặt hàng và thanh toán đang tắt."}
           </aside>
         )}
         {children}

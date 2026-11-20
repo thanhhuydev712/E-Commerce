@@ -122,7 +122,12 @@ export function configureHttp(app: INestApplication) {
       next();
     },
   );
-  app.use(previewBoundary(config.get<boolean>('PREVIEW_READ_ONLY', false)));
+  app.use(
+    previewBoundary(
+      config.get<boolean>('PREVIEW_READ_ONLY', false),
+      config.get<boolean>('INTERACTIVE_DEMO', false),
+    ),
+  );
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

@@ -108,7 +108,7 @@ try:
     migration, migration_text = read_payload(directory, 'migration', sys.argv[3])
     required_runtime = {'DATABASE_URL', 'DATABASE_SCHEMA', 'JWT_SECRET', 'JWT_REFRESH_SECRET', 'ALLOWED_ORIGINS', 'STOREFRONT_URL'}
     flags = {'NODE_ENV': 'production', 'PREVIEW_READ_ONLY': 'true', 'DATABASE_TLS_REQUIRED': 'true', 'TRUST_PROXY_HOPS': '1'}
-    allowed_runtime = required_runtime | {'JWT_EXPIRES_IN', 'REFRESH_TTL_SECONDS'} | set(flags)
+    allowed_runtime = required_runtime | {'JWT_EXPIRES_IN', 'REFRESH_TTL_SECONDS', 'INTERACTIVE_DEMO'} | set(flags)
     required_migration = {'DATABASE_URL', 'PRISMA_MIGRATION_DATABASE_URL', 'DATABASE_SCHEMA'}
     if not required_runtime <= set(runtime) or set(runtime) - allowed_runtime:
         fail('RUNTIME_KEYS_INVALID')
@@ -119,6 +119,8 @@ try:
     for key, expected in flags.items():
         if key in runtime and runtime[key] != expected:
             fail('PRODUCTION_FLAG_MISMATCH')
+    if runtime.get('INTERACTIVE_DEMO', 'false') not in ('true', 'false'):
+        fail('INTERACTIVE_DEMO_INVALID')
     if min(len(runtime['JWT_SECRET']), len(runtime['JWT_REFRESH_SECRET'])) < 32 or runtime['JWT_SECRET'] == runtime['JWT_REFRESH_SECRET']:
         fail('JWT_SECRETS_INVALID')
     for key, upper in [('JWT_EXPIRES_IN', 3600), ('REFRESH_TTL_SECONDS', 2592000)]:

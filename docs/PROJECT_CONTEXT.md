@@ -1,5 +1,7 @@
 # Bối cảnh và định hướng sản phẩm
 
+**Cập nhật20/11/2026:** người dùng đã tự deploy, HTTPS website truy cập được (HTTP200 đã kiểm); hiện các trang vẫn có chốt preview. Yêu cầu tiếp theo là hướng dẫn/cùng mở các thành phần bị khóa, chưa xác định nhóm và chưa yêu cầu nhận đơn thật. Xem `FEATURE_UNLOCK_PLAN.md` và trạng thái mới nhất. Không chạy lại automation seed đang ghi lỗi19/11; bản người dùng đã deploy có thể khác marker local. Không chỉ tắt flag preview vì hiện chưa tách auth/cart/build khỏi COD; cần chốt phạm vi trước thay quyền DB/runtime.
+
 ## Cập nhật quyền triển khai — 19/11/2026
 
 Tiếp nối: DNS đã trỏ đúng EC2; GitHub commit `3896a813` có CI thật thành công (run44479335531), ECR vẫn trống và SNS email chưa xác nhận. Chuẩn bị [Release đầu](FIRST_AWS_RELEASE.md); cần chọn mã đã CI xanh trên GitHub hoặc rà soát bản local trước commit/push. Tám variable đã đối chiếu tên, bảng giá trị nằm trong `infra/.local/github-staging-setup.md`; chưa xác nhận lưu trên GitHub hoặc dispatch workflow. Plugin hiện không hỗ trợ hai thao tác cấu hình/dispatch này. Không suy CI của commit GitHub thành CI cho working tree local.

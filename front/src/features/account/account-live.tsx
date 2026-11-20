@@ -70,6 +70,25 @@ export default function AccountPage({ segments }: { segments: string[] }) {
         label="Đăng nhập"
       />
     );
+  if (shop.interactiveDemo)
+    return (
+      <section className="rf-panel p-8">
+        <h1>Tài khoản thử</h1>
+        <p>
+          Xin chào {shop.user.name}. Bạn có thể dùng giỏ hàng và lưu cấu hình
+          PC.
+        </p>
+        <p>
+          Đơn hàng, thanh toán và cập nhật thông tin tài khoản chưa mở trong đợt
+          demo này.
+        </p>
+        <div className="flex flex-wrap gap-4 py-4">
+          <Link href="/cart">Giỏ hàng</Link>
+          <Link href="/pc-builder/saved">Cấu hình đã lưu</Link>
+          <button onClick={() => void shop.logout()}>Đăng xuất</button>
+        </div>
+      </section>
+    );
   let content: ReactNode;
   if (section === "orders" && id)
     content = <OrderDetail id={id} section={detail} />;

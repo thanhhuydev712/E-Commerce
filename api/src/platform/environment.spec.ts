@@ -7,6 +7,29 @@ const valid = {
   JWT_REFRESH_SECRET: 'b'.repeat(48),
 };
 describe('API environment and response contract', () => {
+  it('only enables interactive demo inside preview and keeps SMTP/payment disabled', () => {
+    expect(validateEnvironment(valid).INTERACTIVE_DEMO).toBe(false);
+    for (const value of [true, 'true']) {
+      const demo = {
+        ...valid,
+        PREVIEW_READ_ONLY: 'true',
+        INTERACTIVE_DEMO: value,
+      };
+      expect(validateEnvironment(demo).INTERACTIVE_DEMO).toBe(true);
+      expect(() =>
+        validateEnvironment({ ...demo, PREVIEW_READ_ONLY: false }),
+      ).toThrow('INTERACTIVE_DEMO requires PREVIEW_READ_ONLY');
+      expect(() =>
+        validateEnvironment({ ...demo, STRIPE_SECRET_KEY: 'sk_test_fixture' }),
+      ).toThrow();
+      expect(() =>
+        validateEnvironment({ ...demo, CHALLENGE_DELIVERY: 'smtp' }),
+      ).toThrow('SMTP must be disabled');
+    }
+    expect(() =>
+      validateEnvironment({ ...valid, INTERACTIVE_DEMO: 'yes' }),
+    ).toThrow();
+  });
   it('validates SMTP credentials, TLS settings and preview/production delivery modes', () => {
     const smtp = {
       ...valid,
