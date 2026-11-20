@@ -1,5 +1,7 @@
 # Khôi phục mật khẩu cho tài khoản demo trên AWS
 
+**Trạng thái 20/11/2026:** đã Release/Deploy app `56aff7c` và bật recovery trên staging. HTTP request cho email thử/không tồn tại đều 202, worker báo `SENT` sau SES SMTP, còn đăng ký/đơn/quote vẫn 503. Người dùng chưa xác nhận inbox và chưa dùng link reset trên AWS; xem [audit](verification/2026-11-20-password-recovery-live.json). Nếu tự đổi mật khẩu, giá trị trong `infra/.local/demo-account.credentials.json` là mật khẩu ban đầu và sẽ không còn đúng; cập nhật/xóa bản local riêng, không gửi mật khẩu hoặc link qua chat.
+
 ## Phạm vi
 
 Chỉ các email tài khoản thử do operator cho phép mới được nhận liên kết. Website vẫn chạy `PREVIEW_READ_ONLY=true` và `INTERACTIVE_DEMO=true`; đăng ký, xác minh email công khai, đơn hàng và thanh toán vẫn đóng. Cờ `PASSWORD_RECOVERY_ENABLED` mặc định `false` ở cả frontend, backend và cấu hình deploy.

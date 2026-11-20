@@ -1,10 +1,10 @@
 # Hướng dẫn Codex — E-Commerce Fullstack
 
-## Khôi phục mật khẩu tài khoản thử — đang phát hành 20/11/2026
+## Khôi phục mật khẩu tài khoản thử — đã mở trên AWS 20/11/2026
 
-- Candidate local bổ sung `PASSWORD_RECOVERY_ENABLED` mặc định false, outbox PostgreSQL mã hóa + worker, SES SMTP cho email tài khoản thử đã xác minh, trang forgot/reset và DB trigger giới hạn đổi mật khẩu đúng allowlist. Xem `docs/PASSWORD_RECOVERY_AWS.md`; không suy candidate thành tính năng đã live trước Release/Deploy/smoke.
-- SES identity Sydney đã xác minh; IAM SMTP user scoped đã chuẩn bị **chưa tạo access key**. CloudFormation staging chỉ thêm egress TCP/587 (UPDATE_COMPLETE, không thay EC2/RDS); host helpers mới đã cài và fetch-env hiện tại qua. Runtime SecureString vẫn chưa bật recovery/SMTP.
-- Backend build/lint +71 unit qua; disposable PostgreSQL TLS 4 nhóm qua (migration, grants/trigger, worker/reset/retry). FE build và mocked Chromium smoke qua; parser28 qua. Chưa gửi SES thật hoặc smoke AWS. Giữ `PREVIEW_READ_ONLY=true`, `INTERACTIVE_DEMO=true`, `PASSWORD_RECOVERY_ENABLED=false` cho tới khi Release, migration, grant, SMTP credential và kiểm thật xong.
+- App commit `56aff7c` đã CI/Release/Deploy hai lượt thành công. Runtime staging: `PREVIEW_READ_ONLY=true`, `INTERACTIVE_DEMO=true`, `PASSWORD_RECOVERY_ENABLED=true`, `CHALLENGE_DELIVERY=smtp`; frontend/API/Nginx healthy. Quên/reset chỉ dành cho email tài khoản thử trong allowlist, không mở signup/order/payment/admin. Xem `docs/PASSWORD_RECOVERY_AWS.md`, `docs/PROJECT_STATUS.md` và audit `docs/verification/2026-11-20-password-recovery-live.json`.
+- SES Sydney identity đã xác minh; IAM SMTP credential scoped chỉ gửi đúng sender/recipient thử, lưu trong SSM SecureString; không in/lưu Git. Live HTTPS smoke qua generic 202 cho email thử/không tồn tại, 503 signup/order/quote. Worker staging ghi `SENT` cho thử, `IGNORED` cho không tồn tại; SES đã chấp nhận thư. Người dùng chưa xác nhận inbox/chưa thực hiện reset qua link, nên không suy live end-to-end reset đã nghiệm thu.
+- CloudFormation chỉ thêm outbound TCP/587, không thay EC2/RDS. Migration additive, helper DB hai lần qua TLS với trigger chặn đổi credential ngoài allowlist. Backend build/lint, 71 unit, 4 nhóm PostgreSQL TLS, frontend build/mock Chromium và parser28 đều qua. Sau rollout, smoke login/cart/saved PC 8 nhóm lại qua. Bootstrap bundle pin cũ vẫn cần đồng bộ helper trước khi thay EC2. Các mục “đang chuẩn bị/flag false” phía dưới là lịch sử.
 
 ## Cập nhật hiện tại — 20/11/2026
 

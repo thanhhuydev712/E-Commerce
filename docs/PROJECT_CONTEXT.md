@@ -1,5 +1,7 @@
 # Bối cảnh và định hướng sản phẩm
 
+**Kết quả mới nhất 20/11/2026:** app `56aff7c` đã mở khôi phục mật khẩu chỉ cho tài khoản thử trên AWS: `PREVIEW_READ_ONLY=true`, `INTERACTIVE_DEMO=true`, `PASSWORD_RECOVERY_ENABLED=true`; SES SMTP đã chấp nhận thư, HTTP generic202, đơn/checkout/đăng ký vẫn đóng. Người dùng chưa xác nhận inbox/chưa đổi mật khẩu qua link. Xem `PASSWORD_RECOVERY_AWS.md` và `verification/2026-11-20-password-recovery-live.json`; đoạn app7921ba6 dưới đây là mốc lịch sử.
+
 **Kết quả mới nhất20/11/2026:** app7921ba6 đã mở demo tương tác trên AWS và smoke HTTPS thật qua. Chỉ tài khoản thử CUSTOMER, giỏ và lưu/xóa PC; không đơn/payment/signup/reset/SMTP/admin. Hai flag cùngtrue, không tắt PREVIEW_READ_ONLY. Xem FEATURE_UNLOCK_PLAN và audit `verification/2026-11-20-interactive-demo-live.json`; các trạng thái chờ/khảo sát bên dưới là lịch sử. Không công khai credential local hoặc chạy lại seed/stack cũ.
 
 **Cập nhật20/11/2026:** người dùng đã tự deploy, HTTPS website truy cập được (HTTP200 đã kiểm); hiện các trang vẫn có chốt preview. Yêu cầu tiếp theo là hướng dẫn/cùng mở các thành phần bị khóa, chưa xác định nhóm và chưa yêu cầu nhận đơn thật. Xem `FEATURE_UNLOCK_PLAN.md` và trạng thái mới nhất. Không chạy lại automation seed đang ghi lỗi19/11; bản người dùng đã deploy có thể khác marker local. Không chỉ tắt flag preview vì hiện chưa tách auth/cart/build khỏi COD; cần chốt phạm vi trước thay quyền DB/runtime.

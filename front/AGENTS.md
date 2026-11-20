@@ -8,6 +8,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+## AWS demo hiện tại — 20/11/2026
+
+- Runtime staging dùng `PREVIEW_READ_ONLY=true` cùng `INTERACTIVE_DEMO=true` và `PASSWORD_RECOVERY_ENABLED=true`. Trang login, giỏ, lưu PC, forgot/reset cho email thử đã mở; signup, orders, quote, payment và admin vẫn khóa ở API. Đừng coi đoạn preview chỉ đọc phía dưới là trạng thái hiện tại.
+- Flag recovery được truyền từ server runtime vào ShopProvider; không dùng `NEXT_PUBLIC_*` cho secret hoặc allowlist. Link email có token trong fragment, RecoveryForm đọc rồi xóa fragment khỏi URL. Bản dùng link đổi mật khẩu thật còn chờ người dùng xác nhận; xem `../docs/PASSWORD_RECOVERY_AWS.md` và audit live.
+
 ## Bối cảnh triển khai của dự án — 06/11/2026
 
 - Đọc [hướng dẫn chung](../AGENTS.md), [hiện trạng](../docs/PROJECT_STATUS.md) và [kế hoạch Docker/CI/CD/Nginx/AWS](../docs/DEPLOYMENT_PLAN.md) trước khi sửa phần build, env hoặc kết nối API.

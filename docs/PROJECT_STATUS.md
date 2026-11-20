@@ -1,10 +1,10 @@
 # Hiện trạng dự án
 
-## Candidate khôi phục mật khẩu demo — 20/11/2026
+## Khôi phục mật khẩu tài khoản demo trên AWS — 20/11/2026
 
-Đã chuẩn bị mã opt-in `PASSWORD_RECOVERY_ENABLED=false` mặc định: API enqueue yêu cầu không lookup account/SMTP trong HTTP, outbox mã hóa/worker retry, token một lần 30 phút và thu hồi phiên cũ; frontend chỉ hiện forgot/reset khi bật flag. Migration thêm bảng, helper grant tối thiểu và trigger giới hạn đổi credential đúng email thử. Backend build/lint và 71 unit qua; test PostgreSQL TLS disposable 4 nhóm qua, frontend production build và mocked Chromium smoke qua, parser deploy 28 fixture qua. [Audit local đã lược bỏ bí mật](verification/2026-11-20-password-recovery-local.json).
-
-AWS: SES Sydney identity cho email thử đã SUCCESS; IAM user/policy gửi đúng sender/recipient đã tạo nhưng **không có access key**; security group EC2 thêm outbound TCP/587 qua change set chỉ sửa AppSecurityGroup, stack UPDATE_COMPLETE, HTTPS vẫn200; helper fetch-env/apply-release mới đã cài trên host và fetch-env hiện tại qua. **Tại thời điểm kiểm local, candidate chưa Release/Deploy; chưa chạy migration/grant trên staging, chưa bật SMTP/recovery hoặc gửi email thật.** Xem [runbook](PASSWORD_RECOVERY_AWS.md). Bản app7921ba6 đang chạy vẫn khóa forgot/reset.
+- App commit `56aff7c` đã CI, Release AWS và Deploy AWS hai lượt thành công. Lượt đầu migration additive với recovery tắt; sau khi helper grant/trigger chạy hai lần qua TLS xác minh, SMTP credential scoped được lưu trong SSM SecureString và lượt deploy hai bật recovery. Runtime staging đã kiểm `PREVIEW_READ_ONLY=true`, `INTERACTIVE_DEMO=true`, `PASSWORD_RECOVERY_ENABLED=true`, `CHALLENGE_DELIVERY=smtp`; frontend/API/Nginx healthy, HTTPS200.
+- Luồng API enqueue không lookup account/SMTP trong HTTP, outbox mã hóa/worker retry, token một lần 30 phút và thu hồi phiên cũ. Live smoke: UI forgot/reset hiện; email không tồn tại và email thử có cùng 202; token reset không hợp lệ bị400; signup/order/quote503. DB staging ghi một `IGNORED` và một `SENT`; SES SMTP đã chấp nhận thư. Smoke login/session/cart/saved PC/logout 8 nhóm qua lại sau deploy. Không tạo đơn hoặc thu tiền. **Chưa có xác nhận thư đến inbox và chưa dùng link đổi mật khẩu thật**; đó là giới hạn nghiệm thu hiện tại. [Audit live](verification/2026-11-20-password-recovery-live.json), [runbook](PASSWORD_RECOVERY_AWS.md).
+- Bằng chứng trước rollout: backend build/lint, 71 unit, PostgreSQL TLS disposable 4 nhóm, frontend build/mock Chromium, parser28 fixture [tại đây](verification/2026-11-20-password-recovery-local.json). CloudFormation chỉ sửa AppSecurityGroup outbound TCP/587, không thay EC2/RDS. IAM policy simulation chỉ cho sender/recipient thử; credential không đưa Git/log. Bootstrap bundle pin cũ vẫn cần đồng bộ helper trước khi thay host.
 
 ## AWS đã mở demo tài khoản/giỏ/lưu PC — 20/11/2026
 

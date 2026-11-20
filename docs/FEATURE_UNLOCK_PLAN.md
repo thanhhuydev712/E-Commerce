@@ -1,6 +1,6 @@
 # Mở tính năng sau bản AWS showcase — 20/11/2026
 
-**Đợt tiếp theo đang chuẩn bị:** khôi phục mật khẩu chỉ cho email tài khoản thử, giữ đăng ký/đơn/thanh toán đóng. Code candidate có outbox, worker, SES SMTP và DB trigger giới hạn quyền; kiểm local PostgreSQL/FE qua, SES identity đã verify, egress587 đã áp dụng, SMTP access key/runtime flag chưa bật và chưa phát hành app. Trạng thái live vẫn như mục ngay dưới. [Runbook và thứ tự mở](PASSWORD_RECOVERY_AWS.md).
+**Đợt khôi phục mật khẩu đã mở trên AWS:** app `56aff7c`, chỉ email tài khoản thử; `PASSWORD_RECOVERY_ENABLED=true` cùng preview/interactive, SES SMTP và DB trigger giới hạn quyền. HTTPS smoke xác nhận generic202 và worker `SENT`, nhưng chưa xác nhận inbox/đổi mật khẩu qua link. Đăng ký/đơn/thanh toán vẫn đóng. [Audit live](verification/2026-11-20-password-recovery-live.json), [runbook](PASSWORD_RECOVERY_AWS.md). Mục “đã mở” ngay dưới mô tả mốc login/cart/PC trước tính năng reset.
 
 ## Đã mở và kiểm tra trên AWS
 
