@@ -83,6 +83,7 @@ function createStore(
   navigate: (destination: string) => void,
   readOnlyPreview = false,
   interactiveDemo = false,
+  passwordRecoveryEnabled = false,
 ) {
   let currentCatalog = initialCatalog;
   const catalog = () => currentCatalog;
@@ -216,6 +217,7 @@ function createStore(
   return {
     readOnlyPreview,
     interactiveDemo,
+    passwordRecoveryEnabled,
     setCatalog: (value: ReturnType<typeof useCatalog>) => {
       currentCatalog = value;
     },
@@ -451,10 +453,12 @@ export function ShopProvider({
   children,
   readOnlyPreview = false,
   interactiveDemo = false,
+  passwordRecoveryEnabled = false,
 }: {
   children: ReactNode;
   readOnlyPreview?: boolean;
   interactiveDemo?: boolean;
+  passwordRecoveryEnabled?: boolean;
 }) {
   const catalog = useCatalog(),
     router = useRouter();
@@ -464,6 +468,7 @@ export function ShopProvider({
       (destination) => router.push(destination),
       readOnlyPreview,
       interactiveDemo,
+      passwordRecoveryEnabled,
     ),
   );
   useEffect(() => {

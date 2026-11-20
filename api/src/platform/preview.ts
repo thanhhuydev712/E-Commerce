@@ -4,6 +4,7 @@ import type { RequestHandler } from 'express';
 export function previewBoundary(
   enabled: boolean,
   interactiveDemo = false,
+  passwordRecovery = false,
 ): RequestHandler {
   return (request, response, next) => {
     const publicRead =
@@ -21,6 +22,11 @@ export function previewBoundary(
       );
     const demoWrite =
       (request.method === 'POST' && demoPost) ||
+      (request.method === 'POST' &&
+        passwordRecovery &&
+        /^\/api\/v1\/auth\/(?:forgot-password|reset-password)\/?$/.test(
+          request.path,
+        )) ||
       (request.method === 'PUT' &&
         /^\/api\/v1\/me\/cart\/?$/.test(request.path)) ||
       (request.method === 'DELETE' &&
@@ -48,7 +54,9 @@ export function previewBoundary(
             ? 'UNAUTHENTICATED'
             : 'PREVIEW_READ_ONLY',
         message: interactiveDemo
-          ? 'Bản demo chỉ mở đăng nhập, giỏ hàng và lưu cấu hình; chức năng này đang tắt.'
+          ? passwordRecovery
+            ? 'Bản demo mở đăng nhập, khôi phục mật khẩu, giỏ hàng và lưu cấu hình; chức năng này đang tắt.'
+            : 'Bản demo chỉ mở đăng nhập, giỏ hàng và lưu cấu hình; chức năng này đang tắt.'
           : noSession
             ? 'Bản giới thiệu không mở phiên tài khoản.'
             : 'Bản trải nghiệm chỉ đọc; đăng ký, đặt hàng và thanh toán đang tắt.',

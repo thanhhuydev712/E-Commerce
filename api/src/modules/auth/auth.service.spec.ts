@@ -55,6 +55,23 @@ function fixture() {
   return { user, challenge, tx, db, delivery, service };
 }
 describe('Password recovery service', () => {
+  it('rejects reset tokens outside the controlled account allowlist', async () => {
+    const f = fixture();
+    const service = new AuthService(
+      f.db as unknown as PrismaService,
+      new JwtService(),
+      new ConfigService({
+        PASSWORD_RECOVERY_ENABLED: true,
+        PASSWORD_RECOVERY_ALLOWED_EMAILS: 'another@example.test',
+      }),
+      f.delivery as unknown as ChallengeDelivery,
+    );
+    await expect(
+      service.consumeChallenge('token', 'RESET_PASSWORD', 'NewPassword-2026!'),
+    ).rejects.toThrow('invalid or expired');
+    expect(f.tx.user.update).not.toHaveBeenCalled();
+    expect(f.tx.authSession.updateMany).not.toHaveBeenCalled();
+  });
   beforeEach(() => {
     vi.restoreAllMocks();
   });

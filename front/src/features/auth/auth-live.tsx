@@ -33,20 +33,31 @@ import {
 
 export function AuthPage({ mode }: { mode: string }) {
   const query = useSearchParams();
-  const { readOnlyPreview, interactiveDemo } = useShop();
+  const { readOnlyPreview, interactiveDemo, passwordRecoveryEnabled } =
+    useShop();
   const destination = safeAuthDestination(query.get("next"));
   const recovery = [
     "forgot-password",
     "reset-password",
     "verify-email",
   ].includes(mode);
-  if (readOnlyPreview && (!interactiveDemo || mode !== "login"))
+  if (
+    readOnlyPreview &&
+    (!interactiveDemo ||
+      (mode !== "login" &&
+        !(
+          passwordRecoveryEnabled &&
+          ["forgot-password", "reset-password"].includes(mode)
+        )))
+  )
     return (
       <section className="mx-auto max-w-2xl px-5 py-16">
         <h1 className="text-2xl font-semibold">Trải nghiệm cửa hàng</h1>
         <p className="mt-4">
           {interactiveDemo
-            ? "Đăng nhập bằng tài khoản thử được cấp riêng. Đăng ký và khôi phục mật khẩu công khai chưa mở; chưa nhận đơn hoặc thanh toán."
+            ? passwordRecoveryEnabled
+              ? "Đăng nhập bằng tài khoản thử được cấp riêng. Đăng ký vẫn đóng; chưa nhận đơn hoặc thanh toán."
+              : "Đăng nhập bằng tài khoản thử được cấp riêng. Đăng ký và khôi phục mật khẩu công khai chưa mở; chưa nhận đơn hoặc thanh toán."
             : "Bản công khai hiện giới thiệu sản phẩm và PC Studio. Tài khoản, đặt hàng và thanh toán đang tắt; bạn không cần nhập thông tin cá nhân."}
         </p>
         <Link
@@ -418,16 +429,17 @@ function AccountForm({
               autoComplete="new-password"
             />
           )}
-          {!register && (
-            <div className="flex justify-end">
-              <Link
-                href={authLink("/forgot-password", destination)}
-                className={tw.text_link}
-              >
-                Quên mật khẩu?
-              </Link>
-            </div>
-          )}
+          {!register &&
+            (!shop.interactiveDemo || shop.passwordRecoveryEnabled) && (
+              <div className="flex justify-end">
+                <Link
+                  href={authLink("/forgot-password", destination)}
+                  className={tw.text_link}
+                >
+                  Quên mật khẩu?
+                </Link>
+              </div>
+            )}
           <ServerError message={error} />
           <button type="submit" className={tw.btn_full} disabled={busy}>
             {busy ? (
@@ -448,15 +460,17 @@ function AccountForm({
           </button>
         </fieldset>
       </form>
-      <p className={tw.switcher}>
-        {register ? "Đã có tài khoản?" : "Bạn chưa có tài khoản?"}{" "}
-        <Link
-          href={authLink(register ? "/login" : "/register", destination)}
-          className={tw.text_link}
-        >
-          {register ? "Đăng nhập" : "Đăng ký ngay"}
-        </Link>
-      </p>
+      {(!shop.interactiveDemo || register) && (
+        <p className={tw.switcher}>
+          {register ? "Đã có tài khoản?" : "Bạn chưa có tài khoản?"}{" "}
+          <Link
+            href={authLink(register ? "/login" : "/register", destination)}
+            className={tw.text_link}
+          >
+            {register ? "Đăng nhập" : "Đăng ký ngay"}
+          </Link>
+        </p>
+      )}
     </section>
   );
 }
@@ -469,6 +483,7 @@ function RecoveryForm({
   destination: string;
 }) {
   const query = useSearchParams();
+  const { interactiveDemo, passwordRecoveryEnabled } = useShop();
   const form = useAuthFields(
     mode,
     mode === "reset-password" ? "" : (query.get("token") ?? ""),
@@ -506,7 +521,9 @@ function RecoveryForm({
       </h1>
       <p className="mt-2 text-rf-body leading-6 text-slate-500">
         {forgot
-          ? "Nhập email đã đăng ký để gửi yêu cầu khôi phục."
+          ? interactiveDemo && passwordRecoveryEnabled
+            ? "Nhập email của tài khoản thử được cấp để yêu cầu liên kết đặt lại mật khẩu."
+            : "Nhập email đã đăng ký để gửi yêu cầu khôi phục."
           : reset
             ? "Dùng mã trong email để tạo mật khẩu mới cho tài khoản."
             : "Nhập mã trong email để hoàn tất xác minh tài khoản."}
@@ -540,7 +557,7 @@ function RecoveryForm({
                 body: { email: form.values.email.trim().toLowerCase() },
               });
               setMessage(
-                "Nếu email thuộc tài khoản đang hoạt động, bạn sẽ nhận được liên kết đặt lại mật khẩu. Hãy kiểm tra cả thư mục spam. Liên kết có hiệu lực 30 phút.",
+                "Nếu email đủ điều kiện, bạn sẽ nhận được liên kết đặt lại mật khẩu. Hãy kiểm tra cả thư mục spam. Liên kết có hiệu lực 30 phút.",
               );
             } else if (reset) {
               await api("/auth/reset-password", {

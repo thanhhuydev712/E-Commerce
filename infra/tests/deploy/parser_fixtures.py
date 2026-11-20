@@ -119,6 +119,18 @@ with tempfile.TemporaryDirectory(prefix='rigforce-parser-fixture-') as temporary
     environment_case(base, 'interactive-demo', lambda app, tool: app.__setitem__('INTERACTIVE_DEMO', 'true'))
     environment_case(base, 'interactive-off', lambda app, tool: app.__setitem__('INTERACTIVE_DEMO', 'false'))
     environment_case(base, 'invalid-interactive', lambda app, tool: app.__setitem__('INTERACTIVE_DEMO', 'yes'), False)
+    def enable_recovery(app, tool):
+        app.update({'INTERACTIVE_DEMO': 'true', 'PASSWORD_RECOVERY_ENABLED': 'true',
+                    'PASSWORD_RECOVERY_ALLOWED_EMAILS': 'demo@example.com', 'CHALLENGE_DELIVERY': 'smtp',
+                    'SMTP_HOST': 'email-smtp.ap-southeast-2.amazonaws.com', 'SMTP_PORT': '587',
+                    'SMTP_SECURE': 'false', 'SMTP_USER': 'fixture-user',
+                    'SMTP_PASSWORD': 'fixture-password', 'SMTP_FROM': 'demo@example.com'})
+    environment_case(base, 'recovery-smtp', enable_recovery)
+    environment_case(base, 'recovery-no-demo', lambda app, tool: (enable_recovery(app, tool), app.__setitem__('INTERACTIVE_DEMO', 'false')), False)
+    environment_case(base, 'recovery-no-smtp', lambda app, tool: (enable_recovery(app, tool), app.__setitem__('CHALLENGE_DELIVERY', 'disabled')), False)
+    environment_case(base, 'recovery-bad-from', lambda app, tool: (enable_recovery(app, tool), app.__setitem__('SMTP_FROM', 'other@example.com')), False)
+    environment_case(base, 'recovery-no-tls', lambda app, tool: (enable_recovery(app, tool), app.__setitem__('SMTP_SECURE', 'false'), app.__setitem__('SMTP_PORT', '465')), False)
+    environment_case(base, 'smtp-without-recovery', lambda app, tool: (enable_recovery(app, tool), app.__setitem__('PASSWORD_RECOVERY_ENABLED', 'false')), False)
     environment_case(base, 'shell-literal', lambda app, tool: app.__setitem__('JWT_SECRET', '$(touch /tmp/SHOULD_NOT_RUN)' + 'C' * 40))
     environment_case(base, 'wrong-role', lambda app, tool: app.__setitem__('DATABASE_URL', tool['DATABASE_URL']), False)
     environment_case(base, 'insecure-pg', lambda app, tool: app.__setitem__(
@@ -129,5 +141,5 @@ with tempfile.TemporaryDirectory(prefix='rigforce-parser-fixture-') as temporary
     environment_case(base, 'unknown-env', lambda app, tool: app.__setitem__('STRIPE_SECRET_KEY', 'sk_test_fixture'), False)
     environment_case(base, 'newline-injection', lambda app, tool: app.__setitem__('JWT_SECRET', 'A' * 64 + '\nUNEXPECTED=bad'), False)
 
-print(json.dumps({'fixtureChecksPassed': checks, 'archiveChecks': 11, 'envChecks': 11,
+print(json.dumps({'fixtureChecksPassed': checks, 'archiveChecks': 11, 'envChecks': 17,
                   'networkCalls': 0, 'awsCalls': 0}))

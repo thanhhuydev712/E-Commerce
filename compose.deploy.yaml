@@ -30,6 +30,7 @@ services:
       PORT: "3001"
       PREVIEW_READ_ONLY: "true"
       INTERACTIVE_DEMO: ${INTERACTIVE_DEMO:-false}
+      PASSWORD_RECOVERY_ENABLED: ${PASSWORD_RECOVERY_ENABLED:-false}
       DATABASE_TLS_REQUIRED: "true"
       TRUST_PROXY_HOPS: "1"
       STRIPE_SECRET_KEY: ""
@@ -55,6 +56,7 @@ services:
       API_INTERNAL_URL: http://api:3001
       PREVIEW_READ_ONLY: "true"
       INTERACTIVE_DEMO: ${INTERACTIVE_DEMO:-false}
+      PASSWORD_RECOVERY_ENABLED: ${PASSWORD_RECOVERY_ENABLED:-false}
     depends_on:
       api: { condition: service_healthy }
     networks: [app]

@@ -30,6 +30,25 @@ const settings = {
   STOREFRONT_URL: 'https://shop.example.test',
 };
 describe('Challenge email delivery', () => {
+  it('only permits allowlisted reset mail in an explicitly enabled interactive preview', async () => {
+    const delivery = new ChallengeDelivery(
+      new ConfigService({
+        ...settings,
+        PREVIEW_READ_ONLY: true,
+        INTERACTIVE_DEMO: true,
+        PASSWORD_RECOVERY_ENABLED: true,
+        PASSWORD_RECOVERY_ALLOWED_EMAILS: message.email,
+      }),
+    );
+    await delivery.send(message);
+    await expect(
+      delivery.send({ ...message, purpose: 'VERIFY_EMAIL' }),
+    ).rejects.toThrow();
+    await expect(
+      delivery.send({ ...message, email: 'other@example.test' }),
+    ).rejects.toThrow();
+    expect(smtp.sendMail).toHaveBeenCalledTimes(1);
+  });
   beforeEach(() => {
     vi.clearAllMocks();
     smtp.createTransport.mockReturnValue({ sendMail: smtp.sendMail });

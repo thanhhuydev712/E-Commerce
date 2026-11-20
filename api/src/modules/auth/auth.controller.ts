@@ -20,6 +20,7 @@ import { Throttle } from '@nestjs/throttler';
 import { ConfigService } from '@nestjs/config';
 import type { Request, Response } from 'express';
 import { AuthService } from './auth.service.js';
+import { PasswordRecoveryService } from './password-recovery.service.js';
 import {
   RegisterDto,
   LoginDto,
@@ -42,6 +43,8 @@ export class AuthController {
   constructor(
     @Inject(AuthService) private readonly auth: AuthService,
     @Inject(ConfigService) private readonly config: ConfigService,
+    @Inject(PasswordRecoveryService)
+    private readonly recovery: PasswordRecoveryService,
   ) {}
   private respond(
     response: Response,
@@ -134,6 +137,8 @@ export class AuthController {
   @UseGuards(AuthOriginGuard)
   @Throttle({ default: { limit: 3, ttl: 60000 } })
   forgot(@Body() dto: EmailDto) {
+    if (this.config.get('PASSWORD_RECOVERY_ENABLED') === true)
+      return this.recovery.request(dto.email);
     return this.auth.issueChallenge(dto.email, 'RESET_PASSWORD');
   }
   @ApiData(MessageDto, 200)

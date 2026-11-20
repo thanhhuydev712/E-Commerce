@@ -7,6 +7,7 @@ import { JwtStrategy } from './jwt.strategy.js';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { AuthOriginGuard } from './cookie-security.js';
 import { ChallengeDelivery } from './challenge-delivery.js';
+import { PasswordRecoveryService } from './password-recovery.service.js';
 @Global()
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ChallengeDelivery } from './challenge-delivery.js';
     JwtAuthGuard,
     AuthOriginGuard,
     ChallengeDelivery,
+    PasswordRecoveryService,
   ],
   exports: [JwtAuthGuard, AuthService],
 })

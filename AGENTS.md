@@ -1,5 +1,11 @@
 # Hướng dẫn Codex — E-Commerce Fullstack
 
+## Khôi phục mật khẩu tài khoản thử — đang phát hành 20/11/2026
+
+- Candidate local bổ sung `PASSWORD_RECOVERY_ENABLED` mặc định false, outbox PostgreSQL mã hóa + worker, SES SMTP cho email tài khoản thử đã xác minh, trang forgot/reset và DB trigger giới hạn đổi mật khẩu đúng allowlist. Xem `docs/PASSWORD_RECOVERY_AWS.md`; không suy candidate thành tính năng đã live trước Release/Deploy/smoke.
+- SES identity Sydney đã xác minh; IAM SMTP user scoped đã chuẩn bị **chưa tạo access key**. CloudFormation staging chỉ thêm egress TCP/587 (UPDATE_COMPLETE, không thay EC2/RDS); host helpers mới đã cài và fetch-env hiện tại qua. Runtime SecureString vẫn chưa bật recovery/SMTP.
+- Backend build/lint +71 unit qua; disposable PostgreSQL TLS 4 nhóm qua (migration, grants/trigger, worker/reset/retry). FE build và mocked Chromium smoke qua; parser28 qua. Chưa gửi SES thật hoặc smoke AWS. Giữ `PREVIEW_READ_ONLY=true`, `INTERACTIVE_DEMO=true`, `PASSWORD_RECOVERY_ENABLED=false` cho tới khi Release, migration, grant, SMTP credential và kiểm thật xong.
+
 ## Cập nhật hiện tại — 20/11/2026
 
 - **Đã deploy và smoke thật** app7921ba6: CUSTOMER login/session, cart, lưu/xóa PC hoạt động. PREVIEW_READ_ONLY=true + INTERACTIVE_DEMO=true; order/quote/payment/signup/reset/webhook/admin vẫn khóa. Đọc `docs/verification/2026-11-20-interactive-demo-live.json` và FEATURE_UNLOCK_PLAN. Email/password thử ở `infra/.local/demo-account.credentials.json`, không log/commit. Các dòng “chờ Deploy” bên dưới là lịch sử, không seed/provision lại.

@@ -23,9 +23,15 @@ export class ChallengeDelivery {
       (this.config.get('NODE_ENV') === 'production' ? 'disabled' : 'memory')
     );
   }
-  assertAvailable() {
+  assertAvailable(purpose: ChallengeMessage['purpose'] = 'RESET_PASSWORD') {
+    const recoveryPreview =
+      this.config.get('PREVIEW_READ_ONLY') === true &&
+      this.config.get('INTERACTIVE_DEMO') === true &&
+      this.config.get('PASSWORD_RECOVERY_ENABLED') === true &&
+      this.mode === 'smtp' &&
+      purpose === 'RESET_PASSWORD';
     if (
-      this.config.get('PREVIEW_READ_ONLY') === true ||
+      (this.config.get('PREVIEW_READ_ONLY') === true && !recoveryPreview) ||
       this.mode === 'disabled' ||
       (this.mode === 'memory' && this.config.get('NODE_ENV') === 'production')
     )
@@ -35,7 +41,17 @@ export class ChallengeDelivery {
       });
   }
   async send(message: ChallengeMessage) {
-    this.assertAvailable();
+    this.assertAvailable(message.purpose);
+    if (
+      this.config.get('PASSWORD_RECOVERY_ENABLED') === true &&
+      !this.config
+        .getOrThrow<string>('PASSWORD_RECOVERY_ALLOWED_EMAILS')
+        .split(',')
+        .includes(message.email)
+    )
+      throw new ServiceUnavailableException(
+        'Recovery recipient is not allowed',
+      );
     if (this.mode === 'memory') {
       this.messages.push(message);
       if (this.messages.length > 100) this.messages.shift();

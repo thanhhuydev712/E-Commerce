@@ -330,7 +330,7 @@ export class AuthService {
     return { message: 'Logged out' };
   }
   async issueChallenge(email: string, purpose: ChallengeMessage['purpose']) {
-    this.delivery.assertAvailable();
+    this.delivery.assertAvailable(purpose);
     const token = randomBytes(32).toString('base64url');
     const expiresAt = new Date(Date.now() + 30 * 60_000);
     const message = await this.prisma.$transaction(async (tx) => {
@@ -410,6 +410,14 @@ export class AuthService {
         current.consumedAt ||
         current.expiresAt <= new Date() ||
         current.user.status !== 'ACTIVE'
+      )
+        throw new BadRequestException('Challenge is invalid or expired');
+      if (
+        this.config.get('PASSWORD_RECOVERY_ENABLED') === true &&
+        !this.config
+          .getOrThrow<string>('PASSWORD_RECOVERY_ALLOWED_EMAILS')
+          .split(',')
+          .includes(current.user.email)
       )
         throw new BadRequestException('Challenge is invalid or expired');
       await tx.authChallenge.update({

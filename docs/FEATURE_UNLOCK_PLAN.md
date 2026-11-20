@@ -1,5 +1,7 @@
 # Mở tính năng sau bản AWS showcase — 20/11/2026
 
+**Đợt tiếp theo đang chuẩn bị:** khôi phục mật khẩu chỉ cho email tài khoản thử, giữ đăng ký/đơn/thanh toán đóng. Code candidate có outbox, worker, SES SMTP và DB trigger giới hạn quyền; kiểm local PostgreSQL/FE qua, SES identity đã verify, egress587 đã áp dụng, SMTP access key/runtime flag chưa bật và chưa phát hành app. Trạng thái live vẫn như mục ngay dưới. [Runbook và thứ tự mở](PASSWORD_RECOVERY_AWS.md).
+
 ## Đã mở và kiểm tra trên AWS
 
 Ứng dụng commit `7921ba6` đã Release/Deploy thành công. Smoke trên HTTPS thật xác nhận: CUSTOMER login, khôi phục phiên trong Chromium, thêm/khôi phục giỏ, lưu/xóa PC có FK cascade, logout. Request có đăng nhập vẫn bị503 cho orders/quote/register/forgot-password/webhook. Dữ liệu giỏ/cấu hình tạo trong smoke đã khôi phục/xóa; không tạo đơn hoặc thanh toán.

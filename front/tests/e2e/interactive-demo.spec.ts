@@ -15,6 +15,9 @@ test("controlled demo exposes login, keeps registration/recovery and checkout cl
   });
   await page.goto("/login");
   await expect(page.locator('input[type="password"]')).toHaveCount(1);
+  await expect(page.getByRole("link", { name: "Quên mật khẩu?" })).toHaveCount(
+    0,
+  );
   for (const route of ["/register", "/forgot-password", "/reset-password"]) {
     await page.goto(route);
     await expect(

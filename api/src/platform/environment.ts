@@ -4,6 +4,7 @@ export function validateEnvironment(input: Record<string, unknown>) {
   for (const name of [
     'PREVIEW_READ_ONLY',
     'INTERACTIVE_DEMO',
+    'PASSWORD_RECOVERY_ENABLED',
     'DATABASE_TLS_REQUIRED',
   ]) {
     const value = input[name] ?? 'false';
@@ -13,6 +14,8 @@ export function validateEnvironment(input: Record<string, unknown>) {
   }
   if (result.INTERACTIVE_DEMO && !result.PREVIEW_READ_ONLY)
     throw new Error('INTERACTIVE_DEMO requires PREVIEW_READ_ONLY');
+  if (result.PASSWORD_RECOVERY_ENABLED && !result.INTERACTIVE_DEMO)
+    throw new Error('PASSWORD_RECOVERY_ENABLED requires INTERACTIVE_DEMO');
   // Chỉ hỗ trợ trực tiếp hoặc đúng một reverse proxy đã biết; không trust tùy ý.
   const proxyHops = Number(input.TRUST_PROXY_HOPS ?? 0);
   if (![0, 1].includes(proxyHops))
@@ -113,8 +116,46 @@ export function validateEnvironment(input: Record<string, unknown>) {
     throw new Error('Invalid CHALLENGE_DELIVERY');
   if (delivery === 'memory' && result.NODE_ENV === 'production')
     throw new Error('Memory email delivery is not allowed in production');
-  if (delivery === 'smtp' && result.PREVIEW_READ_ONLY)
+  if (
+    delivery === 'smtp' &&
+    result.NODE_ENV === 'production' &&
+    !result.PASSWORD_RECOVERY_ENABLED
+  )
+    throw new Error(
+      'Production SMTP requires explicit PASSWORD_RECOVERY_ENABLED configuration',
+    );
+  if (
+    delivery === 'smtp' &&
+    result.PREVIEW_READ_ONLY &&
+    !result.PASSWORD_RECOVERY_ENABLED
+  )
     throw new Error('SMTP must be disabled in read-only preview');
+  if (result.PASSWORD_RECOVERY_ENABLED) {
+    if (delivery !== 'smtp') throw new Error('Password recovery requires SMTP');
+    const emails =
+      typeof input.PASSWORD_RECOVERY_ALLOWED_EMAILS === 'string'
+        ? input.PASSWORD_RECOVERY_ALLOWED_EMAILS.split(',').map((value) =>
+            value.trim().toLowerCase(),
+          )
+        : [];
+    if (
+      !emails.length ||
+      emails.length > 5 ||
+      new Set(emails).size !== emails.length ||
+      emails.some(
+        (email) => !/^[^\s<>@,;]+@[^\s<>@,;]+\.[^\s<>@,;]+$/.test(email),
+      )
+    )
+      throw new Error(
+        'Password recovery requires 1 to 5 exact allowed email addresses',
+      );
+    if (
+      typeof input.SMTP_FROM !== 'string' ||
+      !emails.includes(input.SMTP_FROM.trim().toLowerCase())
+    )
+      throw new Error('SMTP_FROM must be an allowed recovery email');
+    result.PASSWORD_RECOVERY_ALLOWED_EMAILS = emails.join(',');
+  }
   result.CHALLENGE_DELIVERY = delivery;
   if (delivery === 'smtp') {
     for (const name of [

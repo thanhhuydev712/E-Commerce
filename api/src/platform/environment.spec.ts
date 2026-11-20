@@ -7,6 +7,59 @@ const valid = {
   JWT_REFRESH_SECRET: 'b'.repeat(48),
 };
 describe('API environment and response contract', () => {
+  it('requires explicit interactive SMTP recovery with at most five allowed addresses and a matching sender', () => {
+    const recovery = {
+      ...valid,
+      PREVIEW_READ_ONLY: true,
+      INTERACTIVE_DEMO: true,
+      PASSWORD_RECOVERY_ENABLED: true,
+      CHALLENGE_DELIVERY: 'smtp',
+      SMTP_HOST: 'smtp.example.test',
+      SMTP_PORT: '587',
+      SMTP_SECURE: 'false',
+      SMTP_USER: 'fixture',
+      SMTP_PASSWORD: 'fixture-secret',
+      SMTP_FROM: 'customer@example.test',
+      PASSWORD_RECOVERY_ALLOWED_EMAILS: ' CUSTOMER@EXAMPLE.TEST ',
+    };
+    expect(validateEnvironment(recovery)).toMatchObject({
+      PASSWORD_RECOVERY_ENABLED: true,
+      PASSWORD_RECOVERY_ALLOWED_EMAILS: 'customer@example.test',
+    });
+    expect(validateEnvironment(valid).PASSWORD_RECOVERY_ENABLED).toBe(false);
+    for (const change of [
+      { INTERACTIVE_DEMO: false },
+      { PREVIEW_READ_ONLY: false },
+      { CHALLENGE_DELIVERY: 'disabled' },
+      { PASSWORD_RECOVERY_ALLOWED_EMAILS: '' },
+      { PASSWORD_RECOVERY_ALLOWED_EMAILS: '*' },
+      {
+        PASSWORD_RECOVERY_ALLOWED_EMAILS:
+          'customer@example.test,customer@example.test',
+      },
+      {
+        PASSWORD_RECOVERY_ALLOWED_EMAILS: Array.from(
+          { length: 6 },
+          (_, i) => `person${i}@example.test`,
+        ).join(','),
+      },
+      { SMTP_FROM: 'other@example.test' },
+      { SMTP_PASSWORD: '' },
+      { PASSWORD_RECOVERY_ENABLED: 'yes' },
+      { STRIPE_SECRET_KEY: 'sk_test_fixture' },
+    ])
+      expect(() => validateEnvironment({ ...recovery, ...change })).toThrow();
+  });
+  it('fails startup for production SMTP outside the explicitly reviewed recovery mode', () => {
+    expect(() =>
+      validateEnvironment({
+        ...valid,
+        NODE_ENV: 'production',
+        ALLOWED_ORIGINS: 'https://shop.example.test',
+        CHALLENGE_DELIVERY: 'smtp',
+      }),
+    ).toThrow('Production SMTP requires explicit');
+  });
   it('only enables interactive demo inside preview and keeps SMTP/payment disabled', () => {
     expect(validateEnvironment(valid).INTERACTIVE_DEMO).toBe(false);
     for (const value of [true, 'true']) {

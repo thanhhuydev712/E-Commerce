@@ -126,6 +126,7 @@ export function configureHttp(app: INestApplication) {
     previewBoundary(
       config.get<boolean>('PREVIEW_READ_ONLY', false),
       config.get<boolean>('INTERACTIVE_DEMO', false),
+      config.get<boolean>('PASSWORD_RECOVERY_ENABLED', false),
     ),
   );
   app.useGlobalPipes(

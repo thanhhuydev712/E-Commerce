@@ -35,7 +35,11 @@ function fail(code) {
   });
 }
 
-async function assertWriteScope(db, runtime) {
+async function assertWriteScope(
+  db,
+  runtime,
+  scope = { tableGrants, updateColumns },
+) {
   // Check effective privileges, including PUBLIC grants; never silently revoke
   // broader privileges from a role that might belong to another application.
   const tables = await db.query(
@@ -50,7 +54,7 @@ async function assertWriteScope(db, runtime) {
     [runtime],
   );
   for (const row of tables.rows)
-    if (!tableGrants[row.name]?.includes(row.privilege))
+    if (!scope.tableGrants[row.name]?.includes(row.privilege))
       fail('RUNTIME_HAS_BROAD_WRITE_PRIVILEGES');
   const columns = await db.query(
     `
@@ -65,9 +69,9 @@ async function assertWriteScope(db, runtime) {
   );
   for (const row of columns.rows) {
     const permitted =
-      tableGrants[row.name]?.includes(row.privilege) ||
+      scope.tableGrants[row.name]?.includes(row.privilege) ||
       (row.privilege === 'UPDATE' &&
-        updateColumns[row.name]?.includes(row.column));
+        scope.updateColumns[row.name]?.includes(row.column));
     if (!permitted) fail('RUNTIME_HAS_BROAD_COLUMN_PRIVILEGES');
   }
 }

@@ -44,7 +44,7 @@ Kế hoạch tổng thể: [DEPLOYMENT_PLAN](../../docs/DEPLOYMENT_PLAN.md). Com
 | CloudWatch | Host agent: bootstrap/deploy/SSM logs + RAM/disk; containers dùng awslogs override | Agent không wildcard đọc một file Docker ngẫu nhiên. Log groups có retention; metrics/logs có phí |
 | Alarms/Budget | CPU, status checks, RAM/disk, DB free storage; email warning | Budget tính **toàn account**, không phải riêng stack hay hard cap; cần xác nhận SNS email subscription |
 
-Không thêm NAT Gateway, ALB, ECS, Route 53 hoặc custom Lambda trong baseline. EC2 có outbound HTTPS qua Internet Gateway để dùng ECR/S3/SSM, kho package, ACME. Security group DB chỉ nhận PostgreSQL từ SG EC2; DB không public. [Yêu cầu RDS VPC/subnet](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html).
+Không thêm NAT Gateway, ALB, ECS, Route 53 hoặc custom Lambda trong baseline. EC2 có outbound HTTPS qua Internet Gateway để dùng ECR/S3/SSM, kho package, ACME; staging đã thêm egress TCP/587 cho SES SMTP STARTTLS khi chuẩn bị khôi phục mật khẩu tài khoản thử (20/11/2026), không mở inbound tương ứng. Security group DB chỉ nhận PostgreSQL từ SG EC2; DB không public. [Yêu cầu RDS VPC/subnet](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html). Xem [runbook khôi phục mật khẩu](../../docs/PASSWORD_RECOVERY_AWS.md) trước khi bật SMTP/runtime flag.
 
 Template dành cho AWS commercial partition; ARN OIDC và cách bootstrap hiện chưa hỗ trợ GovCloud/China. Region do CLI chọn, không hardcode account/region/domain. Tham số VPC/subnet cần CIDR hợp lệ, không chồng lấn; hai AZ cần khác nhau và hỗ trợ DB class được chọn.
 

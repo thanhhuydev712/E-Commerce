@@ -309,9 +309,12 @@ env_refreshed=true
 step 'Refresh exact runtime/migration SecureStrings' "$base/bin/fetch-env.sh"
 interactive_demo=false
 if grep -qx 'INTERACTIVE_DEMO=true' "$shared/runtime.env"; then interactive_demo=true; fi
+password_recovery=false
+if grep -qx 'PASSWORD_RECOVERY_ENABLED=true' "$shared/runtime.env"; then password_recovery=true; fi
 {
   printf 'DEPLOY_ENVIRONMENT=%s\n' "$ENVIRONMENT"
   printf 'INTERACTIVE_DEMO=%s\n' "$interactive_demo"
+  printf 'PASSWORD_RECOVERY_ENABLED=%s\n' "$password_recovery"
   printf 'API_IMAGE=%s\nFRONT_IMAGE=%s\nTOOLS_IMAGE=%s\n' "$api_image" "$front_image" "$tools_image"
   printf 'DOMAIN_NAME=%s\nSHARED_DIR=%s\nAWS_REGION=%s\n' "$DOMAIN_NAME" "$shared" "$AWS_REGION"
   printf 'CONTAINER_LOG_GROUP=%s/containers\n' "$LOG_GROUP_PREFIX"

@@ -3,10 +3,14 @@ import request from 'supertest';
 import { describe, it, expect } from 'vitest';
 import { previewBoundary } from './preview.js';
 
-function fixture(enabled: boolean, interactiveDemo = false) {
+function fixture(
+  enabled: boolean,
+  interactiveDemo = false,
+  passwordRecovery = false,
+) {
   const app = express();
   let calls = 0;
-  app.use(previewBoundary(enabled, interactiveDemo));
+  app.use(previewBoundary(enabled, interactiveDemo, passwordRecovery));
   app.use((_req, res) => {
     calls += 1;
     res.status(200).json({ ok: true });
@@ -59,6 +63,40 @@ describe('Public preview HTTP boundary', () => {
 });
 
 describe('Interactive preview HTTP boundary', () => {
+  it('opens only exact recovery POST routes with explicit opt-in and keeps signup/verify/orders closed', async () => {
+    const target = fixture(true, true, true);
+    for (const route of ['forgot-password', 'reset-password']) {
+      await request(target.app)
+        .post('/api/v1/auth/' + route)
+        .expect(200);
+      await request(target.app)
+        .post('/api/v1/auth/' + route + '/?ignored=1')
+        .expect(200);
+      for (const method of ['get', 'head', 'put', 'patch', 'delete'] as const)
+        await request(target.app)
+          [method]('/api/v1/auth/' + route)
+          .expect(503);
+      await request(target.app)
+        .post('/api/v1/auth/' + route + '/extra')
+        .expect(503);
+    }
+    for (const path of [
+      '/api/v1/auth/register',
+      '/api/v1/auth/verification/request',
+      '/api/v1/auth/verification/confirm',
+      '/api/v1/me/orders',
+      '/api/v1/me/checkout/quote',
+      '/api/v1/webhooks/stripe',
+    ])
+      await request(target.app).post(path).expect(503);
+    expect(target.calls()).toBe(4);
+    await request(fixture(true, true).app)
+      .post('/api/v1/auth/forgot-password')
+      .expect(503);
+    await request(fixture(true, false, true).app)
+      .post('/api/v1/auth/reset-password')
+      .expect(503);
+  });
   it('allows only the supported login, cart and saved-build methods, including trailing slashes', async () => {
     const target = fixture(true, true);
     const routes = [

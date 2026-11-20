@@ -45,12 +45,15 @@ async function ConnectedStore({ children }: { children: React.ReactNode }) {
   const readOnlyPreview = process.env.PREVIEW_READ_ONLY === "true";
   const interactiveDemo =
     readOnlyPreview && process.env.INTERACTIVE_DEMO === "true";
+  const passwordRecoveryEnabled =
+    interactiveDemo && process.env.PASSWORD_RECOVERY_ENABLED === "true";
   return (
     <CatalogProvider initialData={data}>
       <ShopProvider
-        key={`${readOnlyPreview}:${interactiveDemo}`}
+        key={`${readOnlyPreview}:${interactiveDemo}:${passwordRecoveryEnabled}`}
         readOnlyPreview={readOnlyPreview}
         interactiveDemo={interactiveDemo}
+        passwordRecoveryEnabled={passwordRecoveryEnabled}
       >
         {readOnlyPreview && (
           <aside

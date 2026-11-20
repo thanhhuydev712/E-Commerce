@@ -1,5 +1,11 @@
 # Hiện trạng dự án
 
+## Candidate khôi phục mật khẩu demo — 20/11/2026
+
+Đã chuẩn bị mã opt-in `PASSWORD_RECOVERY_ENABLED=false` mặc định: API enqueue yêu cầu không lookup account/SMTP trong HTTP, outbox mã hóa/worker retry, token một lần 30 phút và thu hồi phiên cũ; frontend chỉ hiện forgot/reset khi bật flag. Migration thêm bảng, helper grant tối thiểu và trigger giới hạn đổi credential đúng email thử. Backend build/lint và 71 unit qua; test PostgreSQL TLS disposable 4 nhóm qua, frontend production build và mocked Chromium smoke qua, parser deploy 28 fixture qua. [Audit local đã lược bỏ bí mật](verification/2026-11-20-password-recovery-local.json).
+
+AWS: SES Sydney identity cho email thử đã SUCCESS; IAM user/policy gửi đúng sender/recipient đã tạo nhưng **không có access key**; security group EC2 thêm outbound TCP/587 qua change set chỉ sửa AppSecurityGroup, stack UPDATE_COMPLETE, HTTPS vẫn200; helper fetch-env/apply-release mới đã cài trên host và fetch-env hiện tại qua. **Tại thời điểm kiểm local, candidate chưa Release/Deploy; chưa chạy migration/grant trên staging, chưa bật SMTP/recovery hoặc gửi email thật.** Xem [runbook](PASSWORD_RECOVERY_AWS.md). Bản app7921ba6 đang chạy vẫn khóa forgot/reset.
+
 ## AWS đã mở demo tài khoản/giỏ/lưu PC — 20/11/2026
 
 - App commit7921ba6 đã CI/Release/Deploy thành công trên `https://rigforce.duckdns.org`. Giữ PREVIEW_READ_ONLY=true, INTERACTIVE_DEMO=true; tài khoản thử CUSTOMER đã tạo, secret chỉ ở file local/SSM được ignore.

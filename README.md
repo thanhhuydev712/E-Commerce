@@ -1,5 +1,7 @@
 # E-Commerce Fullstack
 
+**20/11/2026:** đang chuẩn bị [khôi phục mật khẩu cho tài khoản thử trên AWS](docs/PASSWORD_RECOVERY_AWS.md); tính năng mặc định tắt cho tới khi Release/Deploy và kiểm email thật. Trạng thái thực tế tại [PROJECT_STATUS](docs/PROJECT_STATUS.md).
+
 **17/11/2026:** chủ dự án xác nhận định hướng sản phẩm kinh doanh **RIGFORCE STORE** (công nghệ/gear cho người dùng laptop/PC). Chưa nghiệm thu production; xem [danh sách thiếu, thông tin cần bổ sung và điều kiện mở bán](docs/PRODUCTION_READINESS.md). Giữ tên SKU/coupon và dữ liệu lịch sử đến khi có kế hoạch thay dữ liệu thật, không đổi chuỗi đại trà hoặc xóa nhãn demo để giả trạng thái đã vận hành.
 
 Dự án website thương mại điện tử phục vụ hai mục tiêu: học và củng cố Fullstack từ nền tảng, đồng thời xây dựng sản phẩm portfolio có nghiệp vụ, kiểm thử và khả năng vận hành thực tế.

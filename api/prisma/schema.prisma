@@ -131,6 +131,25 @@ model RolePermission {
 }
 
 /// auth_sessions: see docs/database/DATA_DICTIONARY.md.
+// Durable, encrypted password-recovery work. HTTP acceptance never reads users.
+model AuthRecoveryRequest {
+  id                String    @id @default(uuid()) @db.Uuid
+  recipientHash     String    @map("recipient_hash") @db.VarChar(64)
+  payloadCiphertext String    @map("payload_ciphertext") @db.Text
+  status            String    @default("PENDING") @db.VarChar(16)
+  availableAt       DateTime  @default(now()) @map("available_at") @db.Timestamptz(6)
+  leaseUntil        DateTime? @map("lease_until") @db.Timestamptz(6)
+  leaseToken        String?   @map("lease_token") @db.Uuid
+  attempts          Int       @default(0)
+  expiresAt         DateTime  @map("expires_at") @db.Timestamptz(6)
+  createdAt         DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt         DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([status, availableAt, leaseUntil])
+  @@index([recipientHash, createdAt])
+  @@map("auth_recovery_requests")
+}
+
 model AuthSession {
   id                String    @id @default(uuid()) @db.Uuid
   userId            String    @map("user_id") @db.Uuid

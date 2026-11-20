@@ -108,7 +108,10 @@ try:
     migration, migration_text = read_payload(directory, 'migration', sys.argv[3])
     required_runtime = {'DATABASE_URL', 'DATABASE_SCHEMA', 'JWT_SECRET', 'JWT_REFRESH_SECRET', 'ALLOWED_ORIGINS', 'STOREFRONT_URL'}
     flags = {'NODE_ENV': 'production', 'PREVIEW_READ_ONLY': 'true', 'DATABASE_TLS_REQUIRED': 'true', 'TRUST_PROXY_HOPS': '1'}
-    allowed_runtime = required_runtime | {'JWT_EXPIRES_IN', 'REFRESH_TTL_SECONDS', 'INTERACTIVE_DEMO'} | set(flags)
+    recovery_fields = {'PASSWORD_RECOVERY_ALLOWED_EMAILS', 'CHALLENGE_DELIVERY',
+                       'SMTP_HOST', 'SMTP_PORT', 'SMTP_SECURE', 'SMTP_USER', 'SMTP_PASSWORD', 'SMTP_FROM'}
+    allowed_runtime = required_runtime | {'JWT_EXPIRES_IN', 'REFRESH_TTL_SECONDS', 'INTERACTIVE_DEMO',
+                                          'PASSWORD_RECOVERY_ENABLED'} | recovery_fields | set(flags)
     required_migration = {'DATABASE_URL', 'PRISMA_MIGRATION_DATABASE_URL', 'DATABASE_SCHEMA'}
     if not required_runtime <= set(runtime) or set(runtime) - allowed_runtime:
         fail('RUNTIME_KEYS_INVALID')
@@ -121,6 +124,26 @@ try:
             fail('PRODUCTION_FLAG_MISMATCH')
     if runtime.get('INTERACTIVE_DEMO', 'false') not in ('true', 'false'):
         fail('INTERACTIVE_DEMO_INVALID')
+    if runtime.get('PASSWORD_RECOVERY_ENABLED', 'false') not in ('true', 'false'):
+        fail('PASSWORD_RECOVERY_FLAG_INVALID')
+    recovery_enabled = runtime.get('PASSWORD_RECOVERY_ENABLED', 'false') == 'true'
+    if recovery_enabled:
+        if runtime.get('INTERACTIVE_DEMO') != 'true' or runtime.get('CHALLENGE_DELIVERY') != 'smtp':
+            fail('PASSWORD_RECOVERY_REQUIRES_DEMO_SMTP')
+        if not recovery_fields <= set(runtime):
+            fail('PASSWORD_RECOVERY_SETTINGS_MISSING')
+        addresses = runtime['PASSWORD_RECOVERY_ALLOWED_EMAILS'].split(',')
+        address_pattern = r'[a-z0-9.!#$%&\x27*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?'
+        if (not 1 <= len(addresses) <= 5 or len(set(addresses)) != len(addresses)
+                or any(not re.fullmatch(address_pattern, address) or address != address.lower() for address in addresses)
+                or runtime['SMTP_FROM'] not in addresses):
+            fail('PASSWORD_RECOVERY_EMAIL_SCOPE_INVALID')
+        if not re.fullmatch(r'email-smtp\.[a-z]{2}-[a-z]+-[0-9]+\.amazonaws\.com', runtime['SMTP_HOST']):
+            fail('SMTP_HOST_INVALID')
+        if (runtime['SMTP_PORT'], runtime['SMTP_SECURE']) not in (('465', 'true'), ('587', 'false')):
+            fail('SMTP_TLS_MODE_INVALID')
+    elif recovery_fields & set(runtime):
+        fail('SMTP_SETTINGS_REQUIRE_RECOVERY')
     if min(len(runtime['JWT_SECRET']), len(runtime['JWT_REFRESH_SECRET'])) < 32 or runtime['JWT_SECRET'] == runtime['JWT_REFRESH_SECRET']:
         fail('JWT_SECRETS_INVALID')
     for key, upper in [('JWT_EXPIRES_IN', 3600), ('REFRESH_TTL_SECONDS', 2592000)]:
