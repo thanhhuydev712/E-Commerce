@@ -1,5 +1,11 @@
 # Hiện trạng dự án
 
+## AWS đã mở demo tài khoản/giỏ/lưu PC — 20/11/2026
+
+- App commit7921ba6 đã CI/Release/Deploy thành công trên `https://rigforce.duckdns.org`. Giữ PREVIEW_READ_ONLY=true, INTERACTIVE_DEMO=true; tài khoản thử CUSTOMER đã tạo, secret chỉ ở file local/SSM được ignore.
+- Smoke HTTPS thật8 nhóm qua: login, browser restore/account, cart add, saved PC create/delete+cascade, restore cart, chặn orders/quote/signup/recovery/webhook dù có token, logout. Không tạo đơn/thu tiền; dữ liệu cart/build của smoke đã dọn. [Bằng chứng](verification/2026-11-20-interactive-demo-live.json), [cách tự thử](FEATURE_UNLOCK_PLAN.md).
+- Các mục đang chờ triển khai phía dưới là lịch sử. Chưa mở đăng ký/reset công khai, SMTP, admin, wishlist/profile writes hoặc nhận đơn thật. Giới hạn bootstrap pin/helper khi thay host và các diễn tập restore/rollback còn ghi trong FEATURE_UNLOCK_PLAN.
+
 ## Demo tài khoản/giỏ/lưu PC — chuẩn bị triển khai 20/11/2026
 
 - Người dùng chốt tài khoản thử có kiểm soát, giỏ và lưu PC, chưa nhận đơn thật. Đã thêm INTERACTIVE_DEMO opt-in trong khi PREVIEW_READ_ONLY giữtrue; không mở đăng ký/reset/đơn/payment/admin. Xem [contract và hướng dẫn](FEATURE_UNLOCK_PLAN.md).

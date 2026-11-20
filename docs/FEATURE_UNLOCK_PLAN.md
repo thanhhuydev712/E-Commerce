@@ -1,5 +1,13 @@
 # Mở tính năng sau bản AWS showcase — 20/11/2026
 
+## Đã mở và kiểm tra trên AWS
+
+Ứng dụng commit `7921ba6` đã Release/Deploy thành công. Smoke trên HTTPS thật xác nhận: CUSTOMER login, khôi phục phiên trong Chromium, thêm/khôi phục giỏ, lưu/xóa PC có FK cascade, logout. Request có đăng nhập vẫn bị503 cho orders/quote/register/forgot-password/webhook. Dữ liệu giỏ/cấu hình tạo trong smoke đã khôi phục/xóa; không tạo đơn hoặc thanh toán.
+
+Chủ dự án mở `/login`, lấy thông tin tại `infra/.local/demo-account.credentials.json` trên máy của mình; không gửi mật khẩu lên chat hoặc Git. Đăng nhập rồi thử sản phẩm → thêm giỏ → refresh, và PC Builder → lưu cấu hình → danh sách cấu hình đã lưu → xóa. Trang `/account` chỉ hiện phạm vi demo; checkout/đăng ký/reset vẫn có thông báo chưa mở. Tài khoản là CUSTOMER, không có quyền admin.
+
+Các đoạn kế hoạch/trạng thái chuẩn bị phía dưới là lịch sử thực hiện. Bằng chứng cuối: [interactive demo live](verification/2026-11-20-interactive-demo-live.json). Giữ `PREVIEW_READ_ONLY=true`; flag `INTERACTIVE_DEMO=true` chỉ mở allowlist. Rollback app không tự thu hồi grant DB; phiên bản showcase cũ bỏ qua flag mới nhưng vẫn chặn writes. Muốn thu hồi quyền demo phải làm thao tác operator có kiểm tra; không cấp lại owner hoặc reset database.
+
 ## Nhóm đã chọn và cách mở
 
 Đã chốt: tài khoản thử có kiểm soát, giỏ và lưu PC; không đăng ký/reset công khai, không orders/payment/admin. Contract mới là `PREVIEW_READ_ONLY=true` **cùng** `INTERACTIVE_DEMO=true`. Mặc định flag mới false, nên bản showcase cũ giữ nguyên khi chưa chọn mở.

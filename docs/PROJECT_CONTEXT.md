@@ -1,5 +1,7 @@
 # Bối cảnh và định hướng sản phẩm
 
+**Kết quả mới nhất20/11/2026:** app7921ba6 đã mở demo tương tác trên AWS và smoke HTTPS thật qua. Chỉ tài khoản thử CUSTOMER, giỏ và lưu/xóa PC; không đơn/payment/signup/reset/SMTP/admin. Hai flag cùngtrue, không tắt PREVIEW_READ_ONLY. Xem FEATURE_UNLOCK_PLAN và audit `verification/2026-11-20-interactive-demo-live.json`; các trạng thái chờ/khảo sát bên dưới là lịch sử. Không công khai credential local hoặc chạy lại seed/stack cũ.
+
 **Cập nhật20/11/2026:** người dùng đã tự deploy, HTTPS website truy cập được (HTTP200 đã kiểm); hiện các trang vẫn có chốt preview. Yêu cầu tiếp theo là hướng dẫn/cùng mở các thành phần bị khóa, chưa xác định nhóm và chưa yêu cầu nhận đơn thật. Xem `FEATURE_UNLOCK_PLAN.md` và trạng thái mới nhất. Không chạy lại automation seed đang ghi lỗi19/11; bản người dùng đã deploy có thể khác marker local. Không chỉ tắt flag preview vì hiện chưa tách auth/cart/build khỏi COD; cần chốt phạm vi trước thay quyền DB/runtime.
 
 ## Cập nhật quyền triển khai — 19/11/2026

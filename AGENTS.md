@@ -2,6 +2,8 @@
 
 ## Cập nhật hiện tại — 20/11/2026
 
+- **Đã deploy và smoke thật** app7921ba6: CUSTOMER login/session, cart, lưu/xóa PC hoạt động. PREVIEW_READ_ONLY=true + INTERACTIVE_DEMO=true; order/quote/payment/signup/reset/webhook/admin vẫn khóa. Đọc `docs/verification/2026-11-20-interactive-demo-live.json` và FEATURE_UNLOCK_PLAN. Email/password thử ở `infra/.local/demo-account.credentials.json`, không log/commit. Các dòng “chờ Deploy” bên dưới là lịch sử, không seed/provision lại.
+
 - Đã chốt và cài contract `PREVIEW_READ_ONLY=true` + `INTERACTIVE_DEMO=true` cho tài khoản thử/cart/saved PC; không mở signup/reset/order/payment/admin. Xem mục mới PROJECT_STATUS và FEATURE_UNLOCK_PLAN. Grant tối thiểu + CUSTOMER + helper/SSM flag đã chuẩn bị AWS; chờ Release/Deploy/smoke mới kết luận mở thành công. Không quay về tắt PREVIEW_READ_ONLY toàn cục. Password/email thử chỉ giữ trong infra/.local/ được ignore. Bootstrap CFN pin cũ cần đồng bộ helper trước thay host.
 
 - Người dùng đã tự deploy AWS; HTTPS website trả200 khi kiểm. Yêu cầu mới: hướng dẫn/cùng mở thành phần bị khóa; chưa chốt nhóm, vẫn chưa nhận đơn thật. Đọc `docs/FEATURE_UNLOCK_PLAN.md` và mục mới nhất PROJECT_STATUS. Source chưa tách mở auth/cart/build khỏi COD; không tắt preview toàn cục hoặc cấp DML toàn schema theo suy đoán.

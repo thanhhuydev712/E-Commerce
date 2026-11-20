@@ -1,0 +1,49 @@
+{
+  "verifiedAt": "2026-11-20T07:07:32.200066+00:00",
+  "url": "https://rigforce.duckdns.org",
+  "applicationCommit": "7921ba6924ff8f539595b297771d85569200b525",
+  "release": {
+    "id": 44691377368,
+    "url": "https://github.com/thanhhuydev712/E-Commerce/actions/runs/44691377368",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "deploy": {
+    "id": 44692287799,
+    "url": "https://github.com/thanhhuydev712/E-Commerce/actions/runs/44692287799",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "smoke": {
+    "url": "https://rigforce.duckdns.org",
+    "checks": [
+      "controlled CUSTOMER login",
+      "browser session restoration and account page",
+      "persisted cart add",
+      "owned saved PC creation",
+      "saved PC deletion with FK cascade",
+      "cart restored after smoke",
+      "orders payments signup recovery webhook blocked even while authenticated",
+      "logout"
+    ],
+    "date": "2026-11-20T07:06:34.041Z",
+    "result": "passed"
+  },
+  "previewReadOnly": true,
+  "interactiveDemo": true,
+  "controlledCustomerAccount": true,
+  "publicSignupRecoveryOrdersPaymentsAdmin": false,
+  "databaseWriteScope": "auth sessions/audit/cart/saved PC plus selected columns only",
+  "sqlForbiddenWritesVerified": 11,
+  "testCartAndBuildDataRestored": true,
+  "secretsExcluded": true,
+  "operatorHelpers": {
+    "fetch-env.sh": "615b104f0f07c770d6555bc7ce933a06ed97699e9e7ce92161c7269b530f9374",
+    "apply-release.sh": "afa9ac4e72790f3a68a7abcf9d18622d64329a9a7197234a80636227df3ad34d"
+  },
+  "limits": [
+    "CloudFormation bootstrap pin needs refreshed helpers before replacement host",
+    "AWS restore/rollback drills not repeated",
+    "SMTP reset timing still unresolved; public recovery closed"
+  ]
+}
